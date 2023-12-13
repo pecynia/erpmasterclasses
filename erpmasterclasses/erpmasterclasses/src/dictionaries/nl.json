@@ -1,0 +1,26 @@
+{
+  "navigation": {
+    "title": {
+      "label": "Guus' Website",
+      "href": "/"
+    },
+    "home": {
+      "label": "Home",
+      "href": "/"
+    },
+    "about": {
+      "label": "Over ons",
+      "href": "/about"
+    }
+  },
+  "page": {
+    "home": {
+      "title": "Welkom bij de startpagina",
+      "description": "Dit is de startpagina"
+    },
+    "about": {
+      "title": "Welkom bij de over ons pagina",
+      "description": "Dit is de over ons pagina"
+    }
+  }
+}
