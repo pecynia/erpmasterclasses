@@ -10,7 +10,7 @@ const dictionaries = {
 
 export const getDictionary = async (locale: Locale) => {
   if (!dictionaries[locale]) {
-      throw new Error(`Invalid locale: ${locale}. Expected one of: ${i18n.locales.join(', ')}`);
+      throw new Error(`Invalid locale: ${locale}. Expected one of: ${i18n.locales.join(', ')}`)
   }
-  return dictionaries[locale]();
+  return dictionaries[locale]()
 }

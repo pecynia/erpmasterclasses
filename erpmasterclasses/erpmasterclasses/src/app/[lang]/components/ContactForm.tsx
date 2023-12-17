@@ -28,14 +28,14 @@ export default async function ContactForm({ lang }: { lang: Locale }) {
     const result = await sendEmail(data)
 
     if (result?.success) {
-      toast.success('Email verzonden!')
+      toast.success('Email sent successfully!')
       reset()
       return
     }
 
     // toast error
     console.log(result?.error)
-    toast.error('Oeps! Er ging iets mis.')
+    toast.error('Oops, something went wrong. Please try again later.')
   }
 
   return (
@@ -70,7 +70,7 @@ export default async function ContactForm({ lang }: { lang: Locale }) {
 
       {/* Submit Button */}
       <button disabled={isSubmitting} className='rounded-lg border border-black bg-black py-2.5 font-medium text-white transition-colors hover:bg-black/80 disabled:cursor-not-allowed disabled:opacity-50'>
-        {isSubmitting ? 'Verzenden...' : 'Verzend'}
+        {isSubmitting ? 'Sending...' : 'Send'}
       </button>
     </form>
   )
