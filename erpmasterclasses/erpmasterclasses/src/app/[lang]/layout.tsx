@@ -8,7 +8,7 @@ import Header from '@/app/[lang]/components/Header'
 import Footer from "@/app/[lang]/components/Footer"
 
 const inter = Inter({ subsets: ['latin'] })
-
+  
 export async function generateStaticParams() {
   return i18n.locales.map(locale => ({ lang: locale }))
 }
