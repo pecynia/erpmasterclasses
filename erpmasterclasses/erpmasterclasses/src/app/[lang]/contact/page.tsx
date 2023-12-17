@@ -5,9 +5,14 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import ContactForm from '@/app/[lang]/components/ContactForm'
 import Vlam from './/../../../../public/vlam.png'
+import { Locale } from '../../../../i18n.config'
 
 
-function Page() {
+function Page({
+  params: { lang }
+}: {
+  params: { lang: Locale }
+}) { 
   return (
     <div className='flex flex-col items-center justify-center w-full py-36 relative'>
         <Image 
@@ -24,7 +29,7 @@ function Page() {
           className='min-w-[80%] lg:min-w-[50%] min-h-[20%] max-w-[80%] bg-secondary mb-20 pb-10 flex px-10 pt-4 z-10'
         >
           <div className='w-full pt-2'>
-            <ContactForm />
+            <ContactForm lang={lang} />
           </div>
         </motion.div>
       </div>

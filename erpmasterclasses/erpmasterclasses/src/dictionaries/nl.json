@@ -11,6 +11,10 @@
     "about": {
       "label": "Over ons",
       "href": "/about"
+    },
+    "contact": {
+      "label": "Contact",
+      "href": "/contact"
     }
   },
   "page": {
@@ -22,5 +26,22 @@
       "title": "Welkom bij de over ons pagina",
       "description": "Dit is de over ons pagina"
     }
+  },
+  "contact": {
+    "namePlaceholder": "Naam*",
+    "emailPlaceholder": "E-mail*",
+    "phonePlaceholder": "Telefoonnummer*",
+    "eventDatePlaceholder": "Datum van gepland evenement (optioneel)",
+    "companyNamePlaceholder": "Bedrijfsnaam (optioneel)",
+    "messagePlaceholder": "Bericht*",
+    "submitButtonText": "Verzend",
+    "emailSentToast": "E-mail verzonden!",
+    "errorToast": "Oeps! Er ging iets mis.",
+    "nameRequired": "Naam is verplicht.",
+    "emailRequired": "E-mail is verplicht.",
+    "invalidEmail": "Ongeldige e-mail.",
+    "phoneRequired": "Telefoonnummer is verplicht.",
+    "messageRequired": "Bericht is verplicht.",
+    "messageMinLength": "Bericht moet minstens 6 tekens lang zijn."
   }
 }

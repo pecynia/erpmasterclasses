@@ -16,6 +16,11 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        youngSerif: "Young Serif, serif",
+        garamond: "EB Garamond, serif",
+        raleway: "Raleway, sans-serif",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

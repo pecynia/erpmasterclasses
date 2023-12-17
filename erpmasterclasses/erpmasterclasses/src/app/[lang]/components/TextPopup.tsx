@@ -5,11 +5,12 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 
 import EditorWrapper from '@/app/[lang]/components/editor/EditorWrapper'
+import { Locale } from '../../../../i18n.config'
 
 
 interface Props {
   documentId: string
-  currentLocale: string
+  currentLocale: Locale
   imgPath: string
   link?: string;
   buttonText?: string;

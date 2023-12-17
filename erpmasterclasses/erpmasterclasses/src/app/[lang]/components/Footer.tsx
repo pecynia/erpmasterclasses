@@ -10,20 +10,18 @@ export default async function Footer({ lang }: { lang: Locale }) {
     return (
         <footer className='bg-primary py-8 px-16 text-primary-foreground'>
             <div className='container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 justify-center'>
-                <div className='flex flex-col items-center'>
-                    <Link href='/[lang]' as={`/${lang}`}>
-                        <p>{navigation.title.label}</p>
-                    </Link>
-                </div>
-                <div className='flex flex-col items-center'>
-                    <Link href='/[lang]/about' as={`/${lang}/about`}>
-                        <p>{navigation.about.label}</p>
-                    </Link>
-                </div>
+                {Object.values(navigation).map((navItem: { label: string; href: string; }, index: number) => (
+                    <div key={index} className='flex flex-col items-center'>
+                        <Link href={navItem.href} as={`/${lang}${navItem.href}`}>
+                            <p>{navItem.label}</p>
+                        </Link>
+                    </div>
+                ))}
             </div>
         </footer>
     )
 }
+
 
 // import Link from 'next/link'
 // import { Locale } from '@/app/../../i18n.config'

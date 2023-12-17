@@ -8,10 +8,14 @@ import { z } from 'zod'
 import { ContactFormSchema } from '@/lib/schema'
 import { sendEmail } from '@/app/_actions'
 import { toast } from 'sonner'
+// import { getDictionary } from '@/lib/dictionary'
+import { Locale } from '../../../../i18n.config'
+// import { useEffect, useState } from 'react'
+
 
 export type ContactFormInputs = z.infer<typeof ContactFormSchema>
 
-export default function ContactForm() {
+export default async function ContactForm({ lang }: { lang: Locale }) {
   const {
     register,
     handleSubmit,
@@ -20,6 +24,7 @@ export default function ContactForm() {
   } = useForm<ContactFormInputs>({
     resolver: zodResolver(ContactFormSchema)
   })
+  
 
   const processForm: SubmitHandler<ContactFormInputs> = async data => {
     const result = await sendEmail(data)
@@ -40,30 +45,30 @@ export default function ContactForm() {
       onSubmit={handleSubmit(processForm)}
       className='mx-auto flex flex-1 flex-col gap-4'
     >
-      <h1 className='text-3xl text-center font-youngSerif py-2'>Bereik Ons</h1>
+      <h1 className='text-3xl text-center font-youngSerif py-2'>Reach Out</h1>
       {/* Name Input */}
-      <input {...register('name')} placeholder='Naam*' className='w-1/2 rounded-lg p-2' />
-      {errors.name?.message && <p className='ml-1 mt-1 text-sm text-red-400'>{errors.name.message}</p>}
+      <input {...register('name')} placeholder='Name*' className='w-1/2 rounded-lg p-2' />
+      {errors.name?.message && <p className='ml-1 -mt-2 text-sm text-red-400'>{errors.name.message}</p>}
       
       {/* Email Input */}
       <input {...register('email')} placeholder='Email*' className='w-1/2 rounded-lg p-2' />
-      {errors.email?.message && <p className='ml-1 mt-1 text-sm text-red-400'>{errors.email.message}</p>}
+      {errors.email?.message && <p className='ml-1 -mt-2 text-sm text-red-400'>{errors.email.message}</p>}
 
       {/* Phone Number Input */}
-      <input {...register('phone')} placeholder='Telefoonnummer*' className='w-1/2 rounded-lg p-2' />
-      {errors.phone?.message && <p className='ml-1 mt-1 text-sm text-red-400'>{errors.phone.message}</p>}
+      <input {...register('phone')} placeholder='Phone number*' className='w-1/2 rounded-lg p-2' />
+      {errors.phone?.message && <p className='ml-1 -mt-2 text-sm text-red-400'>{errors.phone.message}</p>}
 
       {/* Event Date Input */}
-      <input {...register('eventDate')} placeholder='Datum gepland evenement (optioneel)' className='w-full rounded-lg p-2' />
+      <input {...register('eventDate')} placeholder='Date planned event (optional)' className='w-full rounded-lg p-2' />
       {/* No validation error for optional field */}
       
       {/* Company Name Input */}
-      <input {...register('companyName')} placeholder='Bedrijfsnaam (optioneel)' className='w-full rounded-lg p-2' />
+      <input {...register('companyName')} placeholder='Company name (optional)' className='w-full rounded-lg p-2' />
       {/* No validation error for optional field */}
       
       {/* Message Input */}
-      <textarea {...register('message')} rows={5} placeholder='Bericht*' className='w-full rounded-lg p-2' />
-      {errors.message?.message && <p className='ml-1 text-sm text-red-400'>{errors.message.message}</p>}
+      <textarea {...register('message')} rows={5} placeholder='Message*' className='w-full rounded-lg p-2' />
+      {errors.message?.message && <p className='ml-1 -mt-2 text-sm text-red-400'>{errors.message.message}</p>}
 
       {/* Submit Button */}
       <button disabled={isSubmitting} className='rounded-lg border border-black bg-black py-2.5 font-medium text-white transition-colors hover:bg-black/80 disabled:cursor-not-allowed disabled:opacity-50'>

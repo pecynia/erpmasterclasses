@@ -11,6 +11,10 @@
       "about": {
         "label": "Über",
         "href": "/about"
+      },
+      "contact": {
+        "label": "Kontakt",
+        "href": "/contact"
       }
     },
     "page": {
@@ -22,5 +26,22 @@
         "title": "Über uns",
         "description": "Dies ist die About Seite"
       }
+    },
+    "contact": {
+      "namePlaceholder": "Name*",
+      "emailPlaceholder": "E-Mail*",
+      "phonePlaceholder": "Telefonnummer*",
+      "eventDatePlaceholder": "Datum des geplanten Ereignisses (optional)",
+      "companyNamePlaceholder": "Firmenname (optional)",
+      "messagePlaceholder": "Nachricht*",
+      "submitButtonText": "Senden",
+      "emailSentToast": "E-Mail gesendet!",
+      "errorToast": "Hoppla! Etwas ist schief gelaufen.",
+      "nameRequired": "Name ist erforderlich.",
+      "emailRequired": "E-Mail ist erforderlich.",
+      "invalidEmail": "Ungültige E-Mail.",
+      "phoneRequired": "Telefonnummer ist erforderlich.",
+      "messageRequired": "Nachricht ist erforderlich.",
+      "messageMinLength": "Nachricht muss mindestens 6 Zeichen lang sein."
     }
   }
