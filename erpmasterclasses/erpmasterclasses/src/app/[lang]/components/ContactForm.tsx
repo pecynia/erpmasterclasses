@@ -8,9 +8,7 @@ import { z } from 'zod'
 import { ContactFormSchema } from '@/lib/schema'
 import { sendEmail } from '@/app/_actions'
 import { toast } from 'sonner'
-// import { getDictionary } from '@/lib/dictionary'
 import { Locale } from '../../../../i18n.config'
-// import { useEffect, useState } from 'react'
 
 
 export type ContactFormInputs = z.infer<typeof ContactFormSchema>
