@@ -91,22 +91,6 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
                 >
                     <div className='bg-secondary-foreground rounded-full w-4 h-4' />
                 </Button>
-            </div>
-                <Separator orientation='vertical' />
-            <div className='flex flex-wrap items-center px-4 py-2 space-x-1'>
-                <Button variant='ghost' size='sm'
-                    onClick={() => editor.chain().focus().unsetAllMarks().run()}>
-                    <RemoveFormatting className='w-4 h-4' />
-                </Button>
-                <Button variant='ghost' size="sm" onClick={() => editor.chain().focus().clearNodes().run()}>
-                    <Eraser className='w-4 h-4' />
-                </Button>
-                <Button variant='ghost' size="sm"
-                    onClick={() => editor.chain().focus().setParagraph().run()}
-                    className={editor.isActive('paragraph') ? 'bg-secondary' : ''}
-                >
-                    <Pilcrow className='w-4 h-4' />
-                </Button>
                 <Button variant='ghost' size="sm"
                     onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
                     className={editor.isActive('heading', { level: 1 }) ? 'bg-secondary' : ''}
@@ -125,6 +109,23 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
                 >
                     <Heading3 className='w-4 h-4' />    
                 </Button>
+                <Button variant='ghost' size='sm'
+                    onClick={() => editor.chain().focus().unsetAllMarks().run()}>
+                    <RemoveFormatting className='w-4 h-4' />
+                </Button>
+                <Button variant='ghost' size="sm" onClick={() => editor.chain().focus().clearNodes().run()}>
+                    <Eraser className='w-4 h-4' />
+                </Button>
+                <Button variant='ghost' size="sm"
+                    onClick={() => editor.chain().focus().setParagraph().run()}
+                    className={editor.isActive('paragraph') ? 'bg-secondary' : ''}
+                >
+                    <Pilcrow className='w-4 h-4' />
+                </Button>
+                
+                </div>
+                <Separator orientation='vertical' />
+            <div className='flex flex-wrap items-center px-4 py-2 space-x-1'>
                 {/* <Button variant='ghost' size="sm"
                     onClick={() => editor.chain().focus().toggleBulletList().run()}
                     className={editor.isActive('bulletList') ? 'bg-secondary' : ''}
