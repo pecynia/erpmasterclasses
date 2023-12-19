@@ -20,6 +20,7 @@ module.exports = {
         youngSerif: "Young Serif, serif",
         garamond: "EB Garamond, serif",
         raleway: "Raleway, sans-serif",
+        exo: "Exo, sans-serif",
       },
       colors: {
         border: "hsl(var(--border))",

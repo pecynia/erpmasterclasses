@@ -73,17 +73,23 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
                     <Strikethrough className='w-4 h-4' />
                 </Button>
                 {/* Text colours */}
-                {/* <Button variant='ghost' size="sm"
-                    onClick={() => editor.chain().focus().setColor(hslToHex(getComputedStyle(document.documentElement).getPropertyValue('--secondary-foreground'))).run()}
-                    className={editor.isActive('textStyle', { color: 'secondary' }) ? 'bg-secondary' : ''}
-                >
-                    <div className='bg-secondary-foreground rounded-full w-4 h-4' />
-                </Button> */}
                 <Button variant='ghost' size="sm"
                     onClick={() => editor.chain().focus().setColor(hslToHex(getComputedStyle(document.documentElement).getPropertyValue('--primary'))).run()}
                     className={editor.isActive('textStyle', { color: 'secondary' }) ? 'bg-secondary' : ''}
                 >
                     <div className='bg-primary rounded-full w-4 h-4' />
+                </Button>
+                <Button variant='ghost' size="sm"
+                    onClick={() => editor.chain().focus().setColor(hslToHex(getComputedStyle(document.documentElement).getPropertyValue('--secondary'))).run()}
+                    className={editor.isActive('textStyle', { color: 'secondary' }) ? 'bg-secondary' : ''}
+                >
+                    <div className='bg-secondary rounded-full w-4 h-4' />
+                </Button>
+                <Button variant='ghost' size="sm"
+                    onClick={() => editor.chain().focus().setColor(hslToHex(getComputedStyle(document.documentElement).getPropertyValue('--secondary-foreground'))).run()}
+                    className={editor.isActive('textStyle', { color: 'secondary' }) ? 'bg-secondary' : ''}
+                >
+                    <div className='bg-secondary-foreground rounded-full w-4 h-4' />
                 </Button>
             </div>
                 <Separator orientation='vertical' />

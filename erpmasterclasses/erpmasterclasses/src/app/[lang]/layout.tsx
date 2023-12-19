@@ -22,8 +22,8 @@ export default function RootLayout({
 }) {
 
   return (
-    <html lang={params.lang}>
-      <body className={`${inter.className} flex min-h-full flex-col font-raleway`}>
+    <html lang={params.lang} className={`${inter.className} h-full`}>
+      <body className='flex min-h-full flex-col font-exo'>
         <NextAuthProvider>
           <Header lang={params.lang} />
           <main className='flex-grow'>{children}</main>

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Young+Serif&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -22,7 +22,7 @@
     --primary-foreground: 210 40% 98%;
  
     --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary-foreground: 0 0% 28%;
  
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
@@ -90,15 +90,15 @@
   }
 
   h1 {
-    @apply mt-4 mb-5 text-3xl font-youngSerif;
+    @apply mt-4 mb-5 text-3xl font-exo font-normal;
   }
 
   h2 {
-    @apply mt-4 mb-4 text-2xl font-youngSerif;
+    @apply mt-4 mb-4 text-2xl font-exo font-normal;
   }
 
   h3 {
-    @apply mt-4 mb-4 text-xl font-youngSerif;
+    @apply mt-4 mb-4 text-xl font-exo font-normal;
   }
 
   > * + * {
@@ -152,7 +152,7 @@
   }
   
   hr {
-    @apply mt-8 mb-8 border-2 border-gray-300 w-full;
+    @apply mt-8 mb-8 border-[1px] border-gray-300 w-full;
   }
 }
 .tiptap p.is-editor-empty:first-child::before {
