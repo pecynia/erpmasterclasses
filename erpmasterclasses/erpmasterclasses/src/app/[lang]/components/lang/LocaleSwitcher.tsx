@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { useSearchParams } from 'next/navigation'
 import { Locale, i18n } from '../../../../../i18n.config'
 import Image from 'next/image'
+import { motion } from "framer-motion"
 
 import LocaleIcons from '@/app/[lang]/components/lang/LocaleIcon'
 
@@ -36,7 +37,7 @@ export default function LocaleSwitcher({ locale }: { locale: Locale }) {
 
     return (
         <Select value={selectedLocale} onValueChange={switchLocale}>
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="w-[180px] my-1">
                 <SelectValue placeholder="Select Language" />
             </SelectTrigger>
             <SelectContent>
@@ -48,7 +49,15 @@ export default function LocaleSwitcher({ locale }: { locale: Locale }) {
                             value={loc}
                             disabled={loc === locale}
                         >
-                            <div className="flex items-center">
+                            <motion.div layout 
+                                initial={{ opacity: 0, y: '-10%' }}
+                                animate={{ opacity: 1, y: '0%' }}
+                                transition={{ 
+                                    delay: 0.1,
+                                    ease: "easeInOut", 
+                                    duration: 0.2 }}
+                                viewport={{ once: true }}
+                                className="flex items-center">
                                 <Image 
                                     alt={loc.toUpperCase()}
                                     src={LocaleIcons[loc]}
@@ -57,7 +66,7 @@ export default function LocaleSwitcher({ locale }: { locale: Locale }) {
                                     className="mr-2"
                                 />
                                 {loc.toUpperCase()}
-                            </div>
+                            </motion.div>
                         </SelectItem>
                     ))}
                 </SelectGroup>

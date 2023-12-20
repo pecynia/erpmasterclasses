@@ -12,11 +12,9 @@ function TestComponent({ currentLocale }: { currentLocale: Locale }) {
         initial={{ opacity: 0, x: '-10%' }}
         animate={{ opacity: 1, x: '0%' }}
         transition={{ type: "spring", ease: "easeInOut", duration: 0.3 }}
-        className='relative'
+        className='relative w-full h-full flex justify-center items-center'
     >   
-        <div className='w-[1500px] h-full flex justify-center items-center'>
-            <TextComponent documentId='initial-test' currentLocale={currentLocale} />
-        </div>
+      <TextComponent documentId='initial-test' currentLocale={currentLocale} />
     </motion.div>
   )
 }

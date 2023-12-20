@@ -90,11 +90,11 @@
   }
 
   h1 {
-    @apply mt-4 mb-5 text-3xl font-exo font-normal;
+    @apply mt-4 mb-5 text-3xl font-exo font-bold;
   }
 
   h2 {
-    @apply mt-4 mb-4 text-2xl font-exo font-normal;
+    @apply mt-4 mb-4 text-2xl font-exo font-semibold;
   }
 
   h3 {

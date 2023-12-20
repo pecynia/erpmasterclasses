@@ -14,9 +14,9 @@ export default async function Header({ lang }: { lang: Locale }) {
                     <p>{navigation.title.label}</p>
                 </Link>
             </div>
-            <div className='pr-4'>
-                <LocaleSwitchButton locale={lang} />
+            <div className='pr-4 flex-row flex items-center gap-4'>
                 <ClientHeaderButtonWrapper />
+                <LocaleSwitchButton locale={lang} />
             </div>
         </header>    
     );
