@@ -14,7 +14,7 @@ const TextComponent = ({ documentId, currentLocale } : { documentId: string, cur
         "bg-secondary flex px-4 pt-4 pb-10 rounded-xl w-[1000px]"
       )}
     >
-      <EditorWrapper documentId={documentId} currentLocale={currentLocale} />
+      <EditorWrapper documentId={documentId} initialLocale={currentLocale} />
     </motion.div>
   );
 };

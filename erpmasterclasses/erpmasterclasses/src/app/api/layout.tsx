@@ -1,8 +1,8 @@
 import '../../styles/globals.css'
 
 export const metadata = {
-  title: 'API Endpoint',
-  description: 'API Endpoint',
+  title: 'Login',
+  description: 'Welkom bij de login pagina',
 }
 
 export default function RootLayout({

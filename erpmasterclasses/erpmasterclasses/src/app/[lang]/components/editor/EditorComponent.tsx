@@ -1,37 +1,35 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
-import { useEditor, EditorContent } from '@tiptap/react'
-import { ReloadIcon } from "@radix-ui/react-icons"
-import { Save } from 'lucide-react'
-
-import StarterKit from '@tiptap/starter-kit'
-import { Color } from '@tiptap/extension-color'
-import Placeholder from '@tiptap/extension-placeholder'
-import TextStyle from '@tiptap/extension-text-style'
-import CustomBulletList from '@/app/[lang]/components/editor/CustomBulletList'
-
-import { generateJSON } from '@tiptap/html'
-
-import MenuBar from '@/app/[lang]/components/editor/MenuBar'
-import { Button } from '@/app/[lang]/components/ui/button'
-import { motion } from 'framer-motion'
-import EditorLocaleSwitcher from '@/app/[lang]/components/editor/EditorLocaleSwitcher'
-import { Locale } from '../../../../../i18n.config'
+import React, { useEffect, useState } from 'react';
+import { useEditor, EditorContent } from '@tiptap/react';
+import { RotateCw , Save } from 'lucide-react';
+import StarterKit from '@tiptap/starter-kit';
+import { Color } from '@tiptap/extension-color';
+import Placeholder from '@tiptap/extension-placeholder';
+import TextStyle from '@tiptap/extension-text-style';
+import CustomBulletList from '@/app/[lang]/components/editor/CustomBulletList';
+import { generateJSON } from '@tiptap/html';
+import MenuBar from '@/app/[lang]/components/editor/MenuBar';
+import { Button } from '@/app/[lang]/components/ui/button';
+import { motion } from 'framer-motion';
+import EditorLocaleSwitcher from '@/app/[lang]/components/editor/EditorLocaleSwitcher';
+import { Locale } from '../../../../../i18n.config';
 
 interface EditorComponentProps {
-    initialContent?: string,
-    editable?: boolean,
-    documentId: string,
-    currentLocale: Locale
+  initialContent?: string;
+  editable?: boolean;
+  documentId: string;
+  currentLocale: Locale;
+  onLocaleChange: (newLocale: Locale) => void;
 }
 
 const EditorComponent: React.FC<EditorComponentProps> = ({ 
-    initialContent = '', 
-    editable = false, 
-    documentId,
-    currentLocale
-}) => {    
+  initialContent = '', 
+  editable = false, 
+  documentId,
+  currentLocale,
+  onLocaleChange
+}) => {
     const [editorContent, setEditorContent] = useState({})
     const [isSaving, setIsSaving] = useState(false)
     const [hasChanges, setHasChanges] = useState(false)
@@ -63,7 +61,12 @@ const EditorComponent: React.FC<EditorComponentProps> = ({
         if (initialContent) {
             editor?.commands.setContent(initialContent)
         }
-    }, [initialContent, editor])
+        console.log("Writing lang:", currentLocale)
+    }, [initialContent, editor, currentLocale])
+
+    const handleLocaleChange = (newLocale: Locale) => {
+        onLocaleChange(newLocale); // Call the passed in onLocaleChange function
+    };
 
     // Make a post fetch request to secure API endpoint
     const handleSave = async () => {
@@ -90,16 +93,16 @@ const EditorComponent: React.FC<EditorComponentProps> = ({
       
     return (
         <motion.div  
-            layout
-            transition={{ type: "spring", ease: "easeInOut", duration: 0.1 }}
-            className='relative flex flex-col'
+          layout
+          transition={{ type: "spring", ease: "easeInOut", duration: 0.1 }}
+          className='relative flex flex-col'
         >
-        {editable && (
+          {editable && (
             <>
-                <MenuBar editor={editor} />
-                <EditorLocaleSwitcher currentLocale={currentLocale} />
+              <MenuBar editor={editor} />
+              <EditorLocaleSwitcher currentLocale={currentLocale} onLocaleChange={handleLocaleChange} />
             </>
-        )}
+          )}
             <motion.div 
                 layout
                 className=''
@@ -111,7 +114,7 @@ const EditorComponent: React.FC<EditorComponentProps> = ({
                 {editable && hasChanges && (
                     isSaving ? 
                     <Button disabled size="lg">
-                        <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                        <RotateCw className="mr-2 h-4 w-4 animate-spin" />
                         Opslaan
                     </Button> : 
                     <Button size="lg" onClick={handleSave}>

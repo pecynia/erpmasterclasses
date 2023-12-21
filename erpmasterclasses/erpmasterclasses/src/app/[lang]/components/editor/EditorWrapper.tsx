@@ -1,71 +1,81 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import Link from "next/link"
-import { motion } from "framer-motion"
-import { useSession } from 'next-auth/react'
-import { generateHTML } from '@tiptap/html'
-import { ReloadIcon } from "@radix-ui/react-icons"
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { useSession } from 'next-auth/react';
+import { generateHTML } from '@tiptap/html';
+import { ReloadIcon } from "@radix-ui/react-icons";
 
-import EditorComponent from "@/app/[lang]/components/editor/EditorComponent"
-import StarterKit from '@tiptap/starter-kit'
-import { Color } from '@tiptap/extension-color'
-import TextStyle from '@tiptap/extension-text-style'
-import { Button } from "@/app/[lang]/components/ui/button"
-import { Locale, i18n } from "../../../../../i18n.config"
+import EditorComponent from "@/app/[lang]/components/editor/EditorComponent";
+import StarterKit from '@tiptap/starter-kit';
+import { Color } from '@tiptap/extension-color';
+import TextStyle from '@tiptap/extension-text-style';
+import { Button } from "@/app/[lang]/components/ui/button";
+import { Locale } from "../../../../../i18n.config";
 
 interface EditorWrapperProps {
-    documentId: string
-    currentLocale: Locale
-    link?: string
-    buttonText?: string
+    documentId: string;
+    initialLocale: Locale;
+    link?: string;
+    buttonText?: string;
 }
 
-// TODO: CONVERT TO SERVER COMPONENT (so we don't fetch everytime)
-const EditorWrapper = ({ documentId, link, buttonText, currentLocale }: EditorWrapperProps) => {
-    const { status, data: session } = useSession()
-    const [fetchedContent, setFetchedContent] = useState('')
+const EditorWrapper: React.FC<EditorWrapperProps> = ({ documentId, link, buttonText, initialLocale }) => {
+    const { status, data: session } = useSession();
+    const [fetchedContent, setFetchedContent] = useState('');
 
-    const allLocales = i18n.locales
+    // State for managing the current locale of the editor
+    const [currentLocale, setCurrentLocale] = useState<Locale>(initialLocale);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const contentFromDb = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/content`, {
+
+    const handleLocaleChange = async (newLocale: Locale) => {
+        console.log("Locale changed to:", newLocale);
+        setCurrentLocale(newLocale); // Update the current locale
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/content`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                     'Document-ID': documentId,
-                    'Locale': currentLocale
+                    'Locale': newLocale
                 },
-            })
-            const json = await contentFromDb.json()
+            });
+            const json = await response.json();
             if (json && json.paragraphJson) {
                 const contentAsHtml = generateHTML(json.paragraphJson, [
                     StarterKit,
                     TextStyle,
                     Color,
-                ])
-                setFetchedContent(contentAsHtml)
-            }            
+                ]);
+                setFetchedContent(contentAsHtml);
+            }
+        } catch (error) {
+            console.error('Error fetching content:', error);
         }
+    };
 
-        fetchData()
-    }, [])
+    useEffect(() => {
+        handleLocaleChange(currentLocale);
+    }, [currentLocale]);
 
     if (status === "loading") {
-        return <motion.div layout className="flex justify-center items-center mt-5 w-full h-full">
-            <ReloadIcon className="w-4 h-4 animate-spin" />
-        </motion.div>
+        return (
+            <motion.div layout className="flex justify-center items-center mt-5 w-full h-full">
+                <ReloadIcon className="w-4 h-4 animate-spin" />
+            </motion.div>
+        );
     }
 
     return (
-        <motion.div layout className="w-full"
-            // layout
-            // initial={{ opacity: 0}}
-            // animate={{ opacity: 1 }}
-            // transition={{ type: "spring", ease: "easeInOut", duration: 0.2 }}
-        >
-            <EditorComponent currentLocale={currentLocale} documentId={documentId} editable={!!session} initialContent={fetchedContent} />
+        <motion.div layout className="w-full">
+            <EditorComponent
+                currentLocale={currentLocale}
+                documentId={documentId}
+                editable={!!session}
+                initialContent={fetchedContent}
+                onLocaleChange={handleLocaleChange}
+            />
             {link && buttonText && (
                 <div className="px-4 flex justify-center">
                     <Button className="rounded-none mt-4">
@@ -76,8 +86,7 @@ const EditorWrapper = ({ documentId, link, buttonText, currentLocale }: EditorWr
                 </div>
             )}
         </motion.div>
-    )
-}
+    );
+};
 
-export default EditorWrapper
-
+export default EditorWrapper;

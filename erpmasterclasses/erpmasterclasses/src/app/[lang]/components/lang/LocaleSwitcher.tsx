@@ -28,7 +28,6 @@ export default function LocaleSwitcher({ locale }: { locale: Locale }) {
     const [selectedLocale, setSelectedLocale] = React.useState(locale)
 
     const switchLocale = (newLocale: Locale) => {
-        console.log("Selected locale:", newLocale)
         if (newLocale !== locale) {
             setSelectedLocale(newLocale)
             router.replace(pathname.replace(`/${locale}`, `/${newLocale}`) + searchParams)
@@ -58,7 +57,7 @@ export default function LocaleSwitcher({ locale }: { locale: Locale }) {
                                     duration: 0.2 }}
                                 viewport={{ once: true }}
                                 className="flex items-center">
-                                <Image 
+                                <Image
                                     alt={loc.toUpperCase()}
                                     src={LocaleIcons[loc]}
                                     width={24}
