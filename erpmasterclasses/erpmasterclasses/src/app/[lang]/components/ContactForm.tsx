@@ -40,7 +40,7 @@ export default async function ContactForm({ lang }: { lang: Locale }) {
 
   return (
     <form onSubmit={handleSubmit(processForm)} className='mx-auto flex flex-1 flex-col gap-4'>
-      <h1 className='text-3xl text-center font-youngSerif py-2'>Reach Out</h1>
+      <h1 className='text-3xl text-center font-exo font-normal py-2'>Reach Out</h1>
       
       {/* Company Name Input */}
       <input {...register('companyName')} placeholder='Company name*' className='w-1/3 rounded-lg p-2 border-2 border-gray-100' />
@@ -59,7 +59,7 @@ export default async function ContactForm({ lang }: { lang: Locale }) {
       {errors.message?.message && <p className='ml-1 -mt-2 text-sm text-red-400'>{errors.message.message}</p>}
 
       {/* Submit Button */}
-      <button disabled={isSubmitting} className='rounded-lg bg-primary py-2.5 font-medium text-white transition-colors hover:bg-black/80 disabled:cursor-not-allowed disabled:opacity-50'>
+      <button disabled={isSubmitting} className='rounded-lg bg-primary py-2.5 font-medium text-white transition-colors hover:bg-primary/80 disabled:cursor-not-allowed disabled:opacity-50'>
         {isSubmitting ? 'Sending...' : 'Send'}
       </button>
     </form>

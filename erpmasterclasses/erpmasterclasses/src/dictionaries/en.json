@@ -25,6 +25,23 @@
       "href": "/contact"
     }
   },
+  "footer": {
+    "contact": {
+      "label": "Contact"
+    },
+    "social": {
+      "label": "Follow Us"
+    },
+    "navigation": {
+      "label": "Navigation"
+    },
+    "description": {
+      "label": "Adjust this text accordingly"
+    },
+    "credit": {
+      "label": "Website by"
+    }
+  },
   "page": {
     "home": {
       "title": "Welcome to NextJs i18n",

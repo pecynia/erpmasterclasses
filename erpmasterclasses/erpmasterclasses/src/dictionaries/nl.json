@@ -25,6 +25,23 @@
       "href": "/contact"
     }
   },
+  "footer": {
+    "contact": {
+      "label": "Contact"
+    },
+    "social": {
+      "label": "Volg Ons"
+    },
+    "navigation": {
+      "label": "Navigatie"
+    },
+    "description": {
+      "label": "Pas deze tekst aan"
+    },
+    "credit": {
+      "label": "Gemaakt door"
+    }
+  },
   "page": {
     "home": {
       "title": "Welkom bij de startpagina",

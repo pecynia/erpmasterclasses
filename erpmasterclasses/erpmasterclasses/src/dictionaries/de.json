@@ -25,6 +25,23 @@
       "href": "/contact"
     }
   },
+  "footer": {
+    "contact": {
+      "label": "Kontakt"
+    },
+    "social": {
+      "label": "Sozial"
+    },
+    "navigation": {
+      "label": "Navigation"
+    },
+    "description": {
+      "label": "Beschreibung. Schreiben Sie hier eine kurze Beschreibung über Ihr Unternehmen."
+    },
+    "credit": {
+      "label": "Gebaut von"
+    }
+  },
   "page": {
     "home": {
       "title": "Wilkommen bei Nextjs i18n",

@@ -14,7 +14,7 @@ export default async function Header({ lang }: { lang: Locale }) {
       <nav className='flex justify-between items-center'>
         <div className='flex items-center space-x-4'>
           {Object.values(navigation).map((navItem, index) => (
-            <Link key={index} href={navItem.href}>
+            <Link key={index} href={`/${lang}${navItem.href}`}>
               <p className='transition-colors px-4 text-primary text-md font-light'>{navItem.label}</p>
             </Link>
           ))}
