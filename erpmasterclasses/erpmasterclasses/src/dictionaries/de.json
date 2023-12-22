@@ -1,47 +1,55 @@
 {
-    "navigation": {
-      "title": {
-        "label": "Guus' Website",
-        "href": "/"
-      },
-      "home": {
-        "label": "Home",
-        "href": "/"
-      },
-      "about": {
-        "label": "Über",
-        "href": "/about"
-      },
-      "contact": {
-        "label": "Kontakt",
-        "href": "/contact"
-      }
+  "navigation": {
+    "home": {
+      "label": "Home",
+      "href": "/"
     },
-    "page": {
-      "home": {
-        "title": "Wilkommen bei Nextjs i18n",
-        "description": "Internationalisierung im NextJs 14 App Router"
-      },
-      "about": {
-        "title": "Über uns",
-        "description": "Dies ist die About Seite"
-      }
+    "about": {
+      "label": "Über uns",
+      "href": "/about"
+    },
+    "agenda": {
+      "label": "Agenda",
+      "href": "/agenda"
+    },
+    "reviews": {
+      "label": "Bewertungen",
+      "href": "/reviews"
+    },
+    "investment": {
+      "label": "Investition",
+      "href": "/investment"
     },
     "contact": {
-      "namePlaceholder": "Name*",
-      "emailPlaceholder": "E-Mail*",
-      "phonePlaceholder": "Telefonnummer*",
-      "eventDatePlaceholder": "Datum des geplanten Ereignisses (optional)",
-      "companyNamePlaceholder": "Firmenname (optional)",
-      "messagePlaceholder": "Nachricht*",
-      "submitButtonText": "Senden",
-      "emailSentToast": "E-Mail gesendet!",
-      "errorToast": "Hoppla! Etwas ist schief gelaufen.",
-      "nameRequired": "Name ist erforderlich.",
-      "emailRequired": "E-Mail ist erforderlich.",
-      "invalidEmail": "Ungültige E-Mail.",
-      "phoneRequired": "Telefonnummer ist erforderlich.",
-      "messageRequired": "Nachricht ist erforderlich.",
-      "messageMinLength": "Nachricht muss mindestens 6 Zeichen lang sein."
+      "label": "Kontakt",
+      "href": "/contact"
     }
+  },
+  "page": {
+    "home": {
+      "title": "Wilkommen bei Nextjs i18n",
+      "description": "Internationalisierung im NextJs 14 App Router"
+    },
+    "about": {
+      "title": "Über uns",
+      "description": "Dies ist die About Seite"
+    }
+  },
+  "contact": {
+    "namePlaceholder": "Name*",
+    "emailPlaceholder": "E-Mail*",
+    "phonePlaceholder": "Telefonnummer*",
+    "eventDatePlaceholder": "Datum des geplanten Ereignisses (optional)",
+    "companyNamePlaceholder": "Firmenname (optional)",
+    "messagePlaceholder": "Nachricht*",
+    "submitButtonText": "Senden",
+    "emailSentToast": "E-Mail gesendet!",
+    "errorToast": "Hoppla! Etwas ist schief gelaufen.",
+    "nameRequired": "Name ist erforderlich.",
+    "emailRequired": "E-Mail ist erforderlich.",
+    "invalidEmail": "Ungültige E-Mail.",
+    "phoneRequired": "Telefonnummer ist erforderlich.",
+    "messageRequired": "Nachricht ist erforderlich.",
+    "messageMinLength": "Nachricht muss mindestens 6 Zeichen lang sein."
   }
+}

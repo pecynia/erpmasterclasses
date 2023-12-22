@@ -63,5 +63,5 @@ export default async function ContactForm({ lang }: { lang: Locale }) {
         {isSubmitting ? 'Sending...' : 'Send'}
       </button>
     </form>
-  );
+  )
 }

@@ -1,9 +1,5 @@
 {
   "navigation": {
-    "title": {
-      "label": "Guus' Website",
-      "href": "/"
-    },
     "home": {
       "label": "Home",
       "href": "/"
@@ -11,6 +7,18 @@
     "about": {
       "label": "Over ons",
       "href": "/about"
+    },
+    "agenda": {
+      "label": "Agenda",
+      "href": "/agenda"
+    },
+    "reviews": {
+      "label": "Ervaringen",
+      "href": "/reviews"
+    },
+    "investment": {
+      "label": "Investering",
+      "href": "/investment"
     },
     "contact": {
       "label": "Contact",
