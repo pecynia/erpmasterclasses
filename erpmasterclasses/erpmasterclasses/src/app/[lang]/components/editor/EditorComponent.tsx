@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
+import { toast } from 'sonner'
 import { RotateCw , Save } from 'lucide-react';
 import StarterKit from '@tiptap/starter-kit';
 import { Color } from '@tiptap/extension-color';
@@ -81,7 +82,11 @@ const EditorComponent: React.FC<EditorComponentProps> = ({
                     'Locale': currentLocale
                 },
             })
-            // check for res.ok or other conditions here
+            if (res.ok) {
+                toast.success('Saved successfully!')
+            } else {
+                toast.error('Oops, something went wrong. Please try again later.')
+            }
             setHasChanges(false)
         } catch (error) {
             console.error('Failed to save:', error)

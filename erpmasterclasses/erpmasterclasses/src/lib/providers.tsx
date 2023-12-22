@@ -12,7 +12,7 @@ export const NextAuthProvider = ({ children }: Props) => {
     <>
       <SessionProvider>
         {children}
-        <Toaster position="top-right" richColors expand closeButton />
+        <Toaster position="top-center" duration={1500} richColors expand closeButton />
       </SessionProvider>
     </>
   )
