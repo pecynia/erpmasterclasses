@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
 import { Locale } from "../../../../../i18n.config";
 
-const TextComponent = ({ documentId, currentLocale } : { documentId: string, currentLocale: Locale }) => {
+const TextComponent = ({ documentId, initialLocale } : { documentId: string, initialLocale: Locale }) => {
   return (
     <motion.div
       layout
@@ -14,7 +14,7 @@ const TextComponent = ({ documentId, currentLocale } : { documentId: string, cur
         "bg-secondary flex px-4 pt-4 pb-10 rounded-xl w-[1000px]"
       )}
     >
-      <EditorWrapper documentId={documentId} initialLocale={currentLocale} />
+      <EditorWrapper documentId={documentId} initialLocale={initialLocale} />
     </motion.div>
   );
 };

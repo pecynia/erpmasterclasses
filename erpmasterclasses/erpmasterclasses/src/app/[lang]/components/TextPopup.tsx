@@ -32,7 +32,7 @@ function TextPopup({ documentId, currentLocale, imgPath, link, buttonText }: Pro
           viewport={{ once: true }}
           className='header-shadow-right min-w-[50%] min-h-[20%] max-w-[70%] bg-secondary mb-20 pb-10 flex px-10 pt-4 z-10'
         >
-            <EditorWrapper documentId={documentId} link={link} buttonText={buttonText} currentLocale={currentLocale} />
+            <EditorWrapper documentId={documentId} link={link} buttonText={buttonText} initialLocale={currentLocale} />
         </motion.div>
       </div>
   )

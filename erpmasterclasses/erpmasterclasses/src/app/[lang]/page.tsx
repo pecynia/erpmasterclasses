@@ -11,7 +11,7 @@ export default async function Home({
     
     return (
       <div className='py-16 flex flex-col justify-center items-center '>
-        <TestComponent currentLocale={lang} />
+        <TestComponent initialLocale={lang} />
       </div>
   )
 }

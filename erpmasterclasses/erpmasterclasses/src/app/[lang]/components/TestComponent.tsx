@@ -6,7 +6,7 @@ import TextComponent from '@/app/[lang]/components/editor/TextComponent'
 import { Locale } from '../../../../i18n.config'
 
 
-function TestComponent({ currentLocale }: { currentLocale: Locale }) {
+function TestComponent({ initialLocale }: { initialLocale: Locale }) {
   return (
     <div>
       <motion.div layout
@@ -15,7 +15,7 @@ function TestComponent({ currentLocale }: { currentLocale: Locale }) {
           transition={{ type: "spring", ease: "easeInOut", duration: 0.3 }}
           className='relative w-full h-full flex justify-center items-center'
       >   
-        <TextComponent documentId='initial-test' currentLocale={currentLocale} />
+        <TextComponent documentId='initial-test' initialLocale={initialLocale} />
       </motion.div>
     </div>
 
