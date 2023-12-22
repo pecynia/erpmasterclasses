@@ -14,19 +14,13 @@ function Page({
   params: { lang: Locale }
 }) { 
   return (
-    <div className='flex flex-col items-center justify-center w-full py-36 relative'>
-        <Image 
-            src={Vlam}
-            alt="Image" 
-            fill
-            className="object-cover object-center"
-        />
+    <div className='flex flex-col items-center justify-center w-full py-20 relative'>
         <motion.div 
           initial={{ opacity: 0, y: '100%' }}
           whileInView={{ opacity: 1, y: '0%' }}
           transition={{ type: "spring", ease: "easeInOut", duration: 0.5 }}
           viewport={{ once: true }}
-          className='min-w-[80%] lg:min-w-[50%] min-h-[20%] max-w-[80%] bg-secondary mb-20 pb-10 flex px-10 pt-4 z-10'
+          className='min-w-[70%] lg:min-w-[40%] min-h-[20%] max-w-[80%] mb-20 pb-10 flex px-10 pt-4 z-10 rounded-xl  bg-white shadow-xl'
         >
           <div className='w-full pt-2'>
             <ContactForm lang={lang} />

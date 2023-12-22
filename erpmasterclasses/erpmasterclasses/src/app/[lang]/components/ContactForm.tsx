@@ -39,39 +39,29 @@ export default async function ContactForm({ lang }: { lang: Locale }) {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit(processForm)}
-      className='mx-auto flex flex-1 flex-col gap-4'
-    >
+    <form onSubmit={handleSubmit(processForm)} className='mx-auto flex flex-1 flex-col gap-4'>
       <h1 className='text-3xl text-center font-youngSerif py-2'>Reach Out</h1>
+      
+      {/* Company Name Input */}
+      <input {...register('companyName')} placeholder='Company name*' className='w-1/3 rounded-lg p-2 border-2 border-gray-100' />
+      {errors.companyName?.message && <p className='ml-1 -mt-2 text-sm text-red-400'>{errors.companyName.message}</p>}
+      
       {/* Name Input */}
-      <input {...register('name')} placeholder='Name*' className='w-1/2 rounded-lg p-2' />
+      <input {...register('name')} placeholder='Name*' className='w-1/3 rounded-lg p-2 border-2 border-gray-100' />
       {errors.name?.message && <p className='ml-1 -mt-2 text-sm text-red-400'>{errors.name.message}</p>}
       
       {/* Email Input */}
-      <input {...register('email')} placeholder='Email*' className='w-1/2 rounded-lg p-2' />
+      <input {...register('email')} placeholder='Email*' className='w-1/2 rounded-lg p-2 border-2 border-gray-100' />
       {errors.email?.message && <p className='ml-1 -mt-2 text-sm text-red-400'>{errors.email.message}</p>}
-
-      {/* Phone Number Input */}
-      <input {...register('phone')} placeholder='Phone number*' className='w-1/2 rounded-lg p-2' />
-      {errors.phone?.message && <p className='ml-1 -mt-2 text-sm text-red-400'>{errors.phone.message}</p>}
-
-      {/* Event Date Input */}
-      <input {...register('eventDate')} placeholder='Date planned event (optional)' className='w-full rounded-lg p-2' />
-      {/* No validation error for optional field */}
-      
-      {/* Company Name Input */}
-      <input {...register('companyName')} placeholder='Company name (optional)' className='w-full rounded-lg p-2' />
-      {/* No validation error for optional field */}
       
       {/* Message Input */}
-      <textarea {...register('message')} rows={5} placeholder='Message*' className='w-full rounded-lg p-2' />
+      <textarea {...register('message')} rows={5} placeholder='Message*' className='w-full rounded-lg p-2 border-2 border-gray-50' />
       {errors.message?.message && <p className='ml-1 -mt-2 text-sm text-red-400'>{errors.message.message}</p>}
 
       {/* Submit Button */}
-      <button disabled={isSubmitting} className='rounded-lg border border-black bg-black py-2.5 font-medium text-white transition-colors hover:bg-black/80 disabled:cursor-not-allowed disabled:opacity-50'>
+      <button disabled={isSubmitting} className='rounded-lg bg-primary py-2.5 font-medium text-white transition-colors hover:bg-black/80 disabled:cursor-not-allowed disabled:opacity-50'>
         {isSubmitting ? 'Sending...' : 'Send'}
       </button>
     </form>
-  )
+  );
 }
