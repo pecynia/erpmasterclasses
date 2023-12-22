@@ -120,11 +120,11 @@ const EditorComponent: React.FC<EditorComponentProps> = ({
                     isSaving ? 
                     <Button disabled size="lg">
                         <RotateCw className="mr-2 h-4 w-4 animate-spin" />
-                        Opslaan
+                        Saving
                     </Button> : 
                     <Button size="lg" onClick={handleSave}>
                         <Save className="mr-2 h-4 w-4" />
-                        Opslaan
+                        Save
                     </Button>
                 )}
             </div>

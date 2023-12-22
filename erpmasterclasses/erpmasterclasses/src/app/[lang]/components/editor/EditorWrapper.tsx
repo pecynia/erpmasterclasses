@@ -28,9 +28,8 @@ const EditorWrapper: React.FC<EditorWrapperProps> = ({ documentId, link, buttonT
     // State for managing the current locale of the editor
     const [currentLocale, setCurrentLocale] = useState<Locale>(initialLocale)
 
-
+    // Function for handling locale changes
     const handleLocaleChange = async (newLocale: Locale) => {
-        console.log("Locale changed to:", newLocale)
         setCurrentLocale(newLocale) // Update the current locale
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/content`, {
