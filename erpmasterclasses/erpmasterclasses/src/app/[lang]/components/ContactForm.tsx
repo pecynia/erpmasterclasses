@@ -1,67 +1,21 @@
-'use client'
+"use client"
 
-import { useForm, SubmitHandler } from 'react-hook-form'
+import ClientContactForm from './ClientContactForm';
+import { motion } from 'framer-motion';
+import { ClientContactFormProps } from './ClientContactForm';
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
-
-import { ContactFormSchema } from '@/lib/schema'
-import { sendContactEmail } from '@/app/_actions'
-import { toast } from 'sonner'
-import { Locale } from '../../../../i18n.config'
-
-
-export type ContactFormInputs = z.infer<typeof ContactFormSchema>
-
-export default async function ContactForm({ lang }: { lang: Locale }) {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isSubmitting }
-  } = useForm<ContactFormInputs>({
-    resolver: zodResolver(ContactFormSchema)
-  })
-  
-
-  const processForm: SubmitHandler<ContactFormInputs> = async data => {
-    const result = await sendContactEmail(data)
-
-    if (result?.success) {
-      toast.success('Email sent successfully!')
-      reset()
-      return
-    }
-
-    // toast error
-    console.log(result?.error)
-    toast.error('Oops, something went wrong. Please try again later.')
-  }
-
+export default async function ContactForm({ localization, errorMessages }: ClientContactFormProps) {
   return (
-    <form onSubmit={handleSubmit(processForm)} className='mx-auto flex flex-1 flex-col gap-4'>
-      <h1 className='text-3xl text-center font-exo font-normal py-2'>Reach Out</h1>
-      
-      {/* Company Name Input */}
-      <input {...register('companyName')} placeholder='Company name*' className='w-1/3 rounded-lg p-2 border-2 border-gray-100' />
-      {errors.companyName?.message && <p className='ml-1 -mt-2 text-sm text-red-400'>{errors.companyName.message}</p>}
-      
-      {/* Name Input */}
-      <input {...register('name')} placeholder='Name*' className='w-1/3 rounded-lg p-2 border-2 border-gray-100' />
-      {errors.name?.message && <p className='ml-1 -mt-2 text-sm text-red-400'>{errors.name.message}</p>}
-      
-      {/* Email Input */}
-      <input {...register('email')} placeholder='Email*' className='w-1/2 rounded-lg p-2 border-2 border-gray-100' />
-      {errors.email?.message && <p className='ml-1 -mt-2 text-sm text-red-400'>{errors.email.message}</p>}
-      
-      {/* Message Input */}
-      <textarea {...register('message')} rows={5} placeholder='Message*' className='w-full rounded-lg p-2 border-2 border-gray-50' />
-      {errors.message?.message && <p className='ml-1 -mt-2 text-sm text-red-400'>{errors.message.message}</p>}
-
-      {/* Submit Button */}
-      <button disabled={isSubmitting} className='rounded-lg bg-primary py-2.5 font-medium text-white transition-colors hover:bg-primary/80 disabled:cursor-not-allowed disabled:opacity-50'>
-        {isSubmitting ? 'Sending...' : 'Send'}
-      </button>
-    </form>
-  )
+    <motion.div 
+          initial={{ opacity: 0, y: '100%' }}
+          whileInView={{ opacity: 1, y: '0%' }}
+          transition={{ type: "spring", ease: "easeInOut", duration: 0.5 }}
+          viewport={{ once: true }}
+          className='min-w-[70%] lg:min-w-[40%] min-h-[20%] max-w-[80%] mb-20 pb-10 flex px-10 pt-4 rounded-xl  bg-white shadow-xl'
+        >
+          <div className='w-full pt-2'>
+            <ClientContactForm localization={localization} errorMessages={errorMessages} />
+          </div>
+    </motion.div>
+  );
 }

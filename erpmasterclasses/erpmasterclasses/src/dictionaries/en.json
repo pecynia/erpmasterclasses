@@ -66,12 +66,19 @@
     "messagePlaceholder": "Message*",
     "submitButtonText": "Submit",
     "emailSentToast": "Email sent!",
-    "errorToast": "Oops! Something went wrong.",
+    "errorToast": "Oops! Something went wrong."
+  },
+  "errorMessages": {
+    "companyNameRequired": "Company name is required.",
     "nameRequired": "Name is required.",
     "emailRequired": "Email is required.",
     "invalidEmail": "Invalid email.",
     "phoneRequired": "Phone number is required.",
     "messageRequired": "Message is required.",
-    "messageMinLength": "Message must be at least 6 characters."
+    "messageMinLength": "Message must be at least 6 characters.",
+    "addressRequired": "Address is required.",
+    "countryRequired": "Country is required.",
+    "positionRequired": "Position is required.",
+    "vatNumberRequired": "VAT number is required."
   }
 }

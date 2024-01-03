@@ -56,17 +56,29 @@
     "namePlaceholder": "Name*",
     "emailPlaceholder": "E-Mail*",
     "phonePlaceholder": "Telefonnummer*",
-    "eventDatePlaceholder": "Datum des geplanten Ereignisses (optional)",
-    "companyNamePlaceholder": "Firmenname (optional)",
+    "eventDatePlaceholder": "Datum der geplanten Veranstaltung (optional)",
+    "companyNamePlaceholder": "Firmenname*",
+    "addressPlaceholder": "Adresse*",
+    "countryPlaceholder": "Land*",
+    "positionPlaceholder": "Position*",
+    "vatPlaceholder": "USt-IdNr.*",
+    "poPlaceholder": "Bestellnummer (optional)",
     "messagePlaceholder": "Nachricht*",
     "submitButtonText": "Senden",
     "emailSentToast": "E-Mail gesendet!",
-    "errorToast": "Hoppla! Etwas ist schief gelaufen.",
+    "errorToast": "Hoppla! Etwas ist schief gelaufen."
+  },
+  "errorMessages": {
+    "companyNameRequired": "Firmenname ist erforderlich.",
     "nameRequired": "Name ist erforderlich.",
     "emailRequired": "E-Mail ist erforderlich.",
     "invalidEmail": "Ungültige E-Mail.",
     "phoneRequired": "Telefonnummer ist erforderlich.",
     "messageRequired": "Nachricht ist erforderlich.",
-    "messageMinLength": "Nachricht muss mindestens 6 Zeichen lang sein."
+    "messageMinLength": "Die Nachricht muss mindestens 6 Zeichen lang sein.",
+    "addressRequired": "Adresse ist erforderlich.",
+    "countryRequired": "Land ist erforderlich.",
+    "positionRequired": "Position ist erforderlich.",
+    "vatNumberRequired": "USt-IdNr. ist erforderlich."
   }
 }

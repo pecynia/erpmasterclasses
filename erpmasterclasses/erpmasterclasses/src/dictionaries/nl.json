@@ -56,17 +56,29 @@
     "namePlaceholder": "Naam*",
     "emailPlaceholder": "E-mail*",
     "phonePlaceholder": "Telefoonnummer*",
-    "eventDatePlaceholder": "Datum van gepland evenement (optioneel)",
-    "companyNamePlaceholder": "Bedrijfsnaam (optioneel)",
+    "eventDatePlaceholder": "Datum van geplande evenement (optioneel)",
+    "companyNamePlaceholder": "Bedrijfsnaam*",
+    "addressPlaceholder": "Adres*",
+    "countryPlaceholder": "Land*",
+    "positionPlaceholder": "Positie*",
+    "vatPlaceholder": "BTW-nummer*",
+    "poPlaceholder": "Bestelnummer (optioneel)",
     "messagePlaceholder": "Bericht*",
-    "submitButtonText": "Verzend",
+    "submitButtonText": "Verzenden",
     "emailSentToast": "E-mail verzonden!",
-    "errorToast": "Oeps! Er ging iets mis.",
+    "errorToast": "Oeps! Er ging iets mis."
+  },
+  "errorMessages": {
+    "companyNameRequired": "Bedrijfsnaam is verplicht.",
     "nameRequired": "Naam is verplicht.",
     "emailRequired": "E-mail is verplicht.",
     "invalidEmail": "Ongeldige e-mail.",
     "phoneRequired": "Telefoonnummer is verplicht.",
     "messageRequired": "Bericht is verplicht.",
-    "messageMinLength": "Bericht moet minstens 6 tekens lang zijn."
+    "messageMinLength": "Bericht moet ten minste 6 tekens bevatten.",
+    "addressRequired": "Adres is verplicht.",
+    "countryRequired": "Land is verplicht.",
+    "positionRequired": "Positie is verplicht.",
+    "vatNumberRequired": "BTW-nummer is verplicht."
   }
 }
