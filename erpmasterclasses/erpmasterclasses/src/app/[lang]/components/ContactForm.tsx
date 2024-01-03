@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 import { ContactFormSchema } from '@/lib/schema'
-import { sendEmail } from '@/app/_actions'
+import { sendContactEmail } from '@/app/_actions'
 import { toast } from 'sonner'
 import { Locale } from '../../../../i18n.config'
 
@@ -25,7 +25,7 @@ export default async function ContactForm({ lang }: { lang: Locale }) {
   
 
   const processForm: SubmitHandler<ContactFormInputs> = async data => {
-    const result = await sendEmail(data)
+    const result = await sendContactEmail(data)
 
     if (result?.success) {
       toast.success('Email sent successfully!')

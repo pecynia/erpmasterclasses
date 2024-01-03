@@ -2,9 +2,7 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import ContactForm from '@/app/[lang]/components/ContactForm'
-import Vlam from './/../../../../public/vlam.png'
 import { Locale } from '../../../../i18n.config'
 
 
@@ -20,7 +18,7 @@ function Page({
           whileInView={{ opacity: 1, y: '0%' }}
           transition={{ type: "spring", ease: "easeInOut", duration: 0.5 }}
           viewport={{ once: true }}
-          className='min-w-[70%] lg:min-w-[40%] min-h-[20%] max-w-[80%] mb-20 pb-10 flex px-10 pt-4 z-10 rounded-xl  bg-white shadow-xl'
+          className='min-w-[70%] lg:min-w-[40%] min-h-[20%] max-w-[80%] mb-20 pb-10 flex px-10 pt-4 rounded-xl  bg-white shadow-xl'
         >
           <div className='w-full pt-2'>
             <ContactForm lang={lang} />
