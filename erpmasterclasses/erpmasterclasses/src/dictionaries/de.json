@@ -62,7 +62,7 @@
     "countryPlaceholder": "Land*",
     "positionPlaceholder": "Position*",
     "vatPlaceholder": "USt-IdNr.*",
-    "poPlaceholder": "Bestellnummer (optional)",
+    "poPlaceholder": "Projektnummer (optional)",
     "messagePlaceholder": "Nachricht*",
     "submitButtonText": "Senden",
     "emailSentToast": "E-Mail gesendet!",

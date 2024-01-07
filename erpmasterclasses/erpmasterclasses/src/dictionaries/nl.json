@@ -62,7 +62,7 @@
     "countryPlaceholder": "Land*",
     "positionPlaceholder": "Positie*",
     "vatPlaceholder": "BTW-nummer*",
-    "poPlaceholder": "Bestelnummer (optioneel)",
+    "poPlaceholder": "Projectnummer (optioneel)",
     "messagePlaceholder": "Bericht*",
     "submitButtonText": "Verzenden",
     "emailSentToast": "E-mail verzonden!",

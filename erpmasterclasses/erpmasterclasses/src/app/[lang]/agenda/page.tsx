@@ -1,9 +1,17 @@
 import React from 'react'
+import { Locale } from '@/app/../../../i18n.config'
+import { getDictionary } from '@/lib/dictionary';
 
-function page() {
+export default async function Page({
+  params: { lang }
+}: {
+  params: { lang: Locale }
+}) { 
+  const { contact, errorMessages } = await getDictionary(lang);
+
   return (
-    <div>page</div>
+    <div>
+      
+    </div>
   )
 }
-
-export default page

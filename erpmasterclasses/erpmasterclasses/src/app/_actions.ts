@@ -2,12 +2,14 @@
 
 import { z } from 'zod'
 import { Resend } from 'resend'
-import { ContactFormSchema } from '@/lib/schema'
+import { ContactFormSchema, RegristrationFormSchema } from '@/lib/schema'
 import ContactFormEmail from '@/emails/contact-form-email'
+import RegistrationFormEmail from '@/emails/registration-form-email'
 
-type ContactFormInputs = z.infer<typeof ContactFormSchema>
 const resend = new Resend(process.env.RESEND_API_KEY)
 
+// Contact Form
+type ContactFormInputs = z.infer<typeof ContactFormSchema>
 export async function sendContactEmail(data: ContactFormInputs) {
   const result = ContactFormSchema.safeParse(data)
 
@@ -29,3 +31,38 @@ export async function sendContactEmail(data: ContactFormInputs) {
 
   return { success: false, error: result.error.format() }
 }
+
+
+// Registration Form 
+type RegistrationFormInputs = z.infer<typeof RegristrationFormSchema>
+export async function sendRegistrationEmail(data: RegistrationFormInputs) {
+  const result = RegristrationFormSchema.safeParse(data)
+
+  if (result.success) {
+    const { companyName, address, country, nameParticipant, phone, email, position, vatNumber, poNumber, additionalParticipants } = result.data
+
+    try {
+      const emailData = await resend.emails.send({
+        from: 'ERP Masterclass <contact@erpmasterclasses.com>',
+        to: ['verheul.nicolai@gmail.com'], //['gk@dynamicsandmore.com'],
+        subject: 'Registration form submission',
+        text: `Company Name: ${companyName}\nAdress: ${address}\nCountry: ${country}\nName: ${nameParticipant}\nPhone: ${phone}\nEmail: ${email}\nPosition: ${position}\nVAT number: ${vatNumber}\nPO number: ${poNumber}\nAdditional participants: ${additionalParticipants}`,
+        react: RegistrationFormEmail({ companyName, address, country, nameParticipant, phone, email, position, vatNumber, poNumber, additionalParticipants }),
+      })
+      return { success: true, data: emailData }
+    }
+    catch (error) {
+      return { success: false, error }
+    }
+  }
+
+  return { success: false, error: result.error.format() }
+}
+
+
+
+
+
+
+
+
