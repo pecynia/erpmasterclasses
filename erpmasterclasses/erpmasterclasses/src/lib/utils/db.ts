@@ -146,23 +146,24 @@ export async function getEventsWithRegistrations(): Promise<EventData[]> {
             shownLanguages: event.shownLanguages,
             registrations: event.registrations
         }
-    })
+    }) as EventData[]
 
     return events
 }
 
 // Create new event
 export async function addEvent(event: CreateEventProps) {
-    const db = await connectToDatabase()
-    const collection = db.collection('events')
+    const db = await connectToDatabase();
+    const collection = db.collection('events');
 
-    const _id = new ObjectId()
-    const newEvent = { _id, ...event } as EventProps
+    const _id = new ObjectId();
+    const newEvent = { _id, ...event } as EventProps;
 
-    const result = await collection.insertOne(newEvent)
+    const result = await collection.insertOne(newEvent);
 
-    return result
+    return { result, _id: _id.toString() };
 }
+
 
 // Update event
 export async function updateEvent(event: EventProps) {
@@ -173,6 +174,7 @@ export async function updateEvent(event: EventProps) {
     const update = { $set: event }
 
     const result = await collection.updateOne(filter, update)
+    console.log(result)
 
     return result
 }
@@ -182,7 +184,7 @@ export async function deleteEvent(eventId: string) {
     const db = await connectToDatabase()
     const collection = db.collection('events')
 
-    const result = await collection.deleteOne({ _id: new ObjectId(eventId) })
+    const result = await collection.deleteOne({ _id: new ObjectId(eventId) }) as { deletedCount: number, acknowledged: boolean }
 
     return result
 }

@@ -1,7 +1,41 @@
-import { Pencil, Trash2 } from "lucide-react";
+"use client"
+
+import { Pencil } from "lucide-react"
 import { Badge } from '@/app/[lang]/components/ui/badge'
+import { EventData } from "@/../../../../typings"
+import LocaleIcons from "@/app/[lang]/components/lang/LocaleIcon"
+import Image from "next/image"
+import DeleteEvent from "@/app/[lang]/components/admin/DeleteEvent"
 
+import React from 'react'
 
+const EventOverview: React.FC<{ allEvents: EventData[], setEventData: React.Dispatch<React.SetStateAction<EventData[]>> }> = ({ allEvents, setEventData }) => {    
+    return (
+        <div className='flex flex-col gap-4 pt-2'>
+            <div className='flex flex-col gap-4'>
+                {allEvents.sort((a, b) => a.date.getTime() - b.date.getTime()).map((event, index) => (
+                    <div className='flex flex-row gap-4 items-center border-2 p-2 pl-4 rounded-md' key={index}>
+                        <div className='flex flex-col gap-2'>
+                            <div className='flex flex-row gap-2 items-center'>
+                                <p className='text-lg font-bold'>{event.title}</p>
+                                <Badge variant='secondary'>
+                                    <Image alt={event.language} src={LocaleIcons[event.language]} width={16} height={16} />
+                                    <p className='text-sm pl-1'>{event.language.toUpperCase()}</p>
+                                </Badge>
+                            </div>
+                            <p className='text-sm'>{event.date.toLocaleDateString()}</p>
+                        </div>
+                        <div className='flex flex-row gap-2 ml-auto mr-2'>
+                            <Badge className="hover:cursor-pointer" onClick={() => console.log('edit')} >
+                                <Pencil size={16} />
+                            </Badge>
+                            <DeleteEvent eventId={event._id} allEvents={allEvents} setEventData={setEventData} />
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+  )
+}
 
-
-// For the pencil we use Badge secondary, for trash we use destructive
+export default EventOverview

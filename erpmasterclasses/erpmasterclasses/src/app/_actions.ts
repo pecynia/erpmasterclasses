@@ -5,7 +5,7 @@ import { Resend } from 'resend'
 import { ContactFormSchema, RegristrationFormSchema } from '@/lib/schema'
 import ContactFormEmail from '@/emails/contact-form-email'
 import RegistrationFormEmail from '@/emails/registration-form-email'
-import { addEvent, getEventsWithRegistrations, deleteEvent } from '@/lib/utils/db'
+import { addEvent, getEventsWithRegistrations, deleteEvent, updateEvent } from '@/lib/utils/db'
 import { CreateEventProps, EventData } from '@/../typings'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -64,9 +64,9 @@ export async function sendRegistrationEmail(data: RegistrationFormInputs) {
 
 // Save event to database
 export async function saveEvent(data: CreateEventProps) {
-  const result = await addEvent(data)
+  const { result, _id} = await addEvent(data)
   if (result.success) {
-    return { success: true, data: result.data }
+    return { success: true, data: result.data, _id }
   }
 }
 
@@ -78,8 +78,16 @@ export async function getAllEvents(): Promise<EventData[]> {
 // Remove event from database
 export async function removeEvent(id: string) {
   const result = await deleteEvent(id)
-  if (result.success) {
-    return { success: true, data: result.data }
+  if (result.acknowledged) {
+    return { success: true, data: result }
+  }
+}
+
+// Update event in database
+export async function updateEventInDatabase(data: EventData) {
+  const result = await updateEvent(data)
+  if (result.acknowledged) {
+    return { success: true, data: result }
   }
 }
 

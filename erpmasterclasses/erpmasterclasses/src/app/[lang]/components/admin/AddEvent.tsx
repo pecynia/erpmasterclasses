@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { EventSchema } from '@/lib/schema'
 import { saveEvent } from '@/app/_actions'
 import { Locale, i18n } from '../../../../../i18n.config'
-import { CreateEventProps } from '@/../typings'
+import { CreateEventProps, EventData } from '@/../typings'
 import LocaleIcons from '@/app/[lang]/components/lang/LocaleIcon'
 import { toast } from 'sonner'
 
@@ -33,9 +33,9 @@ import {
   SelectValue,
 } from "@/app/[lang]/components/ui/select"
 import Image from 'next/image'
-import { Button } from '../ui/button'
-import { Input } from '../ui/input'
-import { Textarea } from '../ui/textarea'
+import { Button } from '@/app/[lang]/components/ui/button'
+import { Input } from '@/app/[lang]/components/ui/input'
+import { Textarea } from '@/app/[lang]/components/ui/textarea'
 import {
   Dialog,
   DialogContent,
@@ -46,7 +46,7 @@ import {
   DialogTrigger,
   DialogClose
 } from "@/app/[lang]/components/ui/dialog"
-const AddEvent: React.FC = () => {
+const AddEvent: React.FC<{ allEvents: EventData[], setEventData: React.Dispatch<React.SetStateAction<EventData[]>> }> = ({ allEvents, setEventData }) => {
   const { register, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm<CreateEventProps>({
     resolver: zodResolver(EventSchema),
     defaultValues: {
@@ -70,8 +70,15 @@ const AddEvent: React.FC = () => {
 
   const processForm: SubmitHandler<CreateEventProps> = async (data) => {
     try {
-      await saveEvent(data)
+      const result = await saveEvent(data)
       toast.success("Event added successfully")
+
+      // Add the new event to the list of events
+      const newEvent = data as CreateEventProps
+      const completeNewEvent = { ...newEvent, _id: result?._id } as EventData
+      setEventData([...allEvents, completeNewEvent])
+
+      // Close the dialog
       closeSheet()
     } catch (error) {
       console.error(error)
@@ -85,7 +92,7 @@ const AddEvent: React.FC = () => {
   const [shownLanguages, setShownLanguages] = React.useState<Locale[]>([selectedLocale])
   const [open, setOpen] = React.useState(false)
 
-  const closeSheet = () => setOpen(false);
+  const closeSheet = () => setOpen(false)
 
   const handleDateSelect = (selectedDate: Date | undefined) => {
     if (selectedDate) {
@@ -172,7 +179,7 @@ const AddEvent: React.FC = () => {
 
           {/* Required Registrations (number) */}
           <div className='flex flex-col gap-2 w-[240px] '>
-            <div>
+            <div className='pt-2'>
               <p className='text-sm '>Required Registrations</p>
             </div>
             <Input
@@ -187,7 +194,7 @@ const AddEvent: React.FC = () => {
 
           {/* Language */}
           <div className='flex flex-col gap-2 w-[240px] '>
-            <div>
+            <div className='pt-2'>
               <p className='text-sm '>Event language</p>
             </div>
             <Select value={selectedLocale} onValueChange={switchLocale}>
@@ -233,25 +240,26 @@ const AddEvent: React.FC = () => {
 
           {/* Multiple Languages Selector */}
           <div className='flex flex-col gap-2'>
-            <div>
+            <div className='pt-2'>
               <p className='text-sm '>Show event in site versions</p>
             </div>
             <div className='flex flex-wrap'>
               {i18n.locales.map((loc) => (
                 <div key={loc} className="flex items-center mr-2 mb-2">
                   <Badge className="p-2" variant="secondary">
-                  <Checkbox
-                    checked={shownLanguages.includes(loc)}
-                    onCheckedChange={() => toggleLanguage(loc)}
-                  />
-                  <Label className="flex items-center ml-3">
-                    <Image src={LocaleIcons[loc]} alt={loc.toUpperCase()} width={24} height={24} />
-                    <span className='ml-2'>{loc.toUpperCase()}</span>
-                  </Label>
+                    <Checkbox
+                      checked={shownLanguages.includes(loc)}
+                      onCheckedChange={() => toggleLanguage(loc)}
+                    />
+                    <Label className="flex items-center ml-3">
+                      <Image src={LocaleIcons[loc]} alt={loc.toUpperCase()} width={24} height={24} />
+                      <span className='ml-2'>{loc.toUpperCase()}</span>
+                    </Label>
                   </Badge>
                 </div>
               ))}
             </div>
+            {errors.shownLanguages && <p className='text-sm text-red-400 -mt-2'>{errors.shownLanguages.message}</p>}
           </div>
 
           {/* Submit Button */}
@@ -262,15 +270,9 @@ const AddEvent: React.FC = () => {
             {isSubmitting ? 'Adding...' : 'Add Event'}
           </Button>
         </form>
-
-        <DialogFooter>
-          <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
-          </DialogClose>
-        </DialogFooter>
       </DialogContent>
     </Dialog>
-  );
-};
+  )
+}
 
-export default AddEvent;
+export default AddEvent

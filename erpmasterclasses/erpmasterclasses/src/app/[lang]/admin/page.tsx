@@ -8,37 +8,40 @@ import Loading from './loading'
 import Container from '@/app/[lang]/components/ui/container'
 import AddEvent from '@/app/[lang]/components/admin/AddEvent'
 import { getAllEvents } from '@/app/_actions'
-import { EventData } from '../../../../typings'
+import { EventData } from '@../../../typings'
+import EventOverview from '@/app/[lang]/components/admin/EventOverview'
+import { Separator } from '../components/ui/separator'
 
 const Page = () => {
     const { status, data: session } = useSession()
 
-    // const [events, setEvents] = useState<EventData[]>([])
+    const [events, setEvents] = useState<EventData[]>([])
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         const result = await getAllEvents()
-    //         setEvents(result)
-    //     }
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await getAllEvents()
+            setEvents(result)
+        }
 
-    //     fetchData()
-    // }, [])
+        fetchData()
+    }, [])
 
-    // if (status === 'loading') {
-    //     return <Loading />
-    // }
+    if (status === 'loading') {
+        return <Loading />
+    }
 
     return (
         <Container>
             <div className='bg-white rounded-lg shadow-lg p-12 mt-10 mb-10 w-full max-w-4xl mx-auto'>
+                <h1 className='font-bold text-4xl mb-8 text-secondary-foreground'>Agenda overview</h1>                
+                
                 {/* Event Overview  */}
-                
-                
-                {/* Add Event */}
-                <div className='mb-8'>
-                    <h2 className='font-bold text-2xl mb-4 text-secondary-foreground'>Add an event</h2>
-                    <AddEvent />
+                <div className='flex flex-col gap-4'>
+                    <p className='text-xl'>Current active events ({events.length})</p>
+                    <AddEvent allEvents={events} setEventData={setEvents} />
                 </div>
+                <Separator className='mt-4 mb-2'/>
+                <EventOverview allEvents={events} setEventData={setEvents} />
             </div>
         </Container>
     )
