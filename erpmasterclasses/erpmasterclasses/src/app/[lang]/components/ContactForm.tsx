@@ -1,8 +1,8 @@
 "use client"
 
-import ClientContactForm from './ClientContactForm';
-import { motion } from 'framer-motion';
-import { ClientContactFormProps } from './ClientContactForm';
+import ClientContactForm from './ClientContactForm'
+import { motion } from 'framer-motion'
+import { ClientContactFormProps } from './ClientContactForm'
 
 export default async function ContactForm({ localization, errorMessages }: ClientContactFormProps) {
   return (
@@ -17,5 +17,5 @@ export default async function ContactForm({ localization, errorMessages }: Clien
             <ClientContactForm localization={localization} errorMessages={errorMessages} />
           </div>
     </motion.div>
-  );
+  )
 }

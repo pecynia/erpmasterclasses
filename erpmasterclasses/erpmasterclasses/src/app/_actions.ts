@@ -5,6 +5,8 @@ import { Resend } from 'resend'
 import { ContactFormSchema, RegristrationFormSchema } from '@/lib/schema'
 import ContactFormEmail from '@/emails/contact-form-email'
 import RegistrationFormEmail from '@/emails/registration-form-email'
+import { addEvent } from '@/lib/utils/db'
+import { CreateEventProps } from '@/../typings'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -40,14 +42,14 @@ export async function sendRegistrationEmail(data: RegistrationFormInputs) {
 
   if (result.success) {
     const { companyName, address, country, nameParticipant, phone, email, position, vatNumber, poNumber, additionalParticipants } = result.data
-
+    const _id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
     try {
       const emailData = await resend.emails.send({
         from: 'ERP Masterclass <contact@erpmasterclasses.com>',
         to: ['verheul.nicolai@gmail.com'], //['gk@dynamicsandmore.com'],
         subject: 'Registration form submission',
         text: `Company Name: ${companyName}\nAdress: ${address}\nCountry: ${country}\nName: ${nameParticipant}\nPhone: ${phone}\nEmail: ${email}\nPosition: ${position}\nVAT number: ${vatNumber}\nPO number: ${poNumber}\nAdditional participants: ${additionalParticipants}`,
-        react: RegistrationFormEmail({ companyName, address, country, nameParticipant, phone, email, position, vatNumber, poNumber, additionalParticipants }),
+        react: RegistrationFormEmail({ _id, companyName, address, country, nameParticipant, phone, email, position, vatNumber, poNumber, additionalParticipants }),
       })
       return { success: true, data: emailData }
     }
@@ -60,6 +62,11 @@ export async function sendRegistrationEmail(data: RegistrationFormInputs) {
 }
 
 
+// Save event to database
+export async function saveEvent(data: CreateEventProps) {
+  const result = await addEvent(data)
+  return result
+}
 
 
 

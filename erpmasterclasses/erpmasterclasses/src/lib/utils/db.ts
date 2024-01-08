@@ -2,9 +2,7 @@ import { MongoClient, ObjectId, ServerApiVersion } from 'mongodb'
 import NodeCache from 'node-cache'
 import { Locale } from '@/app/../../i18n.config'
 import { JSONContent } from '@tiptap/react'
-
-
-
+import { EventProps, CreateEventProps, EventData, RegistrationFormProps } from '@/../typings'
 
 // -------------------- DATABASE --------------------
 
@@ -45,37 +43,195 @@ async function connectToDatabase() {
 
 // Get document given id and locale
 export async function getParagraphJson(documentId: string, locale: Locale) {
-    const db = await connectToDatabase();
-    const collection = db.collection('content');
-    const result = await collection.findOne({ _id: documentId });
+    const db = await connectToDatabase()
+    const collection = db.collection('content')
+    const result = await collection.findOne({ _id: documentId })
 
     // Constructing the response to match the original format
     if (result && result.content && result.content[locale]) {
         return {
             _id: result._id,
             paragraphJson: result.content[locale]
-        };
+        }
     }
     
-    return null;
+    return null
 }
 
 
 
 // Save paragraph JSON content for a specific locale
 export async function saveParagraphJson(documentId: string, locale: Locale, paragraphJson: JSONContent) {
-    const db = await connectToDatabase();
-    const collection = db.collection('content');
+    const db = await connectToDatabase()
+    const collection = db.collection('content')
 
-    const filter = { _id: documentId };
+    const filter = { _id: documentId }
     const update = { 
         $set: { [`content.${locale}`]: paragraphJson } 
-    };
+    }
 
-    const result = await collection.updateOne(filter, update, { upsert: true });
+    const result = await collection.updateOne(filter, update, { upsert: true })
 
-    return result;
+    return result
 }
+
+// -------------------- EVENT OPERATIONS --------------------
+
+// Get event based on eventSlug and language is in shownLanguages
+export async function getEvent(eventSlug: string, language: Locale): Promise<EventProps | null> {
+    const db = await connectToDatabase()
+    const collection = db.collection('events')
+    const result = await collection.findOne({ eventSlug, shownLanguages: language })
+
+    // Constructing the response to match the original format
+    if (result) {
+        return {
+            _id: result._id,
+            title: result.title,
+            eventSlug: result.eventSlug,
+            description: result.description,
+            date: result.date,
+            location: result.location,
+            requiredRegistrations: result.requiredRegistrations,
+            language: result.language,
+            shownLanguages: result.shownLanguages
+        }
+    }
+
+    return null
+}
+
+
+// Get all events based on language is in shownLanguages
+export async function getEvents(language: Locale): Promise<EventProps[]> {
+    const db = await connectToDatabase()
+    const collection = db.collection('events')
+    const result = await collection.find({ shownLanguages: language }).toArray()
+
+    // Constructing the response to match the original format
+    const events = result.map((event: EventProps) => {
+        return {
+            _id: event._id,
+            title: event.title,
+            eventSlug: event.eventSlug,
+            description: event.description,
+            date: event.date,
+            location: event.location,
+            requiredRegistrations: event.requiredRegistrations,
+            language: event.language,
+            shownLanguages: event.shownLanguages
+        }
+    })
+
+    return events
+}
+
+// Get all events with registrations (ADMIN)
+export async function getEventsWithRegistrations(): Promise<EventData[]> {
+    const db = await connectToDatabase()
+    const collection = db.collection('events')
+    const result = await collection.find({}).toArray()
+
+    // Constructing the response to match the original format
+    const events = result.map((event: EventData) => {
+        return {
+            _id: event._id,
+            title: event.title,
+            eventSlug: event.eventSlug,
+            description: event.description,
+            date: event.date,
+            location: event.location,
+            requiredRegistrations: event.requiredRegistrations,
+            language: event.language,
+            shownLanguages: event.shownLanguages,
+            registrations: event.registrations
+        }
+    })
+
+    return events
+}
+
+// Create new event
+export async function addEvent(event: CreateEventProps) {
+    const db = await connectToDatabase()
+    const collection = db.collection('events')
+
+    const _id = new ObjectId()
+    const newEvent = { _id, ...event } as EventProps
+
+    const result = await collection.insertOne(newEvent)
+
+    return result
+}
+
+// Update event
+export async function updateEvent(event: EventProps) {
+    const db = await connectToDatabase()
+    const collection = db.collection('events')
+
+    const filter = { _id: event._id }
+    const update = { $set: event }
+
+    const result = await collection.updateOne(filter, update)
+
+    return result
+}
+
+// Delete event
+export async function deleteEvent(eventId: string) {
+    const db = await connectToDatabase()
+    const collection = db.collection('events')
+
+    const result = await collection.deleteOne({ _id: new ObjectId(eventId) })
+
+    return result
+}
+
+// Add registration to event
+export async function addRegistration(eventId: string, registration: RegistrationFormProps) {
+    const db = await connectToDatabase()
+    const collection = db.collection('events')
+
+    const filter = { _id: new ObjectId(eventId) }
+    const update = { $push: { registrations: registration } }
+
+    const result = await collection.updateOne(filter, update)
+
+    // TODO Send confirmation email
+
+    return result
+}
+
+// Delete registration from event
+export async function deleteRegistration(eventId: string, registrationId: string) {
+    const db = await connectToDatabase()
+    const collection = db.collection('events')
+
+    const filter = { _id: new ObjectId(eventId) }
+    const update = { $pull: { registrations: { _id: new ObjectId(registrationId) } } }
+
+    const result = await collection.updateOne(filter, update)
+
+    // TODO Send cancellation email
+
+    return result
+}
+
+// Update registration from event
+export async function updateRegistration(eventId: string, registration: RegistrationFormProps) {
+    const db = await connectToDatabase()
+    const collection = db.collection('events')
+
+    const filter = { _id: new ObjectId(eventId), "registrations._id": new ObjectId(registration._id) }
+    const update = { $set: { "registrations.$": registration } }
+
+    const result = await collection.updateOne(filter, update)
+
+    return result
+}
+
+
+
 
 
 // --------------- CACHING AND SERVER-SIDE PROPS ---------------
@@ -123,6 +279,3 @@ export async function saveParagraphJson(documentId: string, locale: Locale, para
 //     getStoryBySlug,
 // }
 
-export default {
-    getParagraphJson
-}

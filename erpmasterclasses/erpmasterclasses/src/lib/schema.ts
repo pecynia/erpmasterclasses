@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { Locale, i18n } from '../../i18n.config'
 
 
 // 1: Required
@@ -28,5 +29,22 @@ export const RegristrationFormSchema = z.object({
   vatNumber: z.string().min(1, { message: 'VAT number is required.' }),
   poNumber: z.string().optional(),
   additionalParticipants: z.array(AdditionalRegristrationFormSchema).optional()
+})
+
+export const EventSchema = z.object({
+  title: z.string().min(1, { message: 'Title is required.' }),
+  eventSlug: z.string().min(1, { message: 'Slug is required.' }),
+  description: z.string().min(1, { message: 'Description is required.' }),
+  date: z.date().refine((value) => {
+    return value > new Date()
+  }, { message: 'Date must be in the future.' }),
+  location: z.string().optional(),
+  requiredRegistrations: z.number().min(1, { message: 'At least one registration is required.' }),
+  language: z.string().min(1, { message: 'Language is required.' }).refine((value) => {
+    return i18n.locales.includes(value as Locale)
+  }, { message: 'Language is invalid.' }),
+  shownLanguages: z.array(z.string().min(1, { message: 'Language is required.' }).refine((value) => {
+    return i18n.locales.includes(value as Locale)
+  }, { message: 'Language is invalid.' })).min(1, { message: 'At least one language is required.' })
 })
 

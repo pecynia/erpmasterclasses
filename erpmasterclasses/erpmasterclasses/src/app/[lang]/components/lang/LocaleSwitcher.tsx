@@ -48,14 +48,7 @@ export default function LocaleSwitcher({ locale }: { locale: Locale }) {
                             value={loc}
                             disabled={loc === locale}
                         >
-                            <motion.div layout 
-                                initial={{ opacity: 0, y: '-10%' }}
-                                animate={{ opacity: 1, y: '0%' }}
-                                transition={{ 
-                                    delay: 0.1,
-                                    ease: "easeInOut", 
-                                    duration: 0.2 }}
-                                viewport={{ once: true }}
+                            <div
                                 className="flex items-center">
                                 <Image
                                     alt={loc.toUpperCase()}
@@ -65,7 +58,7 @@ export default function LocaleSwitcher({ locale }: { locale: Locale }) {
                                     className="mr-2"
                                 />
                                 {loc.toUpperCase()}
-                            </motion.div>
+                            </div>
                         </SelectItem>
                     ))}
                 </SelectGroup>

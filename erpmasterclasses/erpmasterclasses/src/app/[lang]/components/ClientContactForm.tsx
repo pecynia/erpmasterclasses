@@ -1,32 +1,32 @@
-import React from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { ContactFormSchema } from '@/lib/schema';
-import { sendContactEmail } from '@/app/_actions';
-import { toast } from 'sonner';
+import React from 'react'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { ContactFormSchema } from '@/lib/schema'
+import { sendContactEmail } from '@/app/_actions'
+import { toast } from 'sonner'
 
-export type ContactFormInputs = z.infer<typeof ContactFormSchema>;
+export type ContactFormInputs = z.infer<typeof ContactFormSchema>
 
 export type ClientContactFormProps = {
   localization: {
-    namePlaceholder: string;
-    emailPlaceholder: string;
-    companyNamePlaceholder: string;
-    messagePlaceholder: string;
-    submitButtonText: string;
-    emailSentToast: string;
-    errorToast: string;
-  };
+    namePlaceholder: string
+    emailPlaceholder: string
+    companyNamePlaceholder: string
+    messagePlaceholder: string
+    submitButtonText: string
+    emailSentToast: string
+    errorToast: string
+  }
   errorMessages: {
-    companyNameRequired: string;
-    nameRequired: string;
-    emailRequired: string;
-    invalidEmail: string;
-    messageRequired: string;
-    messageMinLength: string;
-  };
-};
+    companyNameRequired: string
+    nameRequired: string
+    emailRequired: string
+    invalidEmail: string
+    messageRequired: string
+    messageMinLength: string
+  }
+}
 
 const ClientContactForm: React.FC<ClientContactFormProps> = ({ localization, errorMessages }) => {
   const {
@@ -36,19 +36,19 @@ const ClientContactForm: React.FC<ClientContactFormProps> = ({ localization, err
     formState: { errors, isSubmitting }
   } = useForm<ContactFormInputs>({
     resolver: zodResolver(ContactFormSchema)
-  });
+  })
 
   const processForm: SubmitHandler<ContactFormInputs> = async data => {
-    const result = await sendContactEmail(data);
+    const result = await sendContactEmail(data)
 
     if (result?.success) {
-      toast.success(localization.emailSentToast);
-      reset();
+      toast.success(localization.emailSentToast)
+      reset()
     } else {
-      console.error(result?.error);
-      toast.error(localization.errorToast);
+      console.error(result?.error)
+      toast.error(localization.errorToast)
     }
-  };
+  }
 
   return (
     <form onSubmit={handleSubmit(processForm)} className='mx-auto flex flex-1 flex-col gap-4'>
@@ -97,7 +97,7 @@ const ClientContactForm: React.FC<ClientContactFormProps> = ({ localization, err
         {isSubmitting ? 'Sending...' : localization.submitButtonText}
       </button>
     </form>
-  );
-};
+  )
+}
 
-export default ClientContactForm;
+export default ClientContactForm

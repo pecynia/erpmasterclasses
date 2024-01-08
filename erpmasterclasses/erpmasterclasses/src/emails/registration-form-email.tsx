@@ -1,24 +1,8 @@
 import React from 'react';
+import { RegistrationFormProps } from '@/../typings'
 
-interface AdditionalRegistrationFormEmailProps {
-    nameParticipant: string;
-    email: string;
-}
-
-interface RegistrationFormEmailProps {
-    companyName: string;
-    address: string;
-    country: string;
-    nameParticipant: string;
-    phone: string;
-    email: string;
-    position: string;
-    vatNumber: string;
-    poNumber?: string;
-    additionalParticipants?: AdditionalRegistrationFormEmailProps[];
-}
-
-const RegistrationFormEmail: React.FC<Readonly<RegistrationFormEmailProps>> = ({
+const RegistrationFormEmail: React.FC<Readonly<RegistrationFormProps>> = ({
+    _id,
     companyName,
     address,
     country,
