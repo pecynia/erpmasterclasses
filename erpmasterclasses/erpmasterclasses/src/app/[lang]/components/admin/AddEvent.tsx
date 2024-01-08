@@ -12,6 +12,7 @@ import { toast } from 'sonner'
 
 import { cn } from "@/lib/utils"
 import { CalendarIcon } from "@radix-ui/react-icons"
+import { Plus } from 'lucide-react'
 import { format } from "date-fns"
 import { Calendar } from "@/app/[lang]/components/ui/calendar"
 import { Checkbox } from "@/app/[lang]/components/ui/checkbox"
@@ -35,14 +36,29 @@ import Image from 'next/image'
 import { Button } from '../ui/button'
 
 const AddEvent: React.FC = () => {
-  const { register, handleSubmit, formState: { errors, isSubmitting }, setValue } = useForm<CreateEventProps>({
+  const { register, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm<CreateEventProps>({
     resolver: zodResolver(EventSchema),
+    defaultValues: {
+      title: '',
+      eventSlug: '',
+      description: '',
+      location: '',
+      requiredRegistrations: 0,
+      date: undefined,
+      language: i18n.defaultLocale,
+      shownLanguages: [i18n.defaultLocale]
+    }
   })
 
+  // Register the date, language, and shownLanguages fields
+  React.useEffect(() => {
+    register('date')
+    register('language')
+    register('shownLanguages')
+  }, [register])
+
   const processForm: SubmitHandler<CreateEventProps> = async (data) => {
-    console.log(data)
     try {
-      console.log(data)
       await saveEvent(data)
       toast.success("Event added successfully")
     } catch (error) {
@@ -52,29 +68,29 @@ const AddEvent: React.FC = () => {
   }
 
   const [selectedLocale, setSelectedLocale] = React.useState<Locale>(i18n.defaultLocale)
-  const switchLocale = (newLocale: Locale) => {
-    if (newLocale !== selectedLocale) {
-      setSelectedLocale(newLocale)
-    }
-  }
-
   const [date, setDate] = React.useState<Date | null>(null)
   const [isPopoverOpen, setIsPopoverOpen] = React.useState(false)
+  const [shownLanguages, setShownLanguages] = React.useState<Locale[]>([selectedLocale])
 
   const handleDateSelect = (selectedDate: Date | undefined) => {
     if (selectedDate) {
       setDate(selectedDate)
+      setValue('date', selectedDate) // Update the registered field
       setIsPopoverOpen(false) // Close the popover on date selection
     }
   }
-  
-  const [shownLanguages, setShownLanguages] = React.useState<Locale[]>([selectedLocale])
+
+  const switchLocale = (newLocale: Locale) => {
+    setSelectedLocale(newLocale)
+    setValue('language', newLocale) // Update the registered field
+  }
+
   const toggleLanguage = (loc: Locale) => {
-    if (shownLanguages.includes(loc)) {
-      setShownLanguages(shownLanguages.filter((l) => l !== loc))
-    } else {
-      setShownLanguages([...shownLanguages, loc])
-    }
+    const newShownLanguages = shownLanguages.includes(loc)
+      ? shownLanguages.filter((l) => l !== loc)
+      : [...shownLanguages, loc]
+    setShownLanguages(newShownLanguages)
+    setValue('shownLanguages', newShownLanguages) // Update the registered field
   }
 
   // Custom register for requiredRegistrations
@@ -83,6 +99,8 @@ const AddEvent: React.FC = () => {
       setValueAs: (value) => parseInt(value, 10) || 0 
     })
   }, [register])
+
+  console.log(errors)
 
   return (
     <form onSubmit={handleSubmit(processForm)} className='mx-auto flex flex-1 flex-col gap-4'>
@@ -117,6 +135,9 @@ const AddEvent: React.FC = () => {
             initialFocus
           />
         </PopoverContent>
+
+        {/* Error Message */}
+        {errors.date && <p className='text-sm text-red-400'>{errors.date.message}</p>}
       </Popover>
 
       {/* Location */}
@@ -125,7 +146,6 @@ const AddEvent: React.FC = () => {
 
       {/* Required Registrations (number) */}
       <input
-        type="number"
         placeholder='Required Registrations'
         {...register('requiredRegistrations')}
         className='w-full rounded-lg p-2 border-2 border-gray-100'
@@ -188,6 +208,7 @@ const AddEvent: React.FC = () => {
         <div className='flex flex-wrap'>
           {i18n.locales.map((loc) => (
             <div key={loc} className="flex items-center mr-2 mb-2">
+              <Badge className="p-2" variant="secondary">
               <Checkbox
                 checked={shownLanguages.includes(loc)}
                 onCheckedChange={() => toggleLanguage(loc)}
@@ -196,6 +217,7 @@ const AddEvent: React.FC = () => {
                 <Image src={LocaleIcons[loc]} alt={loc.toUpperCase()} width={24} height={24} />
                 <span className='ml-1'>{loc.toUpperCase()}</span>
               </Label>
+              </Badge>
             </div>
           ))}
         </div>
@@ -203,7 +225,6 @@ const AddEvent: React.FC = () => {
 
       {/* Submit Button */}
       <button 
-        type='submit'
         disabled={isSubmitting} 
         className='rounded-lg bg-primary py-2.5 font-medium text-white transition-colors hover:bg-primary/80 disabled:cursor-not-allowed disabled:opacity-50'
       >

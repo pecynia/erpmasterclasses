@@ -14,7 +14,7 @@ export default async function Page({
     <div>
       {events.map(event => (
         <div key={event._id}>
-          {event.title}
+          {event.title} - {""+event.date} - {event.language} - {event.shownLanguages}
         </div>
       ))}
     </div>
