@@ -37,7 +37,7 @@ const Page = () => {
                 
                 {/* Event Overview  */}
                 <div className='flex flex-col gap-4'>
-                    <p className='text-xl'>Current active events ({events.length})</p>
+                    <p className='text-xl'>Current active events</p>
                     <AddEvent allEvents={events} setEventData={setEvents} />
                 </div>
                 <Separator className='mt-4 mb-2'/>

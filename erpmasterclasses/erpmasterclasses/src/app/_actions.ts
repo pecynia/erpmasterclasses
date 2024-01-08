@@ -85,7 +85,9 @@ export async function removeEvent(id: string) {
 
 // Update event in database
 export async function updateEventInDatabase(data: EventData) {
+  console.log("update event in database", data)
   const result = await updateEvent(data)
+  console.log("result", result)
   if (result.acknowledged) {
     return { success: true, data: result }
   }

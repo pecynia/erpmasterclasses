@@ -54,7 +54,6 @@ export default function LocaleSwitcher({ locale }: { locale: Locale }) {
                                     alt={loc.toUpperCase()}
                                     src={LocaleIcons[loc]}
                                     width={24}
-                                    height={24}
                                     className="mr-2"
                                 />
                                 {loc.toUpperCase()}

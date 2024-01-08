@@ -170,11 +170,11 @@ export async function updateEvent(event: EventProps) {
     const db = await connectToDatabase()
     const collection = db.collection('events')
 
-    const filter = { _id: event._id }
-    const update = { $set: event }
+    const { _id, ...eventProps } = event
+    const filter = { _id: new ObjectId(_id) }
+    const update = { $set: eventProps }
 
-    const result = await collection.updateOne(filter, update)
-    console.log(result)
+    const result = await collection.updateOne(filter, update) as { matchedCount: number, modifiedCount: number, acknowledged: boolean, upsertedId: ObjectId | null, upsertedCount: number }
 
     return result
 }

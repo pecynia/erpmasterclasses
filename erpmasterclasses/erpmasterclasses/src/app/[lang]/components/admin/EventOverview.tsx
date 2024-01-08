@@ -8,6 +8,7 @@ import Image from "next/image"
 import DeleteEvent from "@/app/[lang]/components/admin/DeleteEvent"
 
 import React from 'react'
+import UpdateEvent from "./UpdateEvent"
 
 const EventOverview: React.FC<{ allEvents: EventData[], setEventData: React.Dispatch<React.SetStateAction<EventData[]>> }> = ({ allEvents, setEventData }) => {    
     return (
@@ -19,16 +20,14 @@ const EventOverview: React.FC<{ allEvents: EventData[], setEventData: React.Disp
                             <div className='flex flex-row gap-2 items-center'>
                                 <p className='text-lg font-bold'>{event.title}</p>
                                 <Badge variant='secondary'>
-                                    <Image alt={event.language} src={LocaleIcons[event.language]} width={16} height={16} />
+                                    <Image alt={event.language} src={LocaleIcons[event.language]} width={16} />
                                     <p className='text-sm pl-1'>{event.language.toUpperCase()}</p>
                                 </Badge>
                             </div>
                             <p className='text-sm'>{event.date.toLocaleDateString()}</p>
                         </div>
                         <div className='flex flex-row gap-2 ml-auto mr-2'>
-                            <Badge className="hover:cursor-pointer" onClick={() => console.log('edit')} >
-                                <Pencil size={16} />
-                            </Badge>
+                            <UpdateEvent existingEvent={event} allEvents={allEvents} setEventData={setEventData} />
                             <DeleteEvent eventId={event._id} allEvents={allEvents} setEventData={setEventData} />
                         </div>
                     </div>
