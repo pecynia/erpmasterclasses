@@ -52,6 +52,9 @@
       "description": "This is the about page"
     }
   },
+  "agenda": {
+    "title": "Agenda"
+  },
   "contact": {
     "namePlaceholder": "Name*",
     "emailPlaceholder": "Email*",

@@ -1,6 +1,5 @@
 "use client"
 
-import { Pencil } from "lucide-react"
 import { Badge } from '@/app/[lang]/components/ui/badge'
 import { EventData } from "@/../../../../typings"
 import LocaleIcons from "@/app/[lang]/components/lang/LocaleIcon"

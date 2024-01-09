@@ -52,6 +52,9 @@
       "description": "Dit is de over ons pagina"
     }
   },
+  "agenda": {
+    "title": "Agenda"
+  },
   "contact": {
     "namePlaceholder": "Naam*",
     "emailPlaceholder": "E-mail*",
