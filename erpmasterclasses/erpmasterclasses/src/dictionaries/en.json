@@ -4,21 +4,21 @@
       "label": "Home",
       "href": "/"
     },
-    "about": {
-      "label": "About",
-      "href": "/about"
-    },
     "agenda": {
       "label": "Agenda",
       "href": "/agenda"
     },
-    "reviews": {
-      "label": "Reviews",
-      "href": "/reviews"
-    },
     "investment": {
       "label": "Investment",
       "href": "/investment"
+    },
+    "about": {
+      "label": "About Guus",
+      "href": "/about"
+    },
+    "reviews": {
+      "label": "Reviews",
+      "href": "/reviews"
     },
     "contact": {
       "label": "Contact",

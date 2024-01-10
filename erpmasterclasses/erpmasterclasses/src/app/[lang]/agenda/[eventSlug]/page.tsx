@@ -6,6 +6,7 @@ import { getEvent } from '@/lib/utils/db'
 import { Badge } from '@/app/[lang]/components/ui/badge'
 import Image from 'next/image'
 import LocaleIcons from '@/app/[lang]/components/lang/LocaleIcon'
+import { MapPin, Calendar } from 'lucide-react'
 
 export default async function Page({
   params: { lang, eventSlug }
@@ -33,8 +34,8 @@ export default async function Page({
             <span className="text-sm pl-2">{event.language.toUpperCase()}</span>
           </Badge>
         </div>
-        <p className="text-lg mb-2">{new Date(event.date).toLocaleDateString()}</p>
-        {event.location && <p className="mb-4">Location: {event.location}</p>}
+        <p className="text-lg mb-2 flex">{<Calendar width={16} height={16} className='mr-1 mt-1' />} {new Date(event.date).toLocaleDateString()}</p>
+        {event.location && <p className="mb-4 flex">{<MapPin width={16} height={16} className='mr-1 mt-1' />} {event.location}</p>}
         <p className="text-sm mb-8">Required Registrations: {event.requiredRegistrations}</p>
         <div className="border-t border-gray-200 py-4">
           <h2 className="text-2xl font-semibold mb-3">Description</h2>

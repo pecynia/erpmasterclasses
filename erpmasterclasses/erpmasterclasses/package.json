@@ -23,6 +23,7 @@
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-tooltip": "^1.0.7",
+    "@studio-freight/lenis": "^1.0.33",
     "@tiptap/extension-bullet-list": "^2.1.13",
     "@tiptap/extension-color": "^2.1.13",
     "@tiptap/extension-placeholder": "^2.1.13",

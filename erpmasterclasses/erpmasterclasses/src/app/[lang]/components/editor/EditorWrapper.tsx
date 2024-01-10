@@ -13,15 +13,17 @@ import { Color } from '@tiptap/extension-color'
 import TextStyle from '@tiptap/extension-text-style'
 import { Button } from "@/app/[lang]/components/ui/button"
 import { Locale } from "../../../../../i18n.config"
+import { twMerge } from "tailwind-merge"
 
 interface EditorWrapperProps {
     documentId: string
     initialLocale: Locale
+    className?: string
     link?: string
     buttonText?: string
 }
 
-const EditorWrapper: React.FC<EditorWrapperProps> = ({ documentId, link, buttonText, initialLocale }) => {
+const EditorWrapper: React.FC<EditorWrapperProps> = ({ documentId, link, buttonText, initialLocale, className }) => {
     const { status, data: session } = useSession()
     const [fetchedContent, setFetchedContent] = useState('')
 
@@ -67,7 +69,7 @@ const EditorWrapper: React.FC<EditorWrapperProps> = ({ documentId, link, buttonT
     }
 
     return (
-        <motion.div layout className="w-full">
+        <motion.div layout className={twMerge("w-full", className)}>
             <EditorComponent
                 currentLocale={currentLocale}
                 documentId={documentId}

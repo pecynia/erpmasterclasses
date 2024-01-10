@@ -105,7 +105,6 @@ const EditorComponent: React.FC<EditorComponentProps> = ({
           {editable && (
             <>
               <MenuBar editor={editor} />
-              <EditorLocaleSwitcher currentLocale={currentLocale} onLocaleChange={handleLocaleChange} />
             </>
           )}
             <motion.div 
@@ -115,19 +114,28 @@ const EditorComponent: React.FC<EditorComponentProps> = ({
                 <EditorContent editor={editor} />
             </motion.div>
     
-            <div className="absolute flex justify-end bottom-0 right-0 -mb-14">
-                {editable && hasChanges && (
-                    isSaving ? 
-                    <Button disabled size="lg">
-                        <RotateCw className="mr-2 h-4 w-4 animate-spin" />
-                        Saving
-                    </Button> : 
-                    <Button size="lg" onClick={handleSave}>
-                        <Save className="mr-2 h-4 w-4" />
-                        Save
-                    </Button>
-                )}
+            {editable && (
+                <div className='relative'>
+                {/* Locale switcher, bottom left below the text area  */}
+                <div className="absolute flex justify-start bottom-0 right-0 left-[50%] -mb-14 -ml-1/2" style={{ transform: 'translateX(-100%)' }} >
+                    <EditorLocaleSwitcher currentLocale={currentLocale} onLocaleChange={handleLocaleChange} />
+                </div>
+                {/* Save button, bottom right below the text area  */}
+                <div className="absolute flex justify-end bottom-0 right-0 -mb-14">
+                    {hasChanges && (
+                        isSaving ? 
+                        <Button disabled size="lg">
+                            <RotateCw className="mr-2 h-4 w-4 animate-spin" />
+                            Saving
+                        </Button> : 
+                        <Button size="lg" onClick={handleSave}>
+                            <Save className="mr-2 h-4 w-4" />
+                            Save
+                        </Button>
+                    )}
+                </div>
             </div>
+            )}
         </motion.div>
     )
 }

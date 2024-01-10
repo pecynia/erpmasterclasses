@@ -21,8 +21,11 @@
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
  
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 0 0% 35%;
+    --secondary: 208 100% 48%;
+    --secondary-foreground: 210 40% 96.1%;
+
+    --tertiary: 330 65% 53%;
+    --tertiary-foreground: 210 40% 98%;
  
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
@@ -55,6 +58,9 @@
  
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
+
+    --tertiary: 210 40% 98%;
+    --tertiary-foreground: 222.2 47.4% 11.2%;
  
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
@@ -186,4 +192,26 @@ html.lenis {
 }
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
+}
+
+
+/* Headers, primary color */
+.shadow-right {
+  box-shadow: 9px 9px 0px 0px hsl(var(--primary));
+}
+.shadow-left {
+  box-shadow: -9px 9px 0px 0px hsl(var(--primary));
+} 
+.shadow-right-secondary {
+  box-shadow: 9px 9px 0px 0px hsl(var(--secondary));
+}
+.shadow-left-secondary {
+  box-shadow: -9px 9px 0px 0px hsl(var(--secondary));
+  border-radius: 0.5rem;
+}
+.shadow-left-secondary-foreground {
+  box-shadow: -9px 9px 0px 0px hsl(var(--secondary-foreground));
+}
+.shadow-right-secondary-foreground {
+  box-shadow: 9px 9px 0px 0px hsl(var(--secondary-foreground));
 }

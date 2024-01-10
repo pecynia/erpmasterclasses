@@ -30,7 +30,7 @@ const EditorLocaleSwitcher: React.FC<EditorLocaleSwitcherProps> = ({ currentLoca
       <div className='flex items-center px-4 py-2'>
         <p className='text-md font-light mr-2'>Selected language</p>
         <Select value={currentLocale} onValueChange={onLocaleChange}>
-          <SelectTrigger className="w-[100px] flex items-center justify-between">
+          <SelectTrigger className="w-[150px] flex items-center justify-between">
             <SelectValue>
               <div className="flex items-center">
                 <Image

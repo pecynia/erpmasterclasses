@@ -84,10 +84,10 @@ const UpdateEvent: React.FC<{ existingEvent: EventData, allEvents: EventData[], 
         }
     }
 
-    const [selectedLocale, setSelectedLocale] = React.useState<Locale>(i18n.defaultLocale)
-    const [date, setDate] = React.useState<Date | null>(null)
+    const [selectedLocale, setSelectedLocale] = React.useState<Locale>(existingEvent.language)
+    const [date, setDate] = React.useState<Date | undefined>(new Date(existingEvent.date))
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false)
-    const [shownLanguages, setShownLanguages] = React.useState<Locale[]>([selectedLocale])
+    const [shownLanguages, setShownLanguages] = React.useState<Locale[]>(existingEvent.shownLanguages)
     const [open, setOpen] = React.useState(false)
 
     const closeSheet = () => setOpen(false)

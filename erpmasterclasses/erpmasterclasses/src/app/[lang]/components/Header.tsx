@@ -10,7 +10,7 @@ export default async function Header({ lang }: { lang: Locale }) {
   const { navigation } = await getDictionary(lang)
 
   return (
-    <HeaderClient className='sticky z-50 top-0 left-0 w-full bg-secondary px-10 py-5 transition-transform duration-300'>
+    <HeaderClient className='sticky z-50 top-0 left-0 w-full bg-secondary-foreground px-10 py-5 transition-transform duration-300'>
       <nav className='flex justify-between items-center'>
         <div className='flex items-center space-x-4'>
           {Object.values(navigation).map((navItem, index) => (
