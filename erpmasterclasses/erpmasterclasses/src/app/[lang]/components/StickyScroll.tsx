@@ -1,47 +1,49 @@
 "use client"
 
-import React, { useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import Lenis from '@studio-freight/lenis';
-import EditorWrapper from '@/app/[lang]/components/editor/EditorWrapper';
-import { Locale } from '../../../../i18n.config';
-import Image from 'next/image';
-import UitlegIntens from '@/../public/imgs/uitleg-intens.jpeg';
+import React, { useEffect, useState } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import Lenis from '@studio-freight/lenis'
+import EditorWrapper from '@/app/[lang]/components/editor/EditorWrapper'
+import { Locale } from '../../../../i18n.config'
+import Image from 'next/image'
+import UitlegIntens from '@/../public/imgs/uitleg-intens.jpeg'
+import { Presentation, Users, BookOpenText, Mic2, Network } from 'lucide-react'
 
 const StickyScroll = ({ lang }: { lang: Locale }) => {
-    const [dimension, setDimension] = useState({ width: 0, height: 0 });
-    const { scrollYProgress } = useScroll();
+    const [dimension, setDimension] = useState({ width: 0, height: 0 })
+    const { scrollYProgress } = useScroll()
 
-    const appearLeft = useTransform(scrollYProgress, [0, 0.25], ['-100%', '0%']);
-    const disappearRight = useTransform(scrollYProgress, [0, 0.2], ['0%', '-20%']);
+    const appearLeft = useTransform(scrollYProgress, [0, 0.25], ['-100%', '0%'])
+    const disappearRight = useTransform(scrollYProgress, [0, 0.2], ['0%', '-20%'])
 
-    const textIds = ['sticky-text-1', 'sticky-text-2', 'sticky-text-3', 'sticky-text-4', 'sticky-text-5'];
+    const textIds = ['sticky-text-1', 'sticky-text-2', 'sticky-text-3', 'sticky-text-4', 'sticky-text-5']
+    const icons = [<Network size={36} />, <Presentation size={36} />, <Users size={36} />, <BookOpenText size={36} />, <Mic2 size={36} />]
 
     useEffect(() => {
         const lenis = new Lenis({
             lerp: 0.1,
             smoothTouch: true,
             normalizeWheel: true,
-        });
+        })
 
         const raf = (time: number) => {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        };
+            lenis.raf(time)
+            requestAnimationFrame(raf)
+        }
 
         const resize = () => {
-            setDimension({ width: window.innerWidth, height: window.innerHeight });
-        };
+            setDimension({ width: window.innerWidth, height: window.innerHeight })
+        }
 
-        window.addEventListener('resize', resize);
-        requestAnimationFrame(raf);
-        resize();
+        window.addEventListener('resize', resize)
+        requestAnimationFrame(raf)
+        resize()
 
         return () => {
-            lenis.destroy();
-            window.removeEventListener('resize', resize);
-        };
-    }, []);
+            lenis.destroy()
+            window.removeEventListener('resize', resize)
+        }
+    }, [])
 
     return (
         <div className="container mx-auto px-4">
@@ -76,23 +78,26 @@ const StickyScroll = ({ lang }: { lang: Locale }) => {
                 </motion.div>
 
                 {/* Right Column, center children on x-axis */}
-                <div className="flex-1 gap-36 pb-36 overflow-visible text-xl -mt-32 flex flex-col items-center justify-center">
-                    {textIds.map((item) => (
+                <div className="flex-1 gap-28 pb-36 overflow-visible -mt-32 flex flex-col items-center justify-center">
+                    {textIds.map((item, index) => (
                         <motion.div layout
                             key={item} 
-                            className="shadow-left-secondary p-2 h-40 mb-4 rounded-xl w-2/3"
+                            className="shadow-left-secondary p-4 mb-4 rounded-xl w-2/3"
                             initial={{ opacity: 0, x: '100%' }}
                             whileInView={{ opacity: 1, x: '0%' }}
                             // viewport={{ once: true }}
                             transition={{ duration: 1, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }}
                         >
-                            <EditorWrapper documentId={item} initialLocale={lang}/>
+                            <div className="ml-8 mt-4 -mb-2 flex items-center text-secondary">
+                                {icons[index]}
+                            </div>
+                            <EditorWrapper documentId={item} initialLocale={lang} className='h-40'/>
                         </motion.div>
                     ))}
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default StickyScroll;
+export default StickyScroll
