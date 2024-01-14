@@ -4,13 +4,17 @@
       "label": "Home",
       "href": "/"
     },
+    "benefits": {
+      "label": "Benefits",
+      "href": "/benefits"
+    },
     "agenda": {
       "label": "Agenda",
       "href": "/agenda"
     },
     "investment": {
-      "label": "Investment",
-      "href": "/investment"
+      "label": "Pricing",
+      "href": "/pricing"
     },
     "about": {
       "label": "About Guus",
@@ -42,15 +46,10 @@
       "label": "Website by"
     }
   },
-  "page": {
-    "home": {
-      "title": "Welcome to NextJs i18n",
-      "description": "Internationalization in NextJs 14 App router"
-    },
-    "about": {
-      "title": "About Us",
-      "description": "This is the about page"
-    }
+  "benefits": {
+    "title": "Enhance Your Chance for Success",
+    "description": "Discover how to better prepare for change",
+    "buttonText": "Contact Guus"
   },
   "agenda": {
     "title": "Agenda"

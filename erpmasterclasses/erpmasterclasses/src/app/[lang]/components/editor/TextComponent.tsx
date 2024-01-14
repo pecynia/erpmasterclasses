@@ -11,7 +11,7 @@ const TextComponent = ({ documentId, initialLocale } : { documentId: string, ini
       layout
       transition={{ duration: 0.7, delay: 0.1, ease: [0, 0.71, 0.2, 1.01] }}
       className={twMerge(
-        "bg-secondary flex px-4 pt-4 pb-10 rounded-xl w-[1000px]"
+        "bg-white shadow-left-secondary  flex px-4 pt-4 pb-10 rounded-xl w-[1000px]"
       )}
     >
       <EditorWrapper documentId={documentId} initialLocale={initialLocale} />

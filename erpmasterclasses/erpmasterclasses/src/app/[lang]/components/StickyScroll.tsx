@@ -49,18 +49,17 @@ const StickyScroll = ({ lang }: { lang: Locale }) => {
         <div className="container mx-auto px-4">
             {/* Descriptive Div */}
             <motion.div 
-                className="ml-auto text-left w-2/3 mb-56 pt-10 h-42 flex flex-col items-center justify-center"
+                className="ml-auto text-left w-4/5 lg:w-2/3 mb-44 lg:mb-56 pt-0 lg:pt-10 h-42 flex flex-col items-center justify-center"
                 style={{ x: disappearRight }}
             >
-
                 <EditorWrapper documentId={'about-description'} initialLocale={lang}/>
             </motion.div>
 
             {/* Main Content */}
-            <div className="pt-10 flex justify-between items-start gap-8">
+            <div className="pt-10 flex justify-between items-start gap-8 bg-background rounded-t-3xl">
                 {/* Left Column */}
                 <motion.div 
-                    className="sticky top-[50vh] self-start w-1/3 h-96 flex flex-col items-center justify-center"
+                    className="sticky top-[50vh] self-start w-1/5 lg:w-1/3 h-96 flex flex-col items-center justify-center"
                     style={{ transform: 'translateY(-50%)' }} 
                 >
                     {/* Image in a circle  */}
@@ -78,20 +77,20 @@ const StickyScroll = ({ lang }: { lang: Locale }) => {
                 </motion.div>
 
                 {/* Right Column, center children on x-axis */}
-                <div className="flex-1 gap-28 pb-36 overflow-visible -mt-32 flex flex-col items-center justify-center">
+                <div className="z-10 flex-1 gap-28 pb-36 overflow-hidden pt-20 -mt-48 flex flex-col items-center justify-center">
                     {textIds.map((item, index) => (
-                        <motion.div layout
+                        <motion.div 
                             key={item} 
-                            className="shadow-left-secondary p-4 mb-4 rounded-xl w-2/3"
-                            initial={{ opacity: 0, x: '100%' }}
-                            whileInView={{ opacity: 1, x: '0%' }}
+                            className="shadow-left-secondary bg-white p-4 h-full lg:h-60 mb-4 ml-4 rounded-xl w-full lg:w-2/3"
+                            // initial={{ opacity: 0, x: '100%' }}
+                            // whileInView={{ opacity: 1, x: '0%' }}
                             // viewport={{ once: true }}
-                            transition={{ duration: 1, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }}
+                            // transition={{ duration: 1, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }}
                         >
                             <div className="ml-8 mt-4 -mb-2 flex items-center text-secondary">
                                 {icons[index]}
                             </div>
-                            <EditorWrapper documentId={item} initialLocale={lang} className='h-40'/>
+                            <EditorWrapper documentId={item} initialLocale={lang} />
                         </motion.div>
                     ))}
                 </div>

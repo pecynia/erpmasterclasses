@@ -8,6 +8,7 @@ import { generateHTML } from '@tiptap/html'
 import { ReloadIcon } from "@radix-ui/react-icons"
 
 import EditorComponent from "@/app/[lang]/components/editor/EditorComponent"
+import { getParagraph } from "@/app/_actions"
 import StarterKit from '@tiptap/starter-kit'
 import { Color } from '@tiptap/extension-color'
 import TextStyle from '@tiptap/extension-text-style'

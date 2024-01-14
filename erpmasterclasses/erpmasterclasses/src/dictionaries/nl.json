@@ -4,12 +4,16 @@
       "label": "Home",
       "href": "/"
     },
+    "benefits": {
+      "label": "Voordelen",
+      "href": "/benefits"
+    },
     "agenda": {
       "label": "Agenda",
       "href": "/agenda"
     },
     "investment": {
-      "label": "Investering",
+      "label": "Kosten",
       "href": "/investment"
     },
     "about": {
@@ -41,17 +45,11 @@
     "credit": {
       "label": "Gemaakt door"
     }
-  },
-  "page": {
-    "home": {
-      "title": "Welkom bij de startpagina",
-      "description": "Dit is de startpagina"
-    },
-    "about": {
-      "title": "Welkom bij de over ons pagina",
-      "description": "Dit is de over ons pagina"
-    }
-  },
+  },"benefits": {
+    "title": "Vergroot Uw Kans op Succes",
+    "description": "Ontdek hoe u zich beter kunt voorbereiden op verandering",
+    "buttonText": "Neem Contact Op"
+  },  
   "agenda": {
     "title": "Agenda"
   },

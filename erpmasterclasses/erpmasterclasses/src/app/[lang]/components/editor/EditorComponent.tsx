@@ -107,10 +107,7 @@ const EditorComponent: React.FC<EditorComponentProps> = ({
               <MenuBar editor={editor} />
             </>
           )}
-            <motion.div 
-                layout
-                className=''
-            >
+            <motion.div layout>
                 <EditorContent editor={editor} />
             </motion.div>
     

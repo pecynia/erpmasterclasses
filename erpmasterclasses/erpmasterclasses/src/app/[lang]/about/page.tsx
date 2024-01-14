@@ -9,7 +9,7 @@ export default function Page({
   params: { lang: Locale }
 }) {
   return (
-    <div>
+    <div className='bg-white'>
       <AboutTopSection />
       <StickyScroll lang={lang} />
     </div>

@@ -5,8 +5,13 @@ import { Resend } from 'resend'
 import { ContactFormSchema, RegristrationFormSchema } from '@/lib/schema'
 import ContactFormEmail from '@/emails/contact-form-email'
 import RegistrationFormEmail from '@/emails/registration-form-email'
-import { addEvent, getEventsWithRegistrations, deleteEvent, updateEvent } from '@/lib/utils/db'
+import { addEvent, getEventsWithRegistrations, deleteEvent, updateEvent, getParagraphJson } from '@/lib/utils/db'
 import { CreateEventProps, EventData } from '@/../typings'
+import { Locale } from '../../i18n.config'
+
+
+// ------------------ CONTACT FORMS ------------------
+
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -62,6 +67,8 @@ export async function sendRegistrationEmail(data: RegistrationFormInputs) {
 }
 
 
+// ------------------ EVENTS ------------------
+
 // Save event to database
 export async function saveEvent(data: CreateEventProps) {
   const { result, _id} = await addEvent(data)
@@ -92,5 +99,11 @@ export async function updateEventInDatabase(data: EventData) {
 }
 
 
+// ------------------ CONTENT ACTIONS ------------------
 
-
+export async function getParagraph(id: string, locale: Locale) {
+  const result = await getParagraphJson(id, locale)
+  if (result) {
+    return { success: true, data: JSON.stringify(result) }
+  }
+}
