@@ -34,26 +34,17 @@ const EditorWrapper: React.FC<EditorWrapperProps> = ({ documentId, link, buttonT
     // Function for handling locale changes
     const handleLocaleChange = async (newLocale: Locale) => {
         setCurrentLocale(newLocale) // Update the current locale
-        try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/content`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Document-ID': documentId,
-                    'Locale': newLocale
-                },
-            })
-            const json = await response.json()
-            if (json && json.paragraphJson) {
-                const contentAsHtml = generateHTML(json.paragraphJson, [
-                    StarterKit,
-                    TextStyle,
-                    Color,
-                ])
-                setFetchedContent(contentAsHtml)
-            }
-        } catch (error) {
-            console.error('Error fetching content:', error)
+        const response = await getParagraph(documentId, newLocale)
+
+        if (response && response.success) {
+            const contentAsHtml = generateHTML(response.data?.paragraphJson, [
+                StarterKit,
+                TextStyle,
+                Color,
+            ])
+            setFetchedContent(contentAsHtml)
+        } else {
+            console.error('Error fetching content:', response?.error)
         }
     }
 

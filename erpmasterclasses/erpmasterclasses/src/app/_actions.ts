@@ -101,9 +101,18 @@ export async function updateEventInDatabase(data: EventData) {
 
 // ------------------ CONTENT ACTIONS ------------------
 
+// Server action
 export async function getParagraph(id: string, locale: Locale) {
-  const result = await getParagraphJson(id, locale)
-  if (result) {
-    return { success: true, data: JSON.stringify(result) }
+  try {
+    const result = await getParagraphJson(id, locale)
+    if (result) {
+      return { success: true, data: result }
+    } else {
+      return { success: false, error: "No data found" }
+    }
+  } catch (error) {
+    console.error("Error in getParagraph:", error)
+    return { success: false, error: "Server error" }
   }
 }
+
