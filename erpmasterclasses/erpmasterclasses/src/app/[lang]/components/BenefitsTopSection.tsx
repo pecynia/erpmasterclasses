@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import Tja from '@/../public/imgs/tja.jpg'
@@ -8,6 +8,7 @@ import { motion } from 'framer-motion'
 import { Locale } from '@../../../i18n.config'
 import { Button } from './ui/button'
 import EditorWrapper from '@/app/[lang]/components/editor/EditorWrapper'
+import Lenis from '@studio-freight/lenis'
 
 type BenefitProps = {
     title: string
@@ -16,6 +17,32 @@ type BenefitProps = {
 }
 
 const BenefitsTopSection: React.FC<{ benefits: BenefitProps, lang: Locale }> = ({ benefits, lang }) => {
+    const [dimension, setDimension] = useState({ width: 0, height: 0 })
+    useEffect(() => {
+        const lenis = new Lenis({
+            lerp: 0.1,
+            smoothTouch: true,
+            normalizeWheel: true,
+        })
+
+        const raf = (time: number) => {
+            lenis.raf(time)
+            requestAnimationFrame(raf)
+        }
+
+        const resize = () => {
+            setDimension({ width: window.innerWidth, height: window.innerHeight })
+        }
+
+        window.addEventListener('resize', resize)
+        requestAnimationFrame(raf)
+        resize()
+
+        return () => {
+            lenis.destroy()
+            window.removeEventListener('resize', resize)
+        }
+    }, [])
     return (
         <div className="relative bg-secondary text-primary-foreground flex flex-col justify-center items-center">
             {/* Header Section */}

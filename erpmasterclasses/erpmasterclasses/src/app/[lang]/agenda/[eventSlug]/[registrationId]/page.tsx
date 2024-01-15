@@ -1,2 +1,0 @@
-// Page for managing registration for an client. They have access to their own data and can change it.
-// Includes: updating registration (possible refund) and cancelling registration (includes refund)

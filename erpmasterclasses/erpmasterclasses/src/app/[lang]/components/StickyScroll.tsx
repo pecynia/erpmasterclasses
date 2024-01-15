@@ -17,7 +17,13 @@ const StickyScroll = ({ lang }: { lang: Locale }) => {
     const disappearRight = useTransform(scrollYProgress, [0, 0.2], ['0%', '-20%'])
 
     const textIds = ['sticky-text-1', 'sticky-text-2', 'sticky-text-3', 'sticky-text-4', 'sticky-text-5']
-    const icons = [<Network size={36} />, <Presentation size={36} />, <Users size={36} />, <BookOpenText size={36} />, <Mic2 size={36} />]
+    const icons = [
+        <Network size={36} key="network" />, 
+        <Presentation size={36} key="presentation" />, 
+        <Users size={36} key="users" />, 
+        <BookOpenText size={36} key="book-open-text" />, 
+        <Mic2 size={36} key="mic2" />
+    ]
 
     useEffect(() => {
         const lenis = new Lenis({
@@ -71,21 +77,22 @@ const StickyScroll = ({ lang }: { lang: Locale }) => {
                             alt="About Image"
                             fill
                             className='object-cover w-full h-full'
-                            objectPosition='center 20%'
+                            style={{ objectPosition: 'center 20%' }}
                         />
                     </motion.div>
                 </motion.div>
 
-                {/* Right Column, center children on x-axis */}
-                <div className="z-10 flex-1 gap-28 pb-36 overflow-hidden pt-20 -mt-48 flex flex-col items-center justify-center">
+                {/* Right Column, center children on x-axis, flies in from right */}
+                <motion.div layout
+                    className="z-10 flex-1 gap-28 pb-36 overflow-hidden pt-20 -mt-48 flex flex-col items-center justify-center"
+                >
                     {textIds.map((item, index) => (
-                        <motion.div 
-                            key={item} 
+                        <motion.div key={index} 
                             className="shadow-left-secondary bg-white p-4 h-full lg:h-60 mb-4 ml-4 rounded-xl w-full lg:w-2/3"
-                            // initial={{ opacity: 0, x: '100%' }}
-                            // whileInView={{ opacity: 1, x: '0%' }}
-                            // viewport={{ once: true }}
-                            // transition={{ duration: 1, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }}
+                            initial={{ opacity: 0, x: 300 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: false }}
+                            transition={{ duration: 0.7, delay: 0, ease: [0, 0.71, 0.2, 1.01] }}
                         >
                             <div className="ml-8 mt-4 -mb-2 flex items-center text-secondary">
                                 {icons[index]}
@@ -93,7 +100,7 @@ const StickyScroll = ({ lang }: { lang: Locale }) => {
                             <EditorWrapper documentId={item} initialLocale={lang} />
                         </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
         </div>
     )

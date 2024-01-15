@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useCallback } from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { useSession } from 'next-auth/react'
@@ -32,7 +32,7 @@ const EditorWrapper: React.FC<EditorWrapperProps> = ({ documentId, link, buttonT
     const [currentLocale, setCurrentLocale] = useState<Locale>(initialLocale)
 
     // Function for handling locale changes
-    const handleLocaleChange = async (newLocale: Locale) => {
+    const handleLocaleChange = useCallback(async (newLocale: Locale) => {
         setCurrentLocale(newLocale) // Update the current locale
         const response = await getParagraph(documentId, newLocale)
 
@@ -46,11 +46,11 @@ const EditorWrapper: React.FC<EditorWrapperProps> = ({ documentId, link, buttonT
         } else {
             console.error('Error fetching content:', response?.error)
         }
-    }
+    }, [documentId]) // Dependency array for useCallback
 
     useEffect(() => {
         handleLocaleChange(currentLocale)
-    }, [currentLocale])
+    }, [currentLocale, handleLocaleChange])
 
     if (status === "loading") {
         return (

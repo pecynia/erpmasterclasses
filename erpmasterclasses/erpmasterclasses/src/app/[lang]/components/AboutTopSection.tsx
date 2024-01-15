@@ -16,7 +16,7 @@ const AboutTopSection = () => {
             setIndex((index) => (index + 1) % changingWords.length)
         }, 2000)
         return () => clearInterval(interval)
-    }, [])
+    }, [changingWords.length])
 
     return (
         <div ref={ref} className="relative h-[80vh] mb-10 overflow-hidden flex justify-center">

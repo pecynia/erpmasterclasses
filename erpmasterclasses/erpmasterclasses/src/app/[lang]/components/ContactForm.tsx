@@ -4,7 +4,7 @@ import ClientContactForm from './ClientContactForm'
 import { motion } from 'framer-motion'
 import { ClientContactFormProps } from './ClientContactForm'
 
-export default async function ContactForm({ localization, errorMessages }: ClientContactFormProps) {
+export default function ContactForm({ localization, errorMessages }: ClientContactFormProps) {
   return (
     <motion.div 
           initial={{ opacity: 0, y: '100%' }}

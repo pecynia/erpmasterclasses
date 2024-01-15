@@ -1,12 +1,30 @@
-// Page for event data for specific event
+// src/app/[lang]/agenda/[eventSlug]/page.tsx
 
 import React from 'react'
 import { Locale } from '@/app/../../../i18n.config'
-import { getEvent } from '@/lib/utils/db'
+import { getEvent, getEvents } from '@/lib/utils/db'
 import { Badge } from '@/app/[lang]/components/ui/badge'
 import Image from 'next/image'
 import LocaleIcons from '@/app/[lang]/components/lang/LocaleIcon'
 import { MapPin, Calendar } from 'lucide-react'
+
+type Props = {
+  params: {
+    lang: Locale
+    eventSlug: string
+  }
+}
+
+export async function generateStaticParams({ params }: Props) {
+
+  const events = await getEvents(params.lang)
+
+  return events.map((event) => ({
+    eventSlug: event.eventSlug,
+  }))
+}
+
+export const revalidate = 30
 
 export default async function Page({
   params: { lang, eventSlug }
