@@ -16,7 +16,6 @@ type Props = {
 }
 
 export async function generateStaticParams({ params }: Props) {
-
   const events = await getEvents(params.lang)
 
   return events.map((event) => ({
@@ -26,13 +25,8 @@ export async function generateStaticParams({ params }: Props) {
 
 export const revalidate = 30
 
-export default async function Page({
-  params: { lang, eventSlug }
-}: {
-  params: { lang: Locale, eventSlug: string }
-}) { 
-
-  const event = await getEvent(eventSlug, lang)
+export default async function Page({ params }: Props) { 
+  const event = await getEvent(params.eventSlug, params.lang)
 
   if (!event) {
     return (
@@ -61,6 +55,6 @@ export default async function Page({
         </div>
       </div>
     </div>
-  );
+  )
 }
 
