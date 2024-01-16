@@ -204,6 +204,7 @@ html.lenis {
 } 
 .shadow-right-secondary {
   box-shadow: 7px 7px 0px 0px hsl(var(--secondary));
+  border-radius: 10px;
 }
 .shadow-left-secondary {
   box-shadow: -7px 7px 0px 0px hsl(var(--secondary));

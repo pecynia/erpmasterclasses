@@ -48,7 +48,13 @@
   },"benefits": {
     "title": "Vergroot Uw Kans op Succes",
     "description": "Ontdek hoe u zich beter kunt voorbereiden op verandering",
-    "buttonText": "Neem Contact Op"
+    "buttonText": "Neem Contact Op",
+    "summary": "Samengevat: uw kansen op succes vergroten!",
+    "CTA": "Bekijk onze agenda"
+  },
+  "events": {
+    "requiredRegistrations": "Vereiste registraties",
+    "description": "Beschrijving"
   },  
   "agenda": {
     "title": "Agenda"

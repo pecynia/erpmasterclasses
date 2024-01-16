@@ -64,7 +64,7 @@ const BenefitsTopSection: React.FC<{ benefits: BenefitProps, lang: Locale }> = (
                 className="-mt-20 lg:-mt-10 bg-white text-primary rounded-3xl w-4/5 lg:w-1/2 py-10 px-10 flex justify-between items-center shadow-xl"
             >
                 <div className="w-full lg:w-1/2 px-0 lg:px-4">
-                    <EditorWrapper documentId={'benefits-description-list'} initialLocale={lang} />
+                    <EditorWrapper documentId='benefits-description-list' initialLocale={lang} />
                 </div>
                 <div className="w-1/2 hidden lg:block">
                     <Image src={Tja} alt="Benefit Image" width={500} height={300} className='object-cover rounded-2xl' priority />

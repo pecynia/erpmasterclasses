@@ -71,8 +71,8 @@ const EditorWrapper: React.FC<EditorWrapperProps> = ({ documentId, link, buttonT
             />
             {link && buttonText && (
                 <div className="px-4 flex justify-center">
-                    <Button className="rounded-none mt-4">
-                        <Link href={link}>
+                    <Button variant='secondary' className="rounded-lg mt-4" size='lg'>
+                        <Link href={link} className="text-xl">
                             <p>{buttonText}</p>
                         </Link>
                     </Button>

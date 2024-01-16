@@ -55,7 +55,7 @@ export default async function Footer({ lang }: { lang: Locale }) {
             {/* Bottom */}
             <div className="mt-8 flex justify-center font-thin items-center space-x-4">
                 <p>kvk: {contactInfo.kvk}</p>
-                <p>&copy; ERPMASTERCLASSES {new Date().getFullYear()}</p>
+                <p>&copy; ERP Masterclasses {new Date().getFullYear()}</p>
                 <p>{footer.credit.label} <span className="font-bold">Humainly</span></p>
             </div>
         </footer>

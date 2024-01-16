@@ -49,8 +49,14 @@
   "benefits": {
     "title": "Steigern Sie Ihre Erfolgschancen",
     "description": "Erfahren Sie, wie Sie sich besser auf Veränderungen vorbereiten können",
-    "buttonText": "Kontakt Aufnehmen"
+    "buttonText": "Kontakt Aufnehmen",
+    "summary": "Zusammengefasst: Ihre Erfolgschancen erhöhen!",
+    "CTA": "Überprüfen Sie unseren Zeitplan"
   },  
+  "events": {
+    "requiredRegistrations": "Mindestteilnehmerzahl",
+    "description": "Beschreibung"
+  }, 
   "agenda": {
     "title": "Agenda"
   },

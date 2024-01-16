@@ -2,7 +2,8 @@ import React from 'react'
 import { Locale } from '../../../../i18n.config'
 import { getDictionary } from '@/lib/dictionary'
 import BenefitsTopSection from '@/app/[lang]/components/BenefitsTopSection'
-import BenefitsOverview from '../components/BenefitsOverview'
+import BenefitsOverview from '@/app/[lang]/components/BenefitsOverview'
+import BenefitsFooter from '@/app/[lang]/components/BenefitsFooter'
 
 export default async function Page({
   params: { lang }
@@ -15,7 +16,8 @@ export default async function Page({
   return (
     <div className="">
       <BenefitsTopSection benefits={benefits} lang={lang} />
-      <BenefitsOverview />
+      <BenefitsOverview lang={lang} />
+      <BenefitsFooter lang={lang} />
     </div>
   )
 }
