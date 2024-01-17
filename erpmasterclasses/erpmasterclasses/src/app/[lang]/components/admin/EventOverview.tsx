@@ -7,14 +7,14 @@ import Image from "next/image"
 import DeleteEvent from "@/app/[lang]/components/admin/DeleteEvent"
 
 import React from 'react'
-import UpdateEvent from "./UpdateEvent"
+import UpdateEvent from "@/app/[lang]/components/admin/UpdateEvent"
 
 const EventOverview: React.FC<{ allEvents: EventData[], setEventData: React.Dispatch<React.SetStateAction<EventData[]>> }> = ({ allEvents, setEventData }) => {    
     return (
         <div className='flex flex-col gap-4 pt-2'>
-            <div className='flex flex-col gap-4'>
+            <div className='flex flex-col gap-4 overflow-y-auto h-72'>
                 {allEvents.sort((a, b) => a.date.getTime() - b.date.getTime()).map((event, index) => (
-                    <div className='flex flex-row gap-4 items-center border-2 p-2 pl-4 rounded-md' key={index}>
+                    <div className='bg-gray-50 flex flex-row gap-4 items-center p-2 pl-4 rounded-md' key={index}>
                         <div className='flex flex-col gap-2'>
                             <div className='flex flex-row gap-2 items-center'>
                                 <p className='text-lg font-bold'>{event.title}</p>

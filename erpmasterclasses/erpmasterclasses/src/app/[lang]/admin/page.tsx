@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
-import { Button } from '@/app/[lang]/components/ui/button'
-import { ReloadIcon } from "@radix-ui/react-icons"
+
 import Loading from './loading'
 import Container from '@/app/[lang]/components/ui/container'
 import AddEvent from '@/app/[lang]/components/admin/AddEvent'
@@ -32,7 +31,7 @@ const Page = () => {
 
     return (
         <Container>
-            <div className='bg-white rounded-lg shadow-lg p-12 mt-10 mb-10 w-full max-w-4xl mx-auto'>
+            <div className='min-h-[60vh] bg-white rounded-lg shadow-lg p-12 mt-10 mb-10 w-full max-w-4xl mx-auto'>
                 <h1 className='font-bold text-4xl mb-8 text-secondary'>Agenda overview</h1>                
                 
                 {/* Event Overview  */}

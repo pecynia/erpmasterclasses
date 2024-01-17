@@ -12,6 +12,7 @@ import { Input } from "@/app/[lang]/components/ui/input"
 import { LogIn } from "lucide-react"
 import { ReloadIcon } from "@radix-ui/react-icons"
 import Image from 'next/image'
+import Logo from '@/../public/logo.png'
 
 let validationSchema = yup.object().shape({
   password: yup.string()
@@ -44,14 +45,14 @@ const SignInPage: NextPage = () => {
 
   return (
       <section className='flex min-h-screen overflow-hidden pt-16 sm:py-28'>
-          <div className='mx-auto flex w-full max-w-2xl flex-col px-4 sm:px-6 items-center'>
+          <div className='mx-auto flex w-full max-w-2xl flex-col px-4 sm:px-6 items-center my-auto'>
             <Image 
-                src='/logo.png'
+                src={Logo}
                 alt='logo'
                 width={200}
                 height={200}
             />
-              <div className='sm:rounded-5xl w-full -mx-4 flex-auto bg-background px-4 header-shadow-right sm:mx-0 sm:flex-none sm:p-10'>
+              <div className='bg-white rounded-xl sm:rounded-5xl w-full -mx-4 flex-auto bg-background px-4 header-shadow-right sm:mx-0 sm:flex-none sm:p-10'>
                   <form onSubmit={handleSubmit(handleFormSubmit)}>
                       <div className='space-y-2'>
                           <label htmlFor='password' className='block text-md font-medium text-gray-700'>
