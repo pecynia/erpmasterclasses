@@ -17,7 +17,7 @@ export default async function Page({
 
   return (
     <div className="flex flex-col max-w-5xl mx-auto px-4 py-8 h-[80vh] bg-background">
-      <h1 className='text-4xl font-bold pb-4'>{agenda.title}</h1>
+      <h1 className='text-4xl font-bold pb-6'>{agenda.title}</h1>
       <Separator />
       <AgendaDescription />
       <EventOverview allEvents={events} lang={lang} />

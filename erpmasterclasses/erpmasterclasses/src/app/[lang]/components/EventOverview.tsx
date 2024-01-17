@@ -9,10 +9,10 @@ import { Locale } from '../../../../i18n.config'
 
 const EventOverview: React.FC<{ allEvents: EventProps[], lang: Locale }> = ({ allEvents, lang }) => {
   return (
-    <div className='flex flex-col gap-4 pt-2'>
+    <div className='flex flex-col gap-6 pt-6'>
       {allEvents.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()).map((event, index) => (
-        <Link href={`/${lang}/agenda/${event.eventSlug}`} key={index}>
-            <div className='flex flex-row gap-4 items-center border-2 p-2 pl-4 rounded-md bg-white' key={index}>
+        <Link href={`/${lang}/agenda/${event.eventSlug}`} key={index} className=''>
+            <div className='flex flex-row  items-center p-2 pl-4 rounded-md bg-white' key={index}>
                 <div className='flex flex-col gap-2'>
                     <div className='flex flex-row gap-2 items-center'>
                     <p className='text-lg font-bold'>{event.title}</p>
