@@ -206,8 +206,20 @@ html.lenis {
   box-shadow: 7px 7px 0px 0px hsl(var(--secondary));
   border-radius: 10px;
 }
+.shadow-right-tertiary {
+  box-shadow: 7px 7px 0px 0px hsl(var(--tertiary));
+  border-radius: 10px;
+}
+.shadow-right-white {
+  box-shadow: 7px 7px 0px 0px hsl(0 0% 100%);
+  border-radius: 10px;
+}
 .shadow-left-secondary {
   box-shadow: -7px 7px 0px 0px hsl(var(--secondary));
+  border-radius: 10px;
+}
+.shadow-left-white {
+  box-shadow: -7px 7px 0px 0px hsl(0 0% 100%);
   border-radius: 10px;
 }
 .shadow-left-secondary-foreground {

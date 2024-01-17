@@ -68,6 +68,13 @@
       "buttonText": "Neem Contact Op"
     }
   },
+  "review": {
+    "title": "Sinds 2005 heb ik deze Masterclasses door heel Europa gegeven. In al die jaren heb ik vele honderden organisaties getraind en geïnspireerd. Zowel groot als klein. Lokaal en internationaal. En vrijwel alle denkbare branches en industrieën.",
+    "subTitle": "Feedback van deelnemers",
+    "description": "Dit is wat sommige deelnemers zeggen over deze Masterclasses:",
+    "beOurNextSuccessStory": "Word mijn volgende succesverhaal!",
+    "rating": "Gemiddelde beoordeling tussen de 8,5 en 9,5!"
+  },
   "events": {
     "requiredRegistrations": "Vereiste registraties",
     "description": "Beschrijving"

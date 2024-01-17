@@ -92,6 +92,12 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
                     <div className='bg-secondary-foreground rounded-full w-4 h-4' />
                 </Button>
                 <Button variant='ghost' size="sm"
+                    onClick={() => editor.chain().focus().setColor(hslToHex(getComputedStyle(document.documentElement).getPropertyValue('--tertiary'))).run()}
+                    className={editor.isActive('textStyle', { color: 'secondary' }) ? 'bg-secondary' : ''}
+                >
+                    <div className='bg-tertiary rounded-full w-4 h-4' />
+                </Button>
+                <Button variant='ghost' size="sm"
                     onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
                     className={editor.isActive('heading', { level: 1 }) ? 'bg-secondary' : ''}
                 >

@@ -68,6 +68,13 @@
       "buttonText": "Kontaktieren Sie Guus"
     }
   },
+  "review": {
+    "title": "Seit 2005 habe ich diese Masterclasses in ganz Europa durchgeführt. Über die Jahre hinweg habe ich viele hunderte Organisationen geschult und inspiriert. Sowohl große als auch kleine. Lokale und internationale. Und nahezu alle denkbaren Branchen und Industriezweige.",
+    "subTitle": "Teilnehmer-Feedback",
+    "description": "Das sagen einige der Teilnehmer über diese Masterclasses:",
+    "beOurNextSuccessStory": "Seien Sie meine nächste Erfolgsgeschichte!",
+    "rating": "Durchschnittliche Bewertungen zwischen 8,5 und 9,5!"
+  },
   "events": {
     "requiredRegistrations": "Mindestteilnehmerzahl",
     "description": "Beschreibung"

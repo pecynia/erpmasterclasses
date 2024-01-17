@@ -12,12 +12,11 @@ export default async function Page({
 }) {
   const { benefits } = await getDictionary(lang)
 
-
   return (
-    <div className="">
+    <>
       <BenefitsTopSection benefits={benefits} lang={lang} />
       <BenefitsOverview lang={lang} />
       <BenefitsFooter lang={lang} />
-    </div>
+    </>
   )
 }

@@ -68,6 +68,13 @@
       "buttonText": "Contact Guus"
     }
   },
+  "review": {
+    "title": "I have delivered these Masterclasses all over Europe since 2005. Over these years I have trained and inspired many hundreds of organizations. Both big and small. Local and international. And just about all conceivable branches and industries.",
+    "subTitle": "Participant feedback",
+    "description": "This is what some of the participants say about these Masterclasses:",
+    "beOurNextSuccessStory": "Be my next success story!",
+    "rating": "Average ratings between 8,5 and 9,5!"
+  },
   "events": {
     "requiredRegistrations": "Registrations required",
     "description": "Description"
