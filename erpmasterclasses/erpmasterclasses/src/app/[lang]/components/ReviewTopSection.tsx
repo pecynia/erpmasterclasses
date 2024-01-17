@@ -1,10 +1,9 @@
 "use client"
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Locale } from '@../../../i18n.config';
-import Lenis from '@studio-freight/lenis';
 import Spokeperson from '@/../public/imgs/spokeperson.jpg';
 import { Button } from './ui/button';
 import { ArrowRight } from 'lucide-react';
@@ -19,36 +18,8 @@ type ReviewProps = {
 };
 
 const ReviewTopSection: React.FC<{ review: ReviewProps, lang: Locale, navigation: any }> = ({ review, lang, navigation }) => {
-    const [dimension, setDimension] = useState({ width: 0, height: 0 });
-
-    useEffect(() => {
-        const lenis = new Lenis({
-            lerp: 0.1,
-            smoothTouch: true,
-            normalizeWheel: true,
-        });
-
-        const raf = (time: number) => {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        };
-
-        const resize = () => {
-            setDimension({ width: window.innerWidth, height: window.innerHeight });
-        };
-
-        window.addEventListener('resize', resize);
-        requestAnimationFrame(raf);
-        resize();
-
-        return () => {
-            lenis.destroy();
-            window.removeEventListener('resize', resize);
-        };
-    }, []);
-
     return (
-        <div className='bg-background pb-10'>
+        <div className='bg-background pb-28'>
             <div className='max-w-7xl mx-auto px-6 pt-5 lg:pt-0 lg:px-10'>
                 <div className='mx-auto w-full sm:w-2/3 lg:w-full flex items-center flex-col lg:flex-row justify-center gap-10'>
                     {/* Text Column */}

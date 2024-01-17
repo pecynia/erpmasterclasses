@@ -47,13 +47,31 @@ const BenefitsTopSection: React.FC<{ benefits: BenefitProps, lang: Locale }> = (
         <div className="relative bg-secondary text-primary-foreground flex flex-col justify-center items-center">
             {/* Header Section */}
             <div className="text-center py-20 px-4 w-4/5 lg:w-2/3">
-                <h1 className="text-5xl font-bold mb-4">{benefits.title}</h1>
-                <p className="text-xl mb-6">{benefits.description}</p>
-                <Link href={`/${lang}/contact`}>
-                    <Button variant='outlineInverse' className="px-8 py-6 mb-6 lg:mb-0 text-xl text-primary duration-300 border-2">
-                        {benefits.buttonText}
-                    </Button>
-                </Link>
+                <motion.div 
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.3, delay: 0 }}
+                >
+                    <h1 className="text-5xl font-bold mb-4">{benefits.title}</h1>
+                </motion.div>
+                <motion.div 
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.1 }}
+                >
+                    <p className="text-xl mb-6">{benefits.description}</p>
+                </motion.div>
+                <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                >
+                    <Link href={`/${lang}/contact`}>
+                        <Button variant='outlineInverse' className="px-8 py-6 mb-6 lg:mb-0 text-xl text-primary duration-300 border-2">
+                            {benefits.buttonText}
+                        </Button>
+                    </Link>
+                </motion.div>
             </div>
 
             {/* Content Section */}

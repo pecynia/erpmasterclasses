@@ -72,7 +72,7 @@ const EditorWrapper: React.FC<EditorWrapperProps> = ({ documentId, link, buttonT
             {link && buttonText && (
                 <div className="px-4 flex justify-center">
                     <Button variant='secondary' className="rounded-lg mt-4" size='lg'>
-                        <Link href={link} className="text-xl">
+                        <Link href={link} className="text-lg">
                             <p>{buttonText}</p>
                         </Link>
                     </Button>
