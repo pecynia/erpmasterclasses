@@ -40,7 +40,7 @@
       "label": "Navigation"
     },
     "description": {
-      "label": "Adjust this text accordingly"
+      "label": "Enhance Your Chance for Success"
     },
     "credit": {
       "label": "Website by"
@@ -52,6 +52,21 @@
     "buttonText": "Contact Guus",
     "summary": "In summary: increasing your chances of success!",
     "CTA": "Check Our Agenda"
+  },
+  "pricing": {
+    "type1": {
+      "title": "Type 1",
+      "description": "Organize your feature ideas and easily share interactive roadmaps.",
+      "price": "€ 750,-",
+      "perPerson": "per person",
+      "buttonText": "Book Now"
+    },
+    "type2": {
+      "title": "Type 2",
+      "description": "Organize your feature ideas and easily share interactive roadmaps.",
+      "price": "Custom",
+      "buttonText": "Contact Guus"
+    }
   },
   "events": {
     "requiredRegistrations": "Registrations required",

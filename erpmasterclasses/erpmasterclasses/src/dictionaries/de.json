@@ -40,7 +40,7 @@
       "label": "Navigation"
     },
     "description": {
-      "label": "Beschreibung. Schreiben Sie hier eine kurze Beschreibung über Ihr Unternehmen."
+      "label": "Steigern Sie Ihre Erfolgschancen"
     },
     "credit": {
       "label": "Gebaut von"
@@ -52,11 +52,26 @@
     "buttonText": "Kontakt Aufnehmen",
     "summary": "Zusammengefasst: Ihre Erfolgschancen erhöhen!",
     "CTA": "Überprüfen Sie unseren Zeitplan"
-  },  
+  },
+  "pricing": {
+    "type1": {
+      "title": "Typ 1",
+      "description": "Organisieren Sie Ihre Funktionsideen und teilen Sie einfach interaktive Roadmaps.",
+      "price": "€ 750,-",
+      "perPerson": "pro Person",
+      "buttonText": "Jetzt buchen"
+    },
+    "type2": {
+      "title": "Typ 2",
+      "description": "Organisieren Sie Ihre Funktionsideen und teilen Sie einfach interaktive Roadmaps.",
+      "price": "Individuell",
+      "buttonText": "Kontaktieren Sie Guus"
+    }
+  },
   "events": {
     "requiredRegistrations": "Mindestteilnehmerzahl",
     "description": "Beschreibung"
-  }, 
+  },
   "agenda": {
     "title": "Agenda"
   },

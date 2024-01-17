@@ -1,9 +1,10 @@
 import Link from 'next/link'
 import { Locale } from '@/app/../../i18n.config'
-import Image from 'next/image';
+import Image from 'next/image'
 import { getDictionary } from '@/lib/dictionary'
-import { contactInfo, socialMedia } from '@/dictionaries/contactInfo';
-import { Linkedin, Mail, Phone } from 'lucide-react';
+import { contactInfo, socialMedia } from '@/dictionaries/contactInfo'
+import { Linkedin, Mail, Phone } from 'lucide-react'
+import Logo from '@/../public/logo.png'
 
 
 export default async function Footer({ lang }: { lang: Locale }) {    
@@ -13,8 +14,8 @@ export default async function Footer({ lang }: { lang: Locale }) {
             <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 justify-center">
 
                 {/* Logo & Description */}
-                <div className="flex flex-col items-center">
-                    <Image src='/logo.png' alt='Logo' width={160} height={100} priority />
+                <div className="flex flex-col items-center justify-center">
+                    <Image src={Logo} alt='Logo' width={160} height={100} priority className='invert'/>
                     <p className="text-center mt-4 mb-2">{footer.description.label}</p>
                     <div className="flex space-x-2">
                         <Link href={socialMedia.linkedin || "#"} target="_blank" className='hover:text-secondary-foreground'>

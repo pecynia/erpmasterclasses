@@ -13,7 +13,7 @@ import StarterKit from '@tiptap/starter-kit'
 import { Color } from '@tiptap/extension-color'
 import TextStyle from '@tiptap/extension-text-style'
 import { Button } from "@/app/[lang]/components/ui/button"
-import { Locale } from "../../../../../i18n.config"
+import { Locale } from "@../../../i18n.config"
 import { twMerge } from "tailwind-merge"
 
 interface EditorWrapperProps {

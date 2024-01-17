@@ -1,7 +1,7 @@
 import React from 'react'
 import { Locale } from '@../../../i18n.config'
 import { getDictionary } from '@/lib/dictionary'
-import EditorWrapper from './editor/EditorWrapper'
+import EditorWrapper from '@/app/[lang]/components/editor/EditorWrapper'
 
 const BenefitsFooter: React.FC<{ lang: Locale }> = async ({ lang }) => {
     

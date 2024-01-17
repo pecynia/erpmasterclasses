@@ -14,7 +14,7 @@
     },
     "investment": {
       "label": "Kosten",
-      "href": "/investment"
+      "href": "/pricing"
     },
     "about": {
       "label": "Over Guus",
@@ -40,17 +40,33 @@
       "label": "Navigatie"
     },
     "description": {
-      "label": "Pas deze tekst aan"
+      "label": "Vergroot Uw Kans op Succes"
     },
     "credit": {
       "label": "Gemaakt door"
     }
-  },"benefits": {
+  },
+  "benefits": {
     "title": "Vergroot Uw Kans op Succes",
     "description": "Ontdek hoe u zich beter kunt voorbereiden op verandering",
     "buttonText": "Neem Contact Op",
     "summary": "Samengevat: uw kansen op succes vergroten!",
     "CTA": "Bekijk onze agenda"
+  },
+  "pricing": {
+    "type1": {
+      "title": "Type 1",
+      "description": "Organiseer uw functie-ideeën en deel gemakkelijk interactieve routekaarten.",
+      "price": "€ 750,-",
+      "perPerson": "per persoon",
+      "buttonText": "Nu boeken"
+    },
+    "type2": {
+      "title": "Type 2",
+      "description": "Organiseer uw functie-ideeën en deel gemakkelijk interactieve routekaarten.",
+      "price": "Op maat",
+      "buttonText": "Neem Contact Op"
+    }
   },
   "events": {
     "requiredRegistrations": "Vereiste registraties",
