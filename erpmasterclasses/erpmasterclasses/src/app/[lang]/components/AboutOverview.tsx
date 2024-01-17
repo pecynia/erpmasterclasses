@@ -4,12 +4,12 @@ import React, { useEffect, useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Lenis from '@studio-freight/lenis'
 import EditorWrapper from '@/app/[lang]/components/editor/EditorWrapper'
-import { Locale } from '../../../../i18n.config'
+import { Locale } from '@../../../i18n.config'
 import Image from 'next/image'
 import UitlegIntens from '@/../public/imgs/uitleg-intens.jpeg'
 import { Presentation, Users, BookOpenText, Mic2, Network } from 'lucide-react'
 
-const StickyScroll = ({ lang }: { lang: Locale }) => {
+const AboutOverview = ({ lang }: { lang: Locale }) => {
     const [dimension, setDimension] = useState({ width: 0, height: 0 })
     const { scrollYProgress } = useScroll()
 
@@ -106,4 +106,4 @@ const StickyScroll = ({ lang }: { lang: Locale }) => {
     )
 }
 
-export default StickyScroll
+export default AboutOverview

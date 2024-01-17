@@ -1,5 +1,5 @@
 import React from 'react'
-import StickyScroll from '@/app/[lang]/components/StickyScroll'
+import AboutOverview from '@/app/[lang]/components/AboutOverview'
 import AboutTopSection from '@/app/[lang]/components/AboutTopSection'
 import { Locale } from '@../../../i18n.config'
 
@@ -11,7 +11,7 @@ export default function Page({
   return (
     <div className='bg-white'>
       <AboutTopSection />
-      <StickyScroll lang={lang} />
+      <AboutOverview lang={lang} />
     </div>
   )
 }

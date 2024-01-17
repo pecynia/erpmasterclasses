@@ -47,7 +47,7 @@ const AboutTopSection = () => {
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: 10 }}
                                     transition={{ duration: 0.25 }}
-                                    className='text-secondary font-semibold italic text-2xl'
+                                    className='text-secondary font-bold italic text-2xl'
                                 >
                                     {changingWords[index]}
                                 </motion.div>
