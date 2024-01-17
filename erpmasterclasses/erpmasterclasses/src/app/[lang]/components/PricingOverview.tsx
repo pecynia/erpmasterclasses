@@ -15,7 +15,7 @@ function PricingOverview({ lang, navigation, pricing }: { lang: Locale, navigati
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0 }}
-                className='shadow-right-secondary rounded-xl bg-white md:w-1/2 lg:w-1/2 pb-10'
+                className='shadow-right-tertiary rounded-xl bg-white md:w-1/2 lg:w-1/2 pb-10'
             >
                 <div className='h-80'>
                     <h1 className='text-3xl font-bold px-12 pt-10 pb-5'>
@@ -29,7 +29,7 @@ function PricingOverview({ lang, navigation, pricing }: { lang: Locale, navigati
                         {pricing.type1.price}<span className='text-sm font-light pl-2'>{pricing.type1.perPerson}</span>
                     </h1>
                     <div className='flex flex-col items-center justify-center pt-3'>
-                        <Button variant='secondary' className="rounded-lg mt-4" size='lg'>
+                        <Button variant='tertiary' className="rounded-lg mt-4" size='lg'>
                             <Link href={`/${lang}${navigation.agenda.href}`}>
                                 {pricing.type1.buttonText}
                             </Link>
@@ -61,7 +61,7 @@ function PricingOverview({ lang, navigation, pricing }: { lang: Locale, navigati
                         {pricing.type2.price}
                     </h1>
                     <div className='flex flex-col items-center justify-center pt-3'>
-                        <Button variant='outline' className="rounded-lg mt-4" size='lg'>
+                        <Button variant='secondary' className="rounded-lg mt-4" size='lg'>
                             <Link href={`/${lang}${navigation.contact.href}`}>
                                 {pricing.type2.buttonText}
                             </Link>
