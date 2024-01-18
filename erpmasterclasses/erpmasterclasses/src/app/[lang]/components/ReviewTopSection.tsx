@@ -1,21 +1,21 @@
 "use client"
 
-import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Locale } from '@../../../i18n.config';
-import Spokeperson from '@/../public/imgs/spokeperson.jpg';
-import { Button } from './ui/button';
-import { ArrowRight } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { Locale } from '@../../../i18n.config'
+import Spokeperson from '@/../public/imgs/spokeperson.jpg'
+import { Button } from './ui/button'
+import { ArrowRight } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 type ReviewProps = {
-    title: string;
-    subTitle: string;
-    description: string;
-    beOurNextSuccessStory: string;
-    rating: string;
-};
+    title: string
+    subTitle: string
+    description: string
+    beOurNextSuccessStory: string
+    rating: string
+}
 
 const ReviewTopSection: React.FC<{ review: ReviewProps, lang: Locale, navigation: any }> = ({ review, lang, navigation }) => {
     return (
@@ -43,7 +43,7 @@ const ReviewTopSection: React.FC<{ review: ReviewProps, lang: Locale, navigation
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5, delay: 0.3 }}
                         >
-                            <Button variant="ghost" className="rounded-lg mt-2 -ml-4 underline">
+                            <Button variant="ghost" className="rounded-lg mt-2 -ml-4 underline hover:bg-inherit">
                                 <Link href={`/${lang}${navigation.agenda.href}`}>
                                     {review.beOurNextSuccessStory} <ArrowRight className="inline-block" size={16} />
                                 </Link>
@@ -77,7 +77,7 @@ const ReviewTopSection: React.FC<{ review: ReviewProps, lang: Locale, navigation
                 </div>
             </div>
         </div >
-    );
-};
+    )
+}
 
-export default ReviewTopSection;
+export default ReviewTopSection
