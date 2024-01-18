@@ -22,7 +22,7 @@ const BenefitsFooter: React.FC<{ lang: Locale }> = async ({ lang }) => {
                 style={{ objectPosition: 'center 15%' }}
             />
             <div className='relative container mx-auto px-4 py-36'>
-                <div className=' bg-background py-10 rounded-xl flex flex-col items-center justify-center text-center w-full lg:w-2/3 mx-auto'>
+                <div className=' bg-white shadow-xl py-10 rounded-xl flex flex-col items-center justify-center text-center w-full lg:w-2/3 mx-auto'>
                     <EditorWrapper initialLocale={lang} documentId='benefits-footer' />
                     <Button size='lg' variant='secondary' className='text-md'>
                         <Link href={`/${lang}${navigation.agenda.href}`} className='flex items-center'>

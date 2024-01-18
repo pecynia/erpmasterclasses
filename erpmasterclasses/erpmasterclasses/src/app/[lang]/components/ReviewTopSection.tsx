@@ -59,7 +59,7 @@ const ReviewTopSection: React.FC<{ review: ReviewProps, lang: Locale, navigation
                             transition={{ duration: 0.5, delay: 0 }}
                             className='relative'
                         > 
-                            <Image src={Spokeperson} alt="Spokesperson" className='object-contain' width={500} height={300} />
+                            <Image src={Spokeperson} alt="Spokesperson" className='object-contain' width={600} />
                         </motion.div>
                         <AnimatePresence mode="wait">
                             <motion.div

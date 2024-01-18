@@ -15,9 +15,9 @@ function PricingOverview({ lang, navigation, pricing }: { lang: Locale, navigati
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0 }}
-                className='shadow-right-tertiary rounded-xl bg-white md:w-1/2 lg:w-1/2 pb-10'
+                className='shadow-right-tertiary rounded-xl bg-white pb-10 flex flex-col md:flex-row justify-between items-center md:items-start md:justify-start'
             >
-                <div className='h-80'>
+                <div className='w-full md:w-1/2'>
                     <h1 className='text-3xl font-bold px-12 pt-10 pb-5'>
                         {pricing.type1.title}
                     </h1>
@@ -25,52 +25,26 @@ function PricingOverview({ lang, navigation, pricing }: { lang: Locale, navigati
                     <p className='px-12 pt-5'>
                         {pricing.type1.description}
                     </p>
-                    <h1 className='text-3xl font-bold px-12 pt-5'>
-                        {pricing.type1.price}<span className='text-sm font-light pl-2'>{pricing.type1.perPerson}</span>
-                    </h1>
-                    <div className='flex flex-col items-center justify-center pt-3'>
+                    <div className='pl-12 flex flex-col md:flex-row items-start md:items-center md:gap-10 justify-start py-4'>
+                        <h1 className='text-3xl md:text-2xl lg:text-3xl text-end font-bold mt-2'>
+                            {pricing.type1.price}<span className='text-sm font-light pl-2'>{pricing.type1.perPerson}</span>
+                        </h1>
                         <Button variant='tertiary' className="rounded-lg mt-4" size='lg'>
                             <Link href={`/${lang}${navigation.agenda.href}`}>
                                 {pricing.type1.buttonText}
                             </Link>
                         </Button>
                     </div>
-                </div>
-                <hr className='mx-12 pb-5' />
-                <div className='h-96 mb-5'>
-                    <EditorWrapper initialLocale={lang} documentId='pricing-card-1-content' />
-                </div>
-            </motion.div>
-
-            {/* Card 2 */}
-            <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0 }}
-                className='shadow-right-secondary rounded-xl bg-white md:w-1/2 lg:w-1/2 pb-10'
-            >
-                <div className='h-80'>
-                    <h1 className='text-3xl font-bold px-12 pt-10 pb-5'>
-                        {pricing.type2.title}
-                    </h1>
                     <hr className='mx-12' />
-                    <p className='px-12 pt-5'>
-                        {pricing.type2.description}
-                    </p>
-                    <h1 className='text-3xl font-bold px-12 pt-5'>
-                        {pricing.type2.price}
-                    </h1>
-                    <div className='flex flex-col items-center justify-center pt-3'>
-                        <Button variant='secondary' className="rounded-lg mt-4" size='lg'>
-                            <Link href={`/${lang}${navigation.contact.href}`}>
-                                {pricing.type2.buttonText}
-                            </Link>
-                        </Button>
+                    <div className='px-8 pt-5'>
+                        <EditorWrapper initialLocale={lang} documentId='pricing-card-1-features' />
                     </div>
                 </div>
-                <hr className='mx-12 pb-5' />
-                <div className='h-48 mb-5'>
-                    <EditorWrapper initialLocale={lang} documentId='pricing-card-2-content' />
+                <div className='text-black w-full md:w-1/2 pr-12'>
+                    <hr className='block md:hidden mx-6' />
+                    <div className='mb-5 pt-0 md:pt-5'>
+                        <EditorWrapper initialLocale={lang} documentId='pricing-card-1-content' />
+                    </div>
                 </div>
             </motion.div>
         </>
