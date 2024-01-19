@@ -24,7 +24,7 @@ export async function generateStaticParams({ params }: Props) {
   }))
 }
 
-export const revalidate = 30
+export const revalidate = 10
 
 export default async function Page({ params }: Props) { 
   const event = await getEvent(params.eventSlug, params.lang)
