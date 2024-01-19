@@ -7,6 +7,7 @@ import { EventSchema } from '@/lib/schema'
 import { saveEvent } from '@/app/_actions'
 import { Locale, i18n } from '../../../../../i18n.config'
 import { CreateEventProps, EventData } from '@/../typings'
+import { eventTypes, EventType } from '@../../../event.config'
 import LocaleIcons from '@/app/[lang]/components/lang/LocaleIcon'
 import { toast } from 'sonner'
 
@@ -53,6 +54,7 @@ const AddEvent: React.FC<{ allEvents: EventData[], setEventData: React.Dispatch<
       title: '',
       eventSlug: '',
       description: '',
+      type: eventTypes.defaultType,
       location: '',
       requiredRegistrations: 10,
       date: undefined,
@@ -63,6 +65,7 @@ const AddEvent: React.FC<{ allEvents: EventData[], setEventData: React.Dispatch<
 
   // Register the date, language, and shownLanguages fields
   React.useEffect(() => {
+    register('type')
     register('date')
     register('language')
     register('shownLanguages')
@@ -87,6 +90,7 @@ const AddEvent: React.FC<{ allEvents: EventData[], setEventData: React.Dispatch<
   }
 
   const [selectedLocale, setSelectedLocale] = React.useState<Locale>(i18n.defaultLocale)
+  const [selectedEventType, setSelectedEventType] = React.useState<EventType>(eventTypes.defaultType)
   const [date, setDate] = React.useState<Date | null>(null)
   const [isPopoverOpen, setIsPopoverOpen] = React.useState(false)
   const [shownLanguages, setShownLanguages] = React.useState<Locale[]>([selectedLocale])
@@ -105,6 +109,11 @@ const AddEvent: React.FC<{ allEvents: EventData[], setEventData: React.Dispatch<
   const switchLocale = (newLocale: Locale) => {
     setSelectedLocale(newLocale)
     setValue('language', newLocale) // Update the registered field
+  }
+
+  const switchEventType = (newEventType: EventType) => {
+    setSelectedEventType(newEventType)
+    setValue('type', newEventType) // Update the registered field
   }
 
   const toggleLanguage = (loc: Locale) => {
@@ -145,6 +154,37 @@ const AddEvent: React.FC<{ allEvents: EventData[], setEventData: React.Dispatch<
 
           <Textarea {...register('description')} placeholder='Description' className='w-full rounded-lg p-2 border-2 border-gray-100' />
           {errors.description && <p className='text-sm text-red-400 -mt-2'>{errors.description.message}</p>}
+
+          {/* Event Type */}
+          <div className='flex flex-col gap-2 w-[240px] '>
+            <div className='pt-2'>
+              <p className='text-sm '>Event Type</p>
+            </div>
+            <Select value={selectedEventType} onValueChange={switchEventType}>
+              <SelectTrigger>
+                <SelectValue>
+                  {selectedEventType ? (
+                    <div className="flex items-center">
+                      {selectedEventType.charAt(0).toUpperCase() + selectedEventType.slice(1)}
+                    </div>
+                  ) : (
+                    "Choose Event Type"
+                  )}
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  {eventTypes.types.map((type, index) => (
+                    <SelectItem key={index} value={type}>
+                      <div className="flex items-center">
+                        {type.charAt(0).toUpperCase() + type.slice(1)}
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
 
           {/* Date Picker */}
           <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>

@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { EventSchema } from '@/lib/schema'
 import { updateEventInDatabase } from '@/app/_actions'
 import { Locale, i18n } from '../../../../../i18n.config'
+import { eventTypes, EventType } from '@../../../event.config'
 import { CreateEventProps, EventData } from '@/../typings'
 import LocaleIcons from '@/app/[lang]/components/lang/LocaleIcon'
 import { toast } from 'sonner'
@@ -56,6 +57,7 @@ const UpdateEvent: React.FC<{ existingEvent: EventData, allEvents: EventData[], 
 
     // Register the date, language, and shownLanguages fields
     React.useEffect(() => {
+        register('type')
         register('date')
         register('language')
         register('shownLanguages')
@@ -68,7 +70,7 @@ const UpdateEvent: React.FC<{ existingEvent: EventData, allEvents: EventData[], 
             const updatedEvent = { ...data, _id: existingEvent._id } as EventData
 
             const result = await updateEventInDatabase(updatedEvent)
-            
+
             toast.success("Event updated successfully")
 
             // Update the event in the state updatedEvents (EventData[])
@@ -77,7 +79,7 @@ const UpdateEvent: React.FC<{ existingEvent: EventData, allEvents: EventData[], 
 
             // Close the dialog
             closeSheet()
-            
+
         } catch (error) {
             console.error(error)
             toast.error("Failed to update event")
@@ -85,6 +87,7 @@ const UpdateEvent: React.FC<{ existingEvent: EventData, allEvents: EventData[], 
     }
 
     const [selectedLocale, setSelectedLocale] = React.useState<Locale>(existingEvent.language)
+    const [selectedEventType, setSelectedEventType] = React.useState<EventType>(eventTypes.defaultType)
     const [date, setDate] = React.useState<Date | undefined>(new Date(existingEvent.date))
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false)
     const [shownLanguages, setShownLanguages] = React.useState<Locale[]>(existingEvent.shownLanguages)
@@ -103,6 +106,11 @@ const UpdateEvent: React.FC<{ existingEvent: EventData, allEvents: EventData[], 
     const switchLocale = (newLocale: Locale) => {
         setSelectedLocale(newLocale)
         setValue('language', newLocale) // Update the registered field
+    }
+
+    const switchEventType = (newEventType: EventType) => {
+        setSelectedEventType(newEventType)
+        setValue('type', newEventType) // Update the registered field
     }
 
     const toggleLanguage = (loc: Locale) => {
@@ -142,6 +150,37 @@ const UpdateEvent: React.FC<{ existingEvent: EventData, allEvents: EventData[], 
 
                     <Textarea {...register('description')} placeholder='Description' className='w-full rounded-lg p-2 border-2 border-gray-100' />
                     {errors.description && <p className='text-sm text-red-400 -mt-2'>{errors.description.message}</p>}
+
+                    {/* Event Type */}
+                    <div className='flex flex-col gap-2 w-[240px] '>
+                        <div className='pt-2'>
+                            <p className='text-sm '>Event Type</p>
+                        </div>
+                        <Select value={selectedEventType} onValueChange={switchEventType}>
+                            <SelectTrigger>
+                                <SelectValue>
+                                    {selectedEventType ? (
+                                        <div className="flex items-center">
+                                            {selectedEventType.charAt(0).toUpperCase() + selectedEventType.slice(1)}
+                                        </div>
+                                    ) : (
+                                        "Choose Event Type"
+                                    )}
+                                </SelectValue>
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectGroup>
+                                    {eventTypes.types.map((type, index) => (
+                                        <SelectItem key={index} value={type}>
+                                            <div className="flex items-center">
+                                                {type.charAt(0).toUpperCase() + type.slice(1)}
+                                            </div>
+                                        </SelectItem>
+                                    ))}
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
+                    </div>
 
                     {/* Date Picker */}
                     <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>

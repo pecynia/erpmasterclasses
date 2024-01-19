@@ -22,6 +22,7 @@ const EventOverview: React.FC<{ allEvents: EventData[], setEventData: React.Disp
                                     <Image alt={event.language} src={LocaleIcons[event.language]} width={16} />
                                     <p className='text-sm pl-1'>{event.language.toUpperCase()}</p>
                                 </Badge>
+                                <p className='text-sm'>{event.type.charAt(0).toUpperCase() + event.type.slice(1)}</p>
                             </div>
                             <p className='text-sm'>{event.date.toLocaleDateString()}</p>
                         </div>

@@ -1,5 +1,6 @@
 import { z } from 'zod'
-import { Locale, i18n } from '../../i18n.config'
+import { Locale, i18n } from '@../../../i18n.config'
+import { eventTypes, EventType } from '@../../../event.config'
 
 
 // 1: Required
@@ -35,6 +36,9 @@ export const EventSchema = z.object({
   title: z.string().min(1, { message: 'Title is required.' }),
   eventSlug: z.string().min(1, { message: 'Slug is required.' }),
   description: z.string().min(1, { message: 'Description is required.' }),
+  type: z.string().min(1, { message: 'Event type is required.' }).refine((value) => {
+    return eventTypes.types.includes(value as EventType)
+  }, { message: 'Event type is invalid.' }),
   date: z.date().refine((value) => {
     return value > new Date()
   }, { message: 'Date must be in the future.' }),

@@ -30,10 +30,14 @@ export interface RegistrationFormProps {
     additionalParticipants?: AdditionalRegistrationFormProps[]
 }    
 
+// ------------------ EVENTS ------------------
+
+// Event properties for client-side
 export type CreateEventProps = {
     title: string
     eventSlug: string
     description: string
+    type: EventType
     date: Date
     location?: string
     requiredRegistrations: number
@@ -47,6 +51,7 @@ export type EventProps = {
     title: string
     eventSlug: string
     description: string
+    type: EventType
     date: Date
     location?: string
     requiredRegistrations: number
@@ -60,6 +65,7 @@ export type EventData = {
     title: string
     eventSlug: string
     description: string
+    type: EventType
     date: Date
     location?: string
     requiredRegistrations: number
