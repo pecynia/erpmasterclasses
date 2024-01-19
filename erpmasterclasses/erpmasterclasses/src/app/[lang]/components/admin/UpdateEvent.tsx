@@ -87,7 +87,7 @@ const UpdateEvent: React.FC<{ existingEvent: EventData, allEvents: EventData[], 
     }
 
     const [selectedLocale, setSelectedLocale] = React.useState<Locale>(existingEvent.language)
-    const [selectedEventType, setSelectedEventType] = React.useState<EventType>(eventTypes.defaultType)
+    const [selectedEventType, setSelectedEventType] = React.useState<EventType>(existingEvent.type)
     const [date, setDate] = React.useState<Date | undefined>(new Date(existingEvent.date))
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false)
     const [shownLanguages, setShownLanguages] = React.useState<Locale[]>(existingEvent.shownLanguages)
