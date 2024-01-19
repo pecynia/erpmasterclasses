@@ -3,6 +3,7 @@ import NodeCache from 'node-cache'
 import { Locale } from '@/app/../../i18n.config'
 import { JSONContent } from '@tiptap/react'
 import { EventProps, CreateEventProps, EventData, RegistrationFormProps } from '@/../typings'
+import { revalidateTag } from 'next/cache'
 
 // -------------------- DATABASE --------------------
 
@@ -164,6 +165,8 @@ export async function addEvent(event: CreateEventProps) {
 
     const result = await collection.insertOne(newEvent);
 
+    revalidateTag('events')
+
     return { result, _id: _id.toString() };
 }
 
@@ -178,6 +181,8 @@ export async function updateEvent(event: EventProps) {
     const update = { $set: eventProps }
 
     const result = await collection.updateOne(filter, update) as { matchedCount: number, modifiedCount: number, acknowledged: boolean, upsertedId: ObjectId | null, upsertedCount: number }
+
+    revalidateTag('events')
 
     return result
 }
