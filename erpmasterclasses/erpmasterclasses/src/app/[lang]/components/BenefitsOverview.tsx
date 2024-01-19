@@ -31,7 +31,7 @@ const BenefitsOverview: React.FC<{ lang: Locale }> = ({ lang }) => {
 
             {/* Overview */}
             <div className="relative -mt-16 w-full md:w-3/4 lg:w-4/5 mx-auto px-16 overflow-hidden">
-                <Image 
+                {/* <Image 
                     src={Groep4}
                     alt="Groep 4"
                     className="absolute object-cover mt-44 left-0 w-3/4 sm:max-h-[400px] sm:w-2/3 md:1/3 lg:w-2/5 aspect-square opacity-50"
@@ -41,7 +41,7 @@ const BenefitsOverview: React.FC<{ lang: Locale }> = ({ lang }) => {
                     alt="Groep 5"
                     height={500}
                     className="absolute object-cover bottom-0 mb-24 right-0 w-3/4 sm:w-2/3 sm:max-h-[400px] md:1/3 lg:w-2/5 aspect-square opacity-50"
-                />
+                /> */}
                 {documentIds.map((documentId, index) => (
                     <motion.div layout
                         key={index}
