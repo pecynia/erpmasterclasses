@@ -18,7 +18,7 @@ function PricingOverview({ lang, navigation, pricing }: { lang: Locale, navigati
                 className='shadow-right-tertiary rounded-xl bg-white pb-10 flex flex-col md:flex-row justify-between items-center md:items-start md:justify-start'
             >
                 <div className='w-full md:w-1/2'>
-                    <h1 className='text-3xl font-bold px-12 pt-10 pb-5'>
+                    <h1 className='text-3xl font-bold px-12 pt-10 pb-4'>
                         {pricing.type1.title}
                     </h1>
                     <hr className='mx-12' />
@@ -40,9 +40,9 @@ function PricingOverview({ lang, navigation, pricing }: { lang: Locale, navigati
                         <EditorWrapper initialLocale={lang} documentId='pricing-card-1-features' />
                     </div>
                 </div>
-                <div className='text-black w-full md:w-1/2 pr-12'>
-                    <hr className='block md:hidden mx-6' />
-                    <div className='mb-5 pt-0 md:pt-5'>
+                <div className='w-full md:w-1/2 px-8 md:pl-0 md:pr-12'>
+                    <hr className='block md:hidden mx-4' />
+                    <div className='mb-5 pt-0 md:pt-12'>
                         <EditorWrapper initialLocale={lang} documentId='pricing-card-1-content' />
                     </div>
                 </div>

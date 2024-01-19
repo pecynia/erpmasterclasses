@@ -1,18 +1,18 @@
 "use client"
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react'
 import EditorWrapper from '@/app/[lang]/components/editor/EditorWrapper'
 import { Locale } from '@../../../i18n.config'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import Lenis from '@studio-freight/lenis';
+import Lenis from '@studio-freight/lenis'
 
 type ReviewProps = {
-  title: string;
-  subTitle: string;
-  description: string;
-  beOurNextSuccessStory: string;
-  rating: string;
-};
+  title: string
+  subTitle: string
+  description: string
+  beOurNextSuccessStory: string
+  rating: string
+}
 
 const ReviewOverview: React.FC<{ lang: Locale, review: ReviewProps }> = ({ lang, review }) => {
     const documentIds = [
@@ -23,41 +23,44 @@ const ReviewOverview: React.FC<{ lang: Locale, review: ReviewProps }> = ({ lang,
         'review-description-5',
         'review-description-6',	
     ]
+    
+    // For keeping track of scroll position
     const container = useRef<HTMLDivElement | null>(null)
-
     const { scrollYProgress } = useScroll({
       target: container,
       offset: ["start end", "end start"],
     })    
+
+    // Text animation
     const disappearRight = useTransform(scrollYProgress, [0, 0.2], ['0%', '-30%'])
 
-    const [dimension, setDimension] = useState({ width: 0, height: 0 });
-
+    // For adding smooth scroll
+    const [dimension, setDimension] = useState({ width: 0, height: 0 })
     useEffect(() => {
         const lenis = new Lenis({
             lerp: 0.1,
             smoothTouch: true,
             normalizeWheel: true,
-        });
+        })
 
         const raf = (time: number) => {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        };
+            lenis.raf(time)
+            requestAnimationFrame(raf)
+        }
 
         const resize = () => {
-            setDimension({ width: window.innerWidth, height: window.innerHeight });
-        };
+            setDimension({ width: window.innerWidth, height: window.innerHeight })
+        }
 
-        window.addEventListener('resize', resize);
-        requestAnimationFrame(raf);
-        resize();
+        window.addEventListener('resize', resize)
+        requestAnimationFrame(raf)
+        resize()
 
         return () => {
-            lenis.destroy();
-            window.removeEventListener('resize', resize);
-        };
-    }, []);
+            lenis.destroy()
+            window.removeEventListener('resize', resize)
+        }
+    }, [])
 
 
     return (
@@ -79,15 +82,15 @@ const ReviewOverview: React.FC<{ lang: Locale, review: ReviewProps }> = ({ lang,
                 {review.description}
               </h1>
             </motion.div>
+
             {/* Descriptive Div for small screen*/}
-            <motion.div
-                className="block lg:hidden mt-10 w-full flex-col items-center justify-center"
-            >
+            <motion.div className="block lg:hidden mt-10 w-full flex-col items-center justify-center">
               <h1 className='text-3xl text-secondary font-bold'>
                 {review.description}
               </h1>
             </motion.div>
 
+            {/* Overview */}
             <div className="-mt-5 w-full md:w-3/4 lg:w-4/5 mx-auto px-16 overflow-hidden">
                 {documentIds.map((documentId, index) => (
                     <motion.div layout

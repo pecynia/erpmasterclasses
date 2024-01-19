@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import Tja from '@/../public/imgs/tja.jpg'
 import { motion } from 'framer-motion'
 import { Locale } from '@../../../i18n.config'
 import { Button } from '@/app/[lang]/components/ui/button'
@@ -64,13 +63,6 @@ const BenefitsTopSection: React.FC<{ benefits: BenefitProps, lang: Locale }> = (
                 >
                     <h1 className="text-5xl font-bold mb-4">{benefits.title}</h1>
                 </motion.div>
-                {/* <motion.div 
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: 0.1 }}
-                >
-                    <p className="text-xl mb-6">{benefits.description}</p>
-                </motion.div> */}
                 <motion.div 
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}

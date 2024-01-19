@@ -1,5 +1,6 @@
 import '../../styles/globals.css'
 import { NextAuthProvider } from "@/lib/providers"
+import { HeaderVisibilityProvider } from '@/contexts/HeaderVisibilityContext'
 import { Locale, i18n } from '@/app/../../i18n.config'
 import { Inter } from 'next/font/google'
 import type { Metadata } from 'next'
@@ -42,9 +43,11 @@ export default function RootLayout({
     <html lang={params.lang} className={`${inter.className} h-full`}>
       <body className='flex min-h-full flex-col font-exo'>
         <NextAuthProvider>
-          <Header lang={params.lang} />
-          <main className='flex-grow'>{children}</main>
-          <Footer lang={params.lang} />
+          <HeaderVisibilityProvider>
+            <Header lang={params.lang} />
+            <main className='flex-grow'>{children}</main>
+            <Footer lang={params.lang} />
+          </HeaderVisibilityProvider>
         </NextAuthProvider>
       </body>
     </html>

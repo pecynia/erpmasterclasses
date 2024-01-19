@@ -1,12 +1,9 @@
 import React from 'react'
-import Link from 'next/link'
 import { Locale } from '@/app/../../i18n.config'
 import { getDictionary } from '@/lib/dictionary'
-import ClientHeaderButtonWrapper from '@/app/[lang]/components/admin/ClientHeaderButtonWrapper'
-import LocaleSwitchButton from '@/app/[lang]/components/lang/LocaleSwitcher'
 import { HeaderClient } from '@/app/[lang]/components/HeaderClient'
-import MobileNav from './MobileNav'
-import DesktopNav from './DesktopNav'
+import MobileNav from '@/app/[lang]/components/MobileNav'
+import DesktopNav from '@/app/[lang]/components/DesktopNav'
 
 export default async function Header({ lang }: { lang: Locale }) {
   const { navigation } = await getDictionary(lang)

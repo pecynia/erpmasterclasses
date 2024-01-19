@@ -28,7 +28,7 @@ export default async function Footer({ lang }: { lang: Locale }) {
                 <div className=''>
                     <h1 className="font-exo text-2xl text-secondary-foreground mb-4">{footer.navigation.label}</h1>
                     {Object.values(navigation).map((navItem, index) => (
-                        <Link key={index} href={navItem.href}>
+                        <Link key={index} href={`/${lang}${navItem.href}`}>
                             <div className="mb-2 hover:underline cursor-pointer">{navItem.label}</div>
                         </Link>
                     ))}

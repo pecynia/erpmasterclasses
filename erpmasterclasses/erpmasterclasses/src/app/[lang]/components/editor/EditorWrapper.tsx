@@ -46,7 +46,7 @@ const EditorWrapper: React.FC<EditorWrapperProps> = ({ documentId, link, buttonT
         } else {
             console.error('Error fetching content:', response?.error)
         }
-    }, [documentId]) // Dependency array for useCallback
+    }, [documentId])
 
     useEffect(() => {
         handleLocaleChange(currentLocale)
