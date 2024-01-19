@@ -87,7 +87,16 @@ export async function getEvent(eventSlug: string, language: Locale): Promise<Eve
     // Constructing the response to match the original format
     if (result) {
         return {
-            ...result
+            _id: result._id,
+            title: result.title,
+            eventSlug: result.eventSlug,
+            description: result.description,
+            type: result.type,
+            date: result.date,
+            location: result.location,
+            requiredRegistrations: result.requiredRegistrations,
+            language: result.language,
+            shownLanguages: result.shownLanguages
         }
     }
 
@@ -104,7 +113,16 @@ export async function getEvents(language: Locale): Promise<EventProps[]> {
     // Constructing the response to match the original format
     const events = result.map((event: EventProps) => {
         return {
-            event,
+            _id: event._id,
+            title: event.title,
+            eventSlug: event.eventSlug,
+            description: event.description,
+            type: event.type,
+            date: event.date,
+            location: event.location,
+            requiredRegistrations: event.requiredRegistrations,
+            language: event.language,
+            shownLanguages: event.shownLanguages
         }
     })
 
@@ -120,7 +138,17 @@ export async function getEventsWithRegistrations(): Promise<EventData[]> {
     // Constructing the response to match the original format
     const events = result.map((event: EventData) => {
         return {
-            event,
+            _id: event._id,
+            title: event.title,
+            eventSlug: event.eventSlug,
+            description: event.description,
+            type: event.type,
+            date: event.date,
+            location: event.location,
+            requiredRegistrations: event.requiredRegistrations,
+            language: event.language,
+            shownLanguages: event.shownLanguages,
+            registrations: event.registrations
         }
     }) as EventData[]
 
@@ -137,6 +165,8 @@ export async function addEvent(event: CreateEventProps) {
 
     const result = await collection.insertOne(newEvent);
 
+    revalidateTag('events')
+
     return { result, _id: _id.toString() };
 }
 
@@ -151,7 +181,9 @@ export async function updateEvent(event: EventProps) {
     const update = { $set: eventProps }
 
     const result = await collection.updateOne(filter, update) as { matchedCount: number, modifiedCount: number, acknowledged: boolean, upsertedId: ObjectId | null, upsertedCount: number }
-    
+
+    revalidateTag('events')
+
     return result
 }
 
