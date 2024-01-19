@@ -243,7 +243,7 @@ const UpdateEvent: React.FC<{ existingEvent: EventData, allEvents: EventData[], 
                         <div className='flex flex-wrap'>
                             {i18n.locales.map((loc) => (
                                 <div key={loc} className="flex items-center mr-2 mb-2">
-                                    <Badge className="p-2" variant="secondary">
+                                    <Badge className="p-2" variant="outline">
                                         <Checkbox
                                             checked={shownLanguages.includes(loc)}
                                             onCheckedChange={() => toggleLanguage(loc)}

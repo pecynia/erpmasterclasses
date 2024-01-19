@@ -1,8 +1,6 @@
 import { Locale } from '@../../../i18n.config'
 import { getDictionary } from '@/lib/dictionary'
 import PricingOverview from '@/app/[lang]/components/PricingOverview'
-import Image from 'next/image'
-import Uitleg from '@/../public/imgs/uitleg.jpg'
 
 
 export default async function Page({
