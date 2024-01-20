@@ -4,9 +4,6 @@ import React from 'react'
 import EditorWrapper from '@/app/[lang]/components/editor/EditorWrapper'
 import { Locale } from '@../../../i18n.config'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import Groep4 from '@/../public/imgs/groep-4.jpg'
-import Groep5 from '@/../public/imgs/groep-5.jpg'
-import Image from 'next/image'
 
 const BenefitsOverview: React.FC<{ lang: Locale }> = ({ lang }) => {
     const documentIds = [

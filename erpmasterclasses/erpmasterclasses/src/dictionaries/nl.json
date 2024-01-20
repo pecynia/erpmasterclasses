@@ -8,9 +8,13 @@
       "label": "Voordelen",
       "href": "/benefits"
     },
-    "agenda": {
-      "label": "Agenda",
-      "href": "/agenda"
+    "success": {
+      "label": "Success",
+      "href": "/success"
+    },
+    "transformation": {
+      "label": "Transformatie",
+      "href": "/transformation"
     },
     "investment": {
       "label": "Kosten",
@@ -55,7 +59,7 @@
   },
   "pricing": {
     "type1": {
-      "title": "ERP Masterclasses",
+      "title": "Investering",
       "description": "Organiseer uw functie-ideeën en deel gemakkelijk interactieve routekaarten.",
       "price": "€ 950,-",
       "perPerson": "per persoon",
@@ -80,7 +84,12 @@
     "description": "Beschrijving"
   },  
   "agenda": {
-    "title": "Agenda"
+    "title": "Agenda",
+    "transformation": "Agenda voor de Masterclass Bedrijfstransformatie",
+    "upcomingTransformationMasterclasses": "Aankomende Masterclasses Bedrijfstransformatie",
+    "success": "Agenda voor de ERP/CRM Succes Masterclass",
+    "upcomingSuccessMasterclasses": "Aankomende Masterclasses ERP/CRM Succes",
+    "noFound": "Nog geen evenementen gepland. Check later nog eens."
   },
   "contact": {
     "namePlaceholder": "Naam*",

@@ -8,9 +8,13 @@
       "label": "Vorteile",
       "href": "/benefits"
     },
-    "agenda": {
-      "label": "Agenda",
-      "href": "/agenda"
+    "success": {
+      "label": "Erfolg",
+      "href": "/success"
+    },
+    "transformation": {
+      "label": "Transformation",
+      "href": "/transformation"
     },
     "investment": {
       "label": "Kosten",
@@ -55,7 +59,7 @@
   },
   "pricing": {
     "type1": {
-      "title": "ERP Masterclasses",
+      "title": "Investition",
       "description": "Organisieren Sie Ihre Funktionsideen und teilen Sie einfach interaktive Roadmaps.",
       "price": "€ 950,-",
       "perPerson": "pro Person",
@@ -80,7 +84,12 @@
     "description": "Beschreibung"
   },
   "agenda": {
-    "title": "Agenda"
+    "title": "Agenda",
+    "transformation": "Agenda für die Masterclass Business Transformation",
+    "upcomingTransformationMasterclasses": "Kommende Business Transformation Masterclasses",
+    "success": "Agenda für die ERP/CRM Success Masterclass",
+    "upcomingSuccessMasterclasses": "Kommende ERP/CRM Success Masterclasses",
+    "noFound": "Noch keine Veranstaltungen geplant. Bitte schauen Sie später noch einmal vorbei."
   },
   "contact": {
     "namePlaceholder": "Name*",

@@ -24,7 +24,7 @@ const ReviewFooter: React.FC<{ lang: Locale }> = async ({ lang }) => {
                 <div className='bg-white shadow-xl py-10 rounded-xl flex flex-col items-center justify-center text-center w-full lg:w-2/3 mx-auto'>
                     <EditorWrapper initialLocale={lang} documentId='overview-footer' />
                     <Button size='lg' variant='secondary' className='text-md'>
-                        <Link href={`/${lang}${navigation.agenda.href}`} className='flex items-center'>
+                        <Link href={`/${lang}${navigation.investment.href}`} className='flex items-center'>
                             {benefits.CTA}!
                         </Link>
                     </Button>

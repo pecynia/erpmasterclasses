@@ -8,9 +8,13 @@
       "label": "Benefits",
       "href": "/benefits"
     },
-    "agenda": {
-      "label": "Agenda",
-      "href": "/agenda"
+    "success": {
+      "label": "Success",
+      "href": "/success"
+    },
+    "transformation": {
+      "label": "Transformation",
+      "href": "/transformation"
     },
     "investment": {
       "label": "Pricing",
@@ -55,7 +59,7 @@
   },
   "pricing": {
     "type1": {
-      "title": "ERP Masterclasses",
+      "title": "Investment",
       "description": "Your Investment in Expertise and Experience",
       "price": "€ 950,-",
       "perPerson": "per person",
@@ -80,7 +84,12 @@
     "description": "Description"
   },
   "agenda": {
-    "title": "Agenda"
+    "title": "Agenda",
+    "transformation": "Agenda for the Masterclass Business Transformation",
+    "upcomingTransformationMasterclasses": "Upcoming Masterclasses Business Transformation",
+    "success": "Agenda for the ERP/CRM Success Masterclass",
+    "upcomingSuccessMasterclasses": "Upcoming Masterclasses ERP/CRM Success",
+    "noFound": "No events planned yet. Please check back later."
   },
   "contact": {
     "namePlaceholder": "Name*",

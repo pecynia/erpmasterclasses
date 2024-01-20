@@ -27,7 +27,7 @@ const DesktopNav = ({ routes, lang }: Navigation) => {
                 <div className='flex items-center space-x-4'>
                     {routes.map((navItem, index) => (
                         <button key={index}>
-                            <Link key={index} href={`/${lang}${navItem.href}`} className='px-4'>
+                            <Link key={index} href={`/${lang}${navItem.href}`} className='px-2'>
                                 <span className={`textWithAnimatedUnderline transition-colors text-primary text-md ${pathname === `/${lang}${navItem.href}` ? 'textWithUnderline' : ''}`} >
                                     {navItem.label}
                                 </span>

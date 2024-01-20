@@ -15,7 +15,7 @@ function PricingOverview({ lang, navigation, pricing }: { lang: Locale, navigati
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0 }}
-                className='shadow-right-tertiary rounded-xl bg-white pb-10 flex flex-col md:flex-row justify-between items-center md:items-start md:justify-start'
+                className='relative shadow-right-tertiary rounded-xl bg-white pb-10 mb-10 flex flex-col md:flex-row justify-between items-center md:items-start md:justify-start'
             >
                 <div className='w-full md:w-1/2'>
                     <h1 className='text-3xl font-bold px-12 pt-10 pb-4'>
@@ -30,7 +30,7 @@ function PricingOverview({ lang, navigation, pricing }: { lang: Locale, navigati
                             {pricing.type1.price}<span className='text-sm font-light pl-2'>{pricing.type1.perPerson}</span>
                         </h1>
                         <Button variant='tertiary' className="rounded-lg mt-4" size='lg'>
-                            <Link href={`/${lang}${navigation.agenda.href}`}>
+                            <Link href={`/${lang}${navigation.investment.href}`}>
                                 {pricing.type1.buttonText}
                             </Link>
                         </Button>

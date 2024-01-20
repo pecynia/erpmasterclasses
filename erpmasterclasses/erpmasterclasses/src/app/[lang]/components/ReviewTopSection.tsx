@@ -44,7 +44,7 @@ const ReviewTopSection: React.FC<{ review: ReviewProps, lang: Locale, navigation
                             transition={{ duration: 0.5, delay: 0.3 }}
                         >
                             <Button variant="ghost" className="rounded-lg mt-2 -ml-4 underline hover:bg-inherit">
-                                <Link href={`/${lang}${navigation.agenda.href}`}>
+                                <Link href={`/${lang}${navigation.investment.href}`}>
                                     {review.beOurNextSuccessStory} <ArrowRight className="inline-block" size={16} />
                                 </Link>
                             </Button>

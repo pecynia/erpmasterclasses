@@ -5,11 +5,12 @@ import LocaleIcons from "@/app/[lang]/components/lang/LocaleIcon"
 import Image from "next/image"
 import { Badge } from '@/app/[lang]/components/ui/badge'
 import Link from 'next/link'
-import { Locale } from '../../../../i18n.config'
+import { Locale } from '@../../../i18n.config'
 
-const EventOverview: React.FC<{ allEvents: EventProps[], lang: Locale }> = ({ allEvents, lang }) => {
+const EventOverview: React.FC<{ allEvents: EventProps[], lang: Locale, agenda: any }> = ({ allEvents, lang, agenda }) => {
   return (
     <div className='flex flex-col gap-6 pt-6'>
+      {allEvents.length === 0 && <p className='italic text-sm text-white'>{agenda.noFound}</p>}
       {allEvents.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()).map((event, index) => (
         <Link href={`/${lang}/agenda/${event.eventSlug}`} key={index} className=''>
             <div className='flex flex-row  items-center p-2 pl-4 rounded-md bg-white' key={index}>
