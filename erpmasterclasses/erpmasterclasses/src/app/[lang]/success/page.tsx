@@ -22,7 +22,7 @@ export default async function Page({
                     </h1>
                 </div>
             </div>
-            <div className='flex flex-col max-w-5xl mx-auto px-8 py-8 '>
+            <div className='flex flex-col max-w-5xl mx-auto px-8 py-8 min-h-screen'>
                 <EditorWrapper documentId='success-day-planning' initialLocale={lang} />
             </div>
             <div className='w-full bg-secondary pt-12 pb-36'>

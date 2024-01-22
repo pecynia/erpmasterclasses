@@ -15,11 +15,13 @@ export default async function Footer({ lang }: { lang: Locale }) {
 
                 {/* Logo & Description */}
                 <div className="flex flex-col items-center justify-center">
-                    <Image src={Logo} alt='Logo' width={160} height={100} priority className='invert'/>
-                    <p className="text-center mt-4 mb-2">{footer.description.label}</p>
-                    <div className="flex space-x-2">
-                        <Link href={socialMedia.linkedin || "#"} target="_blank" className='hover:text-secondary-foreground'>
-                            <Linkedin className="cursor-pointer" />
+                    <p className="text-center text-2xl mt-4 mb-2">{footer.description.label}</p>
+                    <div className="flex space-x-2 pt-2">
+                        <p className="font-light">
+                            {footer.description.linkedin}
+                        </p>
+                        <Link href={socialMedia.linkedin!} target="_blank" className='hover:text-secondary'>
+                            <Linkedin className="cursor-pointer -mt-1" />
                         </Link>
                     </div>
                 </div>

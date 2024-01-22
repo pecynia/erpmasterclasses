@@ -9,7 +9,7 @@
       "href": "/benefits"
     },
     "success": {
-      "label": "Auswahl-Meisterklasse",
+      "label": "Selection Masterclass",
       "href": "/success"
     },
     "transformation": {
@@ -44,7 +44,8 @@
       "label": "Navigation"
     },
     "description": {
-      "label": "Steigern Sie Ihre Erfolgschancen"
+      "label": "Steigern Sie Ihre Erfolgschancen",
+      "linkedin": "Guus Krabbenborg's LinkedIn-Profil"
     },
     "credit": {
       "label": "Gebaut von"
