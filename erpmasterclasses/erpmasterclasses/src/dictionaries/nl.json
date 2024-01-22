@@ -61,14 +61,14 @@
   "pricing": {
     "type1": {
       "title": "Uw investering",
-      "description": "Organiseer uw functie-ideeën en deel gemakkelijk interactieve routekaarten.",
+      "description": "Uw investering in expertise en ervaring",
       "price": "€ 950,-",
       "perPerson": "per persoon",
       "buttonText": "Nu boeken"
     },
     "type2": {
       "title": "Type 2",
-      "description": "Organiseer uw functie-ideeën en deel gemakkelijk interactieve routekaarten.",
+      "description": "Uw investering in expertise en ervaring",
       "price": "Op maat",
       "buttonText": "Neem Contact Op"
     }

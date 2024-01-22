@@ -61,14 +61,14 @@
   "pricing": {
     "type1": {
       "title": "Ihre Investition",
-      "description": "Organisieren Sie Ihre Funktionsideen und teilen Sie einfach interaktive Roadmaps.",
+      "description": "Ihre Investition in Fachwissen und Erfahrung",
       "price": "€ 950,-",
       "perPerson": "pro Person",
       "buttonText": "Jetzt buchen"
     },
     "type2": {
       "title": "Typ 2",
-      "description": "Organisieren Sie Ihre Funktionsideen und teilen Sie einfach interaktive Roadmaps.",
+      "description": "Ihre Investition in Fachwissen und Erfahrung",
       "price": "Individuell",
       "buttonText": "Kontaktiere mich"
     }
