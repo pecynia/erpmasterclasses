@@ -9,11 +9,11 @@
       "href": "/benefits"
     },
     "success": {
-      "label": "Erfolg",
+      "label": "Auswahl-Meisterklasse",
       "href": "/success"
     },
     "transformation": {
-      "label": "Transformation",
+      "label": "Transformation Masterclass",
       "href": "/transformation"
     },
     "investment": {
@@ -55,11 +55,11 @@
     "description": "Erfahren Sie, wie Sie sich besser auf Veränderungen vorbereiten können",
     "buttonText": "Kontakt Aufnehmen",
     "summary": "Zusammengefasst: Ihre Erfolgschancen erhöhen!",
-    "CTA": "Überprüfen Sie unseren Zeitplan"
+    "CTA": "Schauen Sie sich die Tagesordnungen an"
   },
   "pricing": {
     "type1": {
-      "title": "Investition",
+      "title": "Ihre Investition",
       "description": "Organisieren Sie Ihre Funktionsideen und teilen Sie einfach interaktive Roadmaps.",
       "price": "€ 950,-",
       "perPerson": "pro Person",
@@ -69,13 +69,16 @@
       "title": "Typ 2",
       "description": "Organisieren Sie Ihre Funktionsideen und teilen Sie einfach interaktive Roadmaps.",
       "price": "Individuell",
-      "buttonText": "Kontaktieren Sie Guus"
+      "buttonText": "Kontaktiere mich"
     }
+  },
+  "about": {
+    "linkedin": "Guus' LinkedIn-Profil finden Sie hier"
   },
   "review": {
     "title": "Seit 2005 habe ich diese Masterclasses in ganz Europa durchgeführt. Über die Jahre hinweg habe ich viele hunderte Organisationen geschult und inspiriert. Sowohl große als auch kleine. Lokale und internationale. Und nahezu alle denkbaren Branchen und Industriezweige.",
     "subTitle": "Teilnehmer-Feedback",
-    "description": "Das sagen einige der Teilnehmer über diese Masterclasses:",
+    "description": "Das sagen Teilnehmer über diese Masterclasses:",
     "beOurNextSuccessStory": "Seien Sie meine nächste Erfolgsgeschichte!",
     "rating": "Durchschnittliche Bewertungen zwischen 8,5 und 9,5!"
   },

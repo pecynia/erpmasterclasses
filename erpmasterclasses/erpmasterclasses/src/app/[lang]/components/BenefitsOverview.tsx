@@ -42,7 +42,7 @@ const BenefitsOverview: React.FC<{ lang: Locale }> = ({ lang }) => {
                 {documentIds.map((documentId, index) => (
                     <motion.div layout
                         key={index}
-                        initial={{ opacity: 0, x: index % 2 === 0 ? '-100%' : '100%' }}
+                        initial={{ opacity: 0, x: index % 2 === 0 ? 20 : -20 }}
                         whileInView={{ opacity: 1, x: '0%' }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.7, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }}

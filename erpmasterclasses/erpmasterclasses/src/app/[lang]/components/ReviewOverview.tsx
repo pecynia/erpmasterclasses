@@ -95,10 +95,10 @@ const ReviewOverview: React.FC<{ lang: Locale, review: ReviewProps }> = ({ lang,
                 {documentIds.map((documentId, index) => (
                     <motion.div layout
                         key={index}
-                        initial={{ opacity: 0, x: index % 2 === 0 ? '-100%' : '100%' }}
-                        whileInView={{ opacity: 1, x: '0%' }}
+                        initial={{ opacity: 0, x: index % 2 === 0 ? 20 : -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.7, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }}
+                        transition={{ duration: 1, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }}
                         className={`flex items-center max-w-5xl w-full md:w-4/5 lg:2/3 px-4 my-16 md:my-24 bg-background ${index % 2 === 0 ? 'shadow-right-secondary ml-auto' : 'shadow-left-secondary mr-auto'}`}
                     >
                         <EditorWrapper documentId={documentId} initialLocale={lang} />

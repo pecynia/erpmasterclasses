@@ -9,11 +9,11 @@
       "href": "/benefits"
     },
     "success": {
-      "label": "Success",
+      "label": "Selectie Masterclass",
       "href": "/success"
     },
     "transformation": {
-      "label": "Transformatie",
+      "label": "Transformatie Masterclass",
       "href": "/transformation"
     },
     "investment": {
@@ -38,7 +38,7 @@
       "label": "Contact"
     },
     "social": {
-      "label": "Volg Ons"
+      "label": "Volg Me"
     },
     "navigation": {
       "label": "Navigatie"
@@ -55,11 +55,11 @@
     "description": "Ontdek hoe u zich beter kunt voorbereiden op verandering",
     "buttonText": "Neem Contact Op",
     "summary": "Samengevat: uw kansen op succes vergroten!",
-    "CTA": "Bekijk onze agenda"
+    "CTA": "Bekijk de agenda's"
   },
   "pricing": {
     "type1": {
-      "title": "Investering",
+      "title": "Uw investering",
       "description": "Organiseer uw functie-ideeën en deel gemakkelijk interactieve routekaarten.",
       "price": "€ 950,-",
       "perPerson": "per persoon",
@@ -72,10 +72,13 @@
       "buttonText": "Neem Contact Op"
     }
   },
+  "about": {
+    "linkedin": "Check Guus’ LinkedIn profiel hier"
+  },
   "review": {
     "title": "Sinds 2005 heb ik deze Masterclasses door heel Europa gegeven. In al die jaren heb ik vele honderden organisaties getraind en geïnspireerd. Zowel groot als klein. Lokaal en internationaal. En vrijwel alle denkbare branches en industrieën.",
     "subTitle": "Feedback van deelnemers",
-    "description": "Dit is wat sommige deelnemers zeggen over deze Masterclasses:",
+    "description": "Dit is wat deelnemers zeggen over deze Masterclasses:",
     "beOurNextSuccessStory": "Word mijn volgende succesverhaal!",
     "rating": "Gemiddelde beoordeling tussen de 8,5 en 9,5!"
   },

@@ -9,11 +9,11 @@
       "href": "/benefits"
     },
     "success": {
-      "label": "Success",
+      "label": "Selection Masterclass",
       "href": "/success"
     },
     "transformation": {
-      "label": "Transformation",
+      "label": "Transformation Masterclass",
       "href": "/transformation"
     },
     "investment": {
@@ -38,7 +38,7 @@
       "label": "Contact"
     },
     "social": {
-      "label": "Follow Us"
+      "label": "Follow Me"
     },
     "navigation": {
       "label": "Navigation"
@@ -53,13 +53,13 @@
   "benefits": {
     "title": "Enhance Your Chance for Success",
     "description": "Discover how to better prepare for change",
-    "buttonText": "Contact Guus",
+    "buttonText": "Contact Me",
     "summary": "In summary: increasing your chances of success!",
-    "CTA": "Check Our Agenda"
+    "CTA": "Check the Agenda's"
   },
   "pricing": {
     "type1": {
-      "title": "Investment",
+      "title": "Your investment",
       "description": "Your Investment in Expertise and Experience",
       "price": "€ 950,-",
       "perPerson": "per person",
@@ -69,13 +69,16 @@
       "title": "Type 2",
       "description": "Organize your feature ideas and easily share interactive roadmaps.",
       "price": "Custom",
-      "buttonText": "Contact Guus"
+      "buttonText": "Contact Me"
     }
+  },
+  "about": {
+    "linkedin": "Check Guus’ LinkedIn profile here"
   },
   "review": {
     "title": "I have delivered these Masterclasses all over Europe since 2005. Over these years I have trained and inspired many hundreds of organizations. Both big and small. Local and international. And just about all conceivable branches and industries.",
     "subTitle": "Participant feedback",
-    "description": "This is what some of the participants say about these Masterclasses:",
+    "description": "This is what participants say about these Masterclasses:",
     "beOurNextSuccessStory": "Be my next success story!",
     "rating": "Average ratings between 8,5 and 9,5!"
   },

@@ -21,6 +21,9 @@ type Navigation = {
 
 const DesktopNav = ({ routes, lang }: Navigation) => {
     const pathname = usePathname()
+    // remove # and everything after it
+    const path = pathname.split('#')[0]
+
     return (
         <div className='hidden lg:block'>
             <nav className='flex justify-between items-center'>
@@ -28,7 +31,7 @@ const DesktopNav = ({ routes, lang }: Navigation) => {
                     {routes.map((navItem, index) => (
                         <button key={index}>
                             <Link key={index} href={`/${lang}${navItem.href}`} className='px-2'>
-                                <span className={`textWithAnimatedUnderline transition-colors text-primary text-md ${pathname === `/${lang}${navItem.href}` ? 'textWithUnderline' : ''}`} >
+                                <span className={`textWithAnimatedUnderline transition-colors text-primary text-md ${path === `/${lang}${navItem.href}` ? 'textWithUnderline' : ''}`} >
                                     {navItem.label}
                                 </span>
                             </Link>

@@ -51,7 +51,7 @@ const EventOverview: React.FC<{ allEvents: EventProps[], lang: Locale, agenda: a
                         <p className='text-sm pl-1'>{event.language.toUpperCase()}</p>
                     </Badge>
                     </div>
-                    <p className='text-sm'>{new Date(event.date).toLocaleDateString()}</p>
+                    <p className='text-sm'>{event.date.toLocaleDateString(lang, {  year: 'numeric', month: 'long', day: 'numeric' })}</p>
                 </div>
             </div>
         </Link>

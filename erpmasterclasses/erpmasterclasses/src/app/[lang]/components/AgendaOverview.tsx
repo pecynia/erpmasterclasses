@@ -1,32 +1,36 @@
-import React from 'react';
-import { Locale } from '@../../../i18n.config';
-import SuccessEventOverview from '@/app/[lang]/components/SuccessEventOverview';
-import TransformationEventOverview from '@/app/[lang]/components/TransformationEventOverview';
+import React from 'react'
+import { Locale } from '@../../../i18n.config'
+import SuccessEventOverview from '@/app/[lang]/components/SuccessEventOverview'
+import TransformationEventOverview from '@/app/[lang]/components/TransformationEventOverview'
+import Link from 'next/link'
 
-const AgendaSection = ({ title, children }: { title: string, children: React.ReactNode }) => (
+const AgendaSection = ({ lang, title, link, children }: { lang: Locale, title: string, link: any, children: React.ReactNode }) => (
+    
     <div className='flex flex-col max-w-5xl mx-auto px-8 py-8'>
-        <h1 className='text-2xl font-bold pb-6'>{title}</h1>
+        <Link href={`/${lang}${link}`}>
+            <h1 className='text-2xl font-bold pb-6 hover:text-secondary cursor-pointer'>{title}</h1>
+        </Link>
         <hr />
         {children}
     </div>
-);
+)
 
-const AgendaOverview = ({ lang, agenda }: { lang: Locale, agenda: any }) => {
+const AgendaOverview = ({ lang, agenda, navigation }: { lang: Locale, agenda: any, navigation: any }) => {
     return (
         <div id='agenda'
             className='relative rounded-xl bg-white shadow-right-secondary'
         >
             {/* Success Agenda Section */}
-            <AgendaSection title={agenda.upcomingSuccessMasterclasses}>
+            <AgendaSection lang={lang} title={agenda.upcomingSuccessMasterclasses} link={navigation.success.href}>
                 <SuccessEventOverview params={{ lang, agenda }} />
             </AgendaSection>
 
             {/* Transformation Agenda Section */}
-            <AgendaSection title={agenda.upcomingTransformationMasterclasses}>
+            <AgendaSection lang={lang} title={agenda.upcomingTransformationMasterclasses} link={navigation.transformation.href}>
                 <TransformationEventOverview params={{ lang, agenda }} />
             </AgendaSection>
         </div>
-    );
-};
+    )
+}
 
-export default AgendaOverview;
+export default AgendaOverview
