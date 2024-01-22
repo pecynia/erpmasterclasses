@@ -4,12 +4,7 @@ import { Locale } from '@../../../i18n.config'
 import { getEvents } from '@/lib/utils/db'
 
 
-const SuccessEventOverview = async ({
-    params: { lang, agenda }
-}: {
-    params: { lang: Locale, agenda: any }
-}) => {
-
+const SuccessEventOverview: React.FC<{ lang: Locale, agenda: any }> = async ({ lang, agenda }) => {
     const events = await getEvents(lang)
     const successEvents = events.filter(event => event.type === 'success')
 

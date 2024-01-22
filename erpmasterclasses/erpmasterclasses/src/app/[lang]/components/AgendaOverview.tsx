@@ -20,12 +20,12 @@ const AgendaOverview = ({ lang, agenda, navigation }: { lang: Locale, agenda: an
         <div className='relative rounded-xl bg-white shadow-right-secondary'>
             {/* Success Agenda Section */}
             <AgendaSection lang={lang} title={agenda.upcomingSuccessMasterclasses} link={navigation.success.href}>
-                <SuccessEventOverview params={{ lang, agenda }} />
+                <SuccessEventOverview lang={lang} agenda={agenda} />
             </AgendaSection>
 
             {/* Transformation Agenda Section */}
             <AgendaSection lang={lang} title={agenda.upcomingTransformationMasterclasses} link={navigation.transformation.href}>
-                <TransformationEventOverview params={{ lang, agenda }} />
+                <TransformationEventOverview lang={lang} agenda={agenda} />
             </AgendaSection>
         </div>
     )
