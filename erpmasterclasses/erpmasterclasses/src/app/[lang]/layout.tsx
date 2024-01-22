@@ -17,18 +17,8 @@ export async function generateStaticParams() {
 }
 
 export const metadata: Metadata = {
-  title: 'Website Title',
-  description: 'Website Description',
-  openGraph: {
-    type: 'website',
-    title: 'Website Title',
-    description: 'Website Description',
-    url: 'https://example.com',
-    images: [],
-    siteName: 'Website Name',
-    locale: 'en',
-    ttl: 30,
-  }
+  title: 'ERP Masterclasses',
+  description: 'Guus Krabbenborg nodigt u uit voor masterclasses over ERP en digitale transformatie.',
 }
 
 export default function RootLayout({
