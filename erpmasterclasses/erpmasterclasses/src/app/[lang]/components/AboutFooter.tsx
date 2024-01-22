@@ -25,7 +25,7 @@ const AboutFooter: React.FC<{ lang: Locale }> = async ({ lang }) => {
                 <div className='py-10 rounded-xl flex flex-col items-center justify-center text-center w-full lg:w-2/3 mx-auto'>
                     <Button size='lg' variant='outline' className='text-xl text-white'>
                         <Link href={socialMedia.linkedin!} className='flex items-center' rel='noopener noreferrer' target='_blank'>
-                            <Linkedin size={24} className='mr-2 -mt-1' />
+                            <Linkedin size={24} className='mr-4 -mt-1' />
                             {about.linkedin}
                             <ArrowUpRight size={24} className='ml-2' />
                         </Link>
