@@ -30,7 +30,7 @@ export default async function Page({
                         {agenda.upcomingTransformationMasterclasses}
                     </h1>
                     <hr />
-                    <TransformationEventOverview params={{ lang, agenda }} />
+                    <TransformationEventOverview lang={lang} agenda={agenda} />
                 </div>
             </div>
 
