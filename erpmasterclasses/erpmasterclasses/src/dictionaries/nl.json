@@ -86,9 +86,10 @@
   "agenda": {
     "title": "Agenda",
     "transformation": "Agenda voor de Masterclass Bedrijfstransformatie",
-    "upcomingTransformationMasterclasses": "Aankomende Masterclasses Bedrijfstransformatie",
+    "upcomingMasterclasses": "Komende Masterclasses",
+    "upcomingTransformationMasterclasses": "Masterclasses Bedrijfstransformatie",
     "success": "Agenda voor de ERP/CRM Succes Masterclass",
-    "upcomingSuccessMasterclasses": "Aankomende Masterclasses ERP/CRM Succes",
+    "upcomingSuccessMasterclasses": "Masterclasses ERP/CRM Succes",
     "noFound": "Nog geen evenementen gepland. Check later nog eens."
   },
   "contact": {

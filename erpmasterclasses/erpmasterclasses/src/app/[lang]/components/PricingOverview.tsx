@@ -30,7 +30,7 @@ function PricingOverview({ lang, navigation, pricing }: { lang: Locale, navigati
                             {pricing.type1.price}<span className='text-sm font-light pl-2'>{pricing.type1.perPerson}</span>
                         </h1>
                         <Button variant='tertiary' className="rounded-lg mt-4" size='lg'>
-                            <Link href={`/${lang}${navigation.investment.href}`}>
+                            <Link href={`/${lang}${navigation.investment.href}#agenda`}>
                                 {pricing.type1.buttonText}
                             </Link>
                         </Button>

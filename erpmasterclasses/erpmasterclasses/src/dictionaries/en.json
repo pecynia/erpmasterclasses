@@ -86,9 +86,10 @@
   "agenda": {
     "title": "Agenda",
     "transformation": "Agenda for the Masterclass Business Transformation",
-    "upcomingTransformationMasterclasses": "Upcoming Masterclasses Business Transformation",
+    "upcomingMasterclasses": "Upcoming Masterclasses",
+    "upcomingTransformationMasterclasses": "Masterclasses Business Transformation",
     "success": "Agenda for the ERP/CRM Success Masterclass",
-    "upcomingSuccessMasterclasses": "Upcoming Masterclasses ERP/CRM Success",
+    "upcomingSuccessMasterclasses": "Masterclasses ERP/CRM Success",
     "noFound": "No events planned yet. Please check back later."
   },
   "contact": {
