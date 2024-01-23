@@ -21,7 +21,6 @@ type Navigation = {
 
 const DesktopNav = ({ routes, lang }: Navigation) => {
     const pathname = usePathname()
-    // remove # and everything after it
     const path = pathname.split('#')[0]
 
     return (

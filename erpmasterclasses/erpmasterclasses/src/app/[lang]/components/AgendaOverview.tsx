@@ -17,7 +17,10 @@ const AgendaSection = ({ lang, title, link, children }: { lang: Locale, title: s
 
 const AgendaOverview = ({ lang, agenda, navigation }: { lang: Locale, agenda: any, navigation: any }) => {
     return (
-        <div className='relative rounded-xl bg-white shadow-right-secondary'>
+        <div 
+            id='agenda'
+            className='relative rounded-xl bg-white shadow-right-secondary'
+        >
             {/* Success Agenda Section */}
             <AgendaSection lang={lang} title={agenda.upcomingSuccessMasterclasses} link={navigation.success.href}>
                 <SuccessEventOverview lang={lang} agenda={agenda} />
