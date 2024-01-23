@@ -19,6 +19,7 @@ export async function generateStaticParams() {
 export const metadata: Metadata = {
   title: 'ERP Masterclasses',
   description: 'Guus Krabbenborg nodigt u uit voor masterclasses over ERP en digitale transformatie.',
+  metadataBase: new URL('https://erpmasterclasses.com'),
 }
 
 export default function RootLayout({

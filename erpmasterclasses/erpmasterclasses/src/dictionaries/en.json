@@ -10,7 +10,7 @@
     },
     "success": {
       "label": "Selection Masterclass",
-      "href": "/success"
+      "href": "/selection"
     },
     "transformation": {
       "label": "Transformation Masterclass",
@@ -67,14 +67,14 @@
       "buttonText": "Book Now"
     },
     "type2": {
-      "title": "Type 2",
-      "description": "Organize your feature ideas and easily share interactive roadmaps.",
+      "title": "Inhouse Masterclass",
+      "description": "Customised to Your Organisation's Needs",
       "price": "Custom",
       "buttonText": "Contact Me"
     }
   },
   "about": {
-    "linkedin": "Check Guus’ LinkedIn profile here"
+    "linkedin": "Check Guus' LinkedIn profile here"
   },
   "review": {
     "title": "I have delivered these Masterclasses all over Europe since 2005. Over these years I have trained and inspired many hundreds of organizations. Both big and small. Local and international. And just about all conceivable branches and industries.",
@@ -89,11 +89,11 @@
   },
   "agenda": {
     "title": "Agenda",
-    "transformation": "Agenda for the Masterclass Business Transformation",
+    "transformation": "Agenda for the ERP Transformation Masterclass",
     "upcomingMasterclasses": "Upcoming Masterclasses",
-    "upcomingTransformationMasterclasses": "Masterclasses Business Transformation",
-    "success": "Agenda for the ERP/CRM Success Masterclass",
-    "upcomingSuccessMasterclasses": "Masterclasses ERP/CRM Success",
+    "upcomingTransformationMasterclasses": "ERP Transformation Masterclass",
+    "success": "Agenda for the ERP Selection Masterclass",
+    "upcomingSuccessMasterclasses": "ERP Selection Masterclass",
     "noFound": "No events planned yet. Please check back later."
   },
   "contact": {

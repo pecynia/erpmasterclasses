@@ -10,7 +10,7 @@
     },
     "success": {
       "label": "Selectie Masterclass",
-      "href": "/success"
+      "href": "/selection"
     },
     "transformation": {
       "label": "Transformatie Masterclass",
@@ -67,14 +67,14 @@
       "buttonText": "Nu boeken"
     },
     "type2": {
-      "title": "Type 2",
+      "title": "Inhouse Masterclass",
       "description": "Uw investering in expertise en ervaring",
       "price": "Op maat",
       "buttonText": "Neem Contact Op"
     }
   },
   "about": {
-    "linkedin": "Check Guus’ LinkedIn profiel hier"
+    "linkedin": "Check Guus' LinkedIn profiel hier"
   },
   "review": {
     "title": "Sinds 2005 heb ik deze Masterclasses door heel Europa gegeven. In al die jaren heb ik vele honderden organisaties getraind en geïnspireerd. Zowel groot als klein. Lokaal en internationaal. En vrijwel alle denkbare branches en industrieën.",
@@ -89,11 +89,11 @@
   },  
   "agenda": {
     "title": "Agenda",
-    "transformation": "Agenda voor de Masterclass Bedrijfstransformatie",
+    "transformation": "Agenda voor de ERP Transformation Masterclass",
     "upcomingMasterclasses": "Komende Masterclasses",
-    "upcomingTransformationMasterclasses": "Masterclasses Bedrijfstransformatie",
-    "success": "Agenda voor de ERP/CRM Succes Masterclass",
-    "upcomingSuccessMasterclasses": "Masterclasses ERP/CRM Succes",
+    "upcomingTransformationMasterclasses": "ERP Transformation Masterclass",
+    "success": "Agenda voor de ERP Selecton Masterclass",
+    "upcomingSuccessMasterclasses": "ERP Selection Masterclass",
     "noFound": "Nog geen evenementen gepland. Check later nog eens."
   },
   "contact": {

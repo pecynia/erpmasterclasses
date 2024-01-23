@@ -48,7 +48,7 @@ export default async function Page({ params }: Props) {
             <span className="text-sm pl-2">{event.language.toUpperCase()}</span>
           </Badge>
         </div>
-        <p className="text-lg mb-2 flex">{<Calendar width={16} height={16} className='mr-1 mt-1' />} {new Date(event.date).toLocaleDateString()}</p>
+        <p className="text-lg mb-2 flex">{<Calendar width={16} height={16} className='mr-1 mt-1' />} {event.date.toLocaleDateString(params.lang, {  year: 'numeric', month: 'long', day: 'numeric' })}</p>
         {event.location && <p className="mb-4 flex">{<MapPin width={16} height={16} className='mr-1 mt-1' />} {event.location}</p>}
         <p className="text-sm mb-8">{eventDict.requiredRegistrations}: {event.requiredRegistrations}</p>
         <div className="border-t border-gray-200 py-4">

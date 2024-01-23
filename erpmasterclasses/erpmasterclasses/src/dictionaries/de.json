@@ -10,7 +10,7 @@
     },
     "success": {
       "label": "Selection Masterclass",
-      "href": "/success"
+      "href": "/selection"
     },
     "transformation": {
       "label": "Transformation Masterclass",
@@ -67,7 +67,7 @@
       "buttonText": "Jetzt buchen"
     },
     "type2": {
-      "title": "Typ 2",
+      "title": "Inhouse Masterclass",
       "description": "Ihre Investition in Fachwissen und Erfahrung",
       "price": "Individuell",
       "buttonText": "Kontaktiere mich"
@@ -89,11 +89,11 @@
   },
   "agenda": {
     "title": "Agenda",
-    "transformation": "Agenda für die Masterclass Business Transformation",
+    "transformation": "Agenda für die ERP Transformation Masterclass",
     "upcomingMasterclasses": "Anstehende Masterclasses",
-    "upcomingTransformationMasterclasses": "Business Transformation Masterclasses",
-    "success": "Agenda für die ERP/CRM Success Masterclass",
-    "upcomingSuccessMasterclasses": "ERP/CRM Success Masterclasses",
+    "upcomingTransformationMasterclasses": "ERP Transformation Masterclass",
+    "success": "Agenda für die ERP Selection Masterclass",
+    "upcomingSuccessMasterclasses": "ERP Selection Masterclass",
     "noFound": "Noch keine Veranstaltungen geplant. Bitte schauen Sie später noch einmal vorbei."
   },
   "contact": {
