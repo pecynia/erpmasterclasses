@@ -113,7 +113,7 @@ export async function getEvents(language: Locale): Promise<EventProps[]> {
     // Constructing the response to match the original format
     const events = result.map((event: EventProps) => {
         return {
-            _id: event._id,
+            _id: event._id.toString(),
             title: event.title,
             eventSlug: event.eventSlug,
             description: event.description,
@@ -138,7 +138,7 @@ export async function getEventsWithRegistrations(): Promise<EventData[]> {
     // Constructing the response to match the original format
     const events = result.map((event: EventData) => {
         return {
-            _id: event._id,
+            _id: event._id.toString(),
             title: event.title,
             eventSlug: event.eventSlug,
             description: event.description,
