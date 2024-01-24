@@ -94,7 +94,9 @@
     "upcomingTransformationMasterclasses": "ERP Transformation Masterclass",
     "success": "Agenda für die ERP Selection Masterclass",
     "upcomingSuccessMasterclasses": "ERP Selection Masterclass",
-    "noFound": "Noch keine Veranstaltungen geplant. Bitte schauen Sie später noch einmal vorbei."
+    "noFound": "Noch keine Veranstaltungen geplant. Bitte schauen Sie später noch einmal vorbei.",
+    "registerButton": "Registrieren"
+
   },
   "contact": {
     "title": "Kontakt",

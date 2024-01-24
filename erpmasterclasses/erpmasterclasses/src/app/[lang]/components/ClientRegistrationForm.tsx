@@ -4,14 +4,13 @@ import React, { useEffect, useState } from 'react'
 import { useForm, SubmitHandler, useFieldArray } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { RegistrationFormSchema, AdditionalRegistrationFormSchema } from '@/lib/schema'
+import { RegistrationFormSchema } from '@/lib/schema'
 import { Trash2 } from 'lucide-react'
 import { Badge } from '@/app/[lang]/components/ui/badge'
 import { sendRegistrationEmail } from '@/app/_actions'
 import { toast } from 'sonner'
 import { motion } from 'framer-motion'
 import { EventProps } from '@../../../typings'
-import { getAllEvents } from '@/app/_actions'
 import {
     Select,
     SelectContent,
@@ -97,19 +96,19 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
         remove(index)
     }
 
+    // Event selection
     const [event, setEvent] = useState<EventProps | undefined>(selectedEvent)
-
-    // Register the selected event
     React.useEffect(() => {
         register('selectedEvent')
     }, [register])
-
-    const stringToEvent = (eventId: string) => events.find(event => event._id === eventId)
-
     const switchEvent = (eventId: string) => {
-        setEvent(stringToEvent(eventId))
-        setValue('selectedEvent', stringToEvent(eventId)!)
+        const newEvent = events.find(event => event._id === eventId)
+        setEvent(newEvent)
+        setValue('selectedEvent', newEvent!)
     }
+
+    console.log(event)
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -127,7 +126,7 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
                     {/* Event Type */}
                     <div className='flex flex-col gap-2 w-full '>
                         <div className='pt-2'>
-                            <p className='text-sm '>Masterclass</p>
+                            <p className='text-sm'>Masterclass</p>
                         </div>
                         <Select value={event?._id} onValueChange={switchEvent}>
                             <SelectTrigger>
@@ -142,15 +141,14 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
                                         </div>
                                     )}
                                 </SelectValue>
-
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectGroup>
                                     <SelectLabel>Masterclasses</SelectLabel>
-                                    {events.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()).map((event, index) => (
-                                        <SelectItem key={index} value={event._id} disabled={event === selectedEvent}>
+                                    {events.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()).map((masterclass, index) => (
+                                        <SelectItem key={index} value={masterclass._id} disabled={masterclass === event}>
                                             <div className="flex items-center">
-                                                <span className='font-normal'>{event.title}</span>: {event.date.toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' })}
+                                                <span className='font-normal'>{masterclass.title}</span>: {masterclass.date.toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' })}
                                             </div>
                                         </SelectItem>
                                     ))}
@@ -159,6 +157,7 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
                             {errors.selectedEvent && <p className='text-sm text-red-400'>{errorMessages.eventRequired}</p>}
                         </Select>
                     </div>
+                    <hr />
 
 
                     {/* Company Name Input */}

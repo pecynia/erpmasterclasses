@@ -175,7 +175,7 @@ const AddEvent: React.FC<{ allEvents: EventData[], setEventData: React.Dispatch<
               <SelectContent>
                 <SelectGroup>
                   {eventTypes.types.map((type, index) => (
-                    <SelectItem key={index} value={type}>
+                    <SelectItem key={index} value={type} disabled={type === selectedEventType}>
                       <div className="flex items-center">
                         {type.charAt(0).toUpperCase() + type.slice(1)}
                       </div>
@@ -259,7 +259,7 @@ const AddEvent: React.FC<{ allEvents: EventData[], setEventData: React.Dispatch<
               <SelectContent>
                 <SelectGroup>
                   {i18n.locales.map((loc) => (
-                    <SelectItem key={loc} value={loc}>
+                    <SelectItem key={loc} value={loc} disabled={loc === selectedLocale}>
                       <div className="flex items-center">
                         <Image
                           src={LocaleIcons[loc]}
