@@ -10,15 +10,28 @@ import { Badge } from '@/app/[lang]/components/ui/badge'
 import { sendRegistrationEmail } from '@/app/_actions'
 import { toast } from 'sonner'
 import { motion } from 'framer-motion'
-import { EventData } from '@../../../typings'
+import { EventProps } from '@../../../typings'
 import { getAllEvents } from '@/app/_actions'
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from "@/app/[lang]/components/ui/select"
+import { Locale } from '@../../../i18n.config'
 
 export type RegistrationFormInputs = z.infer<typeof RegistrationFormSchema>
 
 export type ClientRegistrationFormProps = {
-    selectedEvent?: EventData
+    lang: Locale
+    selectedEvent?: EventProps
+    events: EventProps[]
     localization: {
         registrationFormTitle: string
+        selectMasterclass: string
         companyNamePlaceholder: string
         addressPlaceholder: string
         countryPlaceholder: string
@@ -47,12 +60,16 @@ export type ClientRegistrationFormProps = {
         invalidEmail: string
         messageRequired: string
         messageMinLength: string
+        eventRequired: string
     }
 }
 
-const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ selectedEvent, localization, errorMessages }) => {
-    const { register, control, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<RegistrationFormInputs>({
+const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, selectedEvent, events, localization, errorMessages }) => {
+    const { register, control, handleSubmit, setValue, reset, formState: { errors, isSubmitting } } = useForm<RegistrationFormInputs>({
         resolver: zodResolver(RegistrationFormSchema),
+        defaultValues: {
+            selectedEvent: selectedEvent
+        }
     })
 
     const processForm: SubmitHandler<RegistrationFormInputs> = async data => {
@@ -80,17 +97,19 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ selecte
         remove(index)
     }
 
-    const [events, setEvents] = useState<EventData[]>([])
-    const [event, setEvent] = useState<EventData | undefined>(selectedEvent)
-    useEffect(() => {
-        const fetchData = async () => {
-            const result = await getAllEvents()
-            setEvents(result)
-        }
+    const [event, setEvent] = useState<EventProps | undefined>(selectedEvent)
 
-        fetchData()
-    }, [])
+    // Register the selected event
+    React.useEffect(() => {
+        register('selectedEvent')
+    }, [register])
 
+    const stringToEvent = (eventId: string) => events.find(event => event._id === eventId)
+
+    const switchEvent = (eventId: string) => {
+        setEvent(stringToEvent(eventId))
+        setValue('selectedEvent', stringToEvent(eventId)!)
+    }
     return (
         <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -104,6 +123,44 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ selecte
                     {localization.registrationFormTitle}
                 </h1>
                 <form onSubmit={handleSubmit(processForm)} className='mx-auto flex flex-1 flex-col gap-4'>
+
+                    {/* Event Type */}
+                    <div className='flex flex-col gap-2 w-full '>
+                        <div className='pt-2'>
+                            <p className='text-sm '>Masterclass</p>
+                        </div>
+                        <Select value={event?._id} onValueChange={switchEvent}>
+                            <SelectTrigger>
+                                <SelectValue>
+                                    {event ? (
+                                        <div className="flex items-center">
+                                            <span className='font-normal'>{event.title}</span>: {event.date.toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' })}
+                                        </div>
+                                    ) : (
+                                        <div className="flex items-center">
+                                            <span className='font-normal'>{localization.selectMasterclass}</span>
+                                        </div>
+                                    )}
+                                </SelectValue>
+
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectGroup>
+                                    <SelectLabel>Masterclasses</SelectLabel>
+                                    {events.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()).map((event, index) => (
+                                        <SelectItem key={index} value={event._id} disabled={event === selectedEvent}>
+                                            <div className="flex items-center">
+                                                <span className='font-normal'>{event.title}</span>: {event.date.toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' })}
+                                            </div>
+                                        </SelectItem>
+                                    ))}
+                                </SelectGroup>
+                            </SelectContent>
+                            {errors.selectedEvent && <p className='text-sm text-red-400'>{errorMessages.eventRequired}</p>}
+                        </Select>
+                    </div>
+
+
                     {/* Company Name Input */}
                     <input
                         {...register('companyName')}

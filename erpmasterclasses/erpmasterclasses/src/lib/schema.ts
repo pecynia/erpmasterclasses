@@ -1,6 +1,7 @@
 import { z } from 'zod'
 import { Locale, i18n } from '@../../../i18n.config'
 import { eventTypes, EventType } from '@../../../event.config'
+import { EventProps } from '@../../../typings'
 
 
 // 1: Required
@@ -20,6 +21,18 @@ export const AdditionalRegistrationFormSchema = z.object({
 })
 
 export const RegistrationFormSchema = z.object({
+  selectedEvent: z.object({
+    _id: z.string(),
+    title: z.string(),
+    eventSlug: z.string(),
+    description: z.string(),
+    type: z.string(),
+    date: z.date(),
+    location: z.string().optional(),
+    requiredRegistrations: z.number(),
+    language: z.string(),
+    shownLanguages: z.array(z.string())
+  }),
   companyName: z.string().min(1, { message: 'Company name is required.' }),
   address: z.string().min(1, { message: 'Adress is required.' }),
   country: z.string().min(1, { message: 'Country is required.' }),

@@ -99,6 +99,7 @@
   "contact": {
     "title": "Contact",
     "registrationFormTitle": "Register for the Masterclass",
+    "selectMasterclass": "Select Masterclass",
     "namePlaceholder": "Name*",
     "emailPlaceholder": "Email*",
     "phonePlaceholder": "Phone number*",
@@ -128,6 +129,7 @@
     "addressRequired": "Address is required.",
     "countryRequired": "Country is required.",
     "positionRequired": "Position is required.",
-    "vatNumberRequired": "VAT number is required."
+    "vatNumberRequired": "VAT number is required.",
+    "eventRequired": "Choose an event"
   }
 }

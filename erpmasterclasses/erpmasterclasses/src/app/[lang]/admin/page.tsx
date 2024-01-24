@@ -9,7 +9,7 @@ import AddEvent from '@/app/[lang]/components/admin/AddEvent'
 import { getAllEvents } from '@/app/_actions'
 import { EventData } from '@../../../typings'
 import EventOverview from '@/app/[lang]/components/admin/EventOverview'
-import { Separator } from '../components/ui/separator'
+import { Separator } from '@/app/[lang]/components/ui/separator'
 
 const Page = () => {
     const { status, data: session } = useSession()

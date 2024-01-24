@@ -99,6 +99,7 @@
   "contact": {
     "title": "Contact",
     "registrationFormTitle": "Registeer voor de Masterclass",
+    "selectMasterclass": "Selecteer een Masterclass",
     "namePlaceholder": "Naam*",
     "emailPlaceholder": "E-mail*",
     "phonePlaceholder": "Telefoonnummer*",
@@ -128,6 +129,7 @@
     "addressRequired": "Adres is verplicht.",
     "countryRequired": "Land is verplicht.",
     "positionRequired": "Positie is verplicht.",
-    "vatNumberRequired": "BTW-nummer is verplicht."
+    "vatNumberRequired": "BTW-nummer is verplicht.",
+    "eventRequired": "Kies een evenement."
   }
 }
