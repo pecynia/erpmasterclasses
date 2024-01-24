@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm, SubmitHandler, useFieldArray } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -10,11 +10,13 @@ import { Badge } from '@/app/[lang]/components/ui/badge'
 import { sendRegistrationEmail } from '@/app/_actions'
 import { toast } from 'sonner'
 import { motion } from 'framer-motion'
+import { EventData } from '@../../../typings'
+import { getAllEvents } from '@/app/_actions'
 
 export type RegistrationFormInputs = z.infer<typeof RegistrationFormSchema>
-export type AdditionalParticipantInputs = z.infer<typeof AdditionalRegistrationFormSchema>
 
 export type ClientRegistrationFormProps = {
+    selectedEvent?: EventData
     localization: {
         registrationFormTitle: string
         companyNamePlaceholder: string
@@ -27,6 +29,7 @@ export type ClientRegistrationFormProps = {
         vatPlaceholder: string
         poPlaceholder: string
         submitButtonText: string
+        submitButtonTextSending: string
         emailSentToast: string
         errorToast: string
         additionalParticipantButton: string
@@ -47,7 +50,7 @@ export type ClientRegistrationFormProps = {
     }
 }
 
-const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ localization, errorMessages }) => {
+const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ selectedEvent, localization, errorMessages }) => {
     const { register, control, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<RegistrationFormInputs>({
         resolver: zodResolver(RegistrationFormSchema),
     })
@@ -77,6 +80,17 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ localiz
         remove(index)
     }
 
+    const [events, setEvents] = useState<EventData[]>([])
+    const [event, setEvent] = useState<EventData | undefined>(selectedEvent)
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await getAllEvents()
+            setEvents(result)
+        }
+
+        fetchData()
+    }, [])
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -86,7 +100,7 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ localiz
             className='min-w-[70%] lg:min-w-[40%] min-h-[20%] max-w-[80%] mb-20 pb-10 flex px-10 pt-4 rounded-xl  bg-white shadow-xl'
         >
             <div className='w-full pt-2'>
-                <h1 className='text-xl font-semibold text-center pb-4 pt-2'>
+                <h1 className='text-xl font-semibold pb-4 pt-2'>
                     {localization.registrationFormTitle}
                 </h1>
                 <form onSubmit={handleSubmit(processForm)} className='mx-auto flex flex-1 flex-col gap-4'>
@@ -128,7 +142,7 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ localiz
                     <input
                         {...register('country')}
                         placeholder={localization.countryPlaceholder}
-                        className='w-full rounded-lg p-2 border-2 border-gray-100'
+                        className='w-1/2 rounded-lg p-2 border-2 border-gray-100'
                     />
                     {errors.country && <p className='text-sm text-red-400'>{errorMessages.countryRequired}</p>}
 
@@ -136,7 +150,7 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ localiz
                     <input
                         {...register('phone')}
                         placeholder={localization.phonePlaceholder}
-                        className='w-full rounded-lg p-2 border-2 border-gray-100'
+                        className='w-2/3 rounded-lg p-2 border-2 border-gray-100'
                     />
                     {errors.phone && <p className='text-sm text-red-400'>{errorMessages.phoneRequired}</p>}
 
@@ -144,7 +158,7 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ localiz
                     <input
                         {...register('position')}
                         placeholder={localization.positionPlaceholder}
-                        className='w-full rounded-lg p-2 border-2 border-gray-100'
+                        className='w-2/3 rounded-lg p-2 border-2 border-gray-100'
                     />
                     {errors.position && <p className='text-sm text-red-400'>{errorMessages.positionRequired}</p>}
 
@@ -152,7 +166,7 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ localiz
                     <input
                         {...register('vatNumber')}
                         placeholder={localization.vatPlaceholder}
-                        className='w-full rounded-lg p-2 border-2 border-gray-100'
+                        className='w-2/3 rounded-lg p-2 border-2 border-gray-100'
                     />
                     {errors.vatNumber && <p className='text-sm text-red-400'>{errorMessages.vatNumberRequired}</p>}
 
@@ -216,13 +230,12 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ localiz
                         {localization.additionalParticipantButton}
                     </button>
 
-
                     {/* Submit Button */}
                     <button
                         disabled={isSubmitting}
                         className='rounded-lg bg-primary py-2.5 font-medium text-white transition-colors hover:bg-primary/80 disabled:cursor-not-allowed disabled:opacity-50'
                     >
-                        {isSubmitting ? 'Sending...' : localization.submitButtonText}
+                        {isSubmitting ? localization.submitButtonTextSending : localization.submitButtonText}
                     </button>
                 </form>
             </div>

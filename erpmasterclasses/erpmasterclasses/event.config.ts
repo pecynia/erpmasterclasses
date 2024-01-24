@@ -1,6 +1,6 @@
 export const eventTypes = {
-    defaultType: 'success',
-    types: ['success', 'transformation']
+    defaultType: 'selection',
+    types: ['selection', 'transformation']
 } as const
 
 export type EventType = (typeof eventTypes)['types'][number]

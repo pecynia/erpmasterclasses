@@ -6,7 +6,7 @@ import { getEvents } from '@/lib/utils/db'
 
 const SuccessEventOverview: React.FC<{ lang: Locale, agenda: any }> = async ({ lang, agenda }) => {
     const events = await getEvents(lang)
-    const successEvents = events.filter(event => event.type === 'success')
+    const successEvents = events.filter(event => event.type === 'selection')
 
     return (
         <EventOverview agenda={agenda} allEvents={successEvents} lang={lang} />

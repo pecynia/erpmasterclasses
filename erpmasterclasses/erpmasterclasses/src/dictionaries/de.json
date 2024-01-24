@@ -111,6 +111,7 @@
     "poPlaceholder": "Projektnummer (optional)",
     "messagePlaceholder": "Nachricht*",
     "submitButtonText": "Senden",
+    "submitButtonTextSending": "Senden...",
     "emailSentToast": "E-Mail gesendet!",
     "errorToast": "Hoppla! Etwas ist schief gelaufen.",
     "additionalParticipantButton": "Weitere Teilnehmer hinzufügen",

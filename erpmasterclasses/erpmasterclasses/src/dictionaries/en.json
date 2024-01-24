@@ -111,6 +111,7 @@
     "poPlaceholder": "PO number (optional)",
     "messagePlaceholder": "Message*",
     "submitButtonText": "Submit",
+    "submitButtonTextSending": "Sending...",
     "emailSentToast": "Email sent!",
     "errorToast": "Oops! Something went wrong.",
     "additionalParticipantButton": "Add additional participant",

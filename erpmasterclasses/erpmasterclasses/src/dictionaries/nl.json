@@ -111,6 +111,7 @@
     "poPlaceholder": "Projectnummer (optioneel)",
     "messagePlaceholder": "Bericht*",
     "submitButtonText": "Verzenden",
+    "submitButtonTextSending": "Verzenden...",
     "emailSentToast": "E-mail verzonden!",
     "errorToast": "Oeps! Er ging iets mis.",
     "additionalParticipantButton": "Voeg een extra deelnemer toe",
