@@ -97,6 +97,8 @@
     "noFound": "Nog geen evenementen gepland. Check later nog eens."
   },
   "contact": {
+    "title": "Contact",
+    "registrationFormTitle": "Registeer voor de Masterclass",
     "namePlaceholder": "Naam*",
     "emailPlaceholder": "E-mail*",
     "phonePlaceholder": "Telefoonnummer*",
@@ -104,14 +106,15 @@
     "companyNamePlaceholder": "Bedrijfsnaam*",
     "addressPlaceholder": "Adres*",
     "countryPlaceholder": "Land*",
-    "positionPlaceholder": "Positie*",
+    "positionPlaceholder": "Functie*",
     "vatPlaceholder": "BTW-nummer*",
     "poPlaceholder": "Projectnummer (optioneel)",
     "messagePlaceholder": "Bericht*",
     "submitButtonText": "Verzenden",
     "emailSentToast": "E-mail verzonden!",
     "errorToast": "Oeps! Er ging iets mis.",
-    "additionalParticipantButton": "Voeg een extra deelnemer toe"
+    "additionalParticipantButton": "Voeg een extra deelnemer toe",
+    "additionalParticipants": "Extra deelnemer"
   },
   "errorMessages": {
     "companyNameRequired": "Bedrijfsnaam is verplicht.",

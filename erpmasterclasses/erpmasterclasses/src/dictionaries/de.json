@@ -97,6 +97,8 @@
     "noFound": "Noch keine Veranstaltungen geplant. Bitte schauen Sie später noch einmal vorbei."
   },
   "contact": {
+    "title": "Kontakt",
+    "registrationFormTitle": "Registrierungsformular",
     "namePlaceholder": "Name*",
     "emailPlaceholder": "E-Mail*",
     "phonePlaceholder": "Telefonnummer*",
@@ -111,8 +113,8 @@
     "submitButtonText": "Senden",
     "emailSentToast": "E-Mail gesendet!",
     "errorToast": "Hoppla! Etwas ist schief gelaufen.",
-    "additionalParticipantButton": "Weitere Teilnehmer hinzufügen"
-
+    "additionalParticipantButton": "Weitere Teilnehmer hinzufügen",
+    "additionalParticipants": "Weitere Teilnehmer"
   },
   "errorMessages": {
     "companyNameRequired": "Firmenname ist erforderlich.",

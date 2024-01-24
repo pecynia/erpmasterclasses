@@ -97,6 +97,8 @@
     "noFound": "No events planned yet. Please check back later."
   },
   "contact": {
+    "title": "Contact",
+    "registrationFormTitle": "Register for the Masterclass",
     "namePlaceholder": "Name*",
     "emailPlaceholder": "Email*",
     "phonePlaceholder": "Phone number*",
@@ -111,7 +113,8 @@
     "submitButtonText": "Submit",
     "emailSentToast": "Email sent!",
     "errorToast": "Oops! Something went wrong.",
-    "additionalParticipantButton": "Add additional participant"
+    "additionalParticipantButton": "Add additional participant",
+    "additionalParticipants": "Additional participant"
   },
   "errorMessages": {
     "companyNameRequired": "Company name is required.",

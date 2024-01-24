@@ -5,16 +5,18 @@ import { useForm, SubmitHandler, useFieldArray } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { RegistrationFormSchema, AdditionalRegistrationFormSchema } from '@/lib/schema'
+import { Trash2 } from 'lucide-react'
+import { Badge } from '@/app/[lang]/components/ui/badge'
 import { sendRegistrationEmail } from '@/app/_actions'
 import { toast } from 'sonner'
 import { motion } from 'framer-motion'
-import { Button } from '@/app/[lang]/components/ui/button'
 
 export type RegistrationFormInputs = z.infer<typeof RegistrationFormSchema>
 export type AdditionalParticipantInputs = z.infer<typeof AdditionalRegistrationFormSchema>
 
 export type ClientRegistrationFormProps = {
     localization: {
+        registrationFormTitle: string
         companyNamePlaceholder: string
         addressPlaceholder: string
         countryPlaceholder: string
@@ -28,6 +30,7 @@ export type ClientRegistrationFormProps = {
         emailSentToast: string
         errorToast: string
         additionalParticipantButton: string
+        additionalParticipants: string
     }
     errorMessages: {
         companyNameRequired: string
@@ -45,14 +48,8 @@ export type ClientRegistrationFormProps = {
 }
 
 const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ localization, errorMessages }) => {
-    const {
-        register,
-        handleSubmit,
-        control,
-        reset,
-        formState: { errors, isSubmitting }
-    } = useForm<RegistrationFormInputs>({
-        resolver: zodResolver(RegistrationFormSchema)
+    const { register, control, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<RegistrationFormInputs>({
+        resolver: zodResolver(RegistrationFormSchema),
     })
 
     const processForm: SubmitHandler<RegistrationFormInputs> = async data => {
@@ -67,12 +64,17 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ localiz
         }
     }
 
-    const { fields, append } = useFieldArray({
+    const { fields, append, remove } = useFieldArray({
         control,
         name: "additionalParticipants"
     })
+    // Add participants
     const handleAddParticipant = () => {
         append({ nameParticipant: '', email: '' })
+    }
+    // Remove participants
+    const handleRemoveParticipant = (index: number) => {
+        remove(index)
     }
 
     return (
@@ -84,6 +86,9 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ localiz
             className='min-w-[70%] lg:min-w-[40%] min-h-[20%] max-w-[80%] mb-20 pb-10 flex px-10 pt-4 rounded-xl  bg-white shadow-xl'
         >
             <div className='w-full pt-2'>
+                <h1 className='text-xl font-semibold text-center pb-4 pt-2'>
+                    {localization.registrationFormTitle}
+                </h1>
                 <form onSubmit={handleSubmit(processForm)} className='mx-auto flex flex-1 flex-col gap-4'>
                     {/* Company Name Input */}
                     <input
@@ -159,22 +164,50 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ localiz
                     />
 
                     {/* Additional Participants */}
+                    {fields.length > 0 && (
+                        <hr />
+                    )}
                     {fields.map((field, index) => (
                         <div key={field.id}>
-                            <input
-                                {...register(`additionalParticipants.${index}.nameParticipant` as const)}
-                                placeholder={localization.namePlaceholder}
-                                className='w-1/2 rounded-lg p-2 border-2 border-gray-100'
-                            />
-                            {errors.additionalParticipants && <p className='text-sm text-red-400'>{errorMessages.nameRequired}</p>}
-                            <input
-                                {...register(`additionalParticipants.${index}.email` as const)}
-                                placeholder={localization.emailPlaceholder}
-                                className='w-1/2 rounded-lg p-2 border-2 border-gray-100'
-                            />
-                            {errors.additionalParticipants && <p className='text-sm text-red-400'>
-                            {errors.email!.message === '1' ? errorMessages.emailRequired : errorMessages.invalidEmail}
-                            </p>}
+                            <div className='flex flex-row justify-between items-center gap-4 mb-2'>
+                                <h1 className='font-semibold'>
+                                    {localization.additionalParticipants} {index + 1}
+                                </h1>
+                                <button
+                                    type="button"
+                                    onClick={() => handleRemoveParticipant(index)}
+                                >
+                                    <Badge variant='destructive' className="hover:cursor-pointer">
+                                        <Trash2 size={16} />
+                                    </Badge>
+                                </button>
+                            </div>
+                            <div className='flex flex-row gap-4'>
+                                <div className='w-full'>
+                                    <input
+                                        {...register(`additionalParticipants.${index}.nameParticipant` as const)}
+                                        placeholder={localization.namePlaceholder}
+                                        className='w-full rounded-lg p-2 border-2 border-gray-100'
+                                    />
+                                    {errors.additionalParticipants?.[index]?.nameParticipant?.message && (
+                                        <p className='text-sm text-red-400'>
+                                            {errors.additionalParticipants[index]?.nameParticipant?.message && errorMessages.nameRequired}
+                                        </p>
+                                    )}
+                                </div>
+                                <div className='w-full'>
+                                    <input
+                                        {...register(`additionalParticipants.${index}.email` as const)}
+                                        placeholder={localization.emailPlaceholder}
+                                        className='w-full rounded-lg p-2 border-2 border-gray-100'
+                                    />
+                                    {errors.additionalParticipants?.[index]?.email?.message && (
+                                        <p className='text-sm text-red-400'>
+                                            {errors.additionalParticipants[index]?.email?.message === '1' ? errorMessages.emailRequired : errorMessages.invalidEmail}
+                                        </p>
+                                    )}
+                                </div>
+                            </div>
                         </div>
                     ))}
 
