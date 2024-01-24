@@ -26,6 +26,7 @@ export const RegistrationFormSchema = z.object({
     title: z.string(),
     eventSlug: z.string(),
     description: z.string(),
+    price: z.number(),
     type: z.string(),
     date: z.date(),
     location: z.string().optional(),
@@ -49,6 +50,7 @@ export const EventSchema = z.object({
   title: z.string().min(1, { message: 'Title is required.' }),
   eventSlug: z.string().min(1, { message: 'Slug is required.' }),
   description: z.string().min(1, { message: 'Description is required.' }),
+  price: z.number().min(0, { message: 'Price must be greater than 0.' }),
   type: z.string().min(1, { message: 'Event type is required.' }).refine((value) => {
     return eventTypes.types.includes(value as EventType)
   }, { message: 'Event type is invalid.' }),

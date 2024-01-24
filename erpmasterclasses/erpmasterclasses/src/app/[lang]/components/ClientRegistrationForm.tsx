@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useForm, SubmitHandler, useFieldArray } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -46,6 +46,8 @@ export type ClientRegistrationFormProps = {
         errorToast: string
         additionalParticipantButton: string
         additionalParticipants: string
+        registerButtonText: string
+        registerButtonTextSending: string
     }
     errorMessages: {
         companyNameRequired: string
@@ -76,11 +78,10 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
 
         if (result?.success) {
             toast.success(localization.emailSentToast)
-            reset(); // Resets the form values
+            reset()
 
-            // Clear all additional participants
             for (let i = fields.length - 1; i >= 0; i--) {
-                remove(i);
+                remove(i)
             }
         } else {
             console.error(result?.error)
@@ -118,7 +119,7 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ type: "spring", ease: "easeInOut", duration: 0.5 }}
             viewport={{ once: true }}
-            className='min-w-[70%] lg:min-w-[40%] min-h-[20%] max-w-[80%] mb-20 pb-10 flex px-10 pt-4 rounded-xl  bg-white shadow-xl'
+            className='min-w-[70%] lg:min-w-[40%] min-h-[20%] max-w-[90%] mb-20 pb-10 flex px-10 pt-4 rounded-xl  bg-white shadow-xl'
         >
             <div className='w-full pt-2'>
                 <h1 className='text-xl font-semibold pb-4 pt-2'>
@@ -289,12 +290,56 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
                         {localization.additionalParticipantButton}
                     </button>
 
+                    {/* Price overview (use event.price * number of participants )*/}
+                    <hr />
+                    <div className='flex flex-row justify-between items-center mb-2'>
+                        <h1 className='font-semibold'>
+                            Price overview
+                        </h1>
+                    </div>
+
+                    {/* Price */}
+                    {fields.length > 0 && (
+                        <div>
+                            <div className='flex flex-row gap-4'>
+                                <div className='w-full'>
+                                    <p className='text-sm'>Price per participant</p>
+                                </div>
+                                <div className='w-full'>
+                                    <p className='text-sm'>{event!.price} €</p>
+                                </div>
+                            </div>
+
+                            {/* Total participants */}
+                            <div className='flex flex-row gap-4'>
+                                <div className='w-full'>
+                                    <p className='text-sm'>Total participants</p>
+                                </div>
+                                <div className='w-full'>
+                                    <p className='text-sm'>{fields.length + 1}</p>
+                                </div>
+                            </div>
+                            <hr className='my-1 w-2/3' />
+                        </div>
+                    )}
+
+
+                    {/* Total price */}
+                    <div className='flex flex-row gap-4'>
+                        <div className='w-full'>
+                            <p className='text-sm'>Total price</p>
+                        </div>
+                        <div className='w-full'>
+                            <p className='text-sm'>{(fields.length + 1) * event!.price} €</p>
+                        </div>
+                    </div>
+
                     {/* Submit Button */}
                     <button
                         disabled={isSubmitting}
                         className='rounded-lg bg-primary py-2.5 font-medium text-white transition-colors hover:bg-primary/80 disabled:cursor-not-allowed disabled:opacity-50'
                     >
-                        {isSubmitting ? localization.submitButtonTextSending : localization.submitButtonText}
+                        {isSubmitting ? localization.registerButtonTextSending : localization.registerButtonText}
                     </button>
                 </form>
             </div>

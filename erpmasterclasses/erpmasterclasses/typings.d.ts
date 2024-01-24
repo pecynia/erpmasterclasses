@@ -40,6 +40,7 @@ export type CreateEventProps = {
     title: string
     eventSlug: string
     description: string
+    price: number
     type: EventType
     date: Date
     location?: string
@@ -54,6 +55,7 @@ export type EventProps = {
     title: string
     eventSlug: string
     description: string
+    price: number
     type: EventType
     date: Date
     location?: string
@@ -68,6 +70,7 @@ export type EventData = {
     title: string
     eventSlug: string
     description: string
+    price: number
     type: EventType
     date: Date
     location?: string

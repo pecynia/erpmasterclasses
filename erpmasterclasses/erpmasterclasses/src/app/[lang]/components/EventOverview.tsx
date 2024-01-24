@@ -8,7 +8,9 @@ import Link from 'next/link'
 import { Locale } from '@../../../i18n.config'
 import Lenis from '@studio-freight/lenis'
 import React, { useEffect, useState } from 'react'
-import { Button } from "./ui/button"
+import { Button } from "@/app/[lang]/components/ui/button"
+import { MapPin, Calendar } from 'lucide-react'
+
 
 
 const EventOverview: React.FC<{ allEvents: EventProps[], lang: Locale, agenda: any }> = ({ allEvents, lang, agenda }) => {
@@ -51,11 +53,12 @@ const EventOverview: React.FC<{ allEvents: EventProps[], lang: Locale, agenda: a
                                 <p className='text-sm pl-1'>{event.language.toUpperCase()}</p>
                             </Badge>
                         </div>
-                        <p className='text-sm'>{event.date.toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                        <p className='text-sm flex'>{<Calendar width={16} height={16} className='mr-1' />} {event.date.toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' })}</p>
                         <Badge variant='secondary' className="w-16 md:hidden">
                             <Image alt={event.language} src={LocaleIcons[event.language]} width={16} />
                             <p className='text-sm pl-1'>{event.language.toUpperCase()}</p>
                         </Badge>
+                        <p className='text-sm flex '>{<MapPin width={16} height={16} className='mr-1' />}  {event.location ? event.location : "Online"}</p>
                     </div>
                     <Link href={`/${lang}/register/${event.eventSlug}`}>
                         <Button>

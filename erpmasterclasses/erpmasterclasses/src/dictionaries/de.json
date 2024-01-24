@@ -115,6 +115,8 @@
     "messagePlaceholder": "Nachricht*",
     "submitButtonText": "Senden",
     "submitButtonTextSending": "Senden...",
+    "registerButtonText": "Registrieren",
+    "registerButtonTextSending": "Registrieren...",
     "emailSentToast": "E-Mail gesendet!",
     "errorToast": "Hoppla! Etwas ist schief gelaufen.",
     "additionalParticipantButton": "Weitere Teilnehmer hinzufügen",

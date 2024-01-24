@@ -114,6 +114,8 @@
     "messagePlaceholder": "Message*",
     "submitButtonText": "Submit",
     "submitButtonTextSending": "Sending...",
+    "registerButtonText": "Register",
+    "registerButtonTextSending": "Registering...",
     "emailSentToast": "Email sent!",
     "errorToast": "Oops! Something went wrong.",
     "additionalParticipantButton": "Add additional participant",
