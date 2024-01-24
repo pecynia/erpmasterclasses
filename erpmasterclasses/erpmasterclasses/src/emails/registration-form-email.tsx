@@ -3,6 +3,9 @@ import { RegistrationFormProps } from '@/../typings'
 
 const RegistrationFormEmail: React.FC<Readonly<RegistrationFormProps>> = ({
     _id,
+    eventTitel,
+    eventDate,
+    lang,
     companyName,
     address,
     country,
@@ -16,6 +19,8 @@ const RegistrationFormEmail: React.FC<Readonly<RegistrationFormProps>> = ({
 }) => (
     <div>
         <h1>Registration form submission</h1>
+        <p>Masterclass: <strong>{eventTitel}</strong></p>
+        <p>Date: <strong>{eventDate.toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' })}</strong></p>
         <p>Company Name: <strong>{companyName}</strong></p>
         <p>Address: <strong>{address}</strong></p>
         <p>Country: <strong>{country}</strong></p>

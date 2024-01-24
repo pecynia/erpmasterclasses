@@ -107,8 +107,6 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
         setValue('selectedEvent', newEvent!)
     }
 
-    console.log(event)
-
     return (
         <motion.div
             initial={{ opacity: 0, y: 10 }}

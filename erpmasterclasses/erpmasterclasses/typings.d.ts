@@ -18,6 +18,9 @@ export interface AdditionalRegistrationFormProps {
 
 export interface RegistrationFormProps {
     _id: ObjectId
+    eventTitel: string
+    eventDate: Date
+    lang: Locale
     companyName: string
     address: string
     country: string

@@ -47,14 +47,17 @@ export async function sendRegistrationEmail(data: RegistrationFormInputs, event:
 
   if (result.success) {
     const { companyName, address, country, nameParticipant, phone, email, position, vatNumber, poNumber, additionalParticipants } = result.data
+    const eventTitel = event.title
+    const eventDate = event.date
+    const lang = 'nl'
     const _id = event._id
     try {
       const emailData = await resend.emails.send({
         from: 'ERP Masterclass <contact@erpmasterclasses.com>',
-        to: ['gk@erpmasterclasses.com'],
+        to: ['gk@erpmasterclasses.com'], //['gk@erpmasterclasses.com'],
         subject: 'Registration form submission',
         text: `Event: ${event.title}\nCompany Name: ${companyName}\nAdress: ${address}\nCountry: ${country}\nName: ${nameParticipant}\nPhone: ${phone}\nEmail: ${email}\nPosition: ${position}\nVAT number: ${vatNumber}\nPO number: ${poNumber}\nAdditional participants: ${additionalParticipants}`,
-        react: RegistrationFormEmail({ _id, companyName, address, country, nameParticipant, phone, email, position, vatNumber, poNumber, additionalParticipants }),
+        react: RegistrationFormEmail({ _id, eventTitel, eventDate, lang, companyName, address, country, nameParticipant, phone, email, position, vatNumber, poNumber, additionalParticipants }),
       })
       return { success: true, data: emailData }
     }
