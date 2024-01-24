@@ -76,7 +76,12 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
 
         if (result?.success) {
             toast.success(localization.emailSentToast)
-            reset()
+            reset(); // Resets the form values
+
+            // Clear all additional participants
+            for (let i = fields.length - 1; i >= 0; i--) {
+                remove(i);
+            }
         } else {
             console.error(result?.error)
             toast.error(localization.errorToast)
