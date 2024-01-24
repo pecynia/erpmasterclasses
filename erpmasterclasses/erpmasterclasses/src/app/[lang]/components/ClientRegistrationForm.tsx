@@ -72,7 +72,7 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
     })
 
     const processForm: SubmitHandler<RegistrationFormInputs> = async data => {
-        const result = await sendRegistrationEmail(data)
+        const result = await sendRegistrationEmail(data, event!)
 
         if (result?.success) {
             toast.success(localization.emailSentToast)

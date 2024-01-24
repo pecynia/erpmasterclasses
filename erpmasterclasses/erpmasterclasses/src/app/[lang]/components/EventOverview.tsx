@@ -46,12 +46,16 @@ const EventOverview: React.FC<{ allEvents: EventProps[], lang: Locale, agenda: a
                     <div className='flex flex-col gap-2'>
                         <div className='flex flex-row gap-2 items-center'>
                             <p className='text-lg font-bold'>{event.title}</p>
-                            <Badge variant='secondary'>
+                            <Badge variant='secondary' className="hidden md:flex">
                                 <Image alt={event.language} src={LocaleIcons[event.language]} width={16} />
                                 <p className='text-sm pl-1'>{event.language.toUpperCase()}</p>
                             </Badge>
                         </div>
                         <p className='text-sm'>{event.date.toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                        <Badge variant='secondary' className="w-16 md:hidden">
+                            <Image alt={event.language} src={LocaleIcons[event.language]} width={16} />
+                            <p className='text-sm pl-1'>{event.language.toUpperCase()}</p>
+                        </Badge>
                     </div>
                     <Link href={`/${lang}/register/${event.eventSlug}`}>
                         <Button>

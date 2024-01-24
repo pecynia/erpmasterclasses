@@ -6,7 +6,7 @@ import { ContactFormSchema, RegistrationFormSchema } from '@/lib/schema'
 import ContactFormEmail from '@/emails/contact-form-email'
 import RegistrationFormEmail from '@/emails/registration-form-email'
 import { addEvent, getEventsWithRegistrations, deleteEvent, updateEvent, getParagraphJson } from '@/lib/utils/db'
-import { CreateEventProps, EventData } from '@/../typings'
+import { CreateEventProps, EventData, EventProps } from '@/../typings'
 import { Locale } from '../../i18n.config'
 
 
@@ -42,18 +42,18 @@ export async function sendContactEmail(data: ContactFormInputs) {
 
 // Registration Form 
 type RegistrationFormInputs = z.infer<typeof RegistrationFormSchema>
-export async function sendRegistrationEmail(data: RegistrationFormInputs) {
+export async function sendRegistrationEmail(data: RegistrationFormInputs, event: EventProps) {
   const result = RegistrationFormSchema.safeParse(data)
 
   if (result.success) {
     const { companyName, address, country, nameParticipant, phone, email, position, vatNumber, poNumber, additionalParticipants } = result.data
-    const _id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+    const _id = event._id
     try {
       const emailData = await resend.emails.send({
         from: 'ERP Masterclass <contact@erpmasterclasses.com>',
-        to: ['verheul.nicolai@gmail.com'], //['gk@dynamicsandmore.com'],
+        to: ['gk@erpmasterclasses.com'],
         subject: 'Registration form submission',
-        text: `Company Name: ${companyName}\nAdress: ${address}\nCountry: ${country}\nName: ${nameParticipant}\nPhone: ${phone}\nEmail: ${email}\nPosition: ${position}\nVAT number: ${vatNumber}\nPO number: ${poNumber}\nAdditional participants: ${additionalParticipants}`,
+        text: `Event: ${event.title}\nCompany Name: ${companyName}\nAdress: ${address}\nCountry: ${country}\nName: ${nameParticipant}\nPhone: ${phone}\nEmail: ${email}\nPosition: ${position}\nVAT number: ${vatNumber}\nPO number: ${poNumber}\nAdditional participants: ${additionalParticipants}`,
         react: RegistrationFormEmail({ _id, companyName, address, country, nameParticipant, phone, email, position, vatNumber, poNumber, additionalParticipants }),
       })
       return { success: true, data: emailData }
