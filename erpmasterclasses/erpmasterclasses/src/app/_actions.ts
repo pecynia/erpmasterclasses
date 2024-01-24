@@ -2,7 +2,7 @@
 
 import { z } from 'zod'
 import { Resend } from 'resend'
-import { ContactFormSchema, RegristrationFormSchema } from '@/lib/schema'
+import { ContactFormSchema, RegistrationFormSchema } from '@/lib/schema'
 import ContactFormEmail from '@/emails/contact-form-email'
 import RegistrationFormEmail from '@/emails/registration-form-email'
 import { addEvent, getEventsWithRegistrations, deleteEvent, updateEvent, getParagraphJson } from '@/lib/utils/db'
@@ -41,9 +41,9 @@ export async function sendContactEmail(data: ContactFormInputs) {
 
 
 // Registration Form 
-type RegistrationFormInputs = z.infer<typeof RegristrationFormSchema>
+type RegistrationFormInputs = z.infer<typeof RegistrationFormSchema>
 export async function sendRegistrationEmail(data: RegistrationFormInputs) {
-  const result = RegristrationFormSchema.safeParse(data)
+  const result = RegistrationFormSchema.safeParse(data)
 
   if (result.success) {
     const { companyName, address, country, nameParticipant, phone, email, position, vatNumber, poNumber, additionalParticipants } = result.data

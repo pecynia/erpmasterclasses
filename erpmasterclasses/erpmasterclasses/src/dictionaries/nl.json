@@ -110,7 +110,8 @@
     "messagePlaceholder": "Bericht*",
     "submitButtonText": "Verzenden",
     "emailSentToast": "E-mail verzonden!",
-    "errorToast": "Oeps! Er ging iets mis."
+    "errorToast": "Oeps! Er ging iets mis.",
+    "additionalParticipantButton": "Voeg een extra deelnemer toe"
   },
   "errorMessages": {
     "companyNameRequired": "Bedrijfsnaam is verplicht.",

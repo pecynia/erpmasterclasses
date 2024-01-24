@@ -110,7 +110,8 @@
     "messagePlaceholder": "Message*",
     "submitButtonText": "Submit",
     "emailSentToast": "Email sent!",
-    "errorToast": "Oops! Something went wrong."
+    "errorToast": "Oops! Something went wrong.",
+    "additionalParticipantButton": "Add additional participant"
   },
   "errorMessages": {
     "companyNameRequired": "Company name is required.",

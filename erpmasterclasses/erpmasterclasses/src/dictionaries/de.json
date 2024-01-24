@@ -110,7 +110,9 @@
     "messagePlaceholder": "Nachricht*",
     "submitButtonText": "Senden",
     "emailSentToast": "E-Mail gesendet!",
-    "errorToast": "Hoppla! Etwas ist schief gelaufen."
+    "errorToast": "Hoppla! Etwas ist schief gelaufen.",
+    "additionalParticipantButton": "Weitere Teilnehmer hinzufügen"
+
   },
   "errorMessages": {
     "companyNameRequired": "Firmenname ist erforderlich.",

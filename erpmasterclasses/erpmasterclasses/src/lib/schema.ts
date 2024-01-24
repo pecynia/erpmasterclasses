@@ -14,22 +14,22 @@ export const ContactFormSchema = z.object({
     .min(6, { message: '2' })
 })
 
-export const AdditionalRegristrationFormSchema = z.object({
+export const AdditionalRegistrationFormSchema = z.object({
   nameParticipant: z.string().min(1, { message: 'Name is required.' }),
   email: z.string().min(1, { message: '1' }).email('2')
 })
 
-export const RegristrationFormSchema = z.object({
+export const RegistrationFormSchema = z.object({
   companyName: z.string().min(1, { message: 'Company name is required.' }),
   address: z.string().min(1, { message: 'Adress is required.' }),
   country: z.string().min(1, { message: 'Country is required.' }),
   nameParticipant: z.string().min(1, { message: 'Name is required.' }),
   phone: z.string().min(1, { message: 'Phone number is required.' }),
-  email: z.string().min(1, { message: '1' }).email('I2'),
+  email: z.string().min(1, { message: '1' }).email('2'),
   position: z.string().min(1, { message: 'Position is required.' }),
   vatNumber: z.string().min(1, { message: 'VAT number is required.' }),
   poNumber: z.string().optional(),
-  additionalParticipants: z.array(AdditionalRegristrationFormSchema).optional()
+  additionalParticipants: z.array(AdditionalRegistrationFormSchema).optional()
 })
 
 export const EventSchema = z.object({
