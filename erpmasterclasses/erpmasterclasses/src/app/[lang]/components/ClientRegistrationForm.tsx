@@ -48,6 +48,10 @@ export type ClientRegistrationFormProps = {
         additionalParticipants: string
         registerButtonText: string
         registerButtonTextSending: string
+        priceOverview: string
+        pricePerParticipant: string
+        totalParticipants: string
+        totalPrice: string
     }
     errorMessages: {
         companyNameRequired: string
@@ -294,7 +298,7 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
                     <hr />
                     <div className='flex flex-row justify-between items-center mb-2'>
                         <h1 className='font-semibold'>
-                            Price overview
+                            {localization.priceOverview}
                         </h1>
                     </div>
 
@@ -303,7 +307,7 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
                         <div>
                             <div className='flex flex-row gap-4'>
                                 <div className='w-full'>
-                                    <p className='text-sm'>Price per participant</p>
+                                    <p className='text-sm'>{localization.pricePerParticipant}</p>
                                 </div>
                                 <div className='w-full'>
                                     <p className='text-sm'>{event!.price} €</p>
@@ -313,7 +317,7 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
                             {/* Total participants */}
                             <div className='flex flex-row gap-4'>
                                 <div className='w-full'>
-                                    <p className='text-sm'>Total participants</p>
+                                    <p className='text-sm'>{localization.totalParticipants}</p>
                                 </div>
                                 <div className='w-full'>
                                     <p className='text-sm'>{fields.length + 1}</p>
@@ -327,7 +331,7 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
                     {/* Total price */}
                     <div className='flex flex-row gap-4'>
                         <div className='w-full'>
-                            <p className='text-sm'>Total price</p>
+                            <p className='text-sm'>{localization.totalPrice}</p>
                         </div>
                         <div className='w-full'>
                             <p className='text-sm'>{(fields.length + 1) * event!.price} €</p>
