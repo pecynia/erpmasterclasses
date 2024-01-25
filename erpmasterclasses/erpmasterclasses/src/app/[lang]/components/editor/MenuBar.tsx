@@ -41,36 +41,42 @@ import {
 import { Input } from '@/app/[lang]/components/ui/input'
 
 const MenuBar = ({ editor }: { editor: Editor | null }) => {
-    if (!editor) return null
-
     const [isDialogOpen, setIsDialogOpen] = useState(false)
     const [url, setUrl] = useState('')
 
     const openDialog = useCallback(() => {
-        const previousUrl = editor?.getAttributes('link').href || ''
+        if (!editor) return
+
+        const previousUrl = editor.getAttributes('link').href || ''
         setUrl(previousUrl)
         setIsDialogOpen(true)
     }, [editor])
 
     const setLink = useCallback(() => {
+        if (!editor) return
+
         if (url === null) {
             return // Cancelled
         }
 
         if (url === '') {
-            editor?.chain().focus().extendMarkRange('link').unsetLink().run() // Empty, remove link
+            editor.chain().focus().extendMarkRange('link').unsetLink().run() // Empty, remove link
             return
         }
 
-        editor?.chain().focus().extendMarkRange('link').setLink({ href: url }).run() // Set/update link
+        editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run() // Set/update link
         setIsDialogOpen(false) // Close dialog after setting the link
     }, [url, editor])
 
     const unsetLink = useCallback(() => {
-        if (editor.isActive('link')) {
-            editor.chain().focus().unsetLink().run()
-        }
+        if (!editor || !editor.isActive('link')) return
+
+        editor.chain().focus().unsetLink().run()
     }, [editor])
+
+    if (!editor) {
+        return null
+    }
 
 
     return (

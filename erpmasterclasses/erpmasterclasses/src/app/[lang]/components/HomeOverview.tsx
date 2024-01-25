@@ -20,10 +20,10 @@ const HomeOverview: React.FC<{ lang: Locale }> = ({ lang }) => {
                     className="ml-auto text-left w-4/5 lg:w-2/3 pt-0 lg:pt-10 h-42 flex flex-col items-center justify-center"
                     style={{ x: disappearRight }}
                 >
-                    <EditorWrapper documentId={'home-description'} initialLocale={lang} />
+                    <EditorWrapper documentId='home-description' initialLocale={lang} />
                 </motion.div>
             </div>
-            <div className='relative overflow-hidden mt-10 px-4 md:px-12'>
+            <div className='relative mt-10 px-4 md:px-12 overflow-hidden'>
                 <Image
                     src={Groep3}
                     alt="Image"
@@ -31,8 +31,8 @@ const HomeOverview: React.FC<{ lang: Locale }> = ({ lang }) => {
                     className="object-cover object-center blur-sm scale-105 "
                     style={{ objectPosition: 'center 15%' }}
                 />                
-                <div className="relative w-full pb-36 overflow-visible">
-                    <div className='rounded-b-3xl flex bg-background flex-col pt-48 container px-8 md:px-16 lg:px-32 pb-40 md:pb-32 lg:pb-24 min-h-screen'>
+                <div className="relative w-full pb-36">
+                    <div className='rounded-b-3xl flex bg-background flex-col pt-10 container px-8 md:px-16 lg:px-32 pb-40 md:pb-32 lg:pb-24 min-h-screen'>
                         <EditorWrapper documentId='home-letter' initialLocale={lang} />
                     </div>
                 </div>
