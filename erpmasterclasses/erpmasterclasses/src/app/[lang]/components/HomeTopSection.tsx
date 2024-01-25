@@ -50,10 +50,10 @@ const HomeTopSection: React.FC<{ lang: Locale }> = ({ lang }) => {
     })   
 
     return (
-        <div className="relative text-primary-foreground flex flex-col justify-center items-start h-[80vh]">
+        <div className="relative text-primary-foreground flex flex-col justify-center items-start h-[70vh]">
             <motion.div  
                 ref={container}
-                style={{ y: useTransform(scrollYProgress, [0, 1], [0, dimension.height * 0.2]) }}
+                style={{ y: useTransform(scrollYProgress, [0, 1], [0, dimension.height * 0.25]) }}
                 initial={{ opacity: 0, y: 0 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0 }}
@@ -66,24 +66,6 @@ const HomeTopSection: React.FC<{ lang: Locale }> = ({ lang }) => {
                     className="object-cover object-center -scale-x-100 "
                     style={{ objectPosition: 'center 15%' }}
                 />  
-            </motion.div>
-                    
-        
-            {/* Content Section */}
-            <motion.div layout
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className=" relative left-[10vw] bg-white text-primary rounded-md w-4/5 md:w-3/5 lg:w-2/5 pt-2 "
-            >
-                <div className="w-full my-12 px-14">
-                    <h1 className='text-2xl lg:text-4xl font-bold text-primary mb-4'>
-                        ERP Masterclasses
-                    </h1>
-                    <p className="text-xl">
-                        Transform your business with Guus Krabbenborg.
-                    </p>
-                </div>
             </motion.div>
         </div>
     )
