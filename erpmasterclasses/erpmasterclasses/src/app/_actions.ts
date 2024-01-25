@@ -5,7 +5,7 @@ import { Resend } from 'resend'
 import { ContactFormSchema, RegistrationFormSchema } from '@/lib/schema'
 import ContactFormEmail from '@/emails/contact-form-email'
 import RegistrationFormEmail from '@/emails/registration-form-email'
-import { addEvent, getEventsWithRegistrations, deleteEvent, updateEvent, getParagraphJson } from '@/lib/utils/db'
+import { addEvent, getEventsWithRegistrations, getEvents, deleteEvent, updateEvent, getParagraphJson } from '@/lib/utils/db'
 import { CreateEventProps, EventData, EventProps } from '@/../typings'
 import { Locale } from '../../i18n.config'
 
@@ -83,6 +83,11 @@ export async function saveEvent(data: CreateEventProps) {
 // Get all events (EventData[]) with registrations (ADMIN)
 export async function getAllEventsAdmin(): Promise<EventData[]> {
   return await getEventsWithRegistrations()
+}
+
+// Get all events (EventProps[]) based on language is in shownLanguages
+export async function getAllEvents(language: Locale): Promise<EventProps[]> {
+  return await getEvents(language)
 }
 
 // Remove event from database
