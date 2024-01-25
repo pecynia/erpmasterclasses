@@ -13,7 +13,7 @@ const HomeOverview: React.FC<{ lang: Locale }> = ({ lang }) => {
     return (
         <div className='bg-background relative'>
             <div className="relative container mx-auto px-4">
-                <motion.div className="flex flex-col md:flex-row md:space-x-4 mt-4 gap-2 pt-10"
+                <motion.div className="flex flex-col md:flex-row md:space-x-4 mt-4 gap-2 pt-6 pb-2"
                 >
                     <EditorWrapper documentId='home-description' initialLocale={lang} />
                 </motion.div>
