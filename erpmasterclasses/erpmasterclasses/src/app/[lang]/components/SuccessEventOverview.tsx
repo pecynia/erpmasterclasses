@@ -1,28 +1,10 @@
-"use client"
-
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import EventOverview from '@/app/[lang]/components/EventOverview'
 import { Locale } from '@../../../i18n.config'
-import { EventProps } from '@../../../typings'
-import { getAllEvents } from '@/app/_actions'
+import { getEvents } from '@/lib/utils/db'
 
-
-const SuccessEventOverview = ({ lang, agenda }: { lang: Locale, agenda: any }) => {
-    const [events, setEvents] = useState<EventProps[]>([])
-    const [loading, setLoading] = useState(true)
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const result = await getAllEvents(lang)
-            setEvents(result)
-            setLoading(false)
-        }
-
-        fetchData()
-    }, [lang])
-
-    if (loading) return <p className='text-primary py-4'>{agenda.loadingAgenda}</p>
-
+export async function SuccessEventOverview({ agenda, lang }: { agenda: any, lang: Locale }) {
+    const events = await getEvents(lang)
     const successEvents = events.filter(event => event.type === 'selection')
 
     return (

@@ -2,12 +2,10 @@
 
 import React, { useState, useEffect } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { useHeaderVisibility } from '@/contexts/HeaderVisibilityContext'
 
 export const HeaderClient = ({ children, className = '' }: { children: React.ReactNode, className?: string }) => {
     const [position, setPosition] = useState(typeof window !== 'undefined' ? window.scrollY : 0)
     const [visible, setVisible] = useState(true)
-    const { isHeaderVisible } = useHeaderVisibility();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -24,7 +22,6 @@ export const HeaderClient = ({ children, className = '' }: { children: React.Rea
 
     return (
         <header 
-            style={{ display: isHeaderVisible ? 'block' : 'none' }}
             className={twMerge(className, `${visible ? 'translate-y-0' : '-translate-y-full'}`)}
         >
             {children}
