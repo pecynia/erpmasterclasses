@@ -12,8 +12,7 @@ import { Button } from "@/app/[lang]/components/ui/button"
 import { MapPin, Calendar } from 'lucide-react'
 
 
-
-const EventOverview: React.FC<{ allEvents: EventProps[], lang: Locale, agenda: any }> = ({ allEvents, lang, agenda }) => {
+async function EventOverview({ lang, agenda, allEvents }: { lang: Locale, agenda: any, allEvents: EventProps[] }) {
     const [dimension, setDimension] = useState({ width: 0, height: 0 })
     useEffect(() => {
         const lenis = new Lenis({

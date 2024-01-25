@@ -4,7 +4,7 @@ import { Locale } from '@../../../i18n.config'
 import { getEvents } from '@/lib/utils/db'
 
 
-const TransformationEventOverview: React.FC<{ lang: Locale, agenda: any }> = async ({ lang, agenda }) => {
+async function TransformationEventOverview({ lang, agenda }: { lang: Locale, agenda: any }) {
     const events = await getEvents(lang)
     const successEvents = events.filter(event => event.type === 'transformation')
 
