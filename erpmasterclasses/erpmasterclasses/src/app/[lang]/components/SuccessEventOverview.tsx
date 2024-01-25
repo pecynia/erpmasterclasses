@@ -17,7 +17,7 @@ const SuccessEventOverview = ({ lang, agenda }: { lang: Locale, agenda: any }) =
         }
 
         fetchData()
-    }, [])
+    }, [lang])
     const successEvents = events.filter(event => event.type === 'selection')
 
     return (

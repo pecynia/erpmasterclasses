@@ -7,7 +7,7 @@ import { getAllEvents } from '@/app/_actions'
 import { EventProps } from '@../../../typings'
 
 
-async function TransformationEventOverview({ lang, agenda }: { lang: Locale, agenda: any }) {
+const TransformationEventOverview = ({ lang, agenda }: { lang: Locale, agenda: any }) => {
     const [events, setEvents] = useState<EventProps[]>([])
 
     useEffect(() => {
@@ -17,7 +17,7 @@ async function TransformationEventOverview({ lang, agenda }: { lang: Locale, age
         }
 
         fetchData()
-    }, [])
+    }, [lang])
     const successEvents = events.filter(event => event.type === 'transformation')
 
     return (
