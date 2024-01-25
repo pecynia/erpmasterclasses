@@ -45,7 +45,7 @@ const EventOverview: React.FC<{ allEvents: EventProps[], lang: Locale, agenda: a
             {allEvents.length === 0 && <p className='italic text-sm text-white'>{agenda.noFound}</p>}
             {allEvents.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()).map((event, index) => (
                 <div className='flex flex-row justify-between items-center p-2 px-4 rounded-md bg-white' key={index}>
-                    <div className='flex flex-col gap-2'>
+                    <div className='flex flex-col gap-2 pb-2'>
                         <div className='flex flex-row gap-2 items-center'>
                             <p className='text-lg font-bold'>{event.title}</p>
                             <Badge variant='secondary' className="hidden md:flex">
@@ -54,11 +54,11 @@ const EventOverview: React.FC<{ allEvents: EventProps[], lang: Locale, agenda: a
                             </Badge>
                         </div>
                         <p className='text-sm flex'>{<Calendar width={16} height={16} className='mr-1' />} {event.date.toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-                        <Badge variant='secondary' className="w-16 md:hidden">
+                        <Badge variant='secondary' className="w-16 md:hidden -mt-1">
                             <Image alt={event.language} src={LocaleIcons[event.language]} width={16} />
-                            <p className='text-sm pl-1'>{event.language.toUpperCase()}</p>
+                            <p className='text-sm pl-1 '>{event.language.toUpperCase()}</p>
                         </Badge>
-                        <p className='text-sm flex '>{<MapPin width={16} height={16} className='mr-1' />}  {event.location ? event.location : "Online"}</p>
+                        <p className='text-sm flex -mt-1'>{<MapPin width={16} height={16} className='mr-1' />}  {event.location ? event.location : "Online"}</p>
                     </div>
                     <Link href={`/${lang}/register/${event.eventSlug}`}>
                         <Button>
