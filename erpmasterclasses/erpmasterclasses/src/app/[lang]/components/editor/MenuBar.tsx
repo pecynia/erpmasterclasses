@@ -1,7 +1,8 @@
+"use client"
 
 import { Editor } from '@tiptap/react'
 import { Button } from '@/app/[lang]/components/ui/button'
-import { 
+import {
     Bold,
     Italic,
     Strikethrough,
@@ -19,16 +20,59 @@ import {
     List,
     Eraser,
     Link,
+    Unlink,
     Anchor,
     Palette,
     CheckCheckIcon,
     ListChecks,
- } from 'lucide-react'
+} from 'lucide-react'
 import { Separator } from '@/app/[lang]/components/ui/separator'
 import { hslToHex } from '@/lib/utils/hexToHsl'
+import { useCallback, useState } from 'react'
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/app/[lang]/components/ui/dialog"
+import { Input } from '@/app/[lang]/components/ui/input'
 
 const MenuBar = ({ editor }: { editor: Editor | null }) => {
     if (!editor) return null
+
+    const [isDialogOpen, setIsDialogOpen] = useState(false)
+    const [url, setUrl] = useState('')
+
+    const openDialog = useCallback(() => {
+        const previousUrl = editor?.getAttributes('link').href || ''
+        setUrl(previousUrl)
+        setIsDialogOpen(true)
+    }, [editor])
+
+    const setLink = useCallback(() => {
+        if (url === null) {
+            return // Cancelled
+        }
+
+        if (url === '') {
+            editor?.chain().focus().extendMarkRange('link').unsetLink().run() // Empty, remove link
+            return
+        }
+
+        editor?.chain().focus().extendMarkRange('link').setLink({ href: url }).run() // Set/update link
+        setIsDialogOpen(false) // Close dialog after setting the link
+    }, [url, editor])
+
+    const unsetLink = useCallback(() => {
+        if (editor.isActive('link')) {
+            editor.chain().focus().unsetLink().run()
+        }
+    }, [editor])
+
+
     return (
         <div className='sticky -mt-32 z-10 bg-white shadow-lg rounded-xl'>
             <div className='flex flex-wrap items-center px-4 py-2 space-x-1 gap-2'>
@@ -36,10 +80,10 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
                     onClick={() => editor.chain().focus().toggleBold().run()}
                     disabled={
                         !editor.can()
-                        .chain()
-                        .focus()
-                        .toggleBold()
-                        .run()
+                            .chain()
+                            .focus()
+                            .toggleBold()
+                            .run()
                     }
                     className={editor.isActive('bold') ? 'bg-secondary text-white' : ''}
                 >
@@ -49,11 +93,11 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
                 <Button variant='ghost' size='sm'
                     onClick={() => editor.chain().focus().toggleItalic().run()}
                     disabled={
-                    !editor.can()
-                        .chain()
-                        .focus()
-                        .toggleItalic()
-                        .run()
+                        !editor.can()
+                            .chain()
+                            .focus()
+                            .toggleItalic()
+                            .run()
                     }
                     className={editor.isActive('italic') ? 'bg-secondary' : ''}
                 >
@@ -62,16 +106,56 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
                 <Button variant='ghost' size='sm'
                     onClick={() => editor.chain().focus().toggleStrike().run()}
                     disabled={
-                    !editor.can()
-                        .chain()
-                        .focus()
-                        .toggleStrike()
-                        .run()
+                        !editor.can()
+                            .chain()
+                            .focus()
+                            .toggleStrike()
+                            .run()
                     }
                     className={editor.isActive('strike') ? 'bg-secondary' : ''}
                 >
                     <Strikethrough className='w-4 h-4' />
                 </Button>
+
+                {/* Link Button to Open Dialog */}
+                <Button
+                    variant='ghost'
+                    size='sm'
+                    onClick={openDialog}
+                    className={editor.isActive('link') ? 'bg-secondary' : ''}
+                >
+                    <Link className='w-4 h-4' />
+                </Button>
+
+                {/* Link Dialog */}
+                <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                    <DialogContent className="sm:max-w-[425px]">
+                        <DialogHeader>
+                            <DialogTitle>Set Link</DialogTitle>
+                        </DialogHeader>
+                        <Input
+                            value={url}
+                            onChange={(e) => setUrl(e.target.value)}
+                            className="w-full"
+                        />
+                        <DialogFooter>
+                            <Button onClick={setLink}>Set Link</Button>
+                        </DialogFooter>
+                    </DialogContent>
+                </Dialog>
+
+                {/* Unlink Button */}
+                <Button
+                    variant='ghost'
+                    size='sm'
+                    onClick={unsetLink}
+                    disabled={!editor.isActive('link')}
+                >
+                    <Unlink className='w-4 h-4' />
+                </Button>
+
+
+
                 {/* Text colours */}
                 <Button variant='ghost' size="sm"
                     onClick={() => editor.chain().focus().setColor(hslToHex(getComputedStyle(document.documentElement).getPropertyValue('--primary'))).run()}
@@ -109,11 +193,11 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
                 >
                     <Heading2 className='w-4 h-4' />
                 </Button>
-                <Button variant='ghost'  size="sm"
+                <Button variant='ghost' size="sm"
                     onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
                     className={editor.isActive('heading', { level: 3 }) ? 'bg-secondary' : ''}
                 >
-                    <Heading3 className='w-4 h-4' />    
+                    <Heading3 className='w-4 h-4' />
                 </Button>
                 <Button variant='ghost' size='sm'
                     onClick={() => editor.chain().focus().unsetAllMarks().run()}>
@@ -128,16 +212,9 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
                 >
                     <Pilcrow className='w-4 h-4' />
                 </Button>
-                
-                </div>
-                <Separator orientation='vertical' />
+            </div>
+            <Separator orientation='vertical' />
             <div className='flex flex-wrap items-center px-4 py-2 space-x-1'>
-                {/* <Button variant='ghost' size="sm"
-                    onClick={() => editor.chain().focus().toggleBulletList().run()}
-                    className={editor.isActive('bulletList') ? 'bg-secondary' : ''}
-                    >
-                    <List className='w-5 h-5' />
-                </Button> */}
                 <Button variant='ghost' size="sm"
                     onClick={() => editor.chain().focus().toggleBulletList().run()}
                     className={editor.isActive('bulletList') ? 'bg-secondary' : ''}
@@ -167,10 +244,10 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
                     onClick={() => editor.chain().focus().undo().run()}
                     disabled={
                         !editor.can()
-                        .chain()
-                        .focus()
-                        .undo()
-                        .run()
+                            .chain()
+                            .focus()
+                            .undo()
+                            .run()
                     }
                 >
                     <Undo className='w-6 h-6' />
@@ -179,10 +256,10 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
                     onClick={() => editor.chain().focus().redo().run()}
                     disabled={
                         !editor.can()
-                        .chain()
-                        .focus()
-                        .redo()
-                        .run()
+                            .chain()
+                            .focus()
+                            .redo()
+                            .run()
                     }
                 >
                     <Redo className='w-6 h-6' />

@@ -32,8 +32,7 @@ const HomeOverview: React.FC<{ lang: Locale }> = ({ lang }) => {
                     style={{ objectPosition: 'center 15%' }}
                 />                
                 <div className="relative w-full pb-36 overflow-visible">
-                    <div className='rounded-b-3xl flex bg-background flex-col pt-10 container px-8 md:px-16 lg:px-32 pb-40 md:pb-32 lg:pb-24 min-h-screen'>
-
+                    <div className='rounded-b-3xl flex bg-background flex-col pt-48 container px-8 md:px-16 lg:px-32 pb-40 md:pb-32 lg:pb-24 min-h-screen'>
                         <EditorWrapper documentId='home-letter' initialLocale={lang} />
                     </div>
                 </div>

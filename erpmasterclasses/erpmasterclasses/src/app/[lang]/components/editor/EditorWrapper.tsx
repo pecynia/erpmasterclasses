@@ -6,7 +6,7 @@ import { motion } from "framer-motion"
 import { useSession } from 'next-auth/react'
 import { generateHTML } from '@tiptap/html'
 import { ReloadIcon } from "@radix-ui/react-icons"
-
+import { Link as TiptapLink } from "@tiptap/extension-link"
 import EditorComponent from "@/app/[lang]/components/editor/EditorComponent"
 import { getParagraph } from "@/app/_actions"
 import StarterKit from '@tiptap/starter-kit'
@@ -41,6 +41,7 @@ const EditorWrapper: React.FC<EditorWrapperProps> = ({ documentId, link, buttonT
                 StarterKit,
                 TextStyle,
                 Color,
+                TiptapLink,
             ])
             setFetchedContent(contentAsHtml)
         } else {

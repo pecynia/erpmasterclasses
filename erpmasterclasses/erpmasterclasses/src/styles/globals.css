@@ -272,3 +272,8 @@ button:hover .textWithAnimatedUnderline::before {
   height: 1px;
   background-color: currentColor;
 }
+
+
+.hyperlink {
+  @apply underline text-secondary cursor-pointer font-bold;
+}
