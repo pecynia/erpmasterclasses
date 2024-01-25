@@ -81,7 +81,7 @@ export async function saveEvent(data: CreateEventProps) {
 }
 
 // Get all events (EventData[]) with registrations (ADMIN)
-export async function getAllEvents(): Promise<EventData[]> {
+export async function getAllEventsAdmin(): Promise<EventData[]> {
   return await getEventsWithRegistrations()
 }
 

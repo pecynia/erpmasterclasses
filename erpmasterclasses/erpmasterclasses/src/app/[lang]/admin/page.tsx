@@ -6,7 +6,7 @@ import { useSession } from 'next-auth/react'
 import Loading from './loading'
 import Container from '@/app/[lang]/components/ui/container'
 import AddEvent from '@/app/[lang]/components/admin/AddEvent'
-import { getAllEvents } from '@/app/_actions'
+import { getAllEventsAdmin } from '@/app/_actions'
 import { EventData } from '@../../../typings'
 import EventOverview from '@/app/[lang]/components/admin/EventOverview'
 import { Separator } from '@/app/[lang]/components/ui/separator'
@@ -18,7 +18,7 @@ const Page = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await getAllEvents()
+            const result = await getAllEventsAdmin()
             setEvents(result)
         }
 
