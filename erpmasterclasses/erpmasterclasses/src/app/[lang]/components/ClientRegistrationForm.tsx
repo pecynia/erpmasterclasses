@@ -329,14 +329,16 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
 
 
                     {/* Total price */}
-                    <div className='flex flex-row gap-4'>
-                        <div className='w-full'>
-                            <p className='text-sm'>{localization.totalPrice}</p>
+                    {event && (
+                        <div className='flex flex-row gap-4'>
+                            <div className='w-full'>
+                                <p className='text-sm'>{localization.totalPrice}</p>
+                            </div>
+                            <div className='w-full'>
+                                <p className='text-sm'>{(fields.length + 1) * event.price} €</p>
+                            </div>
                         </div>
-                        <div className='w-full'>
-                            <p className='text-sm'>{(fields.length + 1) * event!.price} €</p>
-                        </div>
-                    </div>
+                    )}
 
                     {/* Submit Button */}
                     <button

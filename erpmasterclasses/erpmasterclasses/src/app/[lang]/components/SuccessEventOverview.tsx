@@ -21,7 +21,7 @@ const SuccessEventOverview = ({ lang, agenda }: { lang: Locale, agenda: any }) =
         fetchData()
     }, [lang])
 
-    if (loading) return <p className='text-primary-foreground py-4'>{agenda.loadingAgenda}</p>
+    if (loading) return <p className='text-primary py-4'>{agenda.loadingAgenda}</p>
 
     const successEvents = events.filter(event => event.type === 'selection')
 
