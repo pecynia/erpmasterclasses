@@ -7,7 +7,6 @@ import Negotiator from 'negotiator';
 // Middleware for NextAuth
 import nextAuthMiddleware from 'next-auth/middleware';
 
-
 function getLocale(request: NextRequestWithAuth): string | undefined {
   const negotiatorHeaders: Record<string, string> = {}
   request.headers.forEach((value, key) => (negotiatorHeaders[key] = value))

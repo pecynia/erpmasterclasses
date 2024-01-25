@@ -10,7 +10,7 @@ import Logo from '@/../public/logo.png'
 export default async function Footer({ lang }: { lang: Locale }) {    
     const { navigation, footer } = await getDictionary(lang)
     return (
-        <footer className="bg-primary py-8 px-16 text-primary-foreground">
+        <footer className="relative bg-primary py-8 px-16 text-primary-foreground">
             <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 justify-center">
 
                 {/* Logo & Description */}

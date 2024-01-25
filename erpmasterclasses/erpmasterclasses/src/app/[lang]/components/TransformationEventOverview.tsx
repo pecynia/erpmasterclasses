@@ -21,7 +21,7 @@ const TransformationEventOverview = ({ lang, agenda }: { lang: Locale, agenda: a
         fetchData()
     }, [lang])
     
-    if (loading) return <p className='text-primary-foreground py-4'>{agenda.loadingAgenda}</p>
+    if (loading) return <p className='text-primary py-4'>{agenda.loadingAgenda}</p>
 
     const successEvents = events.filter(event => event.type === 'transformation')
 

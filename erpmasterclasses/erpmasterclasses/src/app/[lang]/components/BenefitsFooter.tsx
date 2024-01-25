@@ -10,7 +10,7 @@ import { Button } from '@/app/[lang]/components/ui/button'
 
 const BenefitsFooter: React.FC<{ lang: Locale }> = async ({ lang }) => {
     
-    const { benefits, navigation } = await getDictionary(lang)
+    const { navigation } = await getDictionary(lang)
 
     return (
         <div className='flex flex-col relative pb-10'>

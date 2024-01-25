@@ -123,7 +123,7 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ type: "spring", ease: "easeInOut", duration: 0.5 }}
             viewport={{ once: true }}
-            className='min-w-[70%] lg:min-w-[40%] min-h-[20%] max-w-[90%] mb-20 pb-10 flex px-10 pt-4 rounded-xl  bg-white shadow-xl'
+            className='relative min-w-[70%] lg:min-w-[40%] min-h-[20%] max-w-[90%] mb-20 pb-10 flex px-10 pt-4 rounded-xl  bg-white shadow-xl'
         >
             <div className='w-full pt-2'>
                 <h1 className='text-xl font-semibold pb-4 pt-2'>
