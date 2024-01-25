@@ -90,6 +90,7 @@
   },
   "agenda": {
     "title": "Agenda",
+    "loadingAgenda": "Loading agenda...",
     "transformation": "Agenda for the ERP Transformation Masterclass",
     "upcomingMasterclasses": "Upcoming Masterclasses",
     "upcomingTransformationMasterclasses": "ERP Transformation Masterclass",
