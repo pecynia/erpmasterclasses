@@ -59,7 +59,7 @@ const ClientContactForm: React.FC<ClientContactFormProps> = ({ localization, err
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", ease: "easeInOut", duration: 0.5 }}
       viewport={{ once: true }}
-      className='min-w-[70%] lg:min-w-[40%] min-h-[20%] max-w-[80%] mb-20 pb-10 flex px-10 pt-4 rounded-xl  bg-white shadow-xl'
+      className='relative min-w-[70%] lg:min-w-[40%] min-h-[20%] max-w-[80%] mb-20 pb-10 flex px-10 pt-4 rounded-xl  bg-white shadow-xl'
     >
       <div className='w-full pt-2'>
         <form onSubmit={handleSubmit(processForm)} className='mx-auto flex flex-1 flex-col gap-4'>
