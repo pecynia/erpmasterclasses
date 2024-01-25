@@ -10,15 +10,10 @@ import Groep3 from '@/../public/imgs/groep-3.jpg'
 
 const HomeOverview: React.FC<{ lang: Locale }> = ({ lang }) => {
 
-    const { scrollYProgress } = useScroll()
-    const disappearRight = useTransform(scrollYProgress, [0, 0.2], ['0%', '-20%'])
-
     return (
         <div className='bg-background relative'>
             <div className="relative container mx-auto px-4">
-                <motion.div
-                    className="ml-auto text-left w-4/5 lg:w-2/3 pt-0 lg:pt-10 h-42 flex flex-col items-center justify-center"
-                    style={{ x: disappearRight }}
+                <motion.div className="flex flex-col md:flex-row md:space-x-4 mt-4 gap-2 pt-10"
                 >
                     <EditorWrapper documentId='home-description' initialLocale={lang} />
                 </motion.div>
@@ -32,7 +27,7 @@ const HomeOverview: React.FC<{ lang: Locale }> = ({ lang }) => {
                     style={{ objectPosition: 'center 15%' }}
                 />                
                 <div className="relative w-full pb-36">
-                    <div className='rounded-b-3xl flex bg-background flex-col pt-10 container px-8 md:px-16 lg:px-32 pb-40 md:pb-32 lg:pb-24 min-h-screen'>
+                    <div className='rounded-b-3xl flex bg-background flex-col pt-4 container px-8 md:px-16 pb-40 md:pb-32 lg:pb-24 min-h-screen'>
                         <EditorWrapper documentId='home-letter' initialLocale={lang} />
                     </div>
                 </div>

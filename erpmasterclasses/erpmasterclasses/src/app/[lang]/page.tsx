@@ -9,8 +9,6 @@ export default async function Home({
     params: { lang: Locale }
   }) {
     
-    const { navigation } = await getDictionary(lang)
-
     return (
       <div className=''>
         <HomeTopSection lang={lang} />
