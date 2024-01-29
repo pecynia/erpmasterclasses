@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { RegistrationFormProps } from '@/../typings'
 
 const RegistrationFormEmail: React.FC<Readonly<RegistrationFormProps>> = ({

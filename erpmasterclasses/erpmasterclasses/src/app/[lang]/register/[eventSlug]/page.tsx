@@ -14,7 +14,7 @@ export default async function Page({
 
   const events = await getEvents(lang)
   const event = events.find(event => event.eventSlug === eventSlug)
-  const { contact, errorMessages } = await getDictionary(lang);
+  const { contact, errorMessages } = await getDictionary(lang)
 
   return (
     <div className='flex flex-col items-center justify-center w-full py-10 relative'>

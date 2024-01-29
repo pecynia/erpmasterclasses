@@ -10,7 +10,7 @@ import { Badge } from '@/app/[lang]/components/ui/badge'
 import { sendRegistrationEmail } from '@/app/_actions'
 import { toast } from 'sonner'
 import { motion } from 'framer-motion'
-import { EventProps, RegistrationFormProps, AdditionalRegistrationFormProps } from '@../../../typings'
+import { EventProps, RegistrationFormProps } from '@../../../typings'
 import {
     Select,
     SelectContent,
@@ -79,11 +79,16 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
     })
 
     const processForm: SubmitHandler<RegistrationFormInputs> = async data => {
-        // Cast to RegistrationFormProps by adding the additionalParticipants field of type AdditionalRegistrationFormProps
+        const registrationData = data as unknown as RegistrationFormProps
+        try {
+            const result = await checkout(lang, registrationData)
+            // await sendRegistrationEmail(data, data.selectedEvent)
+            reset()
+            toast.success(localization.emailSentToast)
+        } catch (error) {
+            toast.error(localization.errorToast)
+        }
 
-
-        
-        const result = await checkout([data.selectedEvent as EventProps])
     }
 
     const { fields, append, remove } = useFieldArray({

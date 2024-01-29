@@ -31,6 +31,7 @@ export interface RegistrationFormProps {
     vatNumber: string
     poNumber?: string
     additionalParticipants?: AdditionalRegistrationFormProps[]
+    selectedEvent: EventProps
 }    
 
 // ------------------ EVENTS ------------------
