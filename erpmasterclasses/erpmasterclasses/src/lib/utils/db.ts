@@ -4,6 +4,7 @@ import { Locale } from '@/app/../../i18n.config'
 import { JSONContent } from '@tiptap/react'
 import { EventProps, CreateEventProps, EventData, RegistrationFormProps } from '@/../typings'
 import { revalidateTag } from 'next/cache'
+import { date } from 'zod'
 
 // -------------------- DATABASE --------------------
 
@@ -21,6 +22,9 @@ const client = new MongoClient(uri, {
 })
 
 let cachedDb: any = null
+
+// Create a stripe client
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
 // Function to connect to the database
 async function connectToDatabase() {
@@ -97,7 +101,9 @@ export async function getEvent(eventSlug: string, language: Locale): Promise<Eve
             location: result.location,
             requiredRegistrations: result.requiredRegistrations,
             language: result.language,
-            shownLanguages: result.shownLanguages
+            shownLanguages: result.shownLanguages,
+            stripeProductId: result.stripeProductId,
+            stripePriceId: result.stripePriceId
         }
     }
 
@@ -124,7 +130,9 @@ export async function getEvents(language: Locale): Promise<EventProps[]> {
             location: event.location,
             requiredRegistrations: event.requiredRegistrations,
             language: event.language,
-            shownLanguages: event.shownLanguages
+            shownLanguages: event.shownLanguages,
+            stripeProductId: event.stripeProductId,
+            stripePriceId: event.stripePriceId
         }
     })
 
@@ -151,6 +159,8 @@ export async function getEventsWithRegistrations(): Promise<EventData[]> {
             requiredRegistrations: event.requiredRegistrations,
             language: event.language,
             shownLanguages: event.shownLanguages,
+            stripeProductId: event.stripeProductId,
+            stripePriceId: event.stripePriceId,
             registrations: event.registrations
         }
     }) as EventData[]
@@ -160,17 +170,43 @@ export async function getEventsWithRegistrations(): Promise<EventData[]> {
 
 // Create new event
 export async function addEvent(event: CreateEventProps) {
-    const db = await connectToDatabase();
-    const collection = db.collection('events');
+    const db = await connectToDatabase()
+    const collection = db.collection('events')
 
-    const _id = new ObjectId();
-    const newEvent = { _id, ...event } as EventProps;
+    const _id = new ObjectId()
 
-    const result = await collection.insertOne(newEvent);
+    const product = await stripe.products.create({
+        name: event.title,
+        active: true,
+        description: event.description,
+        metadata: {
+            eventId: _id.toString(),
+            eventSlug: event.eventSlug,
+            date: event.date,
+            location: event.location,
+            type: event.type,
+            language: event.language
+        },
+        tax_code: 'txcd_20030000',
+        url: `process.env.NEXT_PUBLIC_URL/${event.language}/agenda/${event.eventSlug}`
+    })
 
-    revalidateTag('events')
+    const price = await stripe.prices.create({
+        product: product.id,
+        unit_amount: event.price * 100,
+        metadata: {
+            eventId: _id.toString()
+        },
+        currency: 'eur',
+    })  
 
-    return { result, _id: _id.toString() };
+    const eventWithStripe = { ...event, _id, stripeProductId: product.id, stripePriceId: price.id } as EventProps
+
+    const result = await collection.insertOne(eventWithStripe)
+
+    // revalidateTag('events')
+
+    return { result, _id: _id.toString() }
 }
 
 
@@ -185,7 +221,7 @@ export async function updateEvent(event: EventProps) {
 
     const result = await collection.updateOne(filter, update) as { matchedCount: number, modifiedCount: number, acknowledged: boolean, upsertedId: ObjectId | null, upsertedCount: number }
 
-    revalidateTag('events')
+    // revalidateTag('events')
 
     return result
 }
@@ -195,7 +231,40 @@ export async function deleteEvent(eventId: string) {
     const db = await connectToDatabase()
     const collection = db.collection('events')
 
-    const result = await collection.deleteOne({ _id: new ObjectId(eventId) }) as { deletedCount: number, acknowledged: boolean }
+    let stripeProdId
+    let result
+
+    // Fetch Stripe Product ID
+    try {
+        const event = await collection.findOne({ _id: new ObjectId(eventId) })
+        stripeProdId = event.stripeProductId
+    } catch (error) {
+        console.error('Error fetching event from database:', error)
+        throw error // Rethrow or handle it as needed
+    }
+
+    // Delete the event from the database
+    try {
+        result = await collection.deleteOne({ _id: new ObjectId(eventId) })
+    } catch (error) {
+        console.error('Error deleting event from database:', error)
+        throw error // Rethrow or handle it as needed
+    }
+
+    // Attempt to delete Stripe product
+    try {
+        await stripe.products.del(stripeProdId)
+    } catch (error) {
+        console.error('Error deleting Stripe product:', error)
+        // Handle or log the error - don't throw as the main operation (event deletion) was successful
+    }
+
+    // Attempt to update Stripe price
+    try {
+        await stripe.prices.update(stripeProdId, { active: false })
+        console.log('Stripe product set to inactive:', stripeProdId)
+    } catch (error) {
+        console.error('Error updating Stripe price:', error)    }
 
     return result
 }

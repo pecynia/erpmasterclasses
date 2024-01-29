@@ -32,7 +32,9 @@ export const RegistrationFormSchema = z.object({
     location: z.string().optional(),
     requiredRegistrations: z.number(),
     language: z.string(),
-    shownLanguages: z.array(z.string())
+    shownLanguages: z.array(z.string()),
+    stripePriceId: z.string(),
+    stripeProductId: z.string()
   }),
   companyName: z.string().min(1, { message: 'Company name is required.' }),
   address: z.string().min(1, { message: 'Adress is required.' }),
@@ -64,6 +66,8 @@ export const EventSchema = z.object({
   }, { message: 'Language is invalid.' }),
   shownLanguages: z.array(z.string().min(1, { message: 'Language is required.' }).refine((value) => {
     return i18n.locales.includes(value as Locale)
-  }, { message: 'Language is invalid.' })).min(1, { message: 'At least one language is required.' })
+  }, { message: 'Language is invalid.' })).min(1, { message: 'At least one language is required.' }),
+  stripePriceId: z.string().min(1, { message: 'Stripe price ID is required.' }),
+  stripeProductId: z.string().min(1, { message: 'Stripe product ID is required.' })
 })
 

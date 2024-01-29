@@ -65,13 +65,10 @@ const UpdateEvent: React.FC<{ existingEvent: EventData, allEvents: EventData[], 
 
     const processForm: SubmitHandler<CreateEventProps> = async (data) => {
         try {
-
             // Take the _id from the existing event and overwrite the rest of the data
             const updatedEvent = { ...data, _id: existingEvent._id } as EventData
 
             const result = await updateEventInDatabase(updatedEvent)
-
-            toast.success("Event updated successfully")
 
             // Update the event in the state updatedEvents (EventData[])
             const updatedEvents = allEvents.map(event => event._id === updatedEvent._id ? updatedEvent : event)

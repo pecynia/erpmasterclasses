@@ -62,6 +62,8 @@ export type EventProps = {
     requiredRegistrations: number
     language: Locale
     shownLanguages: Locale[]
+    stripeProductId: string
+    stripePriceId: string
 }
 
 // Event properties for server-side
@@ -77,5 +79,30 @@ export type EventData = {
     requiredRegistrations: number
     language: Locale
     shownLanguages: Locale[]
+    stripeProductId: string
+    stripePriceId: string
     registrations: RegistrationFormProps[]
+}
+
+
+// ------------------ PRODUCTS ------------------
+
+export type ProductResponse = {
+    id: string
+    object: string
+    active: boolean
+    created: number
+    default_price: number
+    description: string
+    images: string[]
+    livemode: boolean
+    metadata: {}
+    name: string
+    package_dimensions: {}
+    shippable: boolean
+    statement_descriptor: string
+    tax_code: string
+    unit_label: string
+    updated: number
+    url: string
 }

@@ -10,7 +10,7 @@ import { Badge } from '@/app/[lang]/components/ui/badge'
 import { sendRegistrationEmail } from '@/app/_actions'
 import { toast } from 'sonner'
 import { motion } from 'framer-motion'
-import { EventProps } from '@../../../typings'
+import { EventProps, RegistrationFormProps, AdditionalRegistrationFormProps } from '@../../../typings'
 import {
     Select,
     SelectContent,
@@ -21,6 +21,7 @@ import {
     SelectValue,
 } from "@/app/[lang]/components/ui/select"
 import { Locale } from '@../../../i18n.config'
+import { checkout } from '@/lib/checkout'
 
 export type RegistrationFormInputs = z.infer<typeof RegistrationFormSchema>
 
@@ -73,24 +74,16 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
     const { register, control, handleSubmit, setValue, reset, formState: { errors, isSubmitting } } = useForm<RegistrationFormInputs>({
         resolver: zodResolver(RegistrationFormSchema),
         defaultValues: {
-            selectedEvent: selectedEvent
+            selectedEvent: selectedEvent // If you want to change the props here, also adjust the RegistrationFormSchema.selectedEvent
         }
     })
 
     const processForm: SubmitHandler<RegistrationFormInputs> = async data => {
-        const result = await sendRegistrationEmail(data, event!)
+        // Cast to RegistrationFormProps by adding the additionalParticipants field of type AdditionalRegistrationFormProps
 
-        if (result?.success) {
-            toast.success(localization.emailSentToast)
-            reset()
 
-            for (let i = fields.length - 1; i >= 0; i--) {
-                remove(i)
-            }
-        } else {
-            console.error(result?.error)
-            toast.error(localization.errorToast)
-        }
+        
+        const result = await checkout([data.selectedEvent as EventProps])
     }
 
     const { fields, append, remove } = useFieldArray({
@@ -166,7 +159,6 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
                         </Select>
                     </div>
                     <hr />
-
 
                     {/* Company Name Input */}
                     <input
@@ -326,7 +318,6 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
                             <hr className='my-1 w-2/3' />
                         </div>
                     )}
-
 
                     {/* Total price */}
                     {event && (
