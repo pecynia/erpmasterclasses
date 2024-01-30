@@ -3,7 +3,7 @@ import Stripe from 'stripe'
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 
 export async function POST(request: Request) {
-    const { lineItems } = await request.json()
+    const { lineItems, checkoutMetadata } = await request.json()
 
     if (!lineItems) {
         return new Response(JSON.stringify({ error: "lineItems is required" }), {
@@ -13,11 +13,13 @@ export async function POST(request: Request) {
     }
     const session = await stripe.checkout.sessions.create({
         line_items: lineItems,
+        metadata: checkoutMetadata,
         mode: 'payment',
         success_url: `${request.headers.get('Origin')}/${request.headers.get('lang')}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${request.headers.get('Origin')}/${request.headers.get('lang')}`
+        cancel_url: `${request.headers.get('Origin')}/${request.headers.get('lang')}`,          
     })
 
+    // If the session is not created, return an error
     if (!session) {
         return new Response(JSON.stringify({ error: "Session could not be created" }), {
             headers: { "Content-Type": "application/json" },
@@ -25,7 +27,7 @@ export async function POST(request: Request) {
         })
     }
 
-
+    // When the session is created, return the session object
     return new Response(JSON.stringify({ session }), {
         headers: { "Content-Type": "application/json" },
     })

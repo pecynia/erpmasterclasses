@@ -193,7 +193,7 @@ export async function addEvent(event: CreateEventProps) {
 
     const price = await stripe.prices.create({
         product: product.id,
-        unit_amount: event.price * 100,
+        unit_amount: event.price,
         metadata: {
             eventId: _id.toString()
         },
@@ -270,9 +270,11 @@ export async function deleteEvent(eventId: string) {
 }
 
 // Add registration to event
-export async function addRegistration(eventId: string, registration: RegistrationFormProps) {
+export async function addRegistration(registration: RegistrationFormProps) {
     const db = await connectToDatabase()
     const collection = db.collection('events')
+
+    const eventId = registration.selectedEvent._id
 
     const filter = { _id: new ObjectId(eventId) }
     const update = { $push: { registrations: registration } }
@@ -280,7 +282,6 @@ export async function addRegistration(eventId: string, registration: Registratio
     const result = await collection.updateOne(filter, update)
 
     // TODO Send confirmation email
-
     return result
 }
 

@@ -7,7 +7,6 @@ import { z } from 'zod'
 import { RegistrationFormSchema } from '@/lib/schema'
 import { Trash2 } from 'lucide-react'
 import { Badge } from '@/app/[lang]/components/ui/badge'
-import { sendRegistrationEmail } from '@/app/_actions'
 import { toast } from 'sonner'
 import { motion } from 'framer-motion'
 import { EventProps, RegistrationFormProps } from '@../../../typings'
@@ -79,12 +78,11 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
     })
 
     const processForm: SubmitHandler<RegistrationFormInputs> = async data => {
-        const registrationData = data as unknown as RegistrationFormProps
+        const _id = Math.random().toString(36)
+        const registrationData = { ...data, _id } as RegistrationFormProps
         try {
-            const result = await checkout(lang, registrationData)
-            // await sendRegistrationEmail(data, data.selectedEvent)
+            await checkout(lang, registrationData)
             reset()
-            toast.success(localization.emailSentToast)
         } catch (error) {
             toast.error(localization.errorToast)
         }

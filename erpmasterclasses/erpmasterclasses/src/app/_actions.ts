@@ -6,8 +6,9 @@ import { ContactFormSchema, RegistrationFormSchema } from '@/lib/schema'
 import ContactFormEmail from '@/emails/contact-form-email'
 import RegistrationFormEmail from '@/emails/registration-form-email'
 import { addEvent, getEventsWithRegistrations, getEvents, deleteEvent, updateEvent, getParagraphJson } from '@/lib/utils/db'
-import { CreateEventProps, EventData, EventProps } from '@/../typings'
+import { CreateEventProps, EventData, EventProps, RegistrationFormProps } from '@/../typings'
 import { Locale } from '../../i18n.config'
+import RegistrationConfirmationEmail from '@/emails/registration-confirmation-email'
 
 
 // ------------------ CONTACT FORMS ------------------
@@ -55,7 +56,7 @@ export async function sendRegistrationEmail(data: RegistrationFormInputs, event:
     try {
       const emailData = await resend.emails.send({
         from: 'ERP Masterclass <contact@erpmasterclasses.com>',
-        to: ['gk@erpmasterclasses.com'], //['gk@erpmasterclasses.com'],
+        to: ['gk@erpmasterclasses.com'],
         subject: 'Registration form submission',
         text: `Event: ${event.title}\nCompany Name: ${companyName}\nAdress: ${address}\nCountry: ${country}\nName: ${nameParticipant}\nPhone: ${phone}\nEmail: ${email}\nPosition: ${position}\nVAT number: ${vatNumber}\nPO number: ${poNumber}\nAdditional participants: ${additionalParticipants}`,
         react: RegistrationFormEmail({ _id, eventTitel, eventDate, lang, companyName, address, country, nameParticipant, phone, email, position, vatNumber, poNumber, additionalParticipants, selectedEvent }),
@@ -68,6 +69,23 @@ export async function sendRegistrationEmail(data: RegistrationFormInputs, event:
   }
 
   return { success: false, error: result.error.format() }
+}
+
+// Resend registration email
+export async function sendRegistrationConfirmationEmail(data: RegistrationFormProps, totalAmount: number) {
+    try {
+          const emailData = await resend.emails.send({
+              from: 'ERP Masterclass <contact@erpmasterclasses.com>',
+              to: 'verheul.nicolai@gmail.com', //data.email,
+              subject: 'Your Registration Confirmation',
+              text: `Event: ${data.selectedEvent.title}\nCompany Name: ${data.companyName}\nAdress: ${data.address}\nCountry: ${data.country}\nName: ${data.nameParticipant}\nPhone: ${data.phone}\nEmail: ${data.email}\nPosition: ${data.position}\nVAT number: ${data.vatNumber}\nPO number: ${data.poNumber}\nAdditional participants: ${data.additionalParticipants}`,
+              react: RegistrationConfirmationEmail({ ...data, totalAmount }),
+          })
+          return { success: true, data: emailData }
+      } catch (error) {
+          console.error('Error sending confirmation email:', error)
+          return { success: false, error }
+      }
 }
 
 
