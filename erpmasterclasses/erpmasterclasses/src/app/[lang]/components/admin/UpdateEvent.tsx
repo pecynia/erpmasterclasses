@@ -5,7 +5,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { EventSchema } from '@/lib/schema'
 import { updateEventInDatabase } from '@/app/_actions'
-import { Locale, i18n } from '../../../../../i18n.config'
+import { Locale, i18n } from '@../../../i18n.config'
 import { eventTypes, EventType } from '@../../../event.config'
 import { CreateEventProps, EventData } from '@/../typings'
 import LocaleIcons from '@/app/[lang]/components/lang/LocaleIcon'
@@ -47,6 +47,7 @@ import {
     DialogTrigger,
     DialogClose
 } from "@/app/[lang]/components/ui/dialog"
+
 const UpdateEvent: React.FC<{ existingEvent: EventData, allEvents: EventData[], setEventData: React.Dispatch<React.SetStateAction<EventData[]>> }> = ({ existingEvent, allEvents, setEventData }) => {
     const { register, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm<CreateEventProps>({
         resolver: zodResolver(EventSchema),

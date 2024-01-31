@@ -112,6 +112,7 @@
     "phonePlaceholder": "Telefonnummer*",
     "eventDatePlaceholder": "Datum der geplanten Veranstaltung (optional)",
     "companyNamePlaceholder": "Firmenname*",
+    "companyWebsitePlaceholder": "Firmenwebsite",
     "addressPlaceholder": "Adresse*",
     "countryPlaceholder": "Land*",
     "positionPlaceholder": "Position*",
@@ -133,6 +134,7 @@
   },
   "errorMessages": {
     "companyNameRequired": "Firmenname ist erforderlich.",
+    "companyWebsiteRequired": "Firmenwebsite ist erforderlich.",
     "nameRequired": "Name ist erforderlich.",
     "emailRequired": "E-Mail ist erforderlich.",
     "invalidEmail": "Ungültige E-Mail.",
@@ -144,5 +146,12 @@
     "positionRequired": "Position ist erforderlich.",
     "vatNumberRequired": "USt-IdNr. ist erforderlich.",
     "eventRequired": "Bitte wählen Sie eine Veranstaltung aus."
+  },
+  "payments": {
+    "failedToLoadSession": "Fehler beim Laden der Sitzung.",
+    "checkoutSuccess": "Vielen Dank für Ihre Bestellung!",
+    "thankYouForYourPurchase": "Vielen Dank für Ihre Bestellung!",
+    "orderConfirmationDescriptionEmailShortly": "Sie erhalten in Kürze eine Bestätigungs-E-Mail.",
+    "orderSummary": "Bestellübersicht"
   }
 }

@@ -25,7 +25,7 @@ export const contactInfo: ContactInfo = {
     name: "ERP Masterclasses",
     address: `${location.street} ${location.number}, ${location.zip} ${location.city}`,
     email: "gk@erpmasterclasses.com",
-    phone: "+31622496073 ",
+    phone: "+31 622 496 073 ",
     kvk: "09122310",
     vatNumber: "NL809924328B01",
 }

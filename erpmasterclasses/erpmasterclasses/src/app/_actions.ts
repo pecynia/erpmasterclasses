@@ -5,11 +5,10 @@ import { Resend } from 'resend'
 import { ContactFormSchema, RegistrationFormSchema } from '@/lib/schema'
 import ContactFormEmail from '@/emails/contact-form-email'
 import RegistrationFormEmail from '@/emails/registration-form-email'
-import { addEvent, getEventsWithRegistrations, getEvents, deleteEvent, updateEvent, getParagraphJson } from '@/lib/utils/db'
+import { addEvent, getEventsWithRegistrations, getEvents, deleteEvent, updateEvent, getParagraphJson, deleteRegistration } from '@/lib/utils/db'
 import { CreateEventProps, EventData, EventProps, RegistrationFormProps } from '@/../typings'
 import { Locale } from '../../i18n.config'
 import RegistrationConfirmationEmail from '@/emails/registration-confirmation-email'
-
 
 // ------------------ CONTACT FORMS ------------------
 
@@ -40,60 +39,57 @@ export async function sendContactEmail(data: ContactFormInputs) {
   return { success: false, error: result.error.format() }
 }
 
-
 // Registration Form 
-type RegistrationFormInputs = z.infer<typeof RegistrationFormSchema>
-export async function sendRegistrationEmail(data: RegistrationFormInputs, event: EventProps) {
-  const result = RegistrationFormSchema.safeParse(data)
-
-  if (result.success) {
-    const { companyName, address, country, nameParticipant, phone, email, position, vatNumber, poNumber, additionalParticipants } = result.data
-    const eventTitel = event.title
-    const eventDate = event.date
-    const selectedEvent= event
-    const lang = 'nl'
-    const _id = event._id
-    try {
-      const emailData = await resend.emails.send({
-        from: 'ERP Masterclass <contact@erpmasterclasses.com>',
-        to: ['gk@erpmasterclasses.com'],
-        subject: 'Registration form submission',
-        text: `Event: ${event.title}\nCompany Name: ${companyName}\nAdress: ${address}\nCountry: ${country}\nName: ${nameParticipant}\nPhone: ${phone}\nEmail: ${email}\nPosition: ${position}\nVAT number: ${vatNumber}\nPO number: ${poNumber}\nAdditional participants: ${additionalParticipants}`,
-        react: RegistrationFormEmail({ _id, eventTitel, eventDate, lang, companyName, address, country, nameParticipant, phone, email, position, vatNumber, poNumber, additionalParticipants, selectedEvent }),
-      })
-      return { success: true, data: emailData }
-    }
-    catch (error) {
-      return { success: false, error }
-    }
+export async function sendRegistrationEmail(data: RegistrationFormProps, event: EventProps) {
+  try {
+    const emailData = await resend.emails.send({
+      from: 'ERP Masterclass <registrations@erpmasterclasses.com>',
+      to: 'verheul.nicolai@gmail.com', //['gk@erpmasterclasses.com'],
+      subject: 'Registration form submission',
+      text: `Event: ${event.title}\nCompany Name: ${data.companyName}\nAdress: ${data.address}\nCountry: ${data.country}\nName: ${data.nameParticipant}\nPhone: ${data.phone}\nEmail: ${data.email}\nPosition: ${data.position}\nVAT number: ${data.vatNumber}\nPO number: ${data.poNumber}\nAdditional participants: ${data.additionalParticipants}`,
+      react: RegistrationFormEmail({ ...data }),
+    })
+    return { success: true, data: emailData }
   }
-
-  return { success: false, error: result.error.format() }
+  catch (error) {
+    return { success: false, error }
+  }
 }
 
 // Resend registration email
 export async function sendRegistrationConfirmationEmail(data: RegistrationFormProps, totalAmount: number) {
-    try {
-          const emailData = await resend.emails.send({
-              from: 'ERP Masterclass <contact@erpmasterclasses.com>',
-              to: 'verheul.nicolai@gmail.com', //data.email,
-              subject: 'Your Registration Confirmation',
-              text: `Event: ${data.selectedEvent.title}\nCompany Name: ${data.companyName}\nAdress: ${data.address}\nCountry: ${data.country}\nName: ${data.nameParticipant}\nPhone: ${data.phone}\nEmail: ${data.email}\nPosition: ${data.position}\nVAT number: ${data.vatNumber}\nPO number: ${data.poNumber}\nAdditional participants: ${data.additionalParticipants}`,
-              react: RegistrationConfirmationEmail({ ...data, totalAmount }),
-          })
-          return { success: true, data: emailData }
-      } catch (error) {
-          console.error('Error sending confirmation email:', error)
-          return { success: false, error }
-      }
+  try {
+    const emailData = await resend.emails.send({
+      from: 'ERP Masterclass <contact@erpmasterclasses.com>',
+      to: data.email,
+      subject: 'Your Registration Confirmation',
+      text: `Event: ${data.selectedEvent.title}\nCompany Name: ${data.companyName}\nAdress: ${data.address}\nCountry: ${data.country}\nName: ${data.nameParticipant}\nPhone: ${data.phone}\nEmail: ${data.email}\nPosition: ${data.position}\nVAT number: ${data.vatNumber}\nPO number: ${data.poNumber}\nAdditional participants: ${data.additionalParticipants}`,
+      react: RegistrationConfirmationEmail({ ...data, totalAmount }),
+    })
+    return { success: true, data: emailData }
+  } catch (error) {
+    console.error('Error sending confirmation email:', error)
+    return { success: false, error }
+  }
 }
+
+
+// ------------------ REGISTRATIONS ------------------
+
+export async function removeRegistration(eventId: string, registrationId: string) {
+  const result = await deleteRegistration(eventId, registrationId)
+  if (result.acknowledged) {
+    return { success: true, data: result }
+  }
+}
+
 
 
 // ------------------ EVENTS ------------------
 
 // Save event to database
 export async function saveEvent(data: CreateEventProps) {
-  const { result, _id} = await addEvent(data)
+  const { result, _id } = await addEvent(data)
   if (result.success) {
     return { success: true, data: result.data, _id }
   }

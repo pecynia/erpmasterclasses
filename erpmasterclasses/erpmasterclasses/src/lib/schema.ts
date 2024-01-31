@@ -1,8 +1,6 @@
 import { z } from 'zod'
 import { Locale, i18n } from '@../../../i18n.config'
 import { eventTypes, EventType } from '@../../../event.config'
-import { EventProps } from '@../../../typings'
-
 
 // 1: Required
 // 2: Invalid 
@@ -17,7 +15,9 @@ export const ContactFormSchema = z.object({
 
 export const AdditionalRegistrationFormSchema = z.object({
   nameParticipant: z.string().min(1, { message: 'Name is required.' }),
-  email: z.string().min(1, { message: '1' }).email('2')
+  email: z.string().min(1, { message: '1' }).email('2'),
+  phone: z.string().min(1, { message: 'Phone number is required.' }),
+  position: z.string().min(1, { message: 'Position is required.' }),
 })
 
 export const RegistrationFormSchema = z.object({
@@ -37,6 +37,7 @@ export const RegistrationFormSchema = z.object({
     stripeProductId: z.string()
   }),
   companyName: z.string().min(1, { message: 'Company name is required.' }),
+  companyWebsite: z.string().min(1, { message: 'Company website is required.' }),
   address: z.string().min(1, { message: 'Adress is required.' }),
   country: z.string().min(1, { message: 'Country is required.' }),
   nameParticipant: z.string().min(1, { message: 'Name is required.' }),

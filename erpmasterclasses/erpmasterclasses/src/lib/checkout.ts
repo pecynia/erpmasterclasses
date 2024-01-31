@@ -21,6 +21,7 @@ export const checkout = async (lang: Locale, registration: RegistrationFormProps
             eventDate: registration.selectedEvent.date.toISOString(), // Convert date to string
             lang: registration.selectedEvent.language,
             companyName: registration.companyName,
+            companyWebsite: registration.companyWebsite,
             address: registration.address,
             country: registration.country,
             nameParticipant: registration.nameParticipant,
@@ -32,7 +33,6 @@ export const checkout = async (lang: Locale, registration: RegistrationFormProps
             additionalParticipants: JSON.stringify(registration.additionalParticipants), // Serialize array
             selectedEvent: JSON.stringify(registration.selectedEvent) // Serialize object
         }
-
 
         const { session } = await fetch('/api/stripe/sessions', {
             method: 'POST',
@@ -47,7 +47,6 @@ export const checkout = async (lang: Locale, registration: RegistrationFormProps
         const { error } = await stripe!.redirectToCheckout({
             sessionId: session.id,
         })
-
 
         if (error) {
             throw new Error(error.message)

@@ -14,6 +14,8 @@ type StoryContent = {
 export interface AdditionalRegistrationFormProps {
     nameParticipant: string
     email: string
+    phone: string
+    position: string
 }
 
 export interface RegistrationFormProps {
@@ -22,6 +24,7 @@ export interface RegistrationFormProps {
     eventDate: Date
     lang: Locale
     companyName: string
+    companyWebsite: string
     address: string
     country: string
     nameParticipant: string

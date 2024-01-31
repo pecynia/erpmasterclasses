@@ -3,7 +3,7 @@ import { AdditionalRegistrationFormProps, EventProps, RegistrationFormProps } fr
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 import { addRegistration } from '@/lib/utils/db'
 import { Locale } from '@../../../i18n.config'
-import { sendRegistrationConfirmationEmail } from '@/app/_actions'
+import { sendRegistrationConfirmationEmail, sendRegistrationEmail } from '@/app/_actions'
 
 // Helper function to safely parse JSON strings in metadata
 function safelyParseJSON(jsonString: string | undefined) {
@@ -43,6 +43,7 @@ export async function POST(request: Request) {
                 eventDate,
                 lang,
                 companyName,
+                companyWebsite,
                 address,
                 country,
                 nameParticipant,
@@ -63,6 +64,7 @@ export async function POST(request: Request) {
                 eventDate: new Date(eventDate),
                 lang: lang as Locale,
                 companyName,
+                companyWebsite,
                 address,
                 country,
                 nameParticipant,
@@ -78,11 +80,20 @@ export async function POST(request: Request) {
             // Add registration to event in database
             const result = await addRegistration(registrationForm)
 
+            // Send admin email
+            const adminEmailResult = await sendRegistrationEmail(registrationForm, registrationForm.selectedEvent)
+
             // Send confirmation email to customer
             const emailResult = await sendRegistrationConfirmationEmail(registrationForm, session.amount_total!)
-            if (result.acknowledged && emailResult.success) {
+            
+            if (result.acknowledged && emailResult.success && adminEmailResult.success) {
                 console.log('Registration and confirmation email sent successfully')
-                return { success: true, data: result }
+                return new Response(JSON.stringify({ received: true }), {
+                    headers: { "Content-Type": "application/json" },
+                })
+            } else {
+                console.error('Error sending admin email:', adminEmailResult.error)
+                console.error('Error sending confirmation email:', emailResult.error)
             }
             break
         default:

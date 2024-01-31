@@ -1,12 +1,19 @@
 // registration-confirmation-email.tsx
-import React from 'react'
-import { RegistrationFormProps } from '@/../typings'
+import React from 'react';
+import { RegistrationFormProps } from '@/../typings';
+import { contactInfo } from '@/dictionaries/contactInfo';
 
 const style = {
     container: {
         fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
         padding: '20px',
         color: '#333',
+        backgroundColor: '#f9f9f9', // light background color
+        maxWidth: '600px',
+        margin: '0 auto',
+        border: '1px solid #ddd',
+        borderRadius: '8px',
+        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
     },
     header: {
         color: '#444',
@@ -18,7 +25,8 @@ const style = {
     badge: {
         display: 'inline-block',
         padding: '3px 7px',
-        backgroundColor: '#eee',
+        backgroundColor: '#007bff', // primary color
+        color: '#fff',
         borderRadius: '5px',
         margin: '0 5px',
     },
@@ -27,9 +35,16 @@ const style = {
         padding: '10px',
         border: '1px solid #ddd',
         borderRadius: '5px',
+        backgroundColor: '#fff', // white background for contrast
     },
-}
-
+    footer: {
+        marginTop: '20px',
+        paddingTop: '10px',
+        borderTop: '1px solid #ddd',
+        fontSize: '0.9em',
+        color: '#666',
+    },
+};
 
 const RegistrationConfirmationEmail: React.FC<Readonly<RegistrationFormProps & { totalAmount: number }>> = ({
     eventTitel,
@@ -60,16 +75,23 @@ const RegistrationConfirmationEmail: React.FC<Readonly<RegistrationFormProps & {
         <p>Position: <strong>{position}</strong></p>
         <p>VAT Number: <strong>{vatNumber}</strong></p>
         <p>PO Number: <strong>{poNumber}</strong></p>
-        <h2>Additional Contacts:</h2>
+        
+        {additionalParticipants!.length > 0 && <p>Additional Participants:</p>}
+        
         {additionalParticipants?.map((contact, index) => (
             <div key={index} style={style.participant}>
                 <p><strong>{contact.nameParticipant}</strong> ({contact.email})</p>
             </div>
         ))}
-        <p>Total Amount Paid: <span style={style.badge}>{totalAmount} €</span></p>    
-        <hr />
-        <p>Thank you for your registration. You will receive an invitation link to the event shortly before the event starts.</p>
-    </div>
-)
 
-export default RegistrationConfirmationEmail
+        <p>Total Amount Paid: <span style={style.badge}>{totalAmount} €</span></p>    
+
+        <div style={style.footer}>
+            <hr />
+            <p>Thank you for your registration. You will receive an invitation link to the event shortly before the event starts.</p>
+            <p>Please do not reply to this email. For any questions, please contact us at <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a></p>
+        </div>
+    </div>
+);
+
+export default RegistrationConfirmationEmail;

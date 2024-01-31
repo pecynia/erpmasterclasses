@@ -291,7 +291,7 @@ export async function deleteRegistration(eventId: string, registrationId: string
     const collection = db.collection('events')
 
     const filter = { _id: new ObjectId(eventId) }
-    const update = { $pull: { registrations: { _id: new ObjectId(registrationId) } } }
+    const update = { $pull: { registrations: { _id: registrationId } } }
 
     const result = await collection.updateOne(filter, update)
 

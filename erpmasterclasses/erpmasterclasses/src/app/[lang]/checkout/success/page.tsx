@@ -1,46 +1,22 @@
-"use client"
+import { Locale } from '@../../../i18n.config'
+import { getDictionary } from '@/lib/dictionary'
+import OrderOverview from '@/app/[lang]/components/OrderOverview'
 
-import { useSearchParams  } from "next/navigation"
-import useSwr from "swr"
+export default async function Page({
+    params: { lang }
+  }: {
+    params: { lang: Locale }
+  }) {
 
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
-
-export default function CheckoutSuccessPage() {
-    const searchParams = useSearchParams()
-    const session_id = searchParams.get("session_id")
-
-    const url = session_id ? `/api/stripe/sessions?session_id=${session_id}` : null
-    const { data: checkoutSession, error } = useSwr(url, fetcher)
-
-    if (error) return <div>failed to load the session</div>
-
-    const customer = checkoutSession?.session?.customer_details?.email
-    const products = checkoutSession?.session?.line_items?.data?.map((item: any) => ({
-        ...item.price.product,
-        price: item.price.unit_amount,
-        quantity: item.quantity,
-    }))
-
-    const metadata = checkoutSession?.session?.line_items?.data[0]?.price?.product?.metadata
-    const payment = checkoutSession?.session?.payment_intent?.charges?.data[0]?.payment_method_details
-    const subtotal = checkoutSession?.session?.amount_subtotal
-    const total = checkoutSession?.session?.amount_total
-    const discount = checkoutSession?.session?.total_details?.amount_discount
-    const tax = checkoutSession?.session?.total_details?.amount_tax
+    const { payments } = await getDictionary(lang)
 
     return (
-        <div>
-            <h1>Checkout Success</h1>
-            <p>Thank you for your purchase!</p>
-            <h2>Order Summary</h2>
-            <p>Customer: {customer}</p>
-            <p>Products: {products?.map((product: any) => product.name).join(", ")}</p>
-            <p>Payment Method: {payment?.card?.brand} ending in {payment?.card?.last4}</p>
-            <p>date: {metadata?.date}</p>
-            <p>Subtotal: {subtotal}</p>
-            <p>Discount: {discount}</p>
-            <p>Tax: {tax}</p>
-            <p>Total: {total}</p>
+        <div className='bg-background pb-20 pt-10'>
+            <div className='relative max-w-5xl mx-auto px-4 py-4 '>
+                <div className='mx-auto w-full sm:w-2/3 md:w-full justify-center space-y-6 md:space-y-10'>
+                    <OrderOverview payments={payments} />
+                </div>
+            </div>
         </div>
     )
 }

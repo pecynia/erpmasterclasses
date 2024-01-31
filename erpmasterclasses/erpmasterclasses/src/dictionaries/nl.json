@@ -84,7 +84,7 @@
     "title": "Sinds 2005 heb ik deze Masterclasses door heel Europa gegeven. In al die jaren heb ik vele honderden organisaties getraind en geïnspireerd. Zowel groot als klein. Lokaal en internationaal. En vrijwel alle denkbare branches en industrieën.",
     "subTitle": "Feedback van deelnemers",
     "description": "Dit is wat deelnemers zeggen over deze Masterclasses:",
-    "beOurNextSuccessStory": "Word mijn volgende succesverhaal!",
+    "beOurNextSuccessStory": "Word het volgende succesverhaal!",
     "rating": "Gemiddelde beoordeling tussen de 8,5 en 9,5!"
   },
   "events": {
@@ -106,11 +106,12 @@
     "title": "Contact",
     "registrationFormTitle": "Registeer voor de Masterclass",
     "selectMasterclass": "Selecteer een Masterclass",
-    "namePlaceholder": "Naam*",
-    "emailPlaceholder": "E-mail*",
-    "phonePlaceholder": "Telefoonnummer*",
+    "namePlaceholder": "Je naam*",
+    "emailPlaceholder": "Je e-mail*",
+    "phonePlaceholder": "Je telefoonnummer*",
     "eventDatePlaceholder": "Datum van geplande evenement (optioneel)",
     "companyNamePlaceholder": "Bedrijfsnaam*",
+    "companyWebsitePlaceholder": "Bedrijfs website*",
     "addressPlaceholder": "Adres*",
     "countryPlaceholder": "Land*",
     "positionPlaceholder": "Functie*",
@@ -132,6 +133,7 @@
   },
   "errorMessages": {
     "companyNameRequired": "Bedrijfsnaam is verplicht.",
+    "companyWebsiteRequired": "Bedrijfs website is verplicht.",
     "nameRequired": "Naam is verplicht.",
     "emailRequired": "E-mail is verplicht.",
     "invalidEmail": "Ongeldige e-mail.",
@@ -143,5 +145,12 @@
     "positionRequired": "Positie is verplicht.",
     "vatNumberRequired": "BTW-nummer is verplicht.",
     "eventRequired": "Kies een evenement."
+  },
+  "payments": {
+    "failedToLoadSession": "Kon geen betalingssessie laden.",
+    "checkoutSuccess": "Bestelling geslaagd!",
+    "thankYouForYourPurchase": "Bedankt voor je aankoop!",
+    "orderConfirmationDescriptionEmailShortly": "Je ontvangt binnenkort een e-mail met een bevestiging van je bestelling.",
+    "orderSummary": "Besteloverzicht"
   }
 }

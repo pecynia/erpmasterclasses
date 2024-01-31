@@ -37,6 +37,7 @@ export type ClientRegistrationFormProps = {
         namePlaceholder: string
         phonePlaceholder: string
         emailPlaceholder: string
+        companyWebsitePlaceholder: string
         positionPlaceholder: string
         vatPlaceholder: string
         poPlaceholder: string
@@ -55,6 +56,7 @@ export type ClientRegistrationFormProps = {
     }
     errorMessages: {
         companyNameRequired: string
+        companyWebsiteRequired: string
         nameRequired: string
         phoneRequired: string
         emailRequired: string
@@ -86,7 +88,6 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
         } catch (error) {
             toast.error(localization.errorToast)
         }
-
     }
 
     const { fields, append, remove } = useFieldArray({
@@ -95,7 +96,7 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
     })
     // Add participants
     const handleAddParticipant = () => {
-        append({ nameParticipant: '', email: '' })
+        append({ nameParticipant: '', email: '', phone: '', position: '' })
     }
     // Remove participants
     const handleRemoveParticipant = (index: number) => {
@@ -171,6 +172,39 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
                     />
                     {errors.companyName && <p className='text-sm text-red-400'>{errorMessages.companyNameRequired}</p>}
 
+                    {/* Address Input */}
+                    <input
+                        {...register('address')}
+                        placeholder={localization.addressPlaceholder}
+                        className='w-full rounded-lg p-2 border-2 border-gray-100'
+                    />
+                    {errors.address && <p className='text-sm text-red-400'>{errorMessages.addressRequired}</p>}
+
+                    {/* Country Input */}
+                    <input
+                        {...register('country')}
+                        placeholder={localization.countryPlaceholder}
+                        className='w-1/2 rounded-lg p-2 border-2 border-gray-100'
+                    />
+                    {errors.country && <p className='text-sm text-red-400'>{errorMessages.countryRequired}</p>}
+
+                    {/* VAT Number Input */}
+                    <input
+                        {...register('vatNumber')}
+                        placeholder={localization.vatPlaceholder}
+                        className='w-2/3 rounded-lg p-2 border-2 border-gray-100'
+                    />
+                    {errors.vatNumber && <p className='text-sm text-red-400'>{errorMessages.vatNumberRequired}</p>}
+
+                    {/* Company website  */}
+                    <input
+                        {...register('companyWebsite')}
+                        placeholder={localization.companyWebsitePlaceholder}
+                        className='w-2/3 rounded-lg p-2 border-2 border-gray-100'
+                    />
+                    {errors.companyWebsite && <p className='text-sm text-red-400'>{errorMessages.companyWebsiteRequired}</p>}
+
+
                     {/* Name Input */}
                     <input
                         {...register('nameParticipant')}
@@ -189,22 +223,6 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
                         {errors.email.message === '1' ? errorMessages.emailRequired : errorMessages.invalidEmail}
                     </p>}
 
-                    {/* Address Input */}
-                    <input
-                        {...register('address')}
-                        placeholder={localization.addressPlaceholder}
-                        className='w-full rounded-lg p-2 border-2 border-gray-100'
-                    />
-                    {errors.address && <p className='text-sm text-red-400'>{errorMessages.addressRequired}</p>}
-
-                    {/* Country Input */}
-                    <input
-                        {...register('country')}
-                        placeholder={localization.countryPlaceholder}
-                        className='w-1/2 rounded-lg p-2 border-2 border-gray-100'
-                    />
-                    {errors.country && <p className='text-sm text-red-400'>{errorMessages.countryRequired}</p>}
-
                     {/* Phone Input */}
                     <input
                         {...register('phone')}
@@ -220,14 +238,6 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
                         className='w-2/3 rounded-lg p-2 border-2 border-gray-100'
                     />
                     {errors.position && <p className='text-sm text-red-400'>{errorMessages.positionRequired}</p>}
-
-                    {/* VAT Number Input */}
-                    <input
-                        {...register('vatNumber')}
-                        placeholder={localization.vatPlaceholder}
-                        className='w-2/3 rounded-lg p-2 border-2 border-gray-100'
-                    />
-                    {errors.vatNumber && <p className='text-sm text-red-400'>{errorMessages.vatNumberRequired}</p>}
 
                     {/* PO Number Input */}
                     <input
@@ -255,7 +265,7 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
                                     </Badge>
                                 </button>
                             </div>
-                            <div className='flex flex-row gap-4'>
+                            <div className='flex flex-row gap-2 pb-2'>
                                 <div className='w-full'>
                                     <input
                                         {...register(`additionalParticipants.${index}.nameParticipant` as const)}
@@ -281,6 +291,32 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
                                     )}
                                 </div>
                             </div>
+                            <div className='flex flex-row gap-2'>
+                                <div className='w-full'>
+                                    <input
+                                        {...register(`additionalParticipants.${index}.phone` as const)}
+                                        placeholder={localization.phonePlaceholder}
+                                        className='w-full rounded-lg p-2 border-2 border-gray-100'
+                                    />
+                                    {errors.additionalParticipants?.[index]?.phone?.message && (
+                                        <p className='text-sm text-red-400'>
+                                            {errors.additionalParticipants[index]?.phone?.message && errorMessages.phoneRequired}
+                                        </p>
+                                    )}
+                                </div>
+                                <div className='w-full'>
+                                    <input
+                                        {...register(`additionalParticipants.${index}.position` as const)}
+                                        placeholder={localization.positionPlaceholder}
+                                        className='w-full rounded-lg p-2 border-2 border-gray-100'
+                                    />
+                                    {errors.additionalParticipants?.[index]?.position?.message && (
+                                        <p className='text-sm text-red-400'>
+                                            {errors.additionalParticipants[index]?.position?.message && errorMessages.positionRequired}
+                                        </p>
+                                    )}
+                                </div>
+                            </div>
                         </div>
                     ))}
 
@@ -298,41 +334,43 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
                     </div>
 
                     {/* Price */}
-                    {fields.length > 0 && (
-                        <div>
+                    <div className=''>
+                        {fields.length > 0 && (
+                            <div>
+                                <div className='flex flex-row gap-4'>
+                                    <div className='w-full'>
+                                        <p className='text-sm'>{localization.pricePerParticipant}</p>
+                                    </div>
+                                    <div className='w-full'>
+                                        <p className='text-sm text-right'>€ {event!.price} </p>
+                                    </div>
+                                </div>
+
+                                {/* Total participants */}
+                                <div className='flex flex-row gap-4 justify-between'>
+                                    <div className='w-full'>
+                                        <p className='text-sm'>{localization.totalParticipants}</p>
+                                    </div>
+                                    <div className='w-full'>
+                                        <p className='text-sm text-right'>{fields.length + 1}</p>
+                                    </div>
+                                </div>
+                                <hr className='my-1' />
+                            </div>
+                        )}
+
+                        {/* Total price */}
+                        {event && (
                             <div className='flex flex-row gap-4'>
                                 <div className='w-full'>
-                                    <p className='text-sm'>{localization.pricePerParticipant}</p>
+                                    <p className='text-sm'>{localization.totalPrice}</p>
                                 </div>
                                 <div className='w-full'>
-                                    <p className='text-sm'>{event!.price} €</p>
+                                    <p className='text-sm text-right'>€ {(fields.length + 1) * event.price} </p>
                                 </div>
                             </div>
-
-                            {/* Total participants */}
-                            <div className='flex flex-row gap-4'>
-                                <div className='w-full'>
-                                    <p className='text-sm'>{localization.totalParticipants}</p>
-                                </div>
-                                <div className='w-full'>
-                                    <p className='text-sm'>{fields.length + 1}</p>
-                                </div>
-                            </div>
-                            <hr className='my-1 w-2/3' />
-                        </div>
-                    )}
-
-                    {/* Total price */}
-                    {event && (
-                        <div className='flex flex-row gap-4'>
-                            <div className='w-full'>
-                                <p className='text-sm'>{localization.totalPrice}</p>
-                            </div>
-                            <div className='w-full'>
-                                <p className='text-sm'>{(fields.length + 1) * event.price} €</p>
-                            </div>
-                        </div>
-                    )}
+                        )}
+                    </div>
 
                     {/* Submit Button */}
                     <button

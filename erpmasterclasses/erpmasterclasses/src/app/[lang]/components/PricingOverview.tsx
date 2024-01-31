@@ -33,10 +33,10 @@ function PricingOverview({ lang, navigation, pricing }: { lang: Locale, navigati
                         </Link>
                     </Button>
                 </div>
-                <p className='text-sm font-bold text-tertiary mt-2 px-12 pb-2'>
-                        {pricing.type1.discountText}
+                <p className='text-md font-bold text-tertiary mt-2 px-12 pb-2'>
+                    {pricing.type1.discountText}
                 </p>
-                
+
                 <hr className='mx-12' />
                 <div className='px-8 pt-5'>
                     <EditorWrapper initialLocale={lang} documentId='pricing-card-1-features' />

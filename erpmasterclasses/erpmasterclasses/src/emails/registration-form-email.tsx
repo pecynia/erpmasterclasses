@@ -7,6 +7,7 @@ const RegistrationFormEmail: React.FC<Readonly<RegistrationFormProps>> = ({
     eventDate,
     lang,
     companyName,
+    companyWebsite,
     address,
     country,
     nameParticipant,
@@ -20,8 +21,9 @@ const RegistrationFormEmail: React.FC<Readonly<RegistrationFormProps>> = ({
     <div>
         <h1>Registration form submission</h1>
         <p>Masterclass: <strong>{eventTitel}</strong></p>
-        <p>Date: <strong>{eventDate.toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' })}</strong></p>
+        <p>Date: <strong>{eventDate?.toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' })}</strong></p>
         <p>Company Name: <strong>{companyName}</strong></p>
+        <p>Company Website: <strong>{companyWebsite}</strong></p>
         <p>Address: <strong>{address}</strong></p>
         <p>Country: <strong>{country}</strong></p>
         <p>From <strong>{nameParticipant}</strong> ({email})</p>

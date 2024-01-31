@@ -84,7 +84,7 @@
     "title": "I have delivered these Masterclasses all over Europe since 2005. Over these years I have trained and inspired many hundreds of organizations. Both big and small. Local and international. And just about all conceivable branches and industries.",
     "subTitle": "Participant feedback",
     "description": "This is what participants say about these Masterclasses:",
-    "beOurNextSuccessStory": "Be my next success story!",
+    "beOurNextSuccessStory": "Be the next success story!",
     "rating": "Average ratings between 8,5 and 9,5!"
   },
   "events": {
@@ -96,9 +96,9 @@
     "loadingAgenda": "Loading agenda...",
     "transformation": "Agenda for the ERP Transformation Masterclass",
     "upcomingMasterclasses": "Upcoming Masterclasses",
-    "upcomingTransformationMasterclasses": "ERP Transformation Masterclass",
+    "upcomingTransformationMasterclasses": "Scheduled Transformation Masterclass",
     "success": "Agenda for the ERP Selection Masterclass",
-    "upcomingSuccessMasterclasses": "ERP Selection Masterclass",
+    "upcomingSuccessMasterclasses": "Scheduled Selection Masterclasses",
     "noFound": "No events planned yet. Please check back later.",
     "registerButton": "Register"
   },
@@ -106,14 +106,15 @@
     "title": "Contact",
     "registrationFormTitle": "Register for the Masterclass",
     "selectMasterclass": "Select Masterclass",
-    "namePlaceholder": "Name*",
-    "emailPlaceholder": "Email*",
-    "phonePlaceholder": "Phone number*",
+    "namePlaceholder": "Your name*",
+    "emailPlaceholder": "Your email*",
+    "phonePlaceholder": "Your phone number*",
     "eventDatePlaceholder": "Date of planned event (optional)",
     "companyNamePlaceholder": "Company name*",
     "addressPlaceholder": "Address*",
     "countryPlaceholder": "Country*",
-    "positionPlaceholder": "Position*",
+    "positionPlaceholder": "Your position*",
+    "companyWebsitePlaceholder": "Company website*",
     "vatPlaceholder": "VAT number*",
     "poPlaceholder": "PO number (optional)",
     "messagePlaceholder": "Message*",
@@ -132,6 +133,7 @@
   },
   "errorMessages": {
     "companyNameRequired": "Company name is required.",
+    "companyWebsiteRequired": "Company website is required.",
     "nameRequired": "Name is required.",
     "emailRequired": "Email is required.",
     "invalidEmail": "Invalid email.",
@@ -143,5 +145,12 @@
     "positionRequired": "Position is required.",
     "vatNumberRequired": "VAT number is required.",
     "eventRequired": "Choose an event"
+  }, 
+  "payments": {
+    "failedToLoadSession": "Failed to load session",
+    "checkoutSuccess": "Checkout success",
+    "thankYouForYourPurchase": "Thank you for your purchase!",
+    "orderConfirmationDescriptionEmailShortly": "You will receive an email with the invoice shortly.",
+    "orderSummary": "Order summary"
   }
 }

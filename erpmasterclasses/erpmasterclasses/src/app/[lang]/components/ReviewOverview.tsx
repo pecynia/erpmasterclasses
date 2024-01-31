@@ -20,6 +20,7 @@ const ReviewOverview: React.FC<{ lang: Locale, review: ReviewProps }> = ({ lang,
         'review-description-2',
         'review-description-3',
         'review-description-4',
+        'additional-description-1',
         'review-description-5',
         'review-description-6',	
     ]
