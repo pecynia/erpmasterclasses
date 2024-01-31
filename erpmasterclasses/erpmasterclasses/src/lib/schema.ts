@@ -72,3 +72,24 @@ export const EventSchema = z.object({
   stripeProductId: z.string().min(1, { message: 'Stripe product ID is required.' })
 })
 
+// Exactly the same as EventSchema, but without stripe IDs
+export const CreateEventSchema = z.object({
+  title: z.string().min(1, { message: 'Title is required.' }),
+  eventSlug: z.string().min(1, { message: 'Slug is required.' }),
+  description: z.string().min(1, { message: 'Description is required.' }),
+  price: z.number().min(0, { message: 'Price must be greater than 0.' }),
+  type: z.string().min(1, { message: 'Event type is required.' }).refine((value) => {
+    return eventTypes.types.includes(value as EventType)
+  }, { message: 'Event type is invalid.' }),
+  date: z.date().refine((value) => {
+    return value > new Date()
+  }, { message: 'Date must be in the future.' }),
+  location: z.string().optional(),
+  requiredRegistrations: z.number().min(1, { message: 'At least one registration is required.' }),
+  language: z.string().min(1, { message: 'Language is required.' }).refine((value) => {
+    return i18n.locales.includes(value as Locale)
+  }, { message: 'Language is invalid.' }),
+  shownLanguages: z.array(z.string().min(1, { message: 'Language is required.' }).refine((value) => {
+    return i18n.locales.includes(value as Locale)
+  }, { message: 'Language is invalid.' })).min(1, { message: 'At least one language is required.' }),
+})

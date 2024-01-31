@@ -3,7 +3,7 @@
 import React from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { EventSchema } from '@/lib/schema'
+import { CreateEventSchema } from '@/lib/schema'
 import { updateEventInDatabase } from '@/app/_actions'
 import { Locale, i18n } from '@../../../i18n.config'
 import { eventTypes, EventType } from '@../../../event.config'
@@ -50,7 +50,7 @@ import {
 
 const UpdateEvent: React.FC<{ existingEvent: EventData, allEvents: EventData[], setEventData: React.Dispatch<React.SetStateAction<EventData[]>> }> = ({ existingEvent, allEvents, setEventData }) => {
     const { register, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm<CreateEventProps>({
-        resolver: zodResolver(EventSchema),
+        resolver: zodResolver(CreateEventSchema),
         defaultValues: {
             ...existingEvent,
         }
@@ -67,9 +67,12 @@ const UpdateEvent: React.FC<{ existingEvent: EventData, allEvents: EventData[], 
     const processForm: SubmitHandler<CreateEventProps> = async (data) => {
         try {
             // Take the _id from the existing event and overwrite the rest of the data
-            const updatedEvent = { ...data, _id: existingEvent._id } as EventData
+            const updatedEvent = { ...data, _id: existingEvent._id, stripeProductId: existingEvent.stripeProductId, stripePriceId: existingEvent.stripePriceId } as EventData
 
             const result = await updateEventInDatabase(updatedEvent)
+
+            // Set the updated priceId
+            updatedEvent.stripePriceId = result.stripePriceId!
 
             // Update the event in the state updatedEvents (EventData[])
             const updatedEvents = allEvents.map(event => event._id === updatedEvent._id ? updatedEvent : event)
@@ -77,6 +80,9 @@ const UpdateEvent: React.FC<{ existingEvent: EventData, allEvents: EventData[], 
 
             // Close the dialog
             closeSheet()
+
+            // Show a success toast
+            toast.success("Event updated successfully")
 
         } catch (error) {
             console.error(error)

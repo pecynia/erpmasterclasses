@@ -89,9 +89,11 @@ export async function removeRegistration(eventId: string, registrationId: string
 
 // Save event to database
 export async function saveEvent(data: CreateEventProps) {
-  const { result, _id } = await addEvent(data)
+  const { result, _id, eventWithStripe } = await addEvent(data)
   if (result.success) {
-    return { success: true, data: result.data, _id }
+    return { success: true, data: result.data, _id, eventWithStripe }
+  } else {
+    return { success: false, error: result.error }
   }
 }
 
@@ -115,10 +117,11 @@ export async function removeEvent(id: string) {
 
 // Update event in database
 export async function updateEventInDatabase(data: EventData) {
-  const result = await updateEvent(data)
+  const { result, stripePriceId } = await updateEvent(data)
   if (result.acknowledged) {
-    return { success: true, data: result }
-  }
+    return { success: true, data: result, stripePriceId }
+  } else
+    return { success: false, error: 'Error updating event' }
 }
 
 

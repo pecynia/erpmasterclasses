@@ -184,6 +184,7 @@ export async function addEvent(event: CreateEventProps) {
             eventSlug: event.eventSlug,
             date: event.date,
             location: event.location,
+            description: event.description,
             type: event.type,
             language: event.language
         },
@@ -193,7 +194,7 @@ export async function addEvent(event: CreateEventProps) {
 
     const price = await stripe.prices.create({
         product: product.id,
-        unit_amount: event.price,
+        unit_amount: event.price * 100,
         metadata: {
             eventId: _id.toString()
         },
@@ -206,7 +207,7 @@ export async function addEvent(event: CreateEventProps) {
 
     // revalidateTag('events')
 
-    return { result, _id: _id.toString() }
+    return { result, _id: _id.toString(), eventWithStripe }
 }
 
 
@@ -215,15 +216,52 @@ export async function updateEvent(event: EventProps) {
     const db = await connectToDatabase()
     const collection = db.collection('events')
 
-    const { _id, ...eventProps } = event
-    const filter = { _id: new ObjectId(_id) }
-    const update = { $set: eventProps }
+    try {
+        const { _id, ...eventProps } = event
 
-    const result = await collection.updateOne(filter, update) as { matchedCount: number, modifiedCount: number, acknowledged: boolean, upsertedId: ObjectId | null, upsertedCount: number }
+        // Update price in Stripe (make a new one)
+        const updatedPrice = await stripe.prices.create({
+            product: event.stripeProductId,
+            unit_amount: event.price * 100,
+            metadata: {
+                eventId: event._id.toString()
+            },
+            currency: 'eur',
+        })
 
-    // revalidateTag('events')
+        // Update product in Stripe
+        try {
+            await stripe.products.update(event.stripeProductId, { 
+                name: event.title, 
+                description: event.description, 
+                // url: `process.env.NEXT_PUBLIC_URL/${event.language}/agenda/${event.eventSlug}` 
+            })    
+        } catch (error) {
+            console.error('Error updating Stripe product:', error)
+            throw error // Rethrow or handle it as needed
+        }
 
-    return result
+        // Set the old price to inactive
+        try {
+            await stripe.prices.update(event.stripePriceId, { active: false })
+        } catch (error) {
+            console.error('Error updating Stripe price:', error)
+        }
+
+        // Set the new price to the event object
+        const stripePriceId =  updatedPrice.id as string
+        eventProps.stripePriceId = stripePriceId
+
+        // Update the event in the database
+        const filter = { _id: new ObjectId(_id) }
+        const update = { $set: eventProps }
+        const result = await collection.updateOne(filter, update) as { matchedCount: number, modifiedCount: number, acknowledged: boolean, upsertedId: ObjectId | null, upsertedCount: number }
+
+        return { result, stripePriceId }
+    } catch (error) {
+        console.error('Error updating event:', error)
+        throw error // Rethrow or handle it as needed
+    }    
 }
 
 // Delete event
@@ -234,10 +272,12 @@ export async function deleteEvent(eventId: string) {
     let stripeProdId
     let result
 
-    // Fetch Stripe Product ID
+    console.log('Deleting event:', eventId)
+
+    // Get event from database
     try {
         const event = await collection.findOne({ _id: new ObjectId(eventId) })
-        stripeProdId = event.stripeProductId
+        stripeProdId = event?.stripeProductId
     } catch (error) {
         console.error('Error fetching event from database:', error)
         throw error // Rethrow or handle it as needed
@@ -255,13 +295,12 @@ export async function deleteEvent(eventId: string) {
     try {
         await stripe.products.del(stripeProdId)
     } catch (error) {
-        console.error('Error deleting Stripe product:', error)
-        // Handle or log the error - don't throw as the main operation (event deletion) was successful
+        console.error('Cant delete Stripe product, setting it to inactive')
     }
 
     // Attempt to update Stripe price
     try {
-        await stripe.prices.update(stripeProdId, { active: false })
+        await stripe.products.update(stripeProdId, { active: false })
         console.log('Stripe product set to inactive:', stripeProdId)
     } catch (error) {
         console.error('Error updating Stripe price:', error)    }

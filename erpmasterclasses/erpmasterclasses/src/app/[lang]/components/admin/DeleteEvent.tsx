@@ -36,7 +36,7 @@ const DeleteEvent: React.FC<DeleteEventProps> = ({ eventId, allEvents, setEventD
             }
         } catch (error) {
             console.error(error)
-            toast.error('An error occurred while deleting the event')
+            toast.error('An error occurred while deleting the event. Refresh the page and try again.')
         }
     }
 

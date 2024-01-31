@@ -3,7 +3,7 @@
 import React from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { EventSchema } from '@/lib/schema'
+import { CreateEventSchema } from '@/lib/schema'
 import { saveEvent } from '@/app/_actions'
 import { Locale, i18n } from '@../../../i18n.config'
 import { CreateEventProps, EventData } from '@/../typings'
@@ -49,7 +49,7 @@ import {
 } from "@/app/[lang]/components/ui/dialog"
 const AddEvent: React.FC<{ allEvents: EventData[], setEventData: React.Dispatch<React.SetStateAction<EventData[]>> }> = ({ allEvents, setEventData }) => {
   const { register, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm<CreateEventProps>({
-    resolver: zodResolver(EventSchema),
+    resolver: zodResolver(CreateEventSchema),
     defaultValues: {
       title: '',
       eventSlug: '',
@@ -75,15 +75,22 @@ const AddEvent: React.FC<{ allEvents: EventData[], setEventData: React.Dispatch<
   const processForm: SubmitHandler<CreateEventProps> = async (data) => {
     try {
       const result = await saveEvent(data)
-      toast.success("Event added successfully")
 
       // Add the new event to the list of events
       const newEvent = data as CreateEventProps
-      const completeNewEvent = { ...newEvent, _id: result?._id } as EventData
+      const completeNewEvent = { 
+        ...newEvent, 
+        _id: result._id, 
+        stripeProductId: result.eventWithStripe?.stripeProductId, 
+        stripePriceId: result.eventWithStripe?.stripePriceId 
+      } as EventData
+ 
+      // Update the events list
       setEventData([...allEvents, completeNewEvent])
 
       // Close the dialog
       closeSheet()
+      toast.success("Event added successfully")
     } catch (error) {
       console.error(error)
       toast.error("Failed to add event")
@@ -299,7 +306,6 @@ const AddEvent: React.FC<{ allEvents: EventData[], setEventData: React.Dispatch<
               </Select>
             </div>
 
-
             {/* Multiple Languages Selector */}
             <div className='flex flex-col gap-2'>
               <div className='pt-2'>
@@ -326,6 +332,7 @@ const AddEvent: React.FC<{ allEvents: EventData[], setEventData: React.Dispatch<
 
             {/* Submit Button */}
             <Button
+              type='submit'
               disabled={isSubmitting}
               className='rounded-lg bg-primary py-2.5 font-medium text-white transition-colors hover:bg-primary/80 disabled:cursor-not-allowed disabled:opacity-50'
             >

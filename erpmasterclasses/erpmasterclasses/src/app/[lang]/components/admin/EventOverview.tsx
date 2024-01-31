@@ -86,26 +86,27 @@ const EventOverview: React.FC<{ allEvents: EventData[], setEventData: React.Disp
             {/* Participants Dialog */}
             {isParticipantsDialogOpen && (
                 <Dialog open={isParticipantsDialogOpen} onOpenChange={setIsParticipantsDialogOpen}>
-                    <DialogContent>
+                    <DialogContent className='h-[60vh]'>
                         <DialogHeader>
                             <DialogTitle>Participants</DialogTitle>
                             <DialogClose />
                         </DialogHeader>
                         <div className='overflow-y-auto'>
                             {selectedEventRegistrations.map(registration => (
-                                <div key={registration._id} className='flex items-start justify-between p-2 border-2 rounded-xl'>
+                                <div key={registration._id} className='flex items-start justify-between p-2 m-2 border-2 rounded-xl'>
                                     <div>
                                         <p className='flex flex-row gap-1 font-semibold'>
                                             <UserRound className='' size={20} />
                                             {registration.nameParticipant} ({registration.email})
                                         </p>
-                                        <div className='text-sm ml-4 p-1 border-2 rounded-xl'>
+                                        {registration.additionalParticipants!.length > 0 && <div className='text-sm ml-4 p-1 border-2 rounded-xl'>
                                             {registration.additionalParticipants?.map((participant, index) => (
                                                 <p key={index} className='pl-2'>{participant.nameParticipant} ({participant.email})</p>
                                             ))}
                                         </div>
+                                        }
                                     </div>
-                                    <Badge onClick={() => handleDeleteRegistration(registration.selectedEvent._id, registration._id)} className="hover:cursor-pointer">
+                                    <Badge variant='destructive' onClick={() => handleDeleteRegistration(registration.selectedEvent._id, registration._id)} className="hover:cursor-pointer">
                                         <Trash2 size={16} />
                                     </Badge>
                                 </div>
