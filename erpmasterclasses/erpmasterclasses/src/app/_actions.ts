@@ -44,7 +44,7 @@ export async function sendRegistrationEmail(data: RegistrationFormProps, event: 
   try {
     const emailData = await resend.emails.send({
       from: 'ERP Masterclass <registrations@erpmasterclasses.com>',
-      to: 'verheul.nicolai@gmail.com', //['gk@erpmasterclasses.com'],
+      to: ['gk@erpmasterclasses.com'],
       subject: 'Registration form submission',
       text: `Event: ${event.title}\nCompany Name: ${data.companyName}\nAdress: ${data.address}\nCountry: ${data.country}\nName: ${data.nameParticipant}\nPhone: ${data.phone}\nEmail: ${data.email}\nPosition: ${data.position}\nVAT number: ${data.vatNumber}\nPO number: ${data.poNumber}\nAdditional participants: ${data.additionalParticipants}`,
       react: RegistrationFormEmail({ ...data }),

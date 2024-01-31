@@ -1,6 +1,5 @@
 "use client"
 
-// CheckoutSuccessPage.js
 import { useSearchParams } from "next/navigation"
 import useSwr from "swr"
 
@@ -29,8 +28,8 @@ export default function CheckoutSuccessPage( { payments }: { payments: any }) {
     const tax = checkoutSession?.session?.total_details?.amount_tax
 
     return (
-        <div className="container mx-auto px-4 py-10">
-            <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-lg px-12 pb-12 pt-6">
+        <div className="">
+            <div className=" bg-white shadow-lg rounded-lg px-12 pb-12 pt-6">
                 <h1 className="text-2xl font-bold mb-4 text-center">{payments.checkoutSuccess}</h1>
                 <p className="mb-4">{payments.thankYouForYourPurchase}, {customer}! {payments.orderConfirmationDescriptionEmailShortly}</p>
                 
