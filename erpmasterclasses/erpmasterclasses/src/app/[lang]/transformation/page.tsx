@@ -29,7 +29,7 @@ export default async function Page({
                     <EditorWrapper documentId='transformation-day-planning' initialLocale={lang} />
                 </div>
                 {/* Absolute positioned Image at the bottom */}
-                <div className="absolute bottom-0 left-0 w-1/2 md:w-1/3 lg:w-1/4 -z-1">
+                <div className="absolute top-0 right-0 lg:bottom-0 lg:left-0 w-1/2 md:w-1/3 lg:w-1/4 -z-1">
                     <Image
                         src={Groep3}
                         alt="Background Image"
