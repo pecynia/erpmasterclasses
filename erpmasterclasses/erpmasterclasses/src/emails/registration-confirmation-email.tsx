@@ -35,7 +35,7 @@ const style = {
         padding: '10px',
         border: '1px solid #ddd',
         borderRadius: '5px',
-        backgroundColor: '#fff', // white background for contrast
+        backgroundColor: '#fff',
     },
     footer: {
         marginTop: '20px',
@@ -84,7 +84,7 @@ const RegistrationConfirmationEmail: React.FC<Readonly<RegistrationFormProps & {
             </div>
         ))}
 
-        <p>Total Amount Paid: <span style={style.badge}>{totalAmount} €</span></p>    
+        <p>Total Amount Paid: <span style={style.badge}>{totalAmount / 100} €</span></p>    
 
         <div style={style.footer}>
             <hr />

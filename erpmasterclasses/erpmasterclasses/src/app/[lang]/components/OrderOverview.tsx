@@ -31,22 +31,22 @@ export default function CheckoutSuccessPage( { payments }: { payments: any }) {
         <div className="">
             <div className=" bg-white shadow-lg rounded-lg px-12 pb-12 pt-6">
                 <h1 className="text-2xl font-bold mb-4 text-center">{payments.checkoutSuccess}</h1>
-                <p className="mb-4">{payments.thankYouForYourPurchase}, {customer}! {payments.orderConfirmationDescriptionEmailShortly}</p>
+                <p className="mb-4">{payments.thankYouForYourPurchase} {customer}! {payments.orderConfirmationDescriptionEmailShortly}</p>
                 
                 <div className="mb-6">
                     <h2 className="text-xl font-semibold mb-3">{payments.orderSummary}</h2>
                     {products?.map((product: any, index: any) => (
                         <div key={index} className="mb-2">
-                            <p>{product.name} - {product.quantity} x {product.price} €</p>
+                            <p>{product.name} - {product.quantity} x {product.price / 100} €</p>
                         </div>
                     ))}
                 </div>
 
                 {/* <p className="mb-3">Payment Method: {payment?.card?.brand} ending in {payment?.card?.last4}</p> */}
-                <p className="mb-3">Subtotal: {subtotal} €</p>
-                {discount > 0 && <p className="mb-3">Discount: {discount} €</p>}
-                {tax > 0 && <p className="mb-3">Tax: {tax} €</p>}
-                <p className="font-bold">Total: {total} €</p>
+                <p className="mb-3">Subtotal: {subtotal / 100} €</p>
+                {discount > 0 && <p className="mb-3">Discount: {discount / 100} €</p>}
+                {tax > 0 && <p className="mb-3">Tax: {tax / 100} €</p>}
+                <p className="font-bold">Total: {total / 100} €</p>
             </div>
         </div>
     )

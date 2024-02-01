@@ -26,7 +26,7 @@ const HomeOverview: React.FC<{ lang: Locale }> = ({ lang }) => {
                     className="object-cover object-center blur-sm scale-105 "
                     style={{ objectPosition: 'center 15%' }}
                 />                
-                <div className="relative w-full pb-36">
+                <div className="relative w-full pb-36 pt-48">
                     <div className='rounded-b-3xl flex bg-background flex-col pt-4 container px-8 md:px-16 pb-40 md:pb-32 lg:pb-24 min-h-screen'>
                         <EditorWrapper documentId='home-letter' initialLocale={lang} />
                     </div>
