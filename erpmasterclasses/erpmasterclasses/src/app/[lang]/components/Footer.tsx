@@ -7,7 +7,7 @@ import { Linkedin, Mail, Phone } from 'lucide-react'
 import Logo from '@/../public/logo.png'
 
 
-export default async function Footer({ lang }: { lang: Locale }) {    
+export default async function Footer({ lang }: { lang: Locale }) {
     const { navigation, footer } = await getDictionary(lang)
     return (
         <footer className="relative bg-primary py-8 px-16 text-primary-foreground">
@@ -59,10 +59,10 @@ export default async function Footer({ lang }: { lang: Locale }) {
             <div className="mt-8 flex justify-center font-thin items-center space-x-4">
                 <p>kvk: {contactInfo.kvk}</p>
                 <p>&copy; ERP Masterclasses {new Date().getFullYear()}</p>
-                <p>{footer.credit.label} 
-                <Link href="https://boostmaestro.com" target="_blank" className='hover:text-secondary'>
-                    <span className="font-bold font-raleway"> Boost Maestro</span>
-                </Link>
+                <p>{footer.credit.label}
+                    <Link href="https://boostmaestro.com" target="_blank" className='hover:text-secondary'>
+                        <span className="font-bold font-raleway"> Boost Maestro</span>
+                    </Link>
                 </p>
             </div>
         </footer>
