@@ -59,7 +59,11 @@ export default async function Footer({ lang }: { lang: Locale }) {
             <div className="mt-8 flex justify-center font-thin items-center space-x-4">
                 <p>kvk: {contactInfo.kvk}</p>
                 <p>&copy; ERP Masterclasses {new Date().getFullYear()}</p>
-                <p>{footer.credit.label} <span className="font-bold">Humainly</span></p>
+                <p>{footer.credit.label} 
+                <Link href="https://boostmaestro.com" target="_blank" className='hover:text-secondary'>
+                    <span className="font-bold font-raleway"> Boost Maestro</span>
+                </Link>
+                </p>
             </div>
         </footer>
     );
