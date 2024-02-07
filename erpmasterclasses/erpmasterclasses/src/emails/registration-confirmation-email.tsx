@@ -89,7 +89,7 @@ const RegistrationConfirmationEmail: React.FC<Readonly<RegistrationFormProps & {
         <div style={style.footer}>
             <hr />
             <p>Thank you for your registration. You will receive an invitation link to the event shortly before the event starts.</p>
-            <p>Please do not reply to this email. For any questions, please contact us at <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a></p>
+            <p>Please do not reply to this email. For any questions, please contact me at <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a></p>
         </div>
     </div>
 );

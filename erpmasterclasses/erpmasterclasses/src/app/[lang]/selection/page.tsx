@@ -25,19 +25,17 @@ export default async function Page({
             </div>
             {/* Section with Background Image at the Bottom */}
             <div className="relative w-full bg-background pt-12 pb-36">
-                <div className='flex flex-col max-w-5xl mx-auto px-8 pt-8 pb-40 md:pb-32 lg:pb-24 min-h-screen'>
+                <div className='flex flex-col max-w-5xl mx-auto px-8 pt-8 min-h-screen'>
                     <EditorWrapper documentId='success-day-planning' initialLocale={lang} />
                 </div>
-                {/* Absolute positioned Image at the bottom */}
-                <div className="absolute bottom-0 right-0 w-1/2 md:w-1/3 lg:w-1/4 -z-1">
+                {/* Absolute positioned Image at the bottom
+                <div className="absolute bottom-0 right-0 w-1/2 md:w-1/3 lg:w-1/4 -z-1 border-2">
                     <Image
                         src={Groep3}
                         alt="Background Image"
-                        layout="responsive"
                         className="object-cover object-bottom"
-                        style={{ zIndex: -1 }}
                     />
-                </div>
+                </div> */}
             </div>
             <div className='w-full bg-secondary pt-12 pb-36'>
                 <div className='flex flex-col max-w-5xl mx-auto px-8 py-8 '>
