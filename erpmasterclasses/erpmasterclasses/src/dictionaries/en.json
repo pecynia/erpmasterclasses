@@ -74,7 +74,8 @@
       "title": "Inhouse Masterclass",
       "description": "Customised to Your Organisation's Needs",
       "price": "Custom",
-      "buttonText": "Contact Me"
+      "buttonText": "Contact Me",
+      "attention": "Attention"
     }
   },
   "about": {
