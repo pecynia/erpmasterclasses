@@ -25,6 +25,8 @@ const BenefitsOverview: React.FC<{ lang: Locale }> = ({ lang }) => {
             >
                 <EditorWrapper documentId='benefit-description' initialLocale={lang} />
             </motion.div>
+            <br />
+            <br />
 
             {/* Overview */}
             <div className="relative -mt-16 w-full md:w-3/4 lg:w-4/5 mx-auto px-16 overflow-hidden">

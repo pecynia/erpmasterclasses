@@ -33,7 +33,7 @@ function PricingOverview({ lang, navigation, pricing }: { lang: Locale, navigati
                         </Link>
                     </Button>
                 </div>
-                <p className='text-md font-bold text-tertiary mt-2 px-12 pb-2'>
+                <p className='text-xl font-bold text-tertiary mt-2 px-12 pb-2'>
                     {pricing.type1.discountText}
                 </p>
 
