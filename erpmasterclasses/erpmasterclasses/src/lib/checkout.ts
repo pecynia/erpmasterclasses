@@ -14,6 +14,11 @@ export const checkout = async (lang: Locale, registration: RegistrationFormProps
                 quantity: quantity
             },
         ]
+        const customer_details = {
+            email: registration.email,
+            name: registration.nameParticipant,
+            phone: registration.phone
+        }
         // Serialize complex objects and arrays
         const checkoutMetadata = {
             _id: registration._id,
@@ -40,7 +45,7 @@ export const checkout = async (lang: Locale, registration: RegistrationFormProps
                 'Content-Type': 'application/json',
                 'lang': lang
             },
-            body: JSON.stringify({ lineItems, checkoutMetadata }),
+            body: JSON.stringify({ lineItems, checkoutMetadata, customer_details }),
         }).then((res) => res.json()) as { session: Stripe.Checkout.Session }
 
         const stripe = await stripePromise

@@ -194,6 +194,7 @@ export async function addEvent(event: CreateEventProps) {
 
     const price = await stripe.prices.create({
         product: product.id,
+        tax_behavior: 'exclusive',
         unit_amount: event.price * 100,
         metadata: {
             eventId: _id.toString()

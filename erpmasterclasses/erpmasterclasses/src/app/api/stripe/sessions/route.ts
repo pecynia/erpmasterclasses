@@ -3,7 +3,7 @@ import Stripe from 'stripe'
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 
 export async function POST(request: Request) {
-    const { lineItems, checkoutMetadata } = await request.json()
+    const { lineItems, checkoutMetadata, customer_details } = await request.json()
 
     if (!lineItems) {
         return new Response(JSON.stringify({ error: "lineItems is required" }), {
@@ -14,6 +14,9 @@ export async function POST(request: Request) {
     const session = await stripe.checkout.sessions.create({
         line_items: lineItems,
         metadata: checkoutMetadata,
+        locale: 'auto',
+        automatic_tax: { enabled: true },
+        customer_email: customer_details.email,
         mode: 'payment',
         success_url: `${request.headers.get('Origin')}/${request.headers.get('lang')}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${request.headers.get('Origin')}/${request.headers.get('lang')}`,          
@@ -48,6 +51,8 @@ export async function GET(request: NextRequest ) {
     const session = await stripe.checkout.sessions.retrieve(sessionId, {
         expand: ['payment_intent', 'line_items.data.price.product'] // 'line_items.data.price.product.metadata'
     })
+
+    console.log(session)
 
     if (!session) {
         return new Response(JSON.stringify({ error: "Session could not be retrieved" }), {
