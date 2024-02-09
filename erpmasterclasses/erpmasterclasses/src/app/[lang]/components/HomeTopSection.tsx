@@ -2,13 +2,10 @@
 
 import React, { useEffect, useState, useRef } from 'react'
 
-import Link from 'next/link'
 import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Locale } from '@../../../i18n.config'
-import { Button } from '@/app/[lang]/components/ui/button'
 import Groep1 from '@/../public/imgs/groep-1.jpg'
-import Spokeperson2 from '@/../public/imgs/spokeperson2.jpg'
 import Lenis from '@studio-freight/lenis'
 import EditorWrapper from './editor/EditorWrapper'
 
@@ -52,9 +49,6 @@ const HomeTopSection: React.FC<{ lang: Locale }> = ({ lang }) => {
 
     return (
         <div className="relative text-primary-foreground flex flex-col justify-center items-start h-[70vh]">
-
-
-
             <motion.div
                 ref={container}
                 style={{ y: useTransform(scrollYProgress, [0, 1], [0, dimension.height * 0.25]) }}
@@ -77,7 +71,7 @@ const HomeTopSection: React.FC<{ lang: Locale }> = ({ lang }) => {
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className=" absolute left-[10vw] bg-white text-primary rounded-md w-4/5 md:w-3/5 lg:w-2/5  "
+                className=" absolute left-[10vw] bg-background/90 rounded-md px-auto"
             >
                 <div className="w-full pl-4 pr-8 md:pl-10 md:pr-14 mb-1">
                     <EditorWrapper documentId='home-top-section-catchphrase' initialLocale={lang} />
