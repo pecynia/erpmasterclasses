@@ -126,7 +126,7 @@
     "priceOverview": "Prijs overzicht",
     "pricePerParticipant": "Prijs per deelnemer",
     "totalParticipants": "Aantal deelnemers",
-    "totalPrice": "Totaal prijs",
+    "totalPrice": "Totaal prijs (excl. BTW)",
     "emailSentToast": "E-mail verzonden!",
     "errorToast": "Oeps! Er ging iets mis.",
     "additionalParticipantButton": "Voeg een extra deelnemer toe",
@@ -150,7 +150,7 @@
   "payments": {
     "failedToLoadSession": "Kon geen betalingssessie laden.",
     "checkoutSuccess": "Bestelling geslaagd!",
-    "thankYouForYourPurchase": "Bedankt voor je aankoop!",
+    "thankYouForYourPurchase": "Bedankt voor je aankoop",
     "orderConfirmationDescriptionEmailShortly": "Je ontvangt binnenkort een e-mail met een bevestiging van je bestelling.",
     "orderSummary": "Besteloverzicht"
   }

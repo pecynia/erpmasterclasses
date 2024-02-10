@@ -127,7 +127,7 @@
     "priceOverview": "Preisübersicht",
     "pricePerParticipant": "Preis pro Teilnehmer",
     "totalParticipants": "Teilnehmer insgesamt",
-    "totalPrice": "Gesamtpreis",
+    "totalPrice": "Gesamtpreis (exkl. MwSt.)",
     "emailSentToast": "E-Mail gesendet!",
     "errorToast": "Hoppla! Etwas ist schief gelaufen.",
     "additionalParticipantButton": "Weitere Teilnehmer hinzufügen",
@@ -151,7 +151,7 @@
   "payments": {
     "failedToLoadSession": "Fehler beim Laden der Sitzung.",
     "checkoutSuccess": "Vielen Dank für Ihre Bestellung!",
-    "thankYouForYourPurchase": "Vielen Dank für Ihre Bestellung!",
+    "thankYouForYourPurchase": "Vielen Dank für Ihre Bestellung",
     "orderConfirmationDescriptionEmailShortly": "Sie erhalten in Kürze eine Bestätigungs-E-Mail.",
     "orderSummary": "Bestellübersicht"
   }

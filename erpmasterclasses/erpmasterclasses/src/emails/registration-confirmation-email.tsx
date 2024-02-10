@@ -19,16 +19,12 @@ const style = {
         color: '#444',
         marginBottom: '20px',
     },
+    headerSmall: {
+        fontSize: '1.2em',
+        color: '#666',
+    },
     strong: {
         fontWeight: 'bold',
-    },
-    badge: {
-        display: 'inline-block',
-        padding: '3px 7px',
-        backgroundColor: '#007bff', // primary color
-        color: '#fff',
-        borderRadius: '5px',
-        margin: '0 5px',
     },
     participant: {
         marginTop: '10px',
@@ -46,7 +42,7 @@ const style = {
     },
 };
 
-const RegistrationConfirmationEmail: React.FC<Readonly<RegistrationFormProps & { totalAmount: number }>> = ({
+const RegistrationConfirmationEmail: React.FC<Readonly<RegistrationFormProps & { totalAmount: number, subtotal: number, tax: number, discount: number }>> = ({
     eventTitel,
     eventDate,
     lang,
@@ -60,13 +56,19 @@ const RegistrationConfirmationEmail: React.FC<Readonly<RegistrationFormProps & {
     vatNumber,
     poNumber,
     additionalParticipants,
-    totalAmount
+    totalAmount,
+    subtotal,
+    tax,
+    discount
 }) => (
     <div style={style.container}>
         <h1 style={style.header}>Thank you for your registration</h1>
         <p>You have registered for the following event:</p>
         <p>Event: <strong>{eventTitel}</strong></p>
         <p>Date: <strong>{eventDate?.toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' })}</strong></p>
+        
+        <hr />
+        <h3 style={style.headerSmall}>Registration Details</h3>
         <p>Company Name: <strong>{companyName}</strong></p>
         <p>Address: <strong>{address}</strong></p>
         <p>Country: <strong>{country}</strong></p>
@@ -84,10 +86,14 @@ const RegistrationConfirmationEmail: React.FC<Readonly<RegistrationFormProps & {
             </div>
         ))}
 
-        <p>Total Amount Paid: <span style={style.badge}>{totalAmount / 100} €</span></p>    
+        <hr />
+
+        <p>Subtotal: {subtotal / 100} €</p>
+        {discount > 0 && <p>Discount: {discount / 100} €</p>}
+        {tax > 0 && <p>Tax: {tax / 100} €</p>}
+        <p>Total Amount Paid: {totalAmount / 100} €</p>    
 
         <div style={style.footer}>
-            <hr />
             <p>Thank you for your registration. You will receive an invitation link to the event shortly before the event starts.</p>
             <p>Please do not reply to this email. For any questions, please contact me at <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a></p>
         </div>

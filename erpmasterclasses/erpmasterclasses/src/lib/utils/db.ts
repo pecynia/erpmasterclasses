@@ -206,8 +206,6 @@ export async function addEvent(event: CreateEventProps) {
 
     const result = await collection.insertOne(eventWithStripe)
 
-    // revalidateTag('events')
-
     return { result, _id: _id.toString(), eventWithStripe }
 }
 

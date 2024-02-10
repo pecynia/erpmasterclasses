@@ -15,7 +15,7 @@ export async function POST(request: Request) {
         line_items: lineItems,
         metadata: checkoutMetadata,
         locale: 'auto',
-        automatic_tax: { enabled: true },
+        // automatic_tax: { enabled: true },
         customer_email: customer_details.email,
         mode: 'payment',
         success_url: `${request.headers.get('Origin')}/${request.headers.get('lang')}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,

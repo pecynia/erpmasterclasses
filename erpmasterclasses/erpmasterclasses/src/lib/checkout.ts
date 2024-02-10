@@ -11,7 +11,10 @@ export const checkout = async (lang: Locale, registration: RegistrationFormProps
         const lineItems = [
             {
                 price: registration.selectedEvent.stripePriceId,
-                quantity: quantity
+                quantity: quantity,
+                dynamic_tax_rates: [
+                    'txr_1OhtVzIs2202NSkNSXNuzIx9',
+                ],
             },
         ]
         const customer_details = {

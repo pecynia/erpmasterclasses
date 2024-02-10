@@ -84,7 +84,11 @@ export async function POST(request: Request) {
             const adminEmailResult = await sendRegistrationEmail(registrationForm, registrationForm.selectedEvent)
 
             // Send confirmation email to customer
-            const emailResult = await sendRegistrationConfirmationEmail(registrationForm, session.amount_total!)
+            const totalAmount = session.amount_total!
+            const subtotal = session.amount_subtotal!
+            const discount = session.total_details?.amount_discount!
+            const tax = session.total_details?.amount_tax!
+            const emailResult = await sendRegistrationConfirmationEmail(registrationForm, totalAmount, subtotal, tax, discount)
             
             if (result.acknowledged && emailResult.success && adminEmailResult.success) {
                 console.log('Registration and confirmation email sent successfully')

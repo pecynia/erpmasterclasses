@@ -57,14 +57,14 @@ export async function sendRegistrationEmail(data: RegistrationFormProps, event: 
 }
 
 // Resend registration email
-export async function sendRegistrationConfirmationEmail(data: RegistrationFormProps, totalAmount: number) {
+export async function sendRegistrationConfirmationEmail(data: RegistrationFormProps, totalAmount: number, subtotal: number, tax: number, discount: number) {
   try {
     const emailData = await resend.emails.send({
       from: 'ERP Masterclass <contact@erpmasterclasses.com>',
       to: data.email,
       subject: 'Your Registration Confirmation',
       text: `Event: ${data.selectedEvent.title}\nCompany Name: ${data.companyName}\nAdress: ${data.address}\nCountry: ${data.country}\nName: ${data.nameParticipant}\nPhone: ${data.phone}\nEmail: ${data.email}\nPosition: ${data.position}\nVAT number: ${data.vatNumber}\nPO number: ${data.poNumber}\nAdditional participants: ${data.additionalParticipants}`,
-      react: RegistrationConfirmationEmail({ ...data, totalAmount }),
+      react: RegistrationConfirmationEmail({ ...data, totalAmount, subtotal, tax, discount }),
     })
     return { success: true, data: emailData }
   } catch (error) {

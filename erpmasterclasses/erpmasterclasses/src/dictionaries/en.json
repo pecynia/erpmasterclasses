@@ -126,7 +126,7 @@
     "priceOverview": "Price overview",
     "pricePerParticipant": "Price per participant",
     "totalParticipants": "Total participants",
-    "totalPrice": "Total price",
+    "totalPrice": "Total price (excl. VAT)",
     "emailSentToast": "Email sent!",
     "errorToast": "Oops! Something went wrong.",
     "additionalParticipantButton": "Add additional participant",
@@ -150,7 +150,7 @@
   "payments": {
     "failedToLoadSession": "Failed to load session",
     "checkoutSuccess": "Checkout success",
-    "thankYouForYourPurchase": "Thank you for your purchase!",
+    "thankYouForYourPurchase": "Thank you for your purchase",
     "orderConfirmationDescriptionEmailShortly": "You will receive an email with the invoice shortly.",
     "orderSummary": "Order summary"
   }
