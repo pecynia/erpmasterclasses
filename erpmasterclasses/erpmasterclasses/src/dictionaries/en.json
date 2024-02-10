@@ -152,6 +152,10 @@
     "checkoutSuccess": "Checkout success",
     "thankYouForYourPurchase": "Thank you for your purchase",
     "orderConfirmationDescriptionEmailShortly": "You will receive an email with the invoice shortly.",
-    "orderSummary": "Order summary"
+    "orderSummary": "Order summary",
+    "subtotal": "Subtotal",
+    "discount": "Discount",
+    "vat": "VAT",
+    "totalPrice": "Total"
   }
 }

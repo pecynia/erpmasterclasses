@@ -153,6 +153,10 @@
     "checkoutSuccess": "Vielen Dank für Ihre Bestellung!",
     "thankYouForYourPurchase": "Vielen Dank für Ihre Bestellung",
     "orderConfirmationDescriptionEmailShortly": "Sie erhalten in Kürze eine Bestätigungs-E-Mail.",
-    "orderSummary": "Bestellübersicht"
+    "orderSummary": "Bestellübersicht",
+    "subtotal": "Gesamt",
+    "discount": "Rabatt",
+    "vat": "MwSt.",
+    "totalPrice": "Gesamtpreis"
   }
 }

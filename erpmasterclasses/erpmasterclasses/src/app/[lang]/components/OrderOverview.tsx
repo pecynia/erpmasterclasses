@@ -54,10 +54,10 @@ export default function CheckoutSuccessPage( { payments }: { payments: any }) {
                 <hr className="mb-6"/>
 
                 {/* <p className="mb-3">Payment Method: {payment?.card?.brand} ending in {payment?.card?.last4}</p> */}
-                <p className="mb-3">Subtotal: €{subtotal / 100} </p>
-                {discount > 0 && <p className="mb-3">Discount: €{discount / 100} </p>}
-                {tax > 0 && <p className="mb-3">Tax: €{tax / 100} </p>}
-                <p className="font-bold">Total: €{total / 100} </p>
+                <p className="mb-3">{payments.subtotal}: €{subtotal / 100} </p>
+                {discount > 0 && <p className="mb-3">{payments.discount}: €{discount / 100} </p>}
+                {tax > 0 && <p className="mb-3">{payments.vat}: €{tax / 100} </p>}
+                <p className="font-bold">{payments.totalPrice}: €{total / 100} </p>
             </div>
         </div>
     )

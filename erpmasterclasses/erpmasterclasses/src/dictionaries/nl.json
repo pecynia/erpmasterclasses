@@ -152,6 +152,10 @@
     "checkoutSuccess": "Bestelling geslaagd!",
     "thankYouForYourPurchase": "Bedankt voor je aankoop",
     "orderConfirmationDescriptionEmailShortly": "Je ontvangt binnenkort een e-mail met een bevestiging van je bestelling.",
-    "orderSummary": "Besteloverzicht"
+    "orderSummary": "Besteloverzicht",
+    "subtotal": "Subtotaal",
+    "discount": "Korting",
+    "vat": "BTW",
+    "totalPrice": "Totaal"
   }
 }
