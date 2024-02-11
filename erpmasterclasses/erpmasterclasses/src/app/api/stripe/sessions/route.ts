@@ -18,7 +18,7 @@ export async function POST(request: Request) {
         customer_email: customer_details.email,
         mode: 'payment',
         success_url: `${request.headers.get('Origin')}/${request.headers.get('lang')}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${request.headers.get('Origin')}/${request.headers.get('lang')}`,          
+        cancel_url: `${request.headers.get('Origin')}/${request.headers.get('lang')}/register`,     
     })
 
     // If the session is not created, return an error

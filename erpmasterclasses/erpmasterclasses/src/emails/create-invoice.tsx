@@ -82,7 +82,7 @@ export const DocumentPDF = ({ data, paymentDetails }: { data: RegistrationFormPr
     <Document>
         <Page size="A4" style={styles.page}>
             {/* Header */}
-            <Text style={styles.header}>ERP Masterclasses</Text>
+            <Text style={styles.header}>Registration Invoice</Text>
 
             {/* Date  */}
             <Text style={styles.date}>{new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</Text>
