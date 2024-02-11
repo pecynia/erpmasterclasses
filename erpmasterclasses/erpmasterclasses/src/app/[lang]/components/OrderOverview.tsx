@@ -6,7 +6,7 @@ import { CheckCircle } from "lucide-react"
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
-export default function CheckoutSuccessPage( { payments }: { payments: any }) {
+export default function CheckoutSuccessPage({ payments }: { payments: any }) {
     const searchParams = useSearchParams()
     const session_id = searchParams.get("session_id")
 
@@ -32,15 +32,14 @@ export default function CheckoutSuccessPage( { payments }: { payments: any }) {
         <div className="">
             <div className=" bg-white shadow-lg rounded-xl px-12 pb-12 pt-6">
                 <div className="flex justify-center items-center mb-6">
-                    {<CheckCircle className="mb-6 mr-2 text-secondary"/>}
+                    {<CheckCircle className="mb-6 mr-2 text-secondary" />}
                     <h1 className="text-2xl font-bold mb-6 text-center">
                         {payments.checkoutSuccess}
                     </h1>
                 </div>
                 <p className="mb-4">{payments.thankYouForYourPurchase} {customer}! {payments.orderConfirmationDescriptionEmailShortly}</p>
-                
-                <hr />
 
+                <hr />
 
                 <div className="my-6">
                     <h2 className="text-xl font-semibold mb-3">{payments.orderSummary}</h2>
@@ -51,7 +50,7 @@ export default function CheckoutSuccessPage( { payments }: { payments: any }) {
                     ))}
                 </div>
 
-                <hr className="mb-6"/>
+                <hr className="mb-6" />
 
                 {/* <p className="mb-3">Payment Method: {payment?.card?.brand} ending in {payment?.card?.last4}</p> */}
                 <p className="mb-3">{payments.subtotal}: €{subtotal / 100} </p>

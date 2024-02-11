@@ -15,7 +15,6 @@ export async function POST(request: Request) {
         line_items: lineItems,
         metadata: checkoutMetadata,
         locale: 'auto',
-        // automatic_tax: { enabled: true },
         customer_email: customer_details.email,
         mode: 'payment',
         success_url: `${request.headers.get('Origin')}/${request.headers.get('lang')}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
@@ -52,7 +51,7 @@ export async function GET(request: NextRequest ) {
         expand: ['payment_intent', 'line_items.data.price.product'] // 'line_items.data.price.product.metadata'
     })
 
-    console.log(session)
+    // console.log(session)
 
     if (!session) {
         return new Response(JSON.stringify({ error: "Session could not be retrieved" }), {

@@ -9,6 +9,9 @@ import { addEvent, getEventsWithRegistrations, getEvents, deleteEvent, updateEve
 import { CreateEventProps, EventData, EventProps, RegistrationFormProps } from '@/../typings'
 import { Locale } from '../../i18n.config'
 import RegistrationConfirmationEmail from '@/emails/registration-confirmation-email'
+import { DocumentPDF } from '@/emails/create-invoice'
+import ReactPDF from '@react-pdf/renderer';
+import { TestDocumentPDF } from '@/emails/test-invoice'
 
 // ------------------ CONTACT FORMS ------------------
 
@@ -56,15 +59,43 @@ export async function sendRegistrationEmail(data: RegistrationFormProps, event: 
   }
 }
 
+
+export type PaymentDetails = {
+  subtotal: number,
+  totalAmount: number,
+  discount: number,
+  tax: number,
+  customer_details: {
+    address: {
+      city: string,
+      country: string,
+      line1: string,
+      line2?: string,
+      postal_code: string,
+      state?: string
+    },
+    email: string,
+    name?: string,
+    phone?: string
+  }
+}
+
 // Resend registration email
-export async function sendRegistrationConfirmationEmail(data: RegistrationFormProps, totalAmount: number, subtotal: number, tax: number, discount: number) {
+export async function sendRegistrationConfirmationEmail(data: RegistrationFormProps, paymentDetails: PaymentDetails, pdfBufferRaw: Buffer) {
+  const pdfBuffer = Buffer.from(pdfBufferRaw)
   try {
+    if (!pdfBuffer || pdfBuffer.length === 0) {
+      console.error('Error generating PDF buffer')
+      return { success: false, error: 'Error generating PDF buffer' }
+    }
+    const { totalAmount, subtotal, tax, discount } = paymentDetails
     const emailData = await resend.emails.send({
       from: 'ERP Masterclass <contact@erpmasterclasses.com>',
       to: data.email,
       subject: 'Your Registration Confirmation',
       text: `Event: ${data.selectedEvent.title}\nCompany Name: ${data.companyName}\nAdress: ${data.address}\nCountry: ${data.country}\nName: ${data.nameParticipant}\nPhone: ${data.phone}\nEmail: ${data.email}\nPosition: ${data.position}\nVAT number: ${data.vatNumber}\nPO number: ${data.poNumber}\nAdditional participants: ${data.additionalParticipants}`,
       react: RegistrationConfirmationEmail({ ...data, totalAmount, subtotal, tax, discount }),
+      attachments: [{ filename: 'invoice.pdf', content: pdfBuffer }]
     })
     return { success: true, data: emailData }
   } catch (error) {
@@ -72,6 +103,25 @@ export async function sendRegistrationConfirmationEmail(data: RegistrationFormPr
     return { success: false, error }
   }
 }
+
+export async function testSendPdf(pdfBufferRaw: Buffer) {
+  const typeofBuffer = Buffer.from(pdfBufferRaw)
+  console.log(typeofBuffer.length)
+  try {
+    const emailData = await resend.emails.send({
+      from: 'ERP Masterclass <contact@erpmasterclasses.com>',
+      to: 'verheul.nicolai@gmail.com',
+      subject: 'Test PDF',
+      text: `Test PDF`,
+      attachments: [{ filename: 'invoice.pdf', content: typeofBuffer }]
+    })
+    return { success: true, data: emailData }
+  } catch (error) {
+    console.error('Error sending confirmation email:', error)
+    return { success: false, error }
+  }
+}
+
 
 
 // ------------------ REGISTRATIONS ------------------

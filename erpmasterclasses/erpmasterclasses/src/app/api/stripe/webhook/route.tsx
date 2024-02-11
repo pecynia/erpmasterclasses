@@ -3,7 +3,8 @@ import { AdditionalRegistrationFormProps, EventProps, RegistrationFormProps } fr
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 import { addRegistration } from '@/lib/utils/db'
 import { Locale } from '@../../../i18n.config'
-import { sendRegistrationConfirmationEmail, sendRegistrationEmail } from '@/app/_actions'
+import { PaymentDetails, sendRegistrationConfirmationEmail, sendRegistrationEmail, testSendPdf } from '@/app/_actions'
+import { generateInvoicePDF } from '@/app/[lang]/components/GenerateInvoicePDF'
 
 // Helper function to safely parse JSON strings in metadata
 function safelyParseJSON(jsonString: string | undefined) {
@@ -80,15 +81,29 @@ export async function POST(request: Request) {
             // Add registration to event in database
             const result = await addRegistration(registrationForm)
 
-            // Send admin email
-            const adminEmailResult = await sendRegistrationEmail(registrationForm, registrationForm.selectedEvent)
+            // Send email to admin
+            // const adminEmailResult = await sendRegistrationEmail(registrationForm, registrationForm.selectedEvent)
+            const adminEmailResult = {
+                success: true,
+                data: null,
+                error: null
+            }
 
             // Send confirmation email to customer
-            const totalAmount = session.amount_total!
-            const subtotal = session.amount_subtotal!
-            const discount = session.total_details?.amount_discount!
-            const tax = session.total_details?.amount_tax!
-            const emailResult = await sendRegistrationConfirmationEmail(registrationForm, totalAmount, subtotal, tax, discount)
+            const paymentDetails = {
+                subtotal: session.amount_subtotal!,
+                totalAmount: session.amount_total!,
+                discount: session.total_details?.amount_discount!,
+                tax: session.total_details?.amount_tax!,
+                customer_details: session.customer_details
+            } as PaymentDetails
+
+            // Create PDF buffer
+            const pdfBuffer = await generateInvoicePDF()
+
+            // Send confirmation email to customer
+            // const emailResult = await sendRegistrationConfirmationEmail(registrationForm, paymentDetails, pdfBuffer)
+            const emailResult = await testSendPdf(pdfBuffer)
             
             if (result.acknowledged && emailResult.success && adminEmailResult.success) {
                 console.log('Registration and confirmation email sent successfully')
