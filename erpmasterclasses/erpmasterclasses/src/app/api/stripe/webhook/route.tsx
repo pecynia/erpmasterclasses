@@ -3,7 +3,7 @@ import { AdditionalRegistrationFormProps, EventProps, RegistrationFormProps } fr
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 import { addRegistration } from '@/lib/utils/db'
 import { Locale } from '@../../../i18n.config'
-import { PaymentDetails, sendRegistrationConfirmationEmail, sendRegistrationEmail, testSendPdf } from '@/app/_actions'
+import { PaymentDetails, sendRegistrationConfirmationEmail, sendRegistrationEmail } from '@/app/_actions'
 import { generateInvoicePDF } from '@/app/[lang]/components/GenerateInvoicePDF'
 
 // Helper function to safely parse JSON strings in metadata
@@ -82,12 +82,7 @@ export async function POST(request: Request) {
             const result = await addRegistration(registrationForm)
 
             // Send email to admin
-            // const adminEmailResult = await sendRegistrationEmail(registrationForm, registrationForm.selectedEvent)
-            const adminEmailResult = {
-                success: true,
-                data: null,
-                error: null
-            }
+            const adminEmailResult = await sendRegistrationEmail(registrationForm, registrationForm.selectedEvent)
 
             // Send confirmation email to customer
             const paymentDetails = {
@@ -99,11 +94,10 @@ export async function POST(request: Request) {
             } as PaymentDetails
 
             // Create PDF buffer
-            const pdfBuffer = await generateInvoicePDF()
+            const pdfBuffer = await generateInvoicePDF(registrationForm, paymentDetails)
 
             // Send confirmation email to customer
-            // const emailResult = await sendRegistrationConfirmationEmail(registrationForm, paymentDetails, pdfBuffer)
-            const emailResult = await testSendPdf(pdfBuffer)
+            const emailResult = await sendRegistrationConfirmationEmail(registrationForm, paymentDetails, pdfBuffer)
             
             if (result.acknowledged && emailResult.success && adminEmailResult.success) {
                 console.log('Registration and confirmation email sent successfully')

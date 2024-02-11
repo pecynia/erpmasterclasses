@@ -2,16 +2,13 @@
 
 import { z } from 'zod'
 import { Resend } from 'resend'
-import { ContactFormSchema, RegistrationFormSchema } from '@/lib/schema'
+import { ContactFormSchema } from '@/lib/schema'
 import ContactFormEmail from '@/emails/contact-form-email'
 import RegistrationFormEmail from '@/emails/registration-form-email'
 import { addEvent, getEventsWithRegistrations, getEvents, deleteEvent, updateEvent, getParagraphJson, deleteRegistration } from '@/lib/utils/db'
 import { CreateEventProps, EventData, EventProps, RegistrationFormProps } from '@/../typings'
 import { Locale } from '../../i18n.config'
 import RegistrationConfirmationEmail from '@/emails/registration-confirmation-email'
-import { DocumentPDF } from '@/emails/create-invoice'
-import ReactPDF from '@react-pdf/renderer';
-import { TestDocumentPDF } from '@/emails/test-invoice'
 
 // ------------------ CONTACT FORMS ------------------
 
@@ -84,10 +81,6 @@ export type PaymentDetails = {
 export async function sendRegistrationConfirmationEmail(data: RegistrationFormProps, paymentDetails: PaymentDetails, pdfBufferRaw: Buffer) {
   const pdfBuffer = Buffer.from(pdfBufferRaw)
   try {
-    if (!pdfBuffer || pdfBuffer.length === 0) {
-      console.error('Error generating PDF buffer')
-      return { success: false, error: 'Error generating PDF buffer' }
-    }
     const { totalAmount, subtotal, tax, discount } = paymentDetails
     const emailData = await resend.emails.send({
       from: 'ERP Masterclass <contact@erpmasterclasses.com>',
@@ -103,25 +96,6 @@ export async function sendRegistrationConfirmationEmail(data: RegistrationFormPr
     return { success: false, error }
   }
 }
-
-export async function testSendPdf(pdfBufferRaw: Buffer) {
-  const typeofBuffer = Buffer.from(pdfBufferRaw)
-  console.log(typeofBuffer.length)
-  try {
-    const emailData = await resend.emails.send({
-      from: 'ERP Masterclass <contact@erpmasterclasses.com>',
-      to: 'verheul.nicolai@gmail.com',
-      subject: 'Test PDF',
-      text: `Test PDF`,
-      attachments: [{ filename: 'invoice.pdf', content: typeofBuffer }]
-    })
-    return { success: true, data: emailData }
-  } catch (error) {
-    console.error('Error sending confirmation email:', error)
-    return { success: false, error }
-  }
-}
-
 
 
 // ------------------ REGISTRATIONS ------------------
