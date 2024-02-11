@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         alignItems: 'flex-end',
         width: '50%',
-        fontSize: 8,
+        fontSize: 5,
     },
     title: {
         fontSize: 16,
@@ -47,12 +47,24 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         textAlign: 'right',
     },
-    bold: {
+    boldText: {
+        fontSize: 10,
+        marginBottom: 5,
         fontWeight: 'bold',
     },
-    orderSummary: {
+    orderSummaryLeft: {
         marginTop: 20,
         paddingTop: 10,
+        borderTop: '1px solid #ddd',
+        width: '50%',
+        fontSize: 10,
+    },
+    orderSummaryRight: {
+        marginTop: 20,
+        paddingTop: 10,
+        borderTop: '1px solid #ddd',
+        width: '50%',
+        fontSize: 10,
     },
     line: {
         borderBottom: '1px solid #ddd',
@@ -85,26 +97,24 @@ export const DocumentPDF = ({ data, paymentDetails }: { data: RegistrationFormPr
             <Text style={styles.header}>Registration Invoice</Text>
 
             {/* Date  */}
-            <Text style={styles.date}>{new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</Text>
+            <Text style={styles.date}>{new Date().toDateString()}</Text>
 
             {/* Billing and Company Info */}
             <View style={styles.section}>
+
+                {/* Customer Details */}
                 <View style={styles.leftColumn}>
-                    <Text style={[styles.text, styles.bold]}>Billed to:</Text>
+                    <Text style={styles.boldText}>Billed to:</Text>
                     <Text style={styles.text}>{data.companyName}</Text>
                     <Text style={styles.text}>{data.nameParticipant}</Text>
                     <Text style={styles.text}>{paymentDetails.customer_details.address.line1}</Text>
                     {paymentDetails.customer_details.address.line2 && <Text style={styles.text}>{paymentDetails.customer_details.address.line2}</Text>}
-                    <Text style={styles.text}>{paymentDetails.customer_details.address.postal_code} {paymentDetails.customer_details.address.city}</Text>
-                    <Text style={styles.text}>{paymentDetails.customer_details.address.country}</Text>
+                    <Text style={styles.text}>{paymentDetails.customer_details.address.postal_code} {paymentDetails.customer_details.address.city}, {paymentDetails.customer_details.address.country}</Text>
                     <View style={styles.break} />
-                    <Text style={styles.text}>{data.phone}</Text>
-                    <Text style={styles.text}>{paymentDetails.customer_details.email}</Text>
-                    <Text style={styles.text}>{data.companyWebsite}</Text>
-                    <Text style={styles.text}>VAT {data.vatNumber}</Text>
                     {data.poNumber && <Text style={styles.text}>PO: {data.poNumber}</Text>}
                 </View>
 
+                {/* Seller Details */}
                 <View style={styles.rightColumn}>
                     <Text style={styles.title}>Dynamics and More</Text>
                     <Text style={styles.text}>Pad van Witte Veder 13</Text>
@@ -123,20 +133,23 @@ export const DocumentPDF = ({ data, paymentDetails }: { data: RegistrationFormPr
             </View>
 
             {/* Order Summary */}
-            <View style={styles.divider} /> 
-            <View style={styles.orderSummary}>
+            <View style={styles.orderSummaryLeft}>
                 <Text style={styles.title}>Order summary:</Text>
                 <Text style={styles.text}>Event: {data.eventTitel}</Text>
-                <Text style={styles.text}>Date: {data.eventDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</Text>
+                <Text style={styles.text}>Date: {data.eventDate.toDateString()}</Text>
                 <Text style={styles.text}>Language: {data.lang}</Text>
                 <Text style={styles.text}>Total number of participants: {(data.additionalParticipants?.length ?? 0) + 1}</Text>
                 <View style={styles.break} />
+            </View>
+
+            {/* Payment Details */}
+            <View style={styles.orderSummaryRight}> 
+                <Text style={styles.title}>Payment details:</Text>
+                <Text style={styles.text}>Subtotal: € {paymentDetails.subtotal / 100}</Text>
+                <Text style={styles.text}>Tax: € {paymentDetails.tax / 100}</Text>
+                {paymentDetails.discount > 0 && <Text style={styles.text}>Discount: € {paymentDetails.discount / 100}</Text>}
                 <View style={styles.line} />
-                <Text style={styles.text}>Subtotal: €{paymentDetails.subtotal / 100}</Text>
-                <Text style={styles.text}>Tax: €{paymentDetails.tax / 100}</Text>
-                {paymentDetails.discount > 0 && <Text style={styles.text}>Discount: €{paymentDetails.discount / 100}</Text>}
-                <View style={styles.line} />
-                <Text style={[styles.text, styles.bold]}>Total: €{paymentDetails.totalAmount / 100}</Text>
+                <Text style={styles.boldText}>Total: € {paymentDetails.totalAmount / 100}</Text>
             </View>
 
             {/* Footer */}
