@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         alignItems: 'flex-end',
         width: '50%',
-        fontSize: 5,
+        fontSize: 3.5,
     },
     title: {
         fontSize: 16,
@@ -97,7 +97,7 @@ export const DocumentPDF = ({ data, paymentDetails }: { data: RegistrationFormPr
             <Text style={styles.header}>Registration Invoice</Text>
 
             {/* Date  */}
-            <Text style={styles.date}>{new Date().toDateString()}</Text>
+            <Text style={styles.date}>{new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}</Text>
 
             {/* Billing and Company Info */}
             <View style={styles.section}>
@@ -133,27 +133,26 @@ export const DocumentPDF = ({ data, paymentDetails }: { data: RegistrationFormPr
             </View>
 
             {/* Order Summary */}
-            <View style={styles.orderSummaryLeft}>
-                <Text style={styles.title}>Order summary:</Text>
-                <Text style={styles.text}>Event: {data.eventTitel}</Text>
-                <Text style={styles.text}>Date: {data.eventDate.toDateString()}</Text>
-                <Text style={styles.text}>Language: {data.lang}</Text>
-                <Text style={styles.text}>Total number of participants: {(data.additionalParticipants?.length ?? 0) + 1}</Text>
-                <View style={styles.break} />
-            </View>
+            <View style={styles.section}>
+                <View style={styles.orderSummaryLeft}>
+                    <Text style={styles.title}>Order summary:</Text>
+                    <Text style={styles.text}>Event: {data.eventTitel}</Text>
+                    <Text style={styles.text}>Date: {data.eventDate.toLocaleDateString(data.lang, { year: 'numeric', month: 'long', day: 'numeric' })}</Text>
+                    <Text style={styles.text}>Language: {data.lang.toUpperCase()}</Text>
+                    <Text style={styles.text}>Total number of participants: {(data.additionalParticipants?.length ?? 0) + 1}</Text>
+                    <View style={styles.break} />
+                </View>
 
-            {/* Payment Details */}
-            <View style={styles.orderSummaryRight}> 
-                <Text style={styles.title}>Payment details:</Text>
-                <Text style={styles.text}>Subtotal: € {paymentDetails.subtotal / 100}</Text>
-                <Text style={styles.text}>Tax: € {paymentDetails.tax / 100}</Text>
-                {paymentDetails.discount > 0 && <Text style={styles.text}>Discount: € {paymentDetails.discount / 100}</Text>}
-                <View style={styles.line} />
-                <Text style={styles.boldText}>Total: € {paymentDetails.totalAmount / 100}</Text>
+                {/* Payment Details */}
+                <View style={styles.orderSummaryRight}>
+                    <Text style={styles.title}>Payment details:</Text>
+                    <Text style={styles.text}>Subtotal: € {paymentDetails.subtotal / 100}</Text>
+                    <Text style={styles.text}>Tax: € {paymentDetails.tax / 100}</Text>
+                    {paymentDetails.discount > 0 && <Text style={styles.text}>Discount: € {paymentDetails.discount / 100}</Text>}
+                    <View style={styles.line} />
+                    <Text style={styles.boldText}>Total: € {paymentDetails.totalAmount / 100}</Text>
+                </View>
             </View>
-
-            {/* Footer */}
-            <Text style={styles.footer}>Thank you for paying this invoice within 14 days</Text>
         </Page>
     </Document>
 );
