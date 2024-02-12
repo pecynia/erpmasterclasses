@@ -81,9 +81,6 @@ export async function POST(request: Request) {
             // Add registration to event in database
             const result = await addRegistration(registrationForm)
 
-            // Send email to admin
-            const adminEmailResult = await sendRegistrationEmail(registrationForm, registrationForm.selectedEvent)
-
             // Send confirmation email to customer
             const paymentDetails = {
                 subtotal: session.amount_subtotal!,
@@ -95,6 +92,9 @@ export async function POST(request: Request) {
 
             // Create PDF buffer
             const pdfBuffer = await generateInvoicePDF(registrationForm, paymentDetails)
+
+            // Send email to admin
+            const adminEmailResult = await sendRegistrationEmail(registrationForm, registrationForm.selectedEvent, pdfBuffer)
 
             // Send confirmation email to customer
             const emailResult = await sendRegistrationConfirmationEmail(registrationForm, paymentDetails, pdfBuffer)
@@ -116,7 +116,6 @@ export async function POST(request: Request) {
     return new Response(JSON.stringify({ received: true }), {
         headers: { "Content-Type": "application/json" },
     })
-
 }
 
 

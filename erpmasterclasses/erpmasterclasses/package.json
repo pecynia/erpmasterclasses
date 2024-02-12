@@ -38,6 +38,7 @@
     "ai": "^2.2.29",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "country-data": "^0.0.31",
     "date-fns": "^3.1.0",
     "embla-carousel-autoplay": "^8.0.0-rc19",
     "embla-carousel-react": "^8.0.0-rc19",
@@ -67,6 +68,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.10",
+    "@types/country-data": "^0.0.5",
     "@types/negotiator": "^0.6.3",
     "@types/node": "^20",
     "@types/react": "^18.2.45",

@@ -40,7 +40,8 @@ export async function sendContactEmail(data: ContactFormInputs) {
 }
 
 // Registration Form 
-export async function sendRegistrationEmail(data: RegistrationFormProps, event: EventProps) {
+export async function sendRegistrationEmail(data: RegistrationFormProps, event: EventProps,  pdfBufferRaw: Buffer) {
+  const pdfBuffer = Buffer.from(pdfBufferRaw)
   try {
     const emailData = await resend.emails.send({
       from: 'ERP Masterclass <registrations@erpmasterclasses.com>',
@@ -48,6 +49,7 @@ export async function sendRegistrationEmail(data: RegistrationFormProps, event: 
       subject: 'Registration form submission',
       text: `Event: ${event.title}\nCompany Name: ${data.companyName}\nAdress: ${data.address}\nCountry: ${data.country}\nName: ${data.nameParticipant}\nPhone: ${data.phone}\nEmail: ${data.email}\nPosition: ${data.position}\nVAT number: ${data.vatNumber}\nPO number: ${data.poNumber}\nAdditional participants: ${data.additionalParticipants}`,
       react: RegistrationFormEmail({ ...data }),
+      attachments: [{ filename: 'invoice.pdf', content: pdfBuffer }]
     })
     return { success: true, data: emailData }
   }

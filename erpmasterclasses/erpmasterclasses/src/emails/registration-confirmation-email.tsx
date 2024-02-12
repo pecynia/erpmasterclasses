@@ -89,10 +89,10 @@ const RegistrationConfirmationEmail: React.FC<Readonly<RegistrationFormProps & {
 
         <hr />
 
-        <p>Subtotal: {subtotal / 100} €</p>
-        {discount > 0 && <p>Discount: {discount / 100} €</p>}
-        {tax > 0 && <p>Tax: {tax / 100} €</p>}
-        <p>Total Amount Paid: {totalAmount / 100} €</p>    
+        <p>Subtotal: € {(subtotal / 100).toFixed(2)}</p>
+        {discount > 0 && <p>Discount: € {(discount / 100).toFixed(2)}</p>}
+        {tax > 0 && <p>Tax: € {(tax / 100).toFixed(2)}</p>}
+        <p>Total Amount Paid: € {(totalAmount / 100).toFixed(2)}</p>    
 
         <div style={style.footer}>
             <p>Thank you for your registration. You will receive an invitation link to the event shortly before the event starts.</p>
