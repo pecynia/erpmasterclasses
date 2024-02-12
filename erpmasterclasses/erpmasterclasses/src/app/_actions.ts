@@ -7,7 +7,7 @@ import ContactFormEmail from '@/emails/contact-form-email'
 import RegistrationFormEmail from '@/emails/registration-form-email'
 import { addEvent, getEventsWithRegistrations, getEvents, deleteEvent, updateEvent, getParagraphJson, deleteRegistration } from '@/lib/utils/db'
 import { CreateEventProps, EventData, EventProps, RegistrationFormProps } from '@/../typings'
-import { Locale } from '../../i18n.config'
+import { Locale } from '@../../../i18n.config'
 import RegistrationConfirmationEmail from '@/emails/registration-confirmation-email'
 
 // ------------------ CONTACT FORMS ------------------
@@ -25,7 +25,7 @@ export async function sendContactEmail(data: ContactFormInputs) {
     try {
       const emailData = await resend.emails.send({
         from: 'ERP Masterclass <contact@erpmasterclasses.com>',
-        to: ['gk@dynamicsandmore.com'],
+        to: ['gk@erpmasterclasses.com'],
         subject: 'Contact form submission',
         text: `Company Name: ${companyName}\nName: ${name}\nEmail: ${email}\nMessage: ${message}`,
         react: ContactFormEmail({ companyName, name, email, message }),
