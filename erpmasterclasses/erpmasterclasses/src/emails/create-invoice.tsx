@@ -105,7 +105,7 @@ export const DocumentPDF = ({ data, paymentDetails }: { data: RegistrationFormPr
             <Text style={styles.header}>Registration Invoice</Text>
 
             {/* Date  */}
-            <Text style={styles.date}>Wageningen, {new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}</Text>
+            <Text style={styles.date}>Wageningen, {new Date().toLocaleDateString('nl', { year: 'numeric', month: 'long', day: 'numeric' })}</Text>
 
             {/* Billing and Company Info */}
             <View style={styles.section}>
@@ -115,10 +115,20 @@ export const DocumentPDF = ({ data, paymentDetails }: { data: RegistrationFormPr
                     <Text style={styles.boldText}>Billed to:</Text>
                     <Text style={styles.text}>{data.companyName}</Text>
                     <Text style={styles.text}>{data.nameParticipant}</Text>
-                    <Text style={styles.text}>{paymentDetails.customer_details.address.line1}</Text>
-                    {paymentDetails.customer_details.address.line2 && <Text style={styles.text}>{paymentDetails.customer_details.address.line2}</Text>}
-                    <Text style={styles.text}>{paymentDetails.customer_details.address.postal_code} {paymentDetails.customer_details.address.city}</Text>
-                    <Text style={styles.text}>{countries[paymentDetails.customer_details.address.country].name}</Text>
+                    <Text style={styles.text}>
+                        {paymentDetails.customer_details.address.line1 || data.address}
+                    </Text>
+                    {paymentDetails.customer_details.address.line2 && (
+                        <Text style={styles.text}>{paymentDetails.customer_details.address.line2}</Text>
+                    )}
+                    <Text style={styles.text}>
+                        {(paymentDetails.customer_details.address.postal_code || '') +
+                            ' ' +
+                            (paymentDetails.customer_details.address.city || '')}
+                    </Text>
+                    <Text style={styles.text}>
+                        {countries[paymentDetails.customer_details.address.country]?.name || data.country}
+                    </Text>
                 </View>
 
                 {/* Seller Details */}
@@ -145,7 +155,7 @@ export const DocumentPDF = ({ data, paymentDetails }: { data: RegistrationFormPr
                     {data.poNumber && <Text style={styles.text}>PO: {data.poNumber}</Text>}
                     <Text style={styles.text}>Name: {data.nameParticipant}</Text>
                     <Text style={styles.text}>Event: {data.eventTitel}</Text>
-                    <Text style={styles.text}>Date: {data.eventDate.toLocaleDateString(data.lang, { year: 'numeric', month: 'long', day: 'numeric' })}</Text>
+                    <Text style={styles.text}>Date: {data.eventDate.toLocaleDateString('nl', { year: 'numeric', month: 'long', day: 'numeric' })}</Text>
                     <Text style={styles.text}>
                         Language: {
                             (() => {

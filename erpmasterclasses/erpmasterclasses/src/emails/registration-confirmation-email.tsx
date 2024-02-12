@@ -66,7 +66,7 @@ const RegistrationConfirmationEmail: React.FC<Readonly<RegistrationFormProps & {
         <h1 style={style.header}>Thank you for your registration</h1>
         <p>You have registered for the following event:</p>
         <p>Event: <strong>{eventTitel}</strong></p>
-        <p>Date: <strong>{eventDate?.toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' })}</strong></p>
+        <p>Date: <strong>{eventDate?.toLocaleDateString('nl', { year: 'numeric', month: 'long', day: 'numeric' })}</strong></p>
         
         <hr />
         <h3 style={style.headerSmall}>Registration Details</h3>
