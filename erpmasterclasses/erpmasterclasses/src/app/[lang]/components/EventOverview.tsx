@@ -52,7 +52,7 @@ function EventOverview({ lang, agenda, allEvents }: { lang: Locale, agenda: any,
                                 <p className='text-sm pl-1'>{event.language.toUpperCase()}</p>
                             </Badge>
                         </div>
-                        <p className='text-sm flex'>{<Calendar width={16} height={16} className='mr-1' />} {event.date.toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                        <p className='text-sm flex'>{<Calendar width={16} height={16} className='mr-1' />} {event.date.toLocaleDateString('nl', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
                         <Badge variant='secondary' className="w-16 md:hidden -mt-1">
                             <Image alt={event.language} src={LocaleIcons[event.language]} width={16} />
                             <p className='text-sm pl-1 '>{event.language.toUpperCase()}</p>

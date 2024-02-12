@@ -138,7 +138,7 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
                                 <SelectValue>
                                     {event ? (
                                         <div className="flex items-center">
-                                            <span className='font-normal'>{event.title}</span>: {event.date.toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' })}
+                                            <span className='font-normal'>{event.title}</span>: {event.date.toLocaleDateString('nl', { year: 'numeric', month: 'long', day: 'numeric' })}
                                         </div>
                                     ) : (
                                         <div className="flex items-center">
@@ -153,7 +153,7 @@ const ClientRegistrationForm: React.FC<ClientRegistrationFormProps> = ({ lang, s
                                     {events.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()).map((masterclass, index) => (
                                         <SelectItem key={index} value={masterclass._id} disabled={masterclass === event}>
                                             <div className="flex items-center">
-                                                <span className='font-normal'>{masterclass.title}</span>: {masterclass.date.toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' })}
+                                                <span className='font-normal'>{masterclass.title}</span>: {masterclass.date.toLocaleDateString('nl', { year: 'numeric', month: 'long', day: 'numeric' })}
                                             </div>
                                         </SelectItem>
                                     ))}
