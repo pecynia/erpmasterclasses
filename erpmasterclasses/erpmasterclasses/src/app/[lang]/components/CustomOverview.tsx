@@ -8,7 +8,7 @@ const CustomOverview = ({ lang, pricing, navigation }: { lang: Locale, pricing: 
 
     return (
         <div className='flex flex-col items-center justify-center py-10'>
-            <div className='relative rounded-xl bg-white shadow-right-secondary w-full md:w-2/3'>
+            <div className='relative rounded-xl bg-white shadow-right-secondary w-full'>
                 <div className='flex flex-col max-w-5xl mx-auto px-8 py-8'>
                     <h1 className='text-3xl font-bold pb-4 px-4'>
                         {pricing.type2.title}

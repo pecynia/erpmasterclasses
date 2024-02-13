@@ -97,9 +97,9 @@
     "loadingAgenda": "Loading agenda...",
     "transformation": "Agenda for the ERP Transformation Masterclass",
     "upcomingMasterclasses": "Upcoming Masterclasses",
-    "upcomingTransformationMasterclasses": "Scheduled Transformation Masterclass",
+    "upcomingTransformationMasterclasses": "Scheduled ERP Transformation Masterclass",
     "success": "Agenda for the ERP Selection Masterclass",
-    "upcomingSuccessMasterclasses": "Scheduled Selection Masterclasses",
+    "upcomingSuccessMasterclasses": "Scheduled ERP Selection Masterclasses",
     "noFound": "No events planned yet. Please check back later.",
     "registerButton": "Register"
   },
