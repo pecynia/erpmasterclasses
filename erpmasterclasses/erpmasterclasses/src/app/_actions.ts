@@ -64,7 +64,7 @@ export async function sendCheckoutExpiredEmail(data: RegistrationFormProps) {
   try {
     const emailData = await resend.emails.send({
       from: 'ERP Masterclass <actions@erpmasterclasses.com>',
-      to: ['verheul.nicolai@gmail.com'], //['gk@erpmasterclasses.com'],
+      to: ['gk@erpmasterclasses.com'],
       subject: 'Checkout Expired',
       text: `Event: ${data.selectedEvent.title}\nCompany Name: ${data.companyName}\nAdress: ${data.address}\nCountry: ${data.country}\nName: ${data.nameParticipant}\nPhone: ${data.phone}\nEmail: ${data.email}\nPosition: ${data.position}\nVAT number: ${data.vatNumber}\nPO number: ${data.poNumber}\nAdditional participants: ${data.additionalParticipants}`,
       react: CheckoutExpiredEmail({ ...data }),
