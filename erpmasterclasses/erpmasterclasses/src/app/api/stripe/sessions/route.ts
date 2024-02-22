@@ -17,6 +17,7 @@ export async function POST(request: Request) {
         locale: 'auto',
         customer_email: customer_details.email,
         mode: 'payment',
+        expires_at: Math.floor(Date.now() / 1000) + (60 * 30),
         success_url: `${request.headers.get('Origin')}/${request.headers.get('lang')}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${request.headers.get('Origin')}/${request.headers.get('lang')}/register`,     
     })

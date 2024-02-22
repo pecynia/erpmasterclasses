@@ -3,7 +3,7 @@ import { AdditionalRegistrationFormProps, EventProps, RegistrationFormProps } fr
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 import { addRegistration } from '@/lib/utils/db'
 import { Locale } from '@../../../i18n.config'
-import { PaymentDetails, sendRegistrationConfirmationEmail, sendRegistrationEmail } from '@/app/_actions'
+import { PaymentDetails, sendRegistrationConfirmationEmail, sendRegistrationEmail, sendCheckoutExpiredEmail } from '@/app/_actions'
 import { generateInvoicePDF } from '@/app/[lang]/components/GenerateInvoicePDF'
 
 // Helper function to safely parse JSON strings in metadata
@@ -107,6 +107,63 @@ export async function POST(request: Request) {
             } else {
                 console.error('Error sending admin email:', adminEmailResult.error)
                 console.error('Error sending confirmation email:', emailResult.error)
+            }
+            break
+        // Checkout expired
+        case 'checkout.session.expired':
+            const expiredSession = event.data.object as Stripe.Checkout.Session
+            
+            // Extract and parse fields from session metadata
+            const {
+                _id: expiredId,
+                eventTitel: expiredEventTitel,
+                eventDate: expiredEventDate,
+                lang: expiredLang,
+                companyName: expiredCompanyName,
+                companyWebsite: expiredCompanyWebsite,
+                address: expiredAddress,
+                country: expiredCountry,
+                nameParticipant: expiredNameParticipant,
+                phone: expiredPhone,
+                email: expiredEmail,
+                position: expiredPosition,
+                vatNumber: expiredVatNumber,
+                poNumber: expiredPoNumber
+            } = expiredSession.metadata || {}
+
+            const expiredAdditionalParticipants = safelyParseJSON(expiredSession.metadata?.additionalParticipants) as AdditionalRegistrationFormProps[]
+            const expiredSelectedEvent = safelyParseJSON(expiredSession.metadata?.selectedEvent) as EventProps
+
+            // Construct the RegistrationFormProps object
+            const expiredRegistrationForm: RegistrationFormProps = { 
+                _id: expiredId,
+                eventTitel: expiredEventTitel,
+                eventDate: new Date(expiredEventDate),
+                lang: expiredLang as Locale,
+                companyName: expiredCompanyName,
+                companyWebsite: expiredCompanyWebsite,
+                address: expiredAddress,
+                country: expiredCountry,
+                nameParticipant: expiredNameParticipant,
+                phone: expiredPhone,
+                email: expiredEmail,
+                position: expiredPosition,
+                vatNumber: expiredVatNumber,
+                poNumber: expiredPoNumber,
+                additionalParticipants: expiredAdditionalParticipants,
+                selectedEvent: expiredSelectedEvent
+            }
+            
+            // Send email to admin
+            const adminExpiredEmailResult = await sendCheckoutExpiredEmail(expiredRegistrationForm)
+
+            if (adminExpiredEmailResult.success) {
+                console.log('Checkout expired email sent successfully')
+                return new Response(JSON.stringify({ received: true }), {
+                    headers: { "Content-Type": "application/json" },
+                })
+            } else {
+                console.error('Error sending checkout expired email:', adminExpiredEmailResult.error)
             }
             break
         default:
