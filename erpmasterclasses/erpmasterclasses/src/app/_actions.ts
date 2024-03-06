@@ -6,10 +6,12 @@ import { ContactFormSchema } from '@/lib/schema'
 import ContactFormEmail from '@/emails/contact-form-email'
 import RegistrationFormEmail from '@/emails/registration-form-email'
 import CheckoutExpiredEmail from '@/emails/checkout-expired-email'
-import { addEvent, getEventsWithRegistrations, getEvents, deleteEvent, updateEvent, getParagraphJson, deleteRegistration } from '@/lib/utils/db'
+import { addEvent, getEventsWithRegistrations, getEvents, deleteEvent, updateEvent, getParagraphJson, deleteRegistration, saveParagraphJson } from '@/lib/utils/db'
 import { CreateEventProps, EventData, EventProps, RegistrationFormProps } from '@/../typings'
 import { Locale } from '@../../../i18n.config'
 import RegistrationConfirmationEmail from '@/emails/registration-confirmation-email'
+import { JSONContent } from '@tiptap/react'
+import { revalidatePath } from 'next/cache'
 
 // ------------------ CONTACT FORMS ------------------
 
@@ -184,4 +186,23 @@ export async function getParagraph(id: string, locale: Locale) {
     return { success: false, error: "Server error" }
   }
 }
+
+// Save paragraph to database
+export async function saveParagraph(documentId: string, locale: Locale, paragraphJson: string, path: string) {
+  const paragraph = JSON.parse(paragraphJson) as JSONContent
+
+  try {
+    const result = await saveParagraphJson(documentId, locale, paragraph)
+
+    if (result.acknowledged) {
+      revalidatePath(path)
+    }
+
+    return { success: true, data: result }
+  } catch (error) {
+    console.error("Error in saveParagraph:", error)
+    return { success: false, error: "Server error" }
+  }
+}
+
 

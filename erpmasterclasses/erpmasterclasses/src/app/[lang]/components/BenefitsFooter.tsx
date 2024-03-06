@@ -8,7 +8,7 @@ import Image from 'next/image'
 import { Button } from '@/app/[lang]/components/ui/button'
 
 
-const BenefitsFooter: React.FC<{ lang: Locale }> = async ({ lang }) => {
+const BenefitsFooter: React.FC<{ lang: Locale, children: React.ReactNode }> = async ({ lang, children }) => {
     
     const { navigation } = await getDictionary(lang)
 
@@ -23,7 +23,7 @@ const BenefitsFooter: React.FC<{ lang: Locale }> = async ({ lang }) => {
             />
             <div className='relative container mx-auto px-4 py-36'>
                 <div className='bg-white shadow-xl py-10 px-4 rounded-xl flex flex-col items-center justify-center text-center w-full lg:w-2/3 mx-auto'>
-                    <EditorWrapper initialLocale={lang} documentId='benefits-footer' />
+                    {children}
                     <div className='flex flex-col md:flex-row md:space-x-4 mt-4 gap-2 md:py-0'>
                         <Button size='lg' variant='secondary' className='text-md'>
                             <Link href={`/${lang}${navigation.success.href}`} className='flex items-center'>

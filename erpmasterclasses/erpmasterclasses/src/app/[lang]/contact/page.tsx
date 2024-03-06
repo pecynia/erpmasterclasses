@@ -14,7 +14,7 @@ export default async function Page({
   const { contact, errorMessages } = await getDictionary(lang);
 
   return (
-    <div className='flex flex-col items-center justify-center w-full py-20 relative'>
+    <div className='flex flex-col items-center justify-center w-full py-20 relative overflow-hidden'>
       <Image
         src={Groep3}
         alt="Image"

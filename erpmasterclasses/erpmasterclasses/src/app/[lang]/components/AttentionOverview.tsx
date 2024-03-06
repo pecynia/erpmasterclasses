@@ -1,8 +1,7 @@
 import { Locale } from "@../../../i18n.config"
-import EditorWrapper from "@/app/[lang]/components/editor/EditorWrapper"
 
 
-const AttentionOverview = ({ lang, pricing, navigation }: { lang: Locale, pricing: any, navigation: any }) => {
+const AttentionOverview = ({ lang, pricing, navigation, editor }: { lang: Locale, pricing: any, navigation: any, editor: React.ReactNode }) => {
 
     return (
         <div className='flex flex-col items-center justify-center pt-10'>
@@ -12,7 +11,7 @@ const AttentionOverview = ({ lang, pricing, navigation }: { lang: Locale, pricin
                         {pricing.type2.attention}
                     </h1>
                     <hr className='mx-4' />
-                    <EditorWrapper initialLocale={lang} documentId='pricing-pay-attention' />
+                    {editor}
                 </div>
             </div>
         </div>

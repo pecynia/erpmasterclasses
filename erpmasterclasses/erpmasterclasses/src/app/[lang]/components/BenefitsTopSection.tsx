@@ -8,7 +8,6 @@ import { Locale } from '@../../../i18n.config'
 import { Button } from '@/app/[lang]/components/ui/button'
 import Groep2 from '@/../public/imgs/groep-2.jpg'
 import Spokeperson2 from '@/../public/imgs/spokeperson2.jpg'
-import EditorWrapper from '@/app/[lang]/components/editor/EditorWrapper'
 import Lenis from '@studio-freight/lenis'
 
 type BenefitProps = {
@@ -17,7 +16,7 @@ type BenefitProps = {
     buttonText: string
 }
 
-const BenefitsTopSection: React.FC<{ benefits: BenefitProps, lang: Locale }> = ({ benefits, lang }) => {
+const BenefitsTopSection: React.FC<{ benefits: BenefitProps, lang: Locale, children: React.ReactNode}> = ({ benefits, lang, children }) => {
     const [dimension, setDimension] = useState({ width: 0, height: 0 })
     useEffect(() => {
         const lenis = new Lenis({
@@ -84,7 +83,7 @@ const BenefitsTopSection: React.FC<{ benefits: BenefitProps, lang: Locale }> = (
                 className="relative -mt-20 lg:-mt-10 bg-white text-primary rounded-3xl w-4/5 sm:w-2/3 md:w-1/2 lg:min-w-[700px] pt-2 pb-4 lg:py-10 px-6 lg:px-4 flex justify-between items-center shadow-xl"
             >
                 <div className="w-full mb-4 lg:w-1/2 px-0 lg:px-4">
-                    <EditorWrapper documentId='benefits-description-list' initialLocale={lang} />
+                    {children}
                 </div>
                 <div className="w-1/2 hidden lg:block">
                     <Image src={Spokeperson2} alt="Benefit Image" className='object-cover ml-auto rounded-2xl' priority />

@@ -13,9 +13,10 @@ import CustomBulletList from '@/app/[lang]/components/editor/CustomBulletList'
 import { generateJSON } from '@tiptap/html'
 import MenuBar from '@/app/[lang]/components/editor/MenuBar'
 import { Button } from '@/app/[lang]/components/ui/button'
-import { motion } from 'framer-motion'
 import EditorLocaleSwitcher from '@/app/[lang]/components/editor/EditorLocaleSwitcher'
-import { Locale } from '../../../../../i18n.config'
+import { Locale } from '@../../../i18n.config'
+import { saveParagraph } from '@/app/_actions'
+import { usePathname } from 'next/navigation'
 
 interface EditorComponentProps {
     initialContent?: string
@@ -54,7 +55,7 @@ const EditorComponent: React.FC<EditorComponentProps> = ({
                 },
             }),
         ],
-        content: '',
+        content: initialContent,
         editorProps: {
             attributes: {
                 class: 'prose max-w-none w-full',
@@ -68,67 +69,53 @@ const EditorComponent: React.FC<EditorComponentProps> = ({
         },
     })
 
+    // Set the initial content if it exists
     useEffect(() => {
         if (initialContent) {
             editor?.commands.setContent(initialContent)
         }
-        console.log("Writing lang:", currentLocale)
     }, [initialContent, editor, currentLocale])
 
     const handleLocaleChange = (newLocale: Locale) => {
         onLocaleChange(newLocale) // Call the passed in onLocaleChange function
     }
 
+    // Pathname
+    const pathName = usePathname()
+
     // Make a post fetch request to secure API endpoint
     const handleSave = async () => {
         setIsSaving(true)
         try {
-            const res = await fetch('/api/save', {
-                method: 'POST',
-                body: JSON.stringify(editorContent),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Document-ID': documentId,
-                    'Locale': currentLocale
-                },
-            })
-            if (res.ok) {
+            const res = await saveParagraph(documentId, currentLocale, JSON.stringify(editorContent), pathName)
+            if (res.success) {
                 toast.success('Saved successfully!')
             } else {
                 toast.error('Oops, something went wrong. Please try again later.')
             }
             setHasChanges(false)
         } catch (error) {
+            toast.error('Oops, something went wrong. Please try again later.')
             console.error('Failed to save:', error)
         } finally {
             setIsSaving(false)
         }
     }
 
-
     return (
-        <motion.div
-            layout
-            transition={{ type: "spring", ease: "easeInOut", duration: 0.1 }}
-            className='relative flex flex-col'
-        >
+        <div className='relative flex flex-col'>
+            {editable && <MenuBar editor={editor} />}
+            <EditorContent editor={editor} />
             {editable && (
-                <>
-                    <MenuBar editor={editor} />
-                </>
-            )}
-            <motion.div layout>
-                <EditorContent editor={editor} />
-            </motion.div>
+                <div className=''>
 
-            {editable && (
-                <div className='relative'>
                     {/* Locale switcher, bottom left below the text area  */}
-                    <div className="absolute flex justify-start bottom-0 right-0 left-[50%] -mb-14 -ml-1/2" style={{ transform: 'translateX(-100%)' }} >
+                    <div className="flex items-center justify-between">
                         <EditorLocaleSwitcher currentLocale={currentLocale} onLocaleChange={handleLocaleChange} />
                     </div>
+
                     {/* Save button, bottom right below the text area  */}
-                    <div className="absolute flex justify-end bottom-0 right-0 -mb-14">
+                    <div className="absolute bottom-0 right-0">
                         {hasChanges && (
                             isSaving ?
                                 <Button disabled size="lg">
@@ -143,7 +130,7 @@ const EditorComponent: React.FC<EditorComponentProps> = ({
                     </div>
                 </div>
             )}
-        </motion.div>
+        </div>
     )
 }
 

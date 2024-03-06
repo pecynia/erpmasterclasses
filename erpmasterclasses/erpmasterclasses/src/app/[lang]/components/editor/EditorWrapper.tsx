@@ -15,6 +15,7 @@ import TextStyle from '@tiptap/extension-text-style'
 import { Button } from "@/app/[lang]/components/ui/button"
 import { Locale } from "@../../../i18n.config"
 import { twMerge } from "tailwind-merge"
+import EditorServer from "@/app/[lang]/components/editor/EditorServer"
 
 interface EditorWrapperProps {
     documentId: string

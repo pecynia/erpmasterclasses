@@ -7,10 +7,10 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { Locale } from '@../../../i18n.config'
 import Groep1 from '@/../public/imgs/groep-1.jpg'
 import Lenis from '@studio-freight/lenis'
-import EditorWrapper from './editor/EditorWrapper'
 
 
-const HomeTopSection: React.FC<{ lang: Locale }> = ({ lang }) => {
+const HomeTopSection: React.FC<{ 
+    children: React.ReactNode}> = ({ children }) => {
 
     // Make smooth Lenis animations
     const [dimension, setDimension] = useState({ width: 0, height: 0 })
@@ -74,7 +74,7 @@ const HomeTopSection: React.FC<{ lang: Locale }> = ({ lang }) => {
                 className=" absolute left-[10vw] bg-background/90 rounded-md px-auto"
             >
                 <div className="w-full pl-4 pr-8 md:pl-10 md:pr-14 mb-1">
-                    <EditorWrapper documentId='home-top-section-catchphrase' initialLocale={lang} />
+                    {children}
                 </div>
             </motion.div>
         </div>

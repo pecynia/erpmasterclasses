@@ -1,10 +1,9 @@
 import { Locale } from "@../../../i18n.config"
-import EditorWrapper from "@/app/[lang]/components/editor/EditorWrapper"
 import { Button } from "@/app/[lang]/components/ui/button"
 import Link from "next/link"
 
 
-const CustomOverview = ({ lang, pricing, navigation }: { lang: Locale, pricing: any, navigation: any }) => {
+const CustomOverview = ({ lang, pricing, navigation, editor }: { lang: Locale, pricing: any, navigation: any, editor: React.ReactNode }) => {
 
     return (
         <div className='flex flex-col items-center justify-center py-10'>
@@ -14,7 +13,7 @@ const CustomOverview = ({ lang, pricing, navigation }: { lang: Locale, pricing: 
                         {pricing.type2.title}
                     </h1>
                     <hr className='mx-4' />
-                    <EditorWrapper initialLocale={lang} documentId='pricing-card-2' />
+                    {editor}
                     <Button size='lg' variant='secondary' className='text-md mx-4'>
                         <Link href={`/${lang}${navigation.contact.href}`} className='flex items-center '>
                             {pricing.type2.buttonText}

@@ -14,7 +14,7 @@ type ReviewProps = {
   rating: string
 }
 
-const ReviewOverview: React.FC<{ lang: Locale, review: ReviewProps }> = ({ lang, review }) => {
+const ReviewOverview: React.FC<{ lang: Locale, review: ReviewProps, reviews: React.ReactNode[] }> = ({ lang, review, reviews }) => {
     const documentIds = [
         'review-description-1',
         'review-description-2',
@@ -93,7 +93,7 @@ const ReviewOverview: React.FC<{ lang: Locale, review: ReviewProps }> = ({ lang,
 
             {/* Overview */}
             <div className="-mt-5 w-full md:w-3/4 lg:w-4/5 mx-auto px-16 overflow-hidden">
-                {documentIds.map((documentId, index) => (
+                {reviews.map((review, index) => (
                     <motion.div layout
                         key={index}
                         initial={{ opacity: 0, x: index % 2 === 0 ? 20 : -20 }}
@@ -102,7 +102,7 @@ const ReviewOverview: React.FC<{ lang: Locale, review: ReviewProps }> = ({ lang,
                         transition={{ duration: 1, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }}
                         className={`flex items-center max-w-5xl w-full md:w-4/5 lg:2/3 px-4 my-16 md:my-24 bg-background ${index % 2 === 0 ? 'shadow-right-secondary ml-auto' : 'shadow-left-secondary mr-auto'}`}
                     >
-                        <EditorWrapper documentId={documentId} initialLocale={lang} />
+                        {review}
                     </motion.div>
                 ))}
             </div>
