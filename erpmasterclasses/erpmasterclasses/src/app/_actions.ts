@@ -6,8 +6,8 @@ import { ContactFormSchema } from '@/lib/schema'
 import ContactFormEmail from '@/emails/contact-form-email'
 import RegistrationFormEmail from '@/emails/registration-form-email'
 import CheckoutExpiredEmail from '@/emails/checkout-expired-email'
-import { addEvent, getEventsWithRegistrations, getEvents, deleteEvent, updateEvent, getParagraphJson, deleteRegistration, saveParagraphJson } from '@/lib/utils/db'
-import { CreateEventProps, EventData, EventProps, RegistrationFormProps } from '@/../typings'
+import { addEvent, getEventsWithRegistrations, getEvents, deleteEvent, updateEvent, getParagraphJson, deleteRegistration, saveParagraphJson, addStory, deleteStory, updateStory, getStory } from '@/lib/utils/db'
+import { CreateEventProps, EventData, EventProps, RegistrationFormProps, Story, StoryServer } from '@/../typings'
 import { Locale } from '@../../../i18n.config'
 import RegistrationConfirmationEmail from '@/emails/registration-confirmation-email'
 import { JSONContent } from '@tiptap/react'
@@ -203,6 +203,47 @@ export async function saveParagraph(documentId: string, locale: Locale, paragrap
     console.error("Error in saveParagraph:", error)
     return { success: false, error: "Server error" }
   }
+}
+
+
+// ------------------ STORY/BLOG ACTIONS ------------------
+
+// Save story to database
+export async function saveStory(data: Story, paths: string[]) {
+  const result = await addStory(data)
+  if (result.acknowledged) {
+    paths.forEach((path) => revalidatePath(path))
+    return { success: true, data: result }
+  } else {
+    return { success: false, error: "Error saving story" }
+  }
+}
+
+// Delete story from database
+export async function removeStory(slug: string, paths: string[]) {
+  const result = await deleteStory(slug)
+  if (result.acknowledged) {
+    paths.forEach((path) => revalidatePath(path))
+    return { success: true, data: result }
+  } else {
+    return { success: false, error: "Error deleting story" }
+  }
+}
+
+// Update story in database
+export async function editStory(data: StoryServer, paths: string[]) {
+  const result = await updateStory(data)
+  if (result.acknowledged) {
+    paths.forEach((path) => revalidatePath(path))
+    return { success: true, data: result }
+  } else {
+    return { success: false, error: "Error updating story" }
+  }
+}
+
+// Get fullStory
+export async function getFullStory(slug: string) {
+  return JSON.parse(JSON.stringify(await getStory(slug))) as StoryServer
 }
 
 

@@ -28,6 +28,10 @@
       "label": "Bewertungen",
       "href": "/reviews"
     },
+    "blog": {
+      "label": "Blog",
+      "href": "/blog"
+    },
     "contact": {
       "label": "Kontakt",
       "href": "/contact"
@@ -53,6 +57,9 @@
   },
   "home": {
     "description": ""
+  },
+  "notFound": {
+    "postNotFound": "Post nicht gefunden"
   },
   "benefits": {
     "title": "Steigern Sie Ihre Erfolgschancen",

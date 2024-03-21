@@ -17,13 +17,16 @@ import EditorLocaleSwitcher from '@/app/[lang]/components/editor/EditorLocaleSwi
 import { Locale } from '@../../../i18n.config'
 import { saveParagraph } from '@/app/_actions'
 import { usePathname } from 'next/navigation'
+import { StoryContent } from '@/../typings'
 
 interface EditorComponentProps {
-    initialContent?: string
+    initialContent: string
     editable?: boolean
     documentId: string
     currentLocale: Locale
-    onLocaleChange: (newLocale: Locale) => void
+    disableSave?: boolean
+    onLocaleChange?: (newLocale: Locale) => void
+    onContentChange?: (content: StoryContent) => void
 }
 
 const EditorComponent: React.FC<EditorComponentProps> = ({
@@ -31,7 +34,9 @@ const EditorComponent: React.FC<EditorComponentProps> = ({
     editable = false,
     documentId,
     currentLocale,
-    onLocaleChange
+    disableSave = false,
+    onLocaleChange,
+    onContentChange
 }) => {
     const [editorContent, setEditorContent] = useState({})
     const [isSaving, setIsSaving] = useState(false)
@@ -41,6 +46,7 @@ const EditorComponent: React.FC<EditorComponentProps> = ({
             StarterKit,
             Placeholder.configure({
                 placeholder: 'Start typing...',
+                emptyEditorClass: 'is-editor-empty',
             }),
             TextStyle,
             Color,
@@ -63,9 +69,16 @@ const EditorComponent: React.FC<EditorComponentProps> = ({
         },
         editable: editable,
         onUpdate: ({ editor }) => {
-            const contentJson = generateJSON(editor.getHTML(), [StarterKit, TextStyle, Color, Link])
+            const contentJson = generateJSON(editor.getHTML(), [StarterKit, TextStyle, Color, Link, CustomBulletList])
             setEditorContent(contentJson)
             setHasChanges(true)
+            if (onContentChange) {
+                onContentChange({
+                    ...editorContent as StoryContent,
+                    content: contentJson,
+                    locale: currentLocale
+                })
+            }
         },
     })
 
@@ -77,7 +90,8 @@ const EditorComponent: React.FC<EditorComponentProps> = ({
     }, [initialContent, editor, currentLocale])
 
     const handleLocaleChange = (newLocale: Locale) => {
-        onLocaleChange(newLocale) // Call the passed in onLocaleChange function
+        if (onLocaleChange)
+            onLocaleChange(newLocale) // Call the passed in onLocaleChange function
     }
 
     // Pathname
@@ -95,7 +109,6 @@ const EditorComponent: React.FC<EditorComponentProps> = ({
             }
             setHasChanges(false)
         } catch (error) {
-            toast.error('Oops, something went wrong. Please try again later.')
             console.error('Failed to save:', error)
         } finally {
             setIsSaving(false)
@@ -106,7 +119,7 @@ const EditorComponent: React.FC<EditorComponentProps> = ({
         <div className='relative flex flex-col'>
             {editable && <MenuBar editor={editor} />}
             <EditorContent editor={editor} />
-            {editable && (
+            {editable && !disableSave && (
                 <div className=''>
 
                     {/* Locale switcher, bottom left below the text area  */}

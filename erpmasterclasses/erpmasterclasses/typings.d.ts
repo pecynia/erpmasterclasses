@@ -1,16 +1,5 @@
 import { Locale } from '@/app/../../i18n.config'
 
-type StoryContent = {
-    tags: string | string[] | null | undefined
-    slug: string
-    title: string
-    description: string
-    content: string
-    date: string
-    views: number
-}
-
-
 export interface AdditionalRegistrationFormProps {
     nameParticipant: string
     email: string
@@ -109,4 +98,55 @@ export type ProductResponse = {
     unit_label: string
     updated: number
     url: string
+}
+
+
+// ------------------ BLOG ------------------
+
+export type StoryContent = {
+    tags: string[] | null
+    title: string
+    locale: Locale
+    description: string
+    content: JSONContent
+    date: string
+    dateModified: string
+    views: number
+}
+
+export type StoryServer = {
+    _id: ObjectId
+    slug: string
+    content: {
+        [key in Locale]: StoryContent
+    }
+}
+
+export type Story = {
+    slug: string
+    content: {
+        [key in Locale]: StoryContent
+    }
+}
+
+export type StoryContent = {
+    tags: string[] | null
+    title: string
+    locale: Locale
+    description: string
+    content: JSONContent
+    date: string
+    dateModified: string
+    views: number
+}
+
+export type StorySummary = {
+    tags: string | string[] | null | undefined
+    slug: string
+    title: string
+    locale: Locale
+    description: string
+    date: string
+    dateModified: string
+    views: number
 }

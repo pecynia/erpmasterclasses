@@ -28,6 +28,10 @@
       "label": "Reviews",
       "href": "/reviews"
     },
+    "blog": {
+      "label": "Blog",
+      "href": "/blog"
+    },
     "contact": {
       "label": "Contact",
       "href": "/contact"
@@ -53,6 +57,9 @@
   },
   "home": {
     "description": ""
+  },
+  "notFound": {
+    "postNotFound": "Post not found"
   },
   "benefits": {
     "title": "Enhance Your Chance for Success",

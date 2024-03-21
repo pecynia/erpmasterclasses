@@ -28,6 +28,10 @@
       "label": "Ervaringen",
       "href": "/reviews"
     },
+    "blog": {
+      "label": "Blog",
+      "href": "/blog"
+    },
     "contact": {
       "label": "Contact",
       "href": "/contact"
@@ -53,6 +57,9 @@
   },
   "home": {
     "description": ""
+  },
+  "notFound": {
+    "postNotFound": "Post niet gevonden"
   },
   "benefits": {
     "title": "Vergroot Uw Kans op Succes",
