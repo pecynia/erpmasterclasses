@@ -15,6 +15,7 @@ const AgendaSection = ({ lang, title, link, children }: { lang: Locale, title: s
     </div>
 )
 
+// This should be dynamic so past events are not shown
 const AgendaOverview = ({ lang, agenda, navigation }: { lang: Locale, agenda: any, navigation: any }) => {
     return (
         <div 
