@@ -4,8 +4,7 @@ import React, { useEffect, useState, useRef } from 'react'
 
 import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { Locale } from '@../../../i18n.config'
-import Groep1 from '@/../public/imgs/groep-1.jpg'
+import Groep1 from '@/../public/imgs/groep-1.png'
 import Lenis from '@studio-freight/lenis'
 
 

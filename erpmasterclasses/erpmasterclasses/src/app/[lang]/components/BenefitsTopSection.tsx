@@ -54,13 +54,13 @@ const BenefitsTopSection: React.FC<{ benefits: BenefitProps, lang: Locale, child
             />          
             
             {/* Header Section */}
-            <div className="relative text-secondary text-center py-20 px-4 w-4/5 lg:w-2/3">
+            <div className="relative text-secondary text-center pt-10 pb-20 md:py-20 px-4 w-4/5 lg:w-2/3">
                 <motion.div 
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.3, delay: 0 }}
                 >
-                    <h1 className="text-5xl font-bold mb-4">{benefits.title}</h1>
+                    <h1 className="text-4xl md:text-5xl font-bold mb-4">{benefits.title}</h1>
                 </motion.div>
                 <motion.div 
                     initial={{ opacity: 0, y: 10 }}
@@ -68,7 +68,7 @@ const BenefitsTopSection: React.FC<{ benefits: BenefitProps, lang: Locale, child
                     transition={{ duration: 0.5, delay: 0.1 }}
                 >
                     <Link href={`/${lang}/contact`}>
-                        <Button variant='secondary' className="px-8 py-6 mb-6 lg:mb-0 text-xl duration-300">
+                        <Button variant='secondary' className="px-8 py-6 mb-6 lg:mb-0 text-md md:text-xl duration-300">
                             {benefits.buttonText}
                         </Button>
                     </Link>

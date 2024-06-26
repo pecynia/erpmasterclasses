@@ -7,8 +7,6 @@ import { Pencil } from 'lucide-react';
 import {
     Dialog,
     DialogContent,
-    DialogHeader,
-    DialogTitle,
     DialogTrigger
 } from "@/app/[lang]/components/ui/dialog";
 import EditorWrapper from '@/app/[lang]/components/editor/EditorWrapper';
@@ -19,9 +17,9 @@ function OpenEditorButton({ initialLocale, documentId, className }: { initialLoc
     return session && (
         <Dialog>
             <DialogTrigger asChild>
-                <div className="absolute rounded-md inset-0 bg-gray-200 bg-opacity-0 group-hover:bg-opacity-50 flex justify-center items-center cursor-pointer transition-opacity duration-300">
-                    <span className="hidden group-hover:flex items-center text-primary text-lg font-bold">
-                        <Pencil className="w-5 h-5" />
+                <div className="absolute my-4 group-hover:backdrop-blur-[1px] rounded-md inset-0 bg-gray-300 bg-opacity-0 group-hover:bg-opacity-50 flex justify-center items-center cursor-pointer transition-opacity duration-300">
+                    <span className="hidden group-hover:flex items-center text-primary text-lg font-bold ">
+                        <Pencil className="w-5 h-5 animate-bounce" />
                         <span className="ml-2">Edit</span>
                     </span>
                 </div>

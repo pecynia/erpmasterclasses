@@ -32,7 +32,7 @@ export default async function Page({
         lang={lang} 
         review={review} 
         reviews={documentIds.map((id, index) => (
-          <EditorServer documentId={id} initialLocale={lang} key={index} />
+          <EditorServer documentId={id} initialLocale={lang} key={index}/>
         ))}
       />
       
