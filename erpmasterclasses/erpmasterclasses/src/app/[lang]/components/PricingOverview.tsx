@@ -35,9 +35,9 @@ function PricingOverview(
                         </Link>
                     </Button>
                 </div>
-                <p className='text-xl font-bold text-tertiary mt-2 px-12 pb-2'>
+                {/* <p className='text-xl font-bold text-tertiary mt-2 px-12 pb-2'>
                     {pricing.type1.discountText}
-                </p>
+                </p> */}
 
                 <hr className='mx-12' />
                 <div className='px-8 pt-5'>
