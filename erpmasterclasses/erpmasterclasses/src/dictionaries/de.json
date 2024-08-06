@@ -53,7 +53,16 @@
     },
     "credit": {
       "label": "Gebaut von"
-    }
+    },
+    "privacyPolicy": {
+      "label": "Datenschutzrichtlinie"
+    },
+    "termsAndConditions": {
+      "label": "Allgemeine Geschäftsbedingungen"
+    },
+    "cookiePolicy": {
+      "label": "Cookie-Richtlinie"
+    }    
   },
   "home": {
     "description": ""

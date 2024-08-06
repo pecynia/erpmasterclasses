@@ -62,7 +62,7 @@ const EditorWrapper: React.FC<EditorWrapperProps> = ({ documentId, link, buttonT
     }
 
     return (
-        <motion.div layout className={twMerge("w-full", className)}>
+        <motion.div className={twMerge("w-full", className)}>
             <EditorComponent
                 currentLocale={currentLocale}
                 documentId={documentId}
