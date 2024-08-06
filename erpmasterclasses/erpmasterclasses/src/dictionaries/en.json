@@ -53,7 +53,16 @@
     },
     "credit": {
       "label": "Website by"
-    }
+    },
+    "privacyPolicy": {
+      "label": "Privacy Policy"
+    },
+    "termsAndConditions": {
+      "label": "Terms and Conditions"
+    },
+    "cookiePolicy": {
+      "label": "Cookie Policy"
+    }    
   },
   "home": {
     "description": ""

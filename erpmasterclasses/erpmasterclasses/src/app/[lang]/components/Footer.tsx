@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { getDictionary } from '@/lib/dictionary'
 import { contactInfo, socialMedia } from '@/dictionaries/contactInfo'
 import { Linkedin, Mail, Phone } from 'lucide-react'
-import Logo from '@/../public/logo.png'
 
 
 export default async function Footer({ lang }: { lang: Locale }) {
@@ -55,6 +54,19 @@ export default async function Footer({ lang }: { lang: Locale }) {
                 </div>
             </div>
 
+            {/* Terms, Privacy policy and cookie policy */}
+            <div className="mt-8 flex justify-center items-center space-x-4">
+                <Link href={`/${lang}/terms-of-use`}>
+                    <p className="hover:underline cursor-pointer">{footer.termsAndConditions.label}</p>
+                </Link>
+                <Link href={`/${lang}/privacy-policy`}>
+                    <p className="hover:underline cursor-pointer">{footer.privacyPolicy.label}</p>
+                </Link>
+                <Link href={`/${lang}/cookie-policy`}>
+                    <p className="hover:underline cursor-pointer">{footer.cookiePolicy.label}</p>
+                </Link>
+            </div>
+
             {/* Bottom */}
             <div className="mt-8 flex justify-center font-thin items-center space-x-4">
                 <p>kvk: {contactInfo.kvk}</p>
@@ -65,6 +77,8 @@ export default async function Footer({ lang }: { lang: Locale }) {
                     </Link>
                 </p>
             </div>
+
+
         </footer>
     );
 }

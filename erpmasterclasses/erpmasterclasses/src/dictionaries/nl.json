@@ -53,7 +53,16 @@
     },
     "credit": {
       "label": "Gemaakt door"
-    }
+    },
+    "privacyPolicy": {
+      "label": "Privacybeleid"
+    },
+    "termsAndConditions": {
+      "label": "Algemene voorwaarden"
+    },
+    "cookiePolicy": {
+      "label": "Cookiebeleid"
+    }    
   },
   "home": {
     "description": ""
