@@ -94,8 +94,8 @@ const EditorComponent: React.FC<EditorComponentProps> = ({
             onLocaleChange(newLocale) // Call the passed in onLocaleChange function
     }
 
-    // Pathname
-    const pathName = usePathname()
+    // Pathname, with the correct locale for example /en/privacy-policy or /de/privacy-policy
+    const pathName = usePathname().replace(/^\/[a-z]{2}\//, `/${currentLocale}/`)
 
     // Make a post fetch request to secure API endpoint
     const handleSave = async () => {
