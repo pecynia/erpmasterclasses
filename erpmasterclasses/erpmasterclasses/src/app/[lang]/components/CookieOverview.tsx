@@ -83,7 +83,7 @@ const essentialCookies: Cookie[] = [
   },
   {
     name: "ga_consent",
-    purpose: "This cookie saves your cookie preferences for this website. You can change these or withdraw your consent easily.",
+    purpose: "This cookie saves your cookie preferences for this website.",
     domain: "http://www.erpmasterclasses.com/",
     expiration: "Persistant",
     provider: "ERP Masterclasses",
