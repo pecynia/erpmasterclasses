@@ -3,6 +3,11 @@ import HomeTopSection from '@/app/[lang]/components/HomeTopSection'
 import HomeOverview from '@/app/[lang]/components/HomeOverview'
 import EditorServer from "@/app/[lang]/components/editor/EditorServer"
 
+// ERP Transformation Masterclass
+// All Masterclasses start at 9:30 am and end at 5 pm
+// 950
+// 10
+
 export default function Home({
   params: { lang }
 }: {
@@ -10,7 +15,7 @@ export default function Home({
 }) {
 
   return (
-    <div className=''>
+    <div>
       <HomeTopSection>
         <EditorServer documentId='home-top-section-catchphrase' initialLocale={lang} />
       </HomeTopSection>
