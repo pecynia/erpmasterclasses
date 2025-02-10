@@ -6,7 +6,7 @@ import { getEvents } from '@/lib/utils/db'
 import Image from 'next/image'
 import Groep3 from '@/../public/imgs/groep-3.jpg'
 
-
+// update
 export default async function Page({
   params: { lang }
 }: {
