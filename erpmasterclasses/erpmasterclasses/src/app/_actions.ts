@@ -130,7 +130,7 @@ export async function removeRegistration(eventId: string, registrationId: string
 
 
 
-// ------------------ EVENTS ------------------
+// ------------------ EVENTS ------------------ 
 
 // Save event to database
 export async function saveEvent(data: CreateEventProps) {
