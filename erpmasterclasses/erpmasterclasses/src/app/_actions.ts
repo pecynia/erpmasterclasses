@@ -11,7 +11,8 @@ import { CreateEventProps, EventData, EventProps, RegistrationFormProps, Story, 
 import { Locale } from '@../../../i18n.config'
 import RegistrationConfirmationEmail from '@/emails/registration-confirmation-email'
 import { JSONContent } from '@tiptap/react'
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, unstable_noStore as noStore } from 'next/cache'
+
 
 // ------------------ CONTACT FORMS ------------------
 
@@ -44,7 +45,7 @@ export async function sendContactEmail(data: ContactFormInputs) {
 
 // Registration Form 
 export async function sendRegistrationEmail(data: RegistrationFormProps, event: EventProps,  pdfBufferRaw: Buffer) {
-  const pdfBuffer = Buffer.from(pdfBufferRaw)
+  // const pdfBuffer = Buffer.from(pdfBufferRaw)
   try {
     const emailData = await resend.emails.send({
       from: 'ERP Masterclass <registrations@erpmasterclasses.com>',
@@ -52,7 +53,7 @@ export async function sendRegistrationEmail(data: RegistrationFormProps, event: 
       subject: 'Registration form submission',
       text: `Event: ${event.title}\nCompany Name: ${data.companyName}\nAdress: ${data.address}\nCountry: ${data.country}\nName: ${data.nameParticipant}\nPhone: ${data.phone}\nEmail: ${data.email}\nPosition: ${data.position}\nVAT number: ${data.vatNumber}\nPO number: ${data.poNumber}\nAdditional participants: ${data.additionalParticipants}`,
       react: RegistrationFormEmail({ ...data }),
-      attachments: [{ filename: 'invoice.pdf', content: pdfBuffer }]
+      attachments: [{ filename: 'invoice.pdf', content: pdfBufferRaw }]
     })
     return { success: true, data: emailData }
   }
@@ -100,7 +101,7 @@ export type PaymentDetails = {
 
 // Resend registration email
 export async function sendRegistrationConfirmationEmail(data: RegistrationFormProps, paymentDetails: PaymentDetails, pdfBufferRaw: Buffer) {
-  const pdfBuffer = Buffer.from(pdfBufferRaw)
+  // const pdfBuffer = Buffer.from(pdfBufferRaw)
   try {
     const { totalAmount, subtotal, tax, discount } = paymentDetails
     const emailData = await resend.emails.send({
@@ -109,7 +110,7 @@ export async function sendRegistrationConfirmationEmail(data: RegistrationFormPr
       subject: 'Your Registration Confirmation',
       text: `Event: ${data.selectedEvent.title}\nCompany Name: ${data.companyName}\nAdress: ${data.address}\nCountry: ${data.country}\nName: ${data.nameParticipant}\nPhone: ${data.phone}\nEmail: ${data.email}\nPosition: ${data.position}\nVAT number: ${data.vatNumber}\nPO number: ${data.poNumber}\nAdditional participants: ${data.additionalParticipants}`,
       react: RegistrationConfirmationEmail({ ...data, totalAmount, subtotal, tax, discount }),
-      attachments: [{ filename: 'invoice.pdf', content: pdfBuffer }]
+      attachments: [{ filename: 'invoice.pdf', content: pdfBufferRaw }]
     })
     return { success: true, data: emailData }
   } catch (error) {
@@ -150,6 +151,20 @@ export async function getAllEventsAdmin(): Promise<EventData[]> {
 // Get all events (EventProps[]) based on language is in shownLanguages
 export async function getAllEvents(language: Locale): Promise<EventProps[]> {
   return await getEvents(language)
+}
+
+// Get upcoming events (EventProps[]) based on language is in shownLanguages
+export async function getUpcomingEvents(language: Locale): Promise<EventProps[]> {
+  noStore() // Prevent caching for this function
+
+  const allEvents = await getEvents(language)
+  const currentDate = new Date()
+  currentDate.setHours(0, 0, 0, 0)
+
+  return allEvents.filter((event) => {
+    const eventDate = new Date(event.date)
+    return eventDate >= currentDate
+  })
 }
 
 // Remove event from database
